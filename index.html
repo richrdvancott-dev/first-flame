@@ -73,7 +73,7 @@ span.av{text-align:center;font:bold 11px/22px sans-serif;color:#111}
 .cfeed>div,.bub{display:flex;align-items:flex-start;gap:4px}.cfeed .gm{justify-content:flex-end;color:#ffd76a;font-style:italic}
 .bubtxt{background:#241d31;border-radius:2px 9px 9px 9px;padding:3px 7px;flex:1}
 h2,h3{font-family:Georgia,"Times New Roman",serif;letter-spacing:.3px}
-.ic-pause,.ic-play{display:inline-block;width:12px;height:14px;vertical-align:middle;pointer-events:none}.ic-pause{border-left:4px solid currentColor;border-right:4px solid currentColor;width:12px}.ic-play{width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid currentColor;margin-left:2px}
+.ic-pause,.ic-play{display:inline-block;width:12px;height:14px;vertical-align:middle;pointer-events:none}.ic-pause{border-left:4px solid currentColor;border-right:4px solid currentColor;width:12px}.ic-play{width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid currentColor;margin-left:2px;margin-right:-2px}
 .brand{color:#ffb347!important;cursor:pointer;text-shadow:0 0 8px #f806}
 .title{text-align:center}.title h1{font-family:Georgia,serif;font-size:34px;margin:0;color:#ffcf7a;text-shadow:0 0 18px #f80a}.flame{font-size:44px;animation:flick 1.4s infinite alternate}
 @keyframes flick{from{transform:scale(1) rotate(-2deg);filter:drop-shadow(0 0 6px #f80)}to{transform:scale(1.08) rotate(2deg);filter:drop-shadow(0 0 16px #fa0)}}
@@ -193,6 +193,9 @@ body,#app{font-variant-numeric:tabular-nums}#pw,#ak{display:inline-block;min-wid
 #htp .hdots{display:flex;gap:2px;flex-wrap:nowrap}#htp .hdots i{width:24px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer}#htp .hdots i::after{content:"";width:9px;height:9px;border-radius:50%;background:#4a3f58}#htp .hdots i.on::after{background:#ffd76a;box-shadow:0 0 6px #ffd76a}
 @media (orientation:portrait){#htp .hc{height:min(600px,100%)}#htp .hp{grid-template-columns:minmax(0,1fr);grid-template-rows:150px minmax(0,1fr)}#htp .hdots i{width:15px}#htp .hdots{gap:0}#htp .hf{padding:8px 10px 12px;gap:6px}#htp .hb{width:96px;font-size:13px}}
 @media (max-height:360px){#htp .hart{font-size:42px}#htp .hart.big{font-size:64px}#htp h3{font-size:18px;margin-bottom:4px}#htp .hx p{font-size:13px;margin-bottom:5px}}
+.skbox{margin:6px 0;padding:6px;border:1px solid #3a2f4a;border-radius:8px;background:#1a1422}.sk17{display:flex;gap:6px;align-items:flex-start;margin:4px 0}.sk17 .ski{font-size:18px;width:24px;flex:none;text-align:center}.sk17.lock{opacity:.5}
+#powers [data-act=cast]{position:relative;overflow:hidden}#powers [data-act=cast]::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:conic-gradient(from 0deg,rgba(0,0,0,.55) calc(var(--cd,0)*360deg),transparent 0)}
+.btn{transition:transform .08s ease-out,filter .15s}.btn:active{transform:scale(.95)}
 </style><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(r=>r.update()));
@@ -3390,7 +3393,7 @@ const wpath12=(ax,ay,bx,by)=>{if(ax===bx&&ay===by)return[];const q=[[ax,ay]],pr=
   for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy,k=nx+','+ny;if(k in pr||Math.abs(nx-ax)+Math.abs(ny-ay)>6||!inb(nx,ny)||wall(nx,ny)&&!(nx===bx&&ny===by))continue;pr[k]=x+','+y;q.push([nx,ny]);}}return null;};
 window.WALL12={snaps:0};
 const _trk12=trk;trk=function(e,isHero){const r=_trk12(e,isHero);const v=r.v;const now=performance.now();const iv=TICK/Math.max(1,speed);
- if(v.tx===undefined||v.mp!==S.map){if(v.tx!==undefined)WALL12.snaps++;v.tx=e.x;v.ty=e.y;v.fx=e.x;v.fy=e.y;v.q=[];v.lt=now;v.fc=v.fc||v.face||1;v.mp=S.map;}
+ const fk=S.floor+S.phase;if(v.tx===undefined||v.mp!==S.map||v.fk!==fk||inb(v.tx,v.ty)&&wall(v.tx,v.ty)){v.fk=fk;if(v.tx!==undefined)WALL12.snaps++;v.tx=e.x;v.ty=e.y;v.fx=e.x;v.fy=e.y;v.q=[];v.lt=now;v.fc=v.fc||v.face||1;v.mp=S.map;}
  if(e.x!==v.tx||e.y!==v.ty){const last=v.q.length?v.q[v.q.length-1]:[Math.round(v.fx),Math.round(v.fy)];
   const pth=Math.abs(e.x-v.tx)+Math.abs(e.y-v.ty)<=4?wpath12(v.tx,v.ty,e.x,e.y):null;
   if(!pth){v.q=[];v.fx=e.x;v.fy=e.y;WALL12.snaps++;}else v.q.push(...pth);
@@ -3553,6 +3556,144 @@ const _tk16=tick;tick=function(){const r=_tk16.apply(this,arguments);if(!full13(
  if(S.decision&&S.decision.k==='leave'&&S.phase==='camp'){AUTO16.departs++;resolveDecision();}
  return r;};
 {const _st=setThink13;setThink13=function(v){_st(v);if(full13()&&typeof PM!=='undefined'&&PM.open){closePM();if(S)S.paused=false;}};}
+
+</script><script>
+// v17: hero-unique signature skills. Each class has two (2nd unlocks at Lv5); ranks rise with level; traits add a twist.
+// Skills are free bonus actions on a cooldown, used automatically when the moment is right.
+const mobs17=()=>S.ents.filter(e=>e.t==='mob');
+const near17=(u,r)=>mobs17().filter(e=>mdist(u,e)<=r);
+const arch17=e=>typeof archOf10==='function'?archOf10(e):'';
+const deep17=()=>S.floor<=20?1:Math.max(.4,1-(S.floor-20)*.06); // skills help the course; past floor 20 they fade a little so the deep stays hard
+const hitM17=(h,e,mul)=>{const d=Math.max(1,Math.round(heroAtk(h,e)*mul*deep17()-e.def*.5));dmgMob(e,d,h);return d;};
+const healH17=(x,p)=>{if(!x.alive||x.downed)return 0;const M=mhp(x),a=Math.min(M-x.hp,Math.round(M*p*deep17()));x.hp+=a;return a;};
+// trait twists (small, visible on the sheet)
+const TW17={Brave:{off:.85,t:'Offensive skills recharge 15% faster'},Cautious:{def:1.25,t:'Defensive skills trigger earlier'},Pious:{heal:1.2,t:'Healing skills +20%'},Kind:{ally:1.15,t:'Skills that protect allies +15%'},
+ Greedy:{off:1.1,dmg:1.12,t:'Damage skills +12%, but 10% slower'},Skeptic:{dmg:1.08,heal:.9,t:'Damage skills +8%, healing −10%'},Lonely:{solo:1.2,t:'+20% when no ally is adjacent'}};
+const tw17=(h,k)=>{const t=TW17[h.trait];return t&&t[k]||1;};
+const SK17={
+ Warrior:[{id:'roar',n:'Taunting Roar',ic:'📣',cd:14,kind:'def',d:r=>`Enemies within 3 must fight me for ${3+r} ticks`,
+   when:h=>{const n=near17(h,3);return n.length>=2||n.some(e=>e.tg&&e.tg!==h&&['charger','flanker','brute'].includes(arch17(e)));},
+   go:(h,r)=>{const n=near17(h,3);n.forEach(e=>{e.tauntBy=h.id;e.tauntT=3+r;});h.swall=Math.max(h.swall||0,2);return {fx:'roar',n:n.length};}},
+  {id:'cleave',n:'Cleave',ic:'🪓',cd:8,kind:'off',lv:5,d:r=>`Strike every adjacent foe for ${Math.round((1+.1*r)*100)}%`,
+   when:h=>near17(h,1).length>=2,go:(h,r)=>{near17(h,1).forEach(e=>hitM17(h,e,(1+.1*r)*tw17(h,'dmg')));return {fx:'cleave'};}}],
+ Paladin:[{id:'wall',n:'Shield Wall',ic:'🛡️',cd:16,kind:'def',d:r=>`Me and adjacent allies take −${30+5*r}% damage for 4 ticks`,
+   when:h=>near17(h,2).length>=2||alive().some(o=>o!==h&&mdist(o,h)<=1&&o.hp<mhp(o)*.6*tw17(h,'def')),
+   go:(h,r)=>{alive().filter(o=>mdist(o,h)<=1).forEach(o=>{o.swall=4;o.swallP=Math.min(.6,(.3+.05*r)*tw17(h,'ally'));});return {fx:'wall'};}},
+  {id:'lay',n:'Lay on Hands',ic:'🤲',cd:30,kind:'heal',lv:5,d:r=>`Heal the most wounded ally ${25+5*r}%`,
+   when:h=>alive().some(o=>!o.downed&&o.hp<mhp(o)*.35*tw17(h,'def')&&mdist(o,h)<=4),
+   go:(h,r)=>{const o=alive().filter(o=>!o.downed&&mdist(o,h)<=4).sort((a,b)=>a.hp/mhp(a)-b.hp/mhp(b))[0];if(!o)return null;healH17(o,(.25+.05*r)*tw17(h,'heal'));return {fx:'beam',on:[o]};}}],
+ Rogue:[{id:'stab',n:'Backstab',ic:'🗡️',cd:8,kind:'off',d:r=>`${Math.round((2+.2*r)*100)}% to a foe busy with someone else`,
+   when:h=>near17(h,1).some(e=>e.tg&&e.tg!==h),go:(h,r)=>{const e=near17(h,1).find(e=>e.tg&&e.tg!==h);if(!e)return null;hitM17(h,e,(2+.2*r)*tw17(h,'dmg')*(alive().some(o=>o!==h&&mdist(o,h)<=1)?1:tw17(h,'solo')));return {fx:'stab',at:e};}},
+  {id:'vanish',n:'Vanish',ic:'💨',cd:30,kind:'def',lv:5,d:r=>`Below 40% HP: untouchable for ${2+Math.ceil(r/2)} ticks`,
+   when:h=>h.hp<mhp(h)*.4*tw17(h,'def')&&near17(h,2).length>0,go:(h,r)=>{h.vanish=2+Math.ceil(r/2);near17(h,3).forEach(e=>{if(e.tg===h)e.tg=null;});return {fx:'smoke'};}}],
+ Ranger:[{id:'aim',n:'Aimed Shot',ic:'🎯',cd:10,kind:'off',d:r=>`${Math.round((2+.15*r)*100)}% to the toughest foe in sight`,
+   when:h=>near17(h,6).some(e=>(e.boss||e.elite||['brute','chonk'].includes(arch17(e))||e.hp>heroAtk(h,e)*3)&&los(h,e)),
+   go:(h,r)=>{const e=near17(h,6).filter(e=>los(h,e)).sort((a,b)=>b.hp-a.hp)[0];if(!e)return null;hitM17(h,e,(2+.15*r)*tw17(h,'dmg'));return {fx:'arrow',at:[e],big:1};}},
+  {id:'volley',n:'Volley',ic:'🏹',cd:14,kind:'off',lv:5,d:r=>`Arrows hit up to ${3+Math.floor(r/2)} foes for ${Math.round((.7+.05*r)*100)}%`,
+   when:h=>near17(h,5).filter(e=>los(h,e)).length>=3,go:(h,r)=>{const t=near17(h,5).filter(e=>los(h,e)).slice(0,3+Math.floor(r/2));t.forEach(e=>hitM17(h,e,(.7+.05*r)*tw17(h,'dmg')));return {fx:'arrow',at:t};}}],
+ Mage:[{id:'nova',n:'Ember Nova',ic:'💥',cd:12,kind:'off',d:r=>`Blast all foes within 2 for ${Math.round((.9+.1*r)*100)}% (melts swarms)`,
+   when:h=>{const n=near17(h,2);return n.length>=3||n.filter(e=>['swarm','critter'].includes(arch17(e))).length>=2;},
+   go:(h,r)=>{near17(h,2).forEach(e=>hitM17(h,e,(.9+.1*r)*tw17(h,'dmg')*(['swarm','critter'].includes(arch17(e))?1.3:1)));return {fx:'nova',c:'255,140,60'};}},
+  {id:'frost',n:'Frost Lock',ic:'❄️',cd:14,kind:'def',lv:5,d:r=>`Freeze a charging foe in place for ${2+Math.ceil(r/2)} ticks`,
+   when:h=>near17(h,4).some(e=>mdist(e,h)>1&&['charger','brute','flanker'].includes(arch17(e))&&los(h,e)),
+   go:(h,r)=>{const e=near17(h,4).find(e=>mdist(e,h)>1&&['charger','brute','flanker'].includes(arch17(e))&&los(h,e));if(!e)return null;e.root=2+Math.ceil(r/2);hitM17(h,e,.5);return {fx:'frost',at:e};}}],
+ Cleric:[{id:'mend',n:'Prayer of Mending',ic:'✨',cd:16,kind:'heal',d:r=>`Heal every ally within 4 by ${10+2*r}%`,
+   when:h=>{const hs=alive().filter(o=>!o.downed&&mdist(o,h)<=4);return hs.length&&hs.reduce((a,o)=>a+o.hp/mhp(o),0)/hs.length<.7*tw17(h,'def');},
+   go:(h,r)=>{const hs=alive().filter(o=>!o.downed&&mdist(o,h)<=4);hs.forEach(o=>healH17(o,(.1+.02*r)*tw17(h,'heal')));return {fx:'beam',on:hs};}},
+  {id:'purify',n:'Purify',ic:'🌿',cd:20,kind:'heal',lv:5,d:r=>`Cleanse poison & roots nearby, heal ${4+r}%`,
+   when:h=>alive().some(o=>mdist(o,h)<=4&&((o.poison||0)>=2||(o.root||0)>0)),
+   go:(h,r)=>{const hs=alive().filter(o=>mdist(o,h)<=4);hs.forEach(o=>{o.poison=0;o.root=0;healH17(o,(.04+.01*r)*tw17(h,'heal'));});return {fx:'ring',c:'140,255,170'};}}],
+ Necromancer:[{id:'raise',n:'Raise Dead',ic:'💀',cd:25,kind:'off',d:r=>`Summon a Bone Knight for ${16+4*r} ticks`,
+   when:h=>near17(h,4).length>=1&&!S.ents.some(e=>e.t==='ally'&&e.bk===h.id),
+   go:(h,r)=>{const f=nearFree(h.x,h.y);if(!f)return null;const hp=Math.round((20+S.floor*5)*(1+.15*r));S.ents.push({t:'ally',name:'Bone Knight',bk:h.id,x:f[0],y:f[1],hp,mhp:hp,atk:(3+S.floor*1.3)*(1+.1*r),ttl:16+4*r});return {fx:'raise',x:f[0],y:f[1]};}},
+  {id:'drain',n:'Drain Life',ic:'🩸',cd:10,kind:'off',lv:5,d:r=>`${Math.round((1.2+.1*r)*100)}% to a foe, healing me for it`,
+   when:h=>h.hp<mhp(h)*.8&&near17(h,4).some(e=>los(h,e)),go:(h,r)=>{const e=near17(h,4).find(e=>los(h,e));if(!e)return null;const d=hitM17(h,e,(1.2+.1*r)*tw17(h,'dmg'));h.hp=Math.min(mhp(h),h.hp+Math.round(d*.6));return {fx:'drain',at:e};}}],
+ Bard:[{id:'rally',n:'Rallying Anthem',ic:'🎺',cd:18,kind:'ally',d:r=>`Party +${15+3*r}% damage for 6 ticks`,
+   when:h=>near17(h,4).length>=2,go:(h,r)=>{alive().forEach(o=>{o.rally=6;o.rallyP=(.15+.03*r)*tw17(h,'ally');});return {fx:'notes'};}},
+  {id:'discord',n:'Discordant Note',ic:'🎶',cd:20,kind:'def',lv:5,d:r=>`Foes within 3 deal −${25+5*r}% damage for 5 ticks`,
+   when:h=>near17(h,3).length>=3,go:(h,r)=>{near17(h,3).forEach(e=>{e.weak=5;e.weakP=.25+.05*r;});return {fx:'ring',c:'255,150,220'};}}]};
+const rank17=h=>Math.min(5,1+Math.floor((h.lvl-1)/3));
+const skills17=h=>(SK17[h.cls]||[]).filter(s=>(h.lvl||1)>=(s.lv||1));
+window.ST17={uses:{}};
+function useSkill17(h,s){const r=rank17(h);const out=s.go(h,r);if(!out)return false;const cdm=s.kind==='off'?tw17(h,'off'):1;h.sk17[s.id]=Math.round(s.cd*cdm*(S.floor>20?Math.min(1.8,1+(S.floor-20)*.06):1));ST17.uses[s.id]=(ST17.uses[s.id]||0)+1;
+ h.skUse=(h.skUse||{});h.skUse[s.id]=(h.skUse[s.id]||0)+1;
+ if(!offline){if(typeof skillFx17==='function')skillFx17(h,s,out);if(chance(.6))log(`${s.ic} ${h.name}: ${s.n}!`,h);}return true;}
+const _ht17=heroTick;heroTick=function(h){
+ if(h&&h.alive&&!h.downed){h.sk17=h.sk17||{};for(const k in h.sk17)if(h.sk17[k]>0)h.sk17[k]--;['swall','vanish','rally'].forEach(k=>{if(h[k]>0)h[k]--;});
+  if(S.phase==='dungeon'&&!(h.root>0&&false)){for(const s of skills17(h)){if((h.sk17[s.id]||0)>0)continue;let ok=false;try{ok=s.when(h);}catch(e){}if(ok&&useSkill17(h,s))break;}}}
+ return _ht17(h);};
+// effects: taunt, shield wall, vanish, rally, weaken
+{const _mt=window.mobTarget10;window.mobTarget10=function(e,units){if(e.tauntT>0){e.tauntT--;const t=heroById(e.tauntBy);if(t&&t.alive&&!t.downed&&mdist(t,e)<=5)return {u:t,hero:1};}
+ const r=_mt?_mt(e,units):null;if(r&&r.u&&r.u.vanish>0){const alt=units.find(x=>x.u!==r.u&&!(x.u.vanish>0));return alt||r;}return r;};}
+const _hh17=hurtHero;hurtHero=function(h,d,src,how){if(h&&h.vanish>0&&src&&src.t==='mob')return;if(h&&h.swall>0&&src)d=d*(1-(h.swallP||.35));if(src&&src.weak>0)d=d*(1-(src.weakP||.25));return _hh17(h,Math.max(1,Math.round(d)),src,how);};
+const _ha17=heroAtk;heroAtk=function(h,e){let a=_ha17(h,e);if(h.rally>0)a*=1+(h.rallyP||.15);return a;};
+{const _mtk=mobTick;mobTick=function(){for(const e of S.ents)if(e.t==='mob'&&e.weak>0)e.weak--;return _mtk.apply(this,arguments);};}
+// sheet: signature skills, rank, uses, next unlock, trait twist
+const _rs17=renderSheet;renderSheet=function(){_rs17();const h=heroById(sheetId);if(!h||!SK17[h.cls])return;const box=document.querySelector('#ovb .sheet');if(!box)return;const r=rank17(h);
+ const rows=SK17[h.cls].map(s=>{const lock=(h.lvl||1)<(s.lv||1);const cd=(h.sk17&&h.sk17[s.id])||0;return `<div class="sk17 ${lock?'lock':''}"><span class="ski">${s.ic}</span><span><b>${s.n}</b> ${lock?`<span class="small">· unlocks at Lv${s.lv}</span>`:`<span class="small">· rank ${'★'.repeat(r)}${'☆'.repeat(5-r)} · used ${(h.skUse&&h.skUse[s.id])||0}×</span>`}<br><span class="small">${s.d(r)} · ${s.cd}t cooldown</span></span></div>`;}).join('');
+ const tw=TW17[h.trait];const nx=r<5?`Next rank at Lv${3*r+1}.`:'Mastered.';
+ const html=`<div class="skbox" data-keep="1"><div class="hudh">Signature skills</div>${rows}<div class="small">${nx}${tw?` <b>${h.trait}:</b> ${tw.t}.`:''}</div></div>`;
+ const col=box.lastElementChild;const ex=col&&col.querySelector(':scope>.skbox');if(ex){const t=document.createElement('template');t.innerHTML=html;morphKids(ex,t.content.firstElementChild);}else if(col)col.insertAdjacentHTML('beforeend',html);};
+// level-ups that unlock or rank up a skill get a moment
+{const _lu=lvlUp;lvlUp=function(h,silent){const r0=rank17(h),n0=skills17(h).length;const r=_lu.apply(this,arguments);if(!silent&&!offline){const s2=skills17(h);if(s2.length>n0){const s=s2[s2.length-1];log(`🌟 ${h.name} learns ${s.ic} ${s.n}!`,h);say(h,`I've learned ${s.n}! Watch this.`);}else if(rank17(h)>r0)log(`⭐ ${h.name}'s skills grow stronger (rank ${rank17(h)}).`,h);}return r;};}
+// ---------- skill VFX + callout ----------
+const SKC17={Warrior:'255,220,170',Paladin:'255,224,138',Rogue:'200,240,255',Ranger:'216,192,138',Mage:'255,150,70',Cleric:'255,243,160',Necromancer:'176,122,255',Bard:'255,154,216'};
+function skillFx17(h,s,o){if(!FXON())return;const c=SKC17[h.cls]||'255,255,255',X=u=>u.x*TS+12,Y=u=>u.y*TS+12,L=(x,y,r,l)=>R9.lights.push({x,y,r,c,l,m:l});
+ R9.fx.push({k:'skill',h,n:s.ic+' '+s.n,c,t:0,d:1300});L(X(h),Y(h),70,22);
+ switch(o.fx){
+  case 'roar':R9.fx.push({k:'rings',x:X(h),y:Y(h),c,r:3*TS,n:3,t:0,d:700});shake(2);break;
+  case 'cleave':R9.fx.push({k:'spin',x:X(h),y:Y(h),c,t:0,d:320});break;
+  case 'wall':alive().filter(x=>mdist(x,h)<=1).forEach(x=>R9.fx.push({k:'dome',h:x,t:0,d:1000}));break;
+  case 'beam':(o.on||[]).forEach(x=>{R9.fx.push({k:'beam',x:X(x),y:Y(x),c:'120,255,170',t:0,d:800});L(X(x),Y(x),60,30);});break;
+  case 'stab':{const e=o.at;R9.fx.push({k:'slash',x:X(e),y:Y(e),a:-.8,c:'#fff',t:0,d:200},{k:'slash',x:X(e),y:Y(e),a:.8,c:'#c8f0ff',t:0,d:260});R9.stop=50;break;}
+  case 'smoke':for(let i=0;i<(Q()?16:8);i++)FX.parts.push({x:X(h)+(Math.random()-.5)*14,y:Y(h)+(Math.random()-.5)*10,vx:(Math.random()-.5)*.8,vy:-.3-Math.random()*.4,c:'#8a8a9a',l:40,m:40,r:2+Math.random()*1.5,g:-.01});break;
+  case 'arrow':(o.at||[]).forEach((e,i)=>R9.fx.push({k:'proj',x0:X(h),y0:Y(h),x1:X(e),y1:Y(e),c:o.big?'#ffe8a0':'#d8c08a',t:-i*60,d:220,cls:'Ranger'}));if(o.big)shake(2);break;
+  case 'nova':R9.fx.push({k:'nova',x:X(h),y:Y(h),c:o.c||c,r:2.4*TS,t:0,d:520});L(X(h),Y(h),2.6*TS,26);shake(3);break;
+  case 'frost':R9.fx.push({k:'proj',x0:X(h),y0:Y(h),x1:X(o.at),y1:Y(o.at),c:'#bfe6ff',t:0,d:220,cls:'Mage'},{k:'rings',x:X(o.at),y:Y(o.at),c:'170,220,255',r:16,n:2,t:100,d:600});break;
+  case 'ring':R9.fx.push({k:'rings',x:X(h),y:Y(h),c:o.c||c,r:4*TS,n:1,t:0,d:800});break;
+  case 'raise':{const x=o.x*TS+12,y=o.y*TS+12;R9.fx.push({k:'rings',x,y,c:'176,122,255',r:20,n:2,t:0,d:700});for(let i=0;i<(Q()?14:6);i++)FX.parts.push({x:x+(Math.random()-.5)*14,y:y+8,vx:(Math.random()-.5)*.3,vy:-.6-Math.random()*.6,c:pick(['#b07aff','#e8e0d0']),l:40,m:40,r:1.2,g:-.01,add:1});break;}
+  case 'drain':R9.fx.push({k:'proj',x0:X(o.at),y0:Y(o.at),x1:X(h),y1:Y(h),c:'#d04a8a',t:0,d:320,cls:'Mage'});break;
+  case 'notes':alive().forEach(x=>{for(let i=0;i<(Q()?3:1);i++)FX.parts.push({x:X(x)+(Math.random()-.5)*10,y:Y(x)-10,vx:(Math.random()-.5)*.4,vy:-.5,c:'#ff9ad8',l:45,m:45,r:1.4,g:-.005,add:1});});R9.fx.push({k:'rings',x:X(h),y:Y(h),c,r:3*TS,n:2,t:0,d:900});break;}}
+const _df17=drawFx;drawFx=function(dt){_df17(dt);for(let i=R9.fx.length-1;i>=0;i--){const f=R9.fx[i];if(!['skill','rings','nova','spin'].includes(f.k))continue;const a=f.t/f.d;if(a>=1||a<0)continue;cx.save();
+ if(f.k==='skill'){const v=V(f.h);const x=v.x*TS+12,y=v.y*TS-14-Math.min(1,a*4)*6;cx.globalAlpha=a>.75?(1-a)*4:Math.min(1,a*6);cx.font='bold 8px system-ui';cx.textAlign='center';const w=cx.measureText(f.n).width+8;
+  cx.fillStyle='rgba(20,14,28,.85)';cx.fillRect(x-w/2,y-7,w,12);cx.strokeStyle=`rgba(${f.c},.9)`;cx.lineWidth=1;cx.strokeRect(x-w/2+.5,y-6.5,w-1,11);cx.fillStyle=`rgb(${f.c})`;cx.fillText(f.n,x,y);}
+ else if(f.k==='rings'){cx.globalCompositeOperation=Q()?'lighter':'source-over';for(let j=0;j<f.n;j++){const b=Math.max(0,Math.min(1,a*1.4-j*.18));if(b<=0)continue;cx.globalAlpha=(1-b)*.8;cx.strokeStyle=`rgba(${f.c},1)`;cx.lineWidth=2*(1-b)+.6;cx.beginPath();cx.arc(f.x,f.y,f.r*b,0,6.283);cx.stroke();}}
+ else if(f.k==='nova'){cx.globalCompositeOperation=Q()?'lighter':'source-over';const rr=f.r*Math.min(1,a*1.6);const g=cx.createRadialGradient(f.x,f.y,rr*.2,f.x,f.y,rr);g.addColorStop(0,`rgba(${f.c},0)`);g.addColorStop(.75,`rgba(${f.c},${.45*(1-a)})`);g.addColorStop(1,`rgba(${f.c},0)`);cx.fillStyle=g;cx.beginPath();cx.arc(f.x,f.y,rr,0,6.283);cx.fill();}
+ else if(f.k==='spin'){cx.translate(f.x,f.y);cx.rotate(a*6.283);cx.globalAlpha=1-a;cx.strokeStyle=`rgba(${f.c},1)`;cx.lineWidth=2.4;cx.lineCap='round';cx.beginPath();cx.arc(0,0,TS*.9,0,4);cx.stroke();}
+ cx.restore();}};
+
+</script><script>
+// v18 visuals: wall torches with flicker + embers, shaded sprites, walk hop, impact sparks, cooldown sweeps.
+// Budget: everything cached or capped; Low graphics skips the extras.
+// ---------- wall torches (placed on wall front faces, spaced out, baked sconce + live flame) ----------
+const _bt18=buildTiles;buildTiles=function(){_bt18.apply(this,arguments);R9.torch=[];try{const g=R9.tiles.getContext('2d');const k=R9.tk||1;g.setTransform(k,0,0,k,0,0);
+ for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){if(!S.map[y][x]||S.map[y+1][x])continue;const r=rnd9(hash(x*7+3,y*11+5));if(r()>.09)continue;if(R9.torch.some(t=>Math.abs(t.tx-x)+Math.abs(t.ty-y)<5))continue;
+  const px=x*TS+12,py=y*TS+TS-8;g.fillStyle='#2a1e16';g.fillRect(px-2,py-1,4,5);g.fillStyle='#5a4028';g.fillRect(px-3,py-2,6,2);g.fillStyle='#1a120c';g.fillRect(px-1,py+4,2,3);
+  R9.torch.push({tx:x,ty:y,x:px,y:py-3,ph:r()*6});R9.props.push({x:px,y:py+6,r:78,c:'255,168,88',fl:.5});}}catch(e){}};
+// ---------- shaded sprites: soft top light + grounded bottom shade (cached) ----------
+const sh18=(c)=>{const o=document.createElement('canvas');o.width=c.width;o.height=c.height;const g=o.getContext('2d');g.drawImage(c,0,0);g.globalCompositeOperation='source-atop';
+ const gr=g.createLinearGradient(0,0,0,o.height);gr.addColorStop(0,'rgba(255,240,220,.16)');gr.addColorStop(.45,'rgba(255,240,220,0)');gr.addColorStop(.7,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(10,0,20,.32)');g.fillStyle=gr;g.fillRect(0,0,o.width,o.height);
+ const gl=g.createLinearGradient(0,0,o.width,0);gl.addColorStop(0,'rgba(255,255,255,.07)');gl.addColorStop(.35,'rgba(255,255,255,0)');gl.addColorStop(1,'rgba(0,0,0,.12)');g.fillStyle=gl;g.fillRect(0,0,o.width,o.height);return o;};
+const SH18=new WeakMap();const shaded18=c=>{let o=SH18.get(c);if(!o){o=sh18(c);SH18.set(c,o);}return o;};
+{const _h=heroImg;heroImg=function(h,white){const c=_h(h,white);return white||!Q()?c:shaded18(c);};const _m=mobImg;mobImg=function(e,white){const c=_m(e,white);return white||!Q()?c:shaded18(c);};}
+// ---------- walk hop (only while moving) ----------
+{const _t=trk;trk=function(e,isHero){const r=_t(e,isHero);const v=r.v;if(v.mv){v.hp18=(v.hp18||0)+FX.dt;r.y-=Math.abs(Math.sin(v.hp18/90))*(isHero?1.8:1.3);}else v.hp18=0;return r;};}
+// ---------- impact sparks on every hit ----------
+const _dm18=dmgMob;dmgMob=function(e,dmg,h){const was=S.ents.includes(e);const r=_dm18.apply(this,arguments);if(was&&FXON()&&Q()&&FX.parts.length<200){const v=V(e),x=(v.x??e.x)*TS+12,y=(v.y??e.y)*TS+12;const n=Q()===2?6:4;
+ for(let i=0;i<n;i++){const a=Math.random()*6.283,sp=1+Math.random()*1.6;FX.parts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-.4,c:pick(['#fff4c8','#ffd76a','#ffb04a']),l:14,m:14,r:.9,g:.05,add:1});}
+ if(R9.lights.length<24)R9.lights.push({x,y,r:26,c:'255,220,150',l:5,m:5});}return r;};
+let gl18=null;const GL18=()=>{if(gl18)return gl18;gl18=document.createElement('canvas');gl18.width=gl18.height=32;const g=gl18.getContext('2d');const r=g.createRadialGradient(16,16,0,16,16,16);r.addColorStop(0,'rgba(255,190,100,.7)');r.addColorStop(1,'rgba(255,120,40,0)');g.fillStyle=r;g.fillRect(0,0,32,32);return gl18;};
+// ---------- flames + embers drawn after lighting (emissive), only where explored ----------
+const _df18=drawFx;drawFx=function(dt){_df18(dt);if(!R9.torch||!Q()||S.phase==='camp')return;const T=FX.t;cx.save();cx.globalCompositeOperation='lighter';
+ for(const t of R9.torch){if(t.x<CAM.x-20||t.x>CAM.x+LW+20||t.y<CAM.y-20||t.y>CAM.y+LH+20)continue;if(!S.seen[t.ty]||!(S.seen[t.ty][t.tx]||(S.seen[t.ty+1]&&S.seen[t.ty+1][t.tx])))continue;
+  const f=Math.sin(T/70+t.ph)*.5+Math.sin(T/37+t.ph*2)*.3;const hgt=5.5+f;
+  cx.globalAlpha=.85+f*.3;cx.drawImage(GL18(),t.x-16,t.y-17);cx.globalAlpha=1;
+  cx.fillStyle='rgba(255,120,40,.85)';cx.beginPath();cx.ellipse(t.x+f*.4,t.y-hgt*.45,2.4,hgt*.6,0,0,6.283);cx.fill();
+  cx.fillStyle='rgba(255,230,150,.95)';cx.beginPath();cx.ellipse(t.x+f*.3,t.y-hgt*.3,1.2,hgt*.35,0,0,6.283);cx.fill();
+  if(Math.random()<.012*Q()&&FX.parts.length<180)FX.parts.push({x:t.x+(Math.random()-.5)*3,y:t.y-hgt,vx:(Math.random()-.5)*.25,vy:-.35-Math.random()*.3,c:pick(['#ffb04a','#ff7a2a','#ffd76a']),l:60,m:60,r:.7,g:-.002,add:1});}
+ cx.restore();};
+// ---------- power cooldown sweep (style var only: no layout change) ----------
+setInterval(()=>{if(!S||S.title)return;for(const b of document.querySelectorAll('#powers [data-act=cast]')){const m=MIRACLES.find(x=>x.id===b.dataset.id);if(!m)continue;const v=m.cd?Math.min(1,(S.cd[m.id]||0)/m.cd):0;const s=v.toFixed(3);if(b._cd!==s){b._cd=s;b.style.setProperty('--cd',s);}}},200);
 
 </script>
 </body></html>
