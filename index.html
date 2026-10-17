@@ -196,6 +196,14 @@ body,#app{font-variant-numeric:tabular-nums}#pw,#ak{display:inline-block;min-wid
 .skbox{margin:6px 0;padding:6px;border:1px solid #3a2f4a;border-radius:8px;background:#1a1422}.sk17{display:flex;gap:6px;align-items:flex-start;margin:4px 0}.sk17 .ski{font-size:18px;width:24px;flex:none;text-align:center}.sk17.lock{opacity:.5}
 #powers [data-act=cast]{position:relative;overflow:hidden}#powers [data-act=cast]::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:conic-gradient(from 0deg,rgba(0,0,0,.55) calc(var(--cd,0)*360deg),transparent 0)}
 .btn{transition:transform .08s ease-out,filter .15s}.btn:active{transform:scale(.95)}
+
+/* v19 UI polish: gilt corner frames, prompt fade-in, smooth tab/button state (paint-only, no layout change) */
+#ov .box,#pm .pmbox{--gc:#c9a24e;--bg:linear-gradient(#1d1729,#141020);background-image:linear-gradient(var(--gc),var(--gc)),linear-gradient(var(--gc),var(--gc)),linear-gradient(var(--gc),var(--gc)),linear-gradient(var(--gc),var(--gc)),linear-gradient(var(--gc),var(--gc)),linear-gradient(var(--gc),var(--gc)),linear-gradient(var(--gc),var(--gc)),linear-gradient(var(--gc),var(--gc)),var(--bg);background-size:16px 2px,2px 16px,16px 2px,2px 16px,16px 2px,2px 16px,16px 2px,2px 16px,100% 100%;background-position:left 6px top 6px,left 6px top 6px,right 6px top 6px,right 6px top 6px,left 6px bottom 6px,left 6px bottom 6px,right 6px bottom 6px,right 6px bottom 6px,0 0;background-repeat:no-repeat}
+#pm .pmbox{--bg:linear-gradient(#221a30,#151020)}
+#pm{animation:ovin .18s ease-out}#pm .pmbox{animation:pop .2s ease-out}
+.btn{transition:transform .08s,background-color .18s,border-color .18s,box-shadow .18s}
+#tabs .btn.on{box-shadow:0 0 10px #8a5cff55,inset 0 -2px 0 #ffd76a}
+@media (prefers-reduced-motion:reduce){.ov,.ov .box,#pm,#pm .pmbox{animation:none!important}}
 </style><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(r=>r.update()));
@@ -3013,7 +3021,7 @@ window.R9DG=function(dt){const st=th9(),T=FX.t;const key=S.floor+'|'+S.runs+'|'+
  const sx=S.stairs[0],sy=S.stairs[1];if(S.seen[sy][sx]){cx.fillStyle='#000a';rr(sx*TS+3,sy*TS+3,TS-6,TS-6,4);cx.fill();for(let i=0;i<4;i++){cx.fillStyle=`rgba(220,220,255,${.75-i*.17})`;cx.fillRect(sx*TS+5+i*1.5,sy*TS+6+i*3.5,TS-10-i*3,2.4);}}
  // telegraphs (always readable, above lighting later too)
  // entities on the ground
- const lights=[];for(const pr of R9.props)lights.push({x:pr.x,y:pr.y,r:pr.r*(1+Math.sin(T/(90+pr.r)+pr.x)*pr.fl*.4),c:pr.c,a:.85,glow:.12});
+ const lights=[];for(const pr of R9.props){const tx=pr.x/TS|0,ty=pr.y/TS|0;const wy=S.map[ty]&&S.map[ty][tx]?ty+1:ty;if(!(S.seen[wy]&&S.seen[wy][tx]))continue;lights.push({x:pr.x,y:pr.y,r:pr.r*(1+Math.sin(T/(90+pr.r)+pr.x)*pr.fl*.4),c:pr.c,a:.85,glow:.12});}
  for(const z of S.haz)if(S.seen[z.y][z.x])lights.push({x:z.x*TS+12,y:z.y*TS+12,r:34,c:z.k==='void'?'150,60,255':'255,120,40',a:.7});
  if(S.seen[sy][sx])lights.push({x:sx*TS+12,y:sy*TS+12,r:30,c:'200,200,255',a:.5,glow:.08});
  for(const e of S.ents){if(!S.seen[e.y]||!S.seen[e.y][e.x])continue;const px=e.x*TS,py=e.y*TS;
@@ -3023,7 +3031,7 @@ window.R9DG=function(dt){const st=th9(),T=FX.t;const key=S.floor+'|'+S.runs+'|'+
   else if(e.t==='shrine'){cx.fillStyle='#8a8478';cx.fillRect(px+7,py+14,10,6);cx.fillStyle='#ffd76a';rr(px+9,py+4,6,11,2);cx.fill();lights.push({x:px+12,y:py+10,r:60,c:'255,215,106',a:.9,glow:.18});}
   else if(e.t==='trap'&&(e.known||e.god)){cx.strokeStyle=e.god?'#8cf':TRAPS[e.k].col;cx.lineWidth=1.6;cx.beginPath();cx.moveTo(px+7,py+7);cx.lineTo(px+17,py+17);cx.moveTo(px+17,py+7);cx.lineTo(px+7,py+17);cx.stroke();}}
  // fog of war (soft, scaled tiny canvas)
- const D=fogD.data;for(let y=0;y<H;y++)for(let x=0;x<W;x++){const i=(y*W+x)*4;D[i]=D[i+1]=D[i+2]=0;D[i+3]=!S.seen[y][x]?255:VIS[x+','+y]?0:150;}fogX.putImageData(fogD,0,0);
+ const D=fogD.data;if(window.FOG19)FOG19(D,VIS);else for(let y=0;y<H;y++)for(let x=0;x<W;x++){const i=(y*W+x)*4;D[i]=D[i+1]=D[i+2]=0;D[i+3]=!S.seen[y][x]?255:VIS[x+','+y]?0:150;}fogX.putImageData(fogD,0,0);
  // units
  cx.textAlign='center';cx.textBaseline='middle';
  for(const e of S.ents){if(e.t!=='mob'&&e.t!=='ally')continue;if(!S.seen[e.y]||!S.seen[e.y][e.x]||!(VIS[e.x+','+e.y]||e.boss))continue;const p=trk(e,false);const s=sz(e)*TS,cxp=p.x+s/2,cyp=p.y+s/2;
@@ -3661,6 +3669,8 @@ const _df17=drawFx;drawFx=function(dt){_df17(dt);for(let i=R9.fx.length-1;i>=0;i
  else if(f.k==='nova'){cx.globalCompositeOperation=Q()?'lighter':'source-over';const rr=f.r*Math.min(1,a*1.6);const g=cx.createRadialGradient(f.x,f.y,rr*.2,f.x,f.y,rr);g.addColorStop(0,`rgba(${f.c},0)`);g.addColorStop(.75,`rgba(${f.c},${.45*(1-a)})`);g.addColorStop(1,`rgba(${f.c},0)`);cx.fillStyle=g;cx.beginPath();cx.arc(f.x,f.y,rr,0,6.283);cx.fill();}
  else if(f.k==='spin'){cx.translate(f.x,f.y);cx.rotate(a*6.283);cx.globalAlpha=1-a;cx.strokeStyle=`rgba(${f.c},1)`;cx.lineWidth=2.4;cx.lineCap='round';cx.beginPath();cx.arc(0,0,TS*.9,0,4);cx.stroke();}
  cx.restore();}};
+// Floor 20+ stays as hard as before skills: monsters past 20 grow a little to offset the party's new signature skills.
+const DEEPK17=window.DEEPK17||.11;{const _ms=mobScale;mobScale=function(f){return _ms(f)*(f>20?1+Math.min(DEEPK17*10,(f-20)*DEEPK17):1);};}
 
 </script><script>
 // v18 visuals: wall torches with flicker + embers, shaded sprites, walk hop, impact sparks, cooldown sweeps.
@@ -3685,7 +3695,7 @@ const _dm18=dmgMob;dmgMob=function(e,dmg,h){const was=S.ents.includes(e);const r
 let gl18=null;const GL18=()=>{if(gl18)return gl18;gl18=document.createElement('canvas');gl18.width=gl18.height=32;const g=gl18.getContext('2d');const r=g.createRadialGradient(16,16,0,16,16,16);r.addColorStop(0,'rgba(255,190,100,.7)');r.addColorStop(1,'rgba(255,120,40,0)');g.fillStyle=r;g.fillRect(0,0,32,32);return gl18;};
 // ---------- flames + embers drawn after lighting (emissive), only where explored ----------
 const _df18=drawFx;drawFx=function(dt){_df18(dt);if(!R9.torch||!Q()||S.phase==='camp')return;const T=FX.t;cx.save();cx.globalCompositeOperation='lighter';
- for(const t of R9.torch){if(t.x<CAM.x-20||t.x>CAM.x+LW+20||t.y<CAM.y-20||t.y>CAM.y+LH+20)continue;if(!S.seen[t.ty]||!(S.seen[t.ty][t.tx]||(S.seen[t.ty+1]&&S.seen[t.ty+1][t.tx])))continue;
+ for(const t of R9.torch){if(t.x<CAM.x-20||t.x>CAM.x+LW+20||t.y<CAM.y-20||t.y>CAM.y+LH+20)continue;if(!(S.seen[t.ty+1]&&S.seen[t.ty+1][t.tx]))continue;
   const f=Math.sin(T/70+t.ph)*.5+Math.sin(T/37+t.ph*2)*.3;const hgt=5.5+f;
   cx.globalAlpha=.85+f*.3;cx.drawImage(GL18(),t.x-16,t.y-17);cx.globalAlpha=1;
   cx.fillStyle='rgba(255,120,40,.85)';cx.beginPath();cx.ellipse(t.x+f*.4,t.y-hgt*.45,2.4,hgt*.6,0,0,6.283);cx.fill();
@@ -3694,6 +3704,24 @@ const _df18=drawFx;drawFx=function(dt){_df18(dt);if(!R9.torch||!Q()||S.phase==='
  cx.restore();};
 // ---------- power cooldown sweep (style var only: no layout change) ----------
 setInterval(()=>{if(!S||S.title)return;for(const b of document.querySelectorAll('#powers [data-act=cast]')){const m=MIRACLES.find(x=>x.id===b.dataset.id);if(!m)continue;const v=m.cd?Math.min(1,(S.cd[m.id]||0)/m.cd):0;const s=v.toFixed(3);if(b._cd!==s){b._cd=s;b.style.setProperty('--cd',s);}}},200);
+
+</script>
+<script>
+// v19 visuals stage C: attack wind-up, living fog of war, UI transitions. All per-frame work is O(tiles) or cached.
+// ---------- attack wind-up: pull back, then strike (replaces the plain symmetric lunge) ----------
+{const _t=trk;trk=function(e,isHero){const v=V(e);const r=_t(e,isHero);const L=v.lung||0;
+ if(L>0){if(Q())v.lung=Math.min(1,L+.045);// slower, readable swing
+  const p=1-L;const old=Math.sin(L*3.1416)*5;// what v9 already added
+  const nw=p<.34?-2.6*Math.sin(p/.34*1.5708):p<.6?-2.6+8.6*((p-.34)/.26):6*(1-(p-.6)/.4);
+  const d=nw-old;r.x+=(v.lx||0)*d;r.y+=(v.ly||0)*d;
+  }return r;};}
+// ---------- living fog: tiles fade in as they're revealed; remembered tiles get a biome-tinted drifting mist ----------
+let FA19=null,FK19='';
+window.FOG19=function(D,VIS){const n=W*H;const k=S.floor+'|'+S.phase+'|'+n+'|'+S.runs;if(!FA19||FK19!==k){FK19=k;FA19=new Float32Array(n).fill(255);}
+ const a=1-Math.exp(-(FX.dt||16)/140),T=FX.t/900,q=Q();const am=(th9().amb||'0,0,0').split(',').map(Number);const mr=am[0]*1.2+14|0,mg=am[1]*1.2+18|0,mb=am[2]*1.2+34|0;
+ for(let y=0;y<H;y++){const row=S.seen[y];for(let x=0;x<W;x++){const j=y*W+x,i=j*4;let t;
+  if(!row[x])t=255;else if(VIS[x+','+y])t=0;else t=q?150+Math.sin(T+x*.71+y*1.27)*14:150;
+  const c=FA19[j]+=(t-FA19[j])*a;D[i+3]=c;if(row[x]&&t){D[i]=mr;D[i+1]=mg;D[i+2]=mb;}else D[i]=D[i+1]=D[i+2]=0;}}};
 
 </script>
 </body></html>
