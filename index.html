@@ -204,6 +204,16 @@ body,#app{font-variant-numeric:tabular-nums}#pw,#ak{display:inline-block;min-wid
 .btn{transition:transform .08s,background-color .18s,border-color .18s,box-shadow .18s}
 #tabs .btn.on{box-shadow:0 0 10px #8a5cff55,inset 0 -2px 0 #ffd76a}
 @media (prefers-reduced-motion:reduce){.ov,.ov .box,#pm,#pm .pmbox{animation:none!important}}
+
+/* v21 Call a Soul: rarity-framed reveal card (transform/opacity only) */
+.sm21{font-size:13px;margin:6px 0 2px;font-weight:600}
+.sc21{position:relative;text-align:center;padding:14px 10px 8px;border-radius:14px;overflow:hidden;border:2px solid var(--rc);box-shadow:0 0 24px color-mix(in srgb,var(--rc) 45%,transparent) inset;margin-bottom:8px}
+.sc21 .av{width:96px;height:96px;border-radius:12px;border:2px solid var(--rc);box-shadow:0 0 18px var(--rc);animation:sc21in .6s cubic-bezier(.2,1.4,.4,1) both}
+.sc21c{position:relative;z-index:1}.sc21 h2{margin:4px 0 0}.sc21r{font-weight:700;letter-spacing:.06em;animation:sc21in .5s .15s both}
+.sc21g{position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent,var(--rc),transparent 30%,var(--rc),transparent 60%,var(--rc),transparent);opacity:.18;animation:sc21spin 8s linear infinite}
+.sc21.rC .sc21g{opacity:.07}.sc21.rL .sc21g{opacity:.32;animation-duration:4s}
+@keyframes sc21in{from{opacity:0;transform:scale(.4) rotate(-8deg)}to{opacity:1;transform:none}}@keyframes sc21spin{to{transform:rotate(1turn)}}
+@media (prefers-reduced-motion:reduce){.sc21 .av,.sc21r,.sc21g{animation:none!important}}
 </style><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(r=>r.update()));
@@ -698,7 +708,7 @@ function chooseClass(trait){
 function mkHero(){
  const trait=pick(Object.keys(TRAITS));const[cls,why]=chooseClass(trait);const C=CLASSES[cls];
  const lvl=1+bl('training')+(has('u_veteran')?1:0)+(S.phase==='camp'&&alive().length?Math.max(0,Math.floor(alive().reduce((a,h)=>a+h.lvl,0)/alive().length)-2):0);
- let name;do{name=pick(NAMES);}while(S.heroes.some(h=>h.alive&&h.name===name));
+ let name,nt=0;do{name=pick(NAMES);}while(S.heroes.some(h=>h.alive&&h.name===name)||(S.hall&&S.hall.some(f=>f.name===name)&&nt++<40));// a new soul never wears a fallen hero's name
  const h={id:S.nextId++,name,trait,cls,color:C.col,lvl:1,xp:0,
   base:{mhp:C.hp+pk('vit')*10,atk:C.atk+pk('mig'),def:C.def+pk('har')},
   gold:0,bag:[],faith:clamp((cls==='Necromancer'?5:15)+pk('dev')*10+(['Cleric','Paladin'].includes(cls)?15:0),0,100),hope:clamp(60+pk('opt')*10,0,100),
@@ -1216,7 +1226,7 @@ function newRun(){
  S.floor=1;S.deepest=1;S.waypoint=1;S.stall=0;S.tripDeep=0;S.tripStart=1;S.loopTrips=0;S.maxStall=0;S.heroes=S.heroes.filter(h=>h.alive&&false);S.choices=[];S.dead=false;S.cd={};S.scd={};S.fateUsed=0;S.phase='dungeon';S.decision=null;S.leader=null;S.cmdReturn=false;
  S.ents=[];S.runStats={bosses:0,kills:0,startT:S.tick};S.runs++;
  log(`— Run ${S.runs} begins —`);
- S.heroes.push(S.founder&&!S.founderUsed?(S.founderUsed=1,mkFounder(S.founder)):mkHero());
+ S.heroes.push(S.founder&&!S.founderUsed?(S.founderUsed=1,mkFounder(S.founder)):(typeof freeSoul==='function'?freeSoul():mkHero()));
  restock();
  genFloor();}
 function endRun(){
@@ -1307,7 +1317,7 @@ function renderPanel(){
  else if(tab==='party'){
   s=`<div class="small">Party: up to 5 heroes at any rank; extra heroes wait at the base. New recruits join at camp. ${S.tier>=2?'Tap 👑 to assign the leader (they choose the route).':'Assign leaders at Minor Deity.'}</div>`+
   hs.map(h=>`<div class="row"><div><b style="color:${h.color}">${h.name}</b> ${h.cls} <span class="small">(${CLASSES[h.cls].role}) · ${h.trait}</span><br><span class="small">${hs.filter(o=>o!==h).map(o=>`${o.name} ${rel(h,o)>40?'❤️':rel(h,o)<-30?'💢':'·'}${Math.round(rel(h,o))}`).join('  ')}</span></div>${S.tier>=2?`<button class="btn ${leaderHero()===h?'on':''}" data-act="leader" data-h="${h.id}">👑</button>`:''}<button class="btn" data-act="sheet" data-h="${h.id}">Sheet</button></div>`).join('')+
-  (S.fallen&&S.fallen.length?'<h3>The Fallen</h3>'+S.fallen.slice(-8).reverse().map(f=>`<div class="small">☠️ ${f}</div>`).join(''):'');}
+  (typeof memorialHTML==='function'?memorialHTML():'');}
  else if(tab==='base'){
   s=`<div>💰${S.gold} · Stash ${stashUsed()}/${stashCap()}</div><div class="small">${Object.keys(S.stash).filter(k=>S.stash[k]>0).map(k=>ITEMS[k].ic+S.stash[k]).join(' ')||'empty'}</div><div class="small">Armory: ${S.armory.map(gearName).join(', ')||'empty'}</div>`+
   '<h3>Buildings</h3>'+BUILD.map(b=>{const c=bcost(b.id),ok=canPay(c)&&bl(b.id)<5;return `<div class="row"><div>${b.ic} <b>${b.n}</b> ${bl(b.id)?'lvl '+bl(b.id):'<span class="small">not built</span>'}<br><span class="small">${b.d}</span></div><button class="btn ${ok?'gold':'off'}" data-act="build" data-id="${b.id}">${bl(b.id)>=5?'max':Object.keys(c).map(k=>(k==='gold'?'💰':ITEMS[k].ic)+c[k]).join(' ')}</button></div>`;}).join('')+
@@ -1858,9 +1868,9 @@ const STATIONS={kitchen:'Cook: +2 rations per camp',forge:'Smith: chance to impr
 // ---- balance: tier costs (AK) and power thresholds raised
 [0,12,32,75,150,280].forEach((a,i)=>{if(TIERS[i])TIERS[i].ak=a;});
 TIERS[0].n='Ember';TIERS[0].d='The First Flame, barely lit. Faint omens, a little healing, marking targets.';
-{const m=MIRACLES.find(x=>x.id==='soul');if(m){m.n='Void Pull';m.ic='🌀';m.cost=0;m.cd=0;m.tier=0;m.d='Pull a lost or fallen soul from the Void into the party';}}
-TIERS.forEach((t,i)=>{t.unlock=t.unlock.map(u=>/^Party of/.test(u)?u.replace('Party of','Void Pull: party up to'):u);});
-TIERS[0].unlock=['Void Pull: party up to 2'].concat(TIERS[0].unlock);
+{const m=MIRACLES.find(x=>x.id==='soul');if(m){m.n='Call a Soul';m.ic='🌀';m.cost=0;m.cd=0;m.tier=0;m.d='Summon a hero from the roster of waiting souls';}}
+TIERS.forEach((t,i)=>{t.unlock=t.unlock.map(u=>/^Party of/.test(u)?u.replace('Party of','Call a Soul: party up to'):u);});
+TIERS[0].unlock=['Call a Soul: party up to 2'].concat(TIERS[0].unlock);
 TIERS[0].cap=2;
 const BOONS={blessed:{n:'Blessed',d:'+20 faith, +10 hope'},sturdy:{n:'Sturdy',d:'+20% max HP'},keen:{n:'Keen Edge',d:'+2 attack'},provisioned:{n:'Provisioned',d:'Extra potions, food and a Grand Elixir'},bonded:{n:'Bonded',d:'Starts at 50 affection'}};
 const HERO_COLORS=['#d9534f','#e8954a','#f0e68c','#5fd35f','#3cb371','#4ea4ff','#7b68ee','#c46cff','#ff69b4','#f5f5dc','#6c6c8a','#556b2f'];
@@ -2050,7 +2060,7 @@ const _desc=descend;descend=function(){_desc();S.noDeathF=(S.noDeathF||0)+1;aliv
 // ---- achievements
 function checkAch(){CX();for(const a of ACH){if(S.ach[a.id])continue;let ok=false;try{ok=a.c(S);}catch(e){}if(ok){S.ach[a.id]=Date.now();S.ak+=3;S.akTotal+=3;log(`🏆 Achievement: ${a.n} (+3 📜)`);}}
  alive().forEach(h=>{if((h.aff||0)>=100)S.codex.loved=1;});}
-// ---- the Void: grow the party, revive the fallen; roster & bench
+// ---- the Void: grow the party with new souls (death is permanent); roster & bench
 const partyCap=()=>TIERS[S.tier].cap;
 function rosterAll(){return S.heroes.filter(h=>h.alive).concat(CX()&&S.bench);}
 function inRoster(id){return rosterAll().some(h=>h.id===id);}
@@ -2058,24 +2068,17 @@ function voidCost(f){const n=rosterAll().length;if(!f)return{pw:Math.round(20+18
 const SCARS={frail:'Frail: -10% max HP',haunted:'Haunted: starts with little hope',voidtouched:'Void-touched: remembers the dark, +10 affection',fearless:'Fearless: never flees'};
 function placeNew(h){if(S.phase==='dungeon'){const l=leaderHero();const p=l&&(nearFree(l.x,l.y)||[l.x,l.y]);if(p){h.x=p[0];h.y=p[1];}}
  if(alive().length<partyCap())S.heroes.push(h);else{S.bench.push(h);log(`🏕️ ${h.name} waits at the base (party is full).`,h);}}
-function voidPull(hallId){CX();const f=hallId!=null?S.hall.find(x=>x.id===hallId):null;const c=voidCost(f);
+function voidPull(hallId){CX();const f=null;const c=voidCost(f);// design rule: death is permanent; the fallen never return
  if(rosterAll().length>=8)return toast('Your roster is full (8).');if(S.power<c.pw||S.ak<c.ak)return toast(`The Void demands ✨${c.pw}${c.ak?' and 📜'+c.ak:''}.`);
  if(alive().length>=partyCap()&&S.phase==='dungeon'&&S.bench.length>=3)return toast('No room in the party or at base.');
  S.power-=c.pw;S.ak-=c.ak;let h;
- if(f){h=mkHero({gender:f.gender,name:f.name});const C=CLASSES[f.cls];h.cls=f.cls;h.trait=f.trait;h.color=f.color;h.portrait=f.portrait;h.base={mhp:C.hp+pk('vit')*10,atk:C.atk+pk('mig'),def:C.def+pk('har')};
-  const lv=Math.max(1,Math.floor(f.lvl/2));for(let i=1;i<lv;i++)lvlUp(h,true);h.arcsDone=f.arcsDone||[];h.arc=f.arc;h.aff=clamp(Math.round(f.aff*.6)+10,0,100);h.pulls=(f.pulls||0)+1;h.kills=0;h.rel={};
-  h.scar=pick(Object.keys(SCARS));if(h.scar==='haunted')h.hope=25;if(h.scar==='voidtouched')h.aff=clamp(h.aff+10,0,100);if(h.scar==='fearless')h.cmd=null;
-  h.hp=mhp(h);S.hall.splice(S.hall.indexOf(f),1);
-  log(`🌀 ${h.name} the ${h.cls} is pulled back from the Void, ${SCARS[h.scar].split(':')[0].toLowerCase()}.`,h);
-  say(h,pick([`I remember... falling. And then your light. Why did you bring me back?`,`It was so cold. I could hear you calling my name the whole time.`,`I died to ${f.cause.split(' on ')[0]}. I won't forget that. Neither will ${P(h).them==='them'?'they':'it'}.`]));}
- else{h=mkHero();log(`🌀 A lost soul is drawn out of the Void: ${h.name} the ${h.cls}.`,h);}
+ {h=mkHero();log(`🌀 A lost soul is drawn out of the Void: ${h.name} the ${h.cls}.`,h);}
  placeNew(h);alive().forEach(x=>{if(x!==h){hope(x,5);social(x,8);}});burst(CAM.x+LW/2,CAM.y+LH/2,'#a3f',30,2.5,50);render();return h;}
 function openVoid(){CX();const c0=voidCost(null);const n=alive().length,cap=partyCap();
- const fl=S.hall.slice().reverse().filter(f=>!inRoster(f.id)).slice(0,12);
- ov(`<h2>🌀 The Void</h2><div class="small">Lost souls and fallen heroes drift in the dark between floors. Party ${n}/${cap} (grows with your tier) · Roster ${rosterAll().length}/8. Extra heroes wait at the base.</div>
+
+ ov(`<h2>🌀 The Void</h2><div class="small">Lost souls drift in the dark between floors, waiting for a light. Party ${n}/${cap} (grows with your tier) · Roster ${rosterAll().length}/8. Extra heroes wait at the base.</div>
  <div class="row"><div><b>Pull a lost soul</b><br><span class="small">A random new hero</span></div><button class="btn ${S.power>=c0.pw?'gold':'off'}" data-act="vpull" data-h="">✨${c0.pw}</button></div>
- <h3>Hall of the Fallen</h3>${fl.length?fl.map(f=>{const c=voidCost(f);return `<div class="row">${avatar(f.cls,f.color,f)}<div><b style="color:${f.color}">${f.name}</b> <span class="small">Lv${f.lvl} ${f.cls} · run ${f.run}${f.pulls?' · returned '+f.pulls+'×':''}</span><br><span class="small">${f.epitaph}</span></div><button class="btn ${S.power>=c.pw&&S.ak>=c.ak?'gold':'off'}" data-act="vpull" data-h="${f.id}">✨${c.pw} 📜${c.ak}</button></div>`;}).join(''):'<div class="small">No fallen heroes yet.</div>'}
- <div class="small">Returned heroes keep their name, story and memories, but restart at half level and bear a scar of the Void.</div>
+ <div class="small" style="margin-top:6px">🪦 The fallen do not return. Their names are kept at the camp memorial.</div>
  <button class="btn" style="width:100%" data-act="close">Close</button>`);}
 function setActive(id,on){const b=S.bench.find(h=>h.id===id),a=S.heroes.find(h=>h.id===id&&h.alive);
  if(on&&b){if(alive().length>=partyCap())return toast(`Party is full (${partyCap()}). Bench someone first.`);if(S.phase!=='camp')return toast('Swap heroes at camp.');S.bench.splice(S.bench.indexOf(b),1);S.heroes.push(b);say(b,'My turn! Let\'s go.');}
@@ -2147,7 +2150,7 @@ function openCodex(t){if(t)codexTab=t;CX();const C=S.codex;let s='';
  if(codexTab==='beasts'){s=THEMES.map(th=>`<h3>${th.n}</h3><div class="cgrid">${th.mobs.map(m=>{const r=C.mobs[m[0]];const kn=(S.know[m[0]]||0)>=3;return r?`<div class="cc"><b>${m[0]}</b><div class="small">slain ${r.k} · HP ${m[2]} · ATK ${m[3]}</div><div class="small">${kn?ABIL[m[6]]:'ability: ???'}${m[7]?' · undead':''}</div></div>`:`<div class="cc lk">???</div>`;}).join('')}</div>`).join('')+`<div class="small">Elites slain: ${C.elites}. Affixes: ${Object.values(AFFIX).map(a=>a.n+' ('+a.d+')').join(', ')}</div>`;}
  else if(codexTab==='bosses')s=BOSSES.map((b,i)=>{const k=C.bosses[b.n];const seen=k||(S.know[b.n]||0)>0;return `<div class="row"><div><b>${seen?b.n:'??? (floor '+((i+1)*5)+')'}</b> <span class="small">floor ${(i+1)*5}${k?' · defeated '+k+'×':''}</span><br><span class="small">${seen?'<i>'+b.lore+'</i><br>'+BOSS_INTEL[b.n]:'Defeat or foresee it to learn more.'}</span></div></div>`;}).join('');
  else if(codexTab==='items'){const found=C.items;s='<h3>Legendaries</h3><div class="cgrid">'+LEGENDS.map(l=>found[l.n]?`<div class="cc" style="border-color:${RARITY[4].c}"><b style="color:${RARITY[4].c}">★ ${l.n}</b><div class="small">${l.d}</div></div>`:'<div class="cc lk">★ ???</div>').join('')+Object.values(UNIQUES).map(u=>`<div class="cc"><b style="color:#f0f">${u.n}</b><div class="small">boss relic · ${u.d}</div></div>`).join('')+'</div><h3>Sets</h3>'+Object.values(SETS).map(st=>`<div class="row"><div><b>◆ ${st.n}</b><br><span class="small">${Object.values(st.pieces).map(p=>found[p]?'✔ '+p:'? ???').join(' · ')}<br>2 pieces: ${st.b2} · 3 pieces: ${st.b3}</span></div></div>`).join('')+'<h3>Rarities</h3><div class="seg">'+RARITY.map(r=>`<span style="color:${r.c}">${r.n} ×${r.m}</span>`).join(' · ')+'</div><h3>Consumables</h3>'+['elixir','holywater','whetstone','feast','tonic','smoke','potion','bomb','scroll'].map(k=>`<span class="small">${ITEMS[k].ic} ${ITEMS[k].n}</span>`).join(' · ');}
- else if(codexTab==='fallen')s=S.hall.length?S.hall.slice().reverse().map(f=>`<div class="row">${avatar(f.cls,f.color,f)}<div><b style="color:${f.color}">${f.name}</b> <span class="small">Lv${f.lvl} ${f.cls} · run ${f.run} · floor ${f.floor} · 💛${f.aff}</span><br><span class="small"><i>${f.epitaph}</i></span></div>${!inRoster(f.id)?`<button class="btn s gold" data-act="void">🌀</button>`:''}</div>`).join(''):'<div class="small">No hero has fallen yet. They will.</div>';
+ else if(codexTab==='fallen')s=S.hall.length?S.hall.slice().reverse().map(f=>`<div class="row">${avatar(f.cls,f.color,f)}<div><b style="color:${f.color}">${f.name}</b> <span class="small">Lv${f.lvl} ${f.cls} · run ${f.run} · floor ${f.floor} · 💛${f.aff}</span><br><span class="small"><i>${f.epitaph}</i></span></div></div>`).join(''):'<div class="small">No hero has fallen yet. They will.</div>';
  else s=`<div class="small">${Object.keys(S.ach).length}/${ACH.length} feats · each grants 📜3</div><div class="cgrid">`+ACH.map(a=>`<div class="cc ${S.ach[a.id]?'':'lk'}"><b>${S.ach[a.id]?'🏆':'🔒'} ${a.n}</b><div class="small">${a.d}</div></div>`).join('')+'</div>';
  $('ovb').innerHTML=`<div class="codex"><div class="ch"><h2>📖 Codex</h2><div class="seg">${tabs}</div></div><div class="cbody">${s}</div><button class="btn" style="width:100%;margin-top:6px" data-act="close">Close</button></div>`;$('ov').style.display='flex';$('ov').classList.add('wide');baseOpen=false;}
 // ---- character sheet: talents, story, scars, pronouns
@@ -2207,7 +2210,7 @@ let hudSig='';
 function hudRow(h){return `<div class="hp2" data-act="selh" data-h="${h.id}" id="hr${h.id}">${avatar(h.cls,h.color,h)}<div class="hb"><div class="hn"><b style="color:${h.color}">${h.name}</b><span class="small"> ${CLASSES[h.cls].ic}${h.lvl}</span><span class="hm"></span></div>
  <div class="bar2 hpb2"><i></i><em></em></div><div class="needs2"><i class="nf"></i><i class="nw"></i><i class="ne"></i></div></div><button class="hsh" data-act="sheet" data-h="${h.id}">⋯</button></div>`;}
 function renderPartyHUD(){const ps=S.heroes.filter(h=>h.alive||S.phase==='dungeon');const sig=ps.map(h=>h.id).join(',')+'|'+(S.bench||[]).length;const el=$('party');
- if(sig!==hudSig||!el.querySelector('.hp2')){hudSig=sig;el.innerHTML=`<div class="hudh">Party <span class="small">${alive().length}/${partyCap()}${(S.bench||[]).length?' · '+S.bench.length+' at base':''}</span></div>`+ps.map(hudRow).join('')+(alive().length<partyCap()?`<button class="btn s gold" data-act="void" style="width:100%">🌀 Pull a soul (${alive().length}/${partyCap()})</button>`:'');}
+ if(sig!==hudSig||!el.querySelector('.hp2')){hudSig=sig;el.innerHTML=`<div class="hudh">Party <span class="small">${alive().length}/${partyCap()}${(S.bench||[]).length?' · '+S.bench.length+' at base':''}</span></div>`+ps.map(hudRow).join('')+(alive().length<partyCap()?`<button class="btn s gold" data-act="void" style="width:100%">🌀 Call a Soul (${alive().length}/${partyCap()})</button>`:'');}
  for(const h of ps){const r=document.getElementById('hr'+h.id);if(!r)continue;const M=mhp(h),f=h.alive?h.hp/M:0;
   r.classList.toggle('dead',!h.alive);r.classList.toggle('down',!!h.downed);r.classList.toggle('sel',S.sel===h.id);r.classList.toggle('req',!!h.req);
   const b=r.querySelector('.hpb2 i');b.style.width=Math.round(f*100)+'%';b.style.background=h.downed?'#888':f<.35?'linear-gradient(90deg,#c22,#f55)':'linear-gradient(90deg,#3a3,#7e5)';
@@ -3513,13 +3516,13 @@ const _ht13=heroTick;heroTick=function(h){if(h&&h.alive&&h.mend>0){h.mend--;if(!
 // v15: How to Play — a small card deck in the fledgling god's voice. Replaces the old help text.
 const HTP=[
  {a:'<div class="hart big">🔥</div>',t:'Hello, little god',p:['You are a newborn god: one small ember in a very big dark.','Heroes pray to you, and their faith ✨ is your power. No faith, no miracles. (No pressure.)']},
- {a:'<div class="hart">🌀<span>👥</span></div>',t:'Gather your flock',p:['Tap <b>🌀 Pull a soul</b> to call a hero out of the Void. Up to <b>5</b> descend together; extras wait at the 🏰 base.','Then they explore, fight and loot <b>on their own</b>, in real time. Speed it up with <b>1x · 2x · 4x</b>.']},
+ {a:'<div class="hart">🌀<span>👥</span></div>',t:'Gather your flock',p:['Tap <b>🌀 Call a Soul</b> to summon a hero: each one is hand-made, with a story, likes and a rarity (odds shown, with a pity counter). Spend 💠 shards from descending, or faith.','Up to <b>5</b> descend together; extras wait at the 🏰 base. They explore, fight and loot <b>on their own</b>, in real time (1x · 2x · 4x).']},
  {a:()=>'<div class="hmock">'+['heal','mend','soul','mark','bless'].map(id=>{const m=MIRACLES.find(x=>x.id===id);return m?`<span class="btn p">${m.ic}<br>${m.n.replace('Ember ','')}</span>`:'';}).join('')+'</div>',t:'Divine interventions',p:['Your powers live in the bar under the map. Tap one to cast; 🎯 tools like Mark then want a tap on the map.','❤️ <b>Heal</b> is the big save. 🕯️ <b>Ember Mend</b> is a cheap, slow warmth for everyone. 🌟 <b>Bless</b> sharpens blades.']},
  {a:'<div class="hart">⬆️<span>📜</span></div>',t:'Climbing the pantheon',p:['When a party falls, you keep 📜 <b>Ancient Knowledge</b>. Fill the ⬆️ bar up top to <b>ascend</b>.','Ember → Wisp → Spirit → … → Primordial. Every rank brings new tricks. Gods grow up too.']},
  {a:'<div class="hart"><i class="hbub">💬 I\'m hungry…</i>🧠</div>',t:'They talk. A lot.',p:['Heroes get hungry, lonely and opinionated. Small asks float up as bubbles; tap one to answer.','Tired of babysitting? Tap <b>🧠</b>: <b>Think</b> lets them handle small stuff; <b>⚡ Full autonomy</b> lets them decide everything. You can still cast anytime.']},
  {a:'<div class="hart">🏕️<span>🎒</span></div>',t:'Home sweet camp',p:['Between floors, heroes rest at camp to eat, drink and sleep. Build it up from the 🏰 base.','Backpacks are small. Loot gets hauled home to storage; bigger packs carry more.']},
  {a:'<div class="hart">⚔️<span>🐭</span></div>',t:'The War Council',p:['Tap ⚔️ to see what lurks ahead and who counters it.','Tanks hold the line, rogues dive the backline, mages melt swarms, and clerics cure the poison mice. Yes, poison mice.']},
- {a:'<div class="hart">🕯️<span>💾</span></div>',t:'The long descent',p:['Floors 1–20 are a gentle beginner\'s descent (once per save). <b>Floor 20 is where it gets real.</b>','Your game saves itself. In the app, 💾 gives you a backup code to keep somewhere safe.']}];
+ {a:'<div class="hart">🪦<span>❤️‍🔥</span></div>',t:'The long descent',p:['Floors 1–20 are a gentle beginner\'s descent (once per save). <b>Floor 20 is where it gets real.</b>','The fallen rest at the camp memorial. Bringing one back takes the <b>Rekindling</b>: a very rare ❤️‍🔥 Soul Ember, a deep bond and a mountain of faith. So keep them alive. Your game saves itself.']}];
 const HT={i:0,first:false,el:null,wasP:false};
 function htpBuild(){if(HT.el)return HT.el;const d=document.createElement('div');d.id='htp';d.setAttribute('role','dialog');d.setAttribute('aria-label','How to Play');
  d.innerHTML=`<div class="hc"><div class="hp"><div class="ha"></div><div class="ht"><div class="hn small"></div><h3></h3><div class="hx"></div></div></div><div class="hf"><button class="btn hb" data-h="back"></button><div class="hdots">${HTP.map((_,i)=>`<i data-h="dot" data-i="${i}"></i>`).join('')}</div><button class="btn gold hb" data-h="next"></button></div></div>`;
@@ -3722,6 +3725,117 @@ window.FOG19=function(D,VIS){const n=W*H;const k=S.floor+'|'+S.phase+'|'+n+'|'+S
  for(let y=0;y<H;y++){const row=S.seen[y];for(let x=0;x<W;x++){const j=y*W+x,i=j*4;let t;
   if(!row[x])t=255;else if(VIS[x+','+y])t=0;else t=q?150+Math.sin(T+x*.71+y*1.27)*14:150;
   const c=FA19[j]+=(t-FA19[j])*a;D[i+3]=c;if(row[x]&&t){D[i]=mr;D[i+1]=mg;D[i+2]=mb;}else D[i]=D[i+1]=D[i+2]=0;}}};
+
+</script>
+<script>
+// v20: death is (almost) final. The fallen are remembered at the camp memorial.
+// The only way back is the Rekindling: a Soul Ember (very rare, deep floors and bosses), a steep faith cost that grows each time,
+// and a deep bond with that hero. They return weakened and scarred, and can't be rekindled again for an hour.
+const REK={bond:75,cd:3600e3,cost:n=>500*(n+1)*(n+2)/2};// 500, 1500, 3000, ...
+// Soul Embers: bosses on floor 10+ (12%), elites on floor 20+ (1.5%)
+{const _k=killMob;killMob=function(e,h){const r=_k.apply(this,arguments);try{{const p=e.boss&&S.floor>=10?.12:e.elite&&S.floor>=20?.015:0;
+ if(p&&Math.random()<p){S.embers=(S.embers||0)+1;log(`❤️‍🔥 A Soul Ember drifts up from ${e.name}. Keep it safe.`);if(typeof toast==='function'&&!offline)toast('❤️‍🔥 A Soul Ember! It can rekindle a fallen hero.');}}}catch(x){}return r;};}
+// remember when a hero was last rekindled, so their memorial entry carries the cooldown
+{const _d=dieHero;dieHero=function(h){const was=h.alive;const r=_d.apply(this,arguments);if(was&&!h.alive&&S.hall&&S.hall.length){const f=S.hall[S.hall.length-1];if(f.id===h.id){f.rekAt=h.rekAt||0;f.pulls=h.pulls||0;f.key=h.key;f.likes=h.likes;f.rar=h.rar;f.bio=h.bio;}}return r;};}
+function rekCheck(f){const n=f.pulls||0,c=REK.cost(n),cdLeft=f.rekAt?Math.max(0,REK.cd-(Date.now()-f.rekAt)):0;const why=[];
+ if((S.embers||0)<1)why.push('needs a ❤️‍🔥 Soul Ember');if((f.aff||0)<REK.bond)why.push(`needs bond 💛${REK.bond}+ (was ${f.aff})`);if(S.power<c)why.push(`needs ✨${c}`);
+ if(cdLeft)why.push(`their soul is still settling (${Math.ceil(cdLeft/60000)} min)`);if(rosterAll().length>=8)why.push('roster is full');if(S.phase!=='camp')why.push('only at camp');return{ok:!why.length,why,c};}
+function rekindle(id){const f=(S.hall||[]).find(x=>x.id===id);if(!f)return;const k=rekCheck(f);if(!k.ok)return toast('The Rekindling '+k.why[0]+'.');
+ S.embers--;S.power-=k.c;const h=mkHero({gender:f.gender,name:f.name});const C=CLASSES[f.cls];h.cls=f.cls;h.trait=f.trait;h.color=f.color;h.portrait=f.portrait;if(f.key)h.key=f.key;h.likes=f.likes;h.rar=f.rar;h.bio=f.bio;
+ h.base={mhp:C.hp+pk('vit')*10,atk:C.atk+pk('mig'),def:C.def+pk('har')};const lv=Math.max(1,Math.floor(f.lvl/2));for(let i=1;i<lv;i++)lvlUp(h,true);
+ h.arcsDone=f.arcsDone||[];h.aff=clamp(Math.round(f.aff*.6),0,100);h.pulls=(f.pulls||0)+1;h.rekAt=Date.now();h.kills=0;h.rel={};
+ h.scar=pick(Object.keys(SCARS));if(h.scar==='frail')h.base.mhp=Math.round(h.base.mhp*.9);if(h.scar==='haunted')h.hope=25;if(h.scar==='voidtouched')h.aff=clamp(h.aff+10,0,100);h.hp=mhp(h);
+ S.hall.splice(S.hall.indexOf(f),1);placeNew(h);
+ log(`❤️‍🔥 The Rekindling: ${h.name} the ${h.cls} walks out of the ashes, ${SCARS[h.scar].split(':')[0].toLowerCase()}, at level ${h.lvl}.`,h);
+ say(h,pick([`I remember falling. And then your light, calling my name.`,`It was so cold. You came for me. You actually came.`,`I died to ${(f.cause||'the dark').split(' on ')[0]}. I won't forget it.`]));
+ if(typeof burst==='function')burst(CAM.x+LW/2,CAM.y+LH/2,'#ffb04a',40,2.6,60);render();}
+function memorialHTML(){const H=(S.hall||[]).slice().reverse();if(!H.length)return '';
+ return `<h3>🪦 Camp memorial</h3><div class="small">The fallen rest here. Only the Rekindling can call one back: a ❤️‍🔥 Soul Ember (you have ${S.embers||0}), a deep bond (💛${REK.bond}+) and a great deal of faith. They return weakened.</div>`+
+ H.slice(0,12).map(f=>{const k=rekCheck(f);return `<div class="row mem20">${avatar(f.cls,f.color,f)}<div><b style="color:${f.color}">${f.name}</b> <span class="small">${f.cls} · Lv${f.lvl} · floor ${f.floor} · 💛${f.aff}${f.pulls?' · rekindled '+f.pulls+'×':''}</span><br><span class="small"><i>${(f.cause||'').replace(/^./,c=>c.toUpperCase())}</i>${k.ok?'':' · '+k.why[0]}</span></div><button class="btn s ${k.ok?'gold':'off'}" data-act="rek20" data-h="${f.id}" aria-label="Rekindle">❤️‍🔥 ✨${k.c}</button></div>`;}).join('')+(H.length>12?`<div class="small">…and ${H.length-12} more in the 📖 Codex.</div>`:'');}
+document.addEventListener('pointerdown',ev=>{const b=ev.target.closest('[data-act="rek20"]');if(!b)return;ev.preventDefault();ev.stopPropagation();rekindle(+b.dataset.h);},true);
+
+</script>
+<script>
+// v21: Summon. A curated roster of hand-made heroes answers your call. Odds are shown, there's a pity counter,
+// no duplicates while a hero lives, and the fallen can't be summoned again (only the Rekindling brings them back).
+// Currency: 💠 Soul Shards earned in play (floors, bosses, bond milestones). Faith ✨ also works at the old price.
+// SUMMON.pay lists payment sources; another source could be added later without touching the roll.
+const RAR={C:{n:'Common',col:'#b8c0cc',odds:.60,st:1},R:{n:'Rare',col:'#5fb4ff',odds:.28,st:1.05},E:{n:'Epic',col:'#c07aff',odds:.10,st:1.1},L:{n:'Legendary',col:'#ffc94a',odds:.02,st:1.15}};
+const ROSTER=[
+ // key, name, gender, class, rarity, trait, favourite food, favourite gift, dislikes, bio, first line
+ ['bram','Bram','m','Warrior','C','Brave','roast meat','whetstones','waiting','A miller\'s son who swings a sword like a flail.','Point me at it. Whatever it is.'],
+ ['tilly','Tilly','f','Ranger','C','Cautious','apples','maps','loud noises','Grew up counting rabbits; now counts arrows.','I\'ll keep watch. I always do.'],
+ ['osk','Osk','m','Cleric','C','Pious','plain bread','candles','swearing','A village priest who never lost a fever patient. Yet.','Bless this bread. And this sword. And you.'],
+ ['wren','Wren','f','Rogue','C','Greedy','sweet buns','shiny stones','being told no','Picked her first lock at six. It was a jail cell.','Anything shiny down there? Asking for me.'],
+ ['pip','Pip','x','Bard','C','Kind','honey cakes','music boxes','silence','A traveling lute player with exactly one good song.','I wrote a song about you. It\'s short. So far.'],
+ ['hollis','Hollis','m','Paladin','C','Cautious','spiced stew','polished shields','mud','A retired guard who missed the noise.','Stay behind me. That\'s the whole plan.'],
+ ['nettle','Nettle','f','Mage','C','Skeptic','mushroom pie','old books','superstition','A failed apprentice. The tower failed first.','Magic is just math that bites.'],
+ ['corvin','Corvin','m','Necromancer','C','Lonely','smoked fish','candles','sunshine','A gravedigger who started hearing replies.','The dead are good listeners. You\'re okay too.'],
+ ['dagny','Dagny','f','Warrior','R','Brave','roast meat','trophy teeth','retreating','A shield-maiden from the north with a laugh like an avalanche.','HA! Finally, a proper hole to fall into!'],
+ ['sorrel','Sorrel','m','Ranger','R','Kind','apples','carved birds','cages','Talks to hawks. Some of them answer.','The wind says hello. I say it too.'],
+ ['ines','Ines','f','Cleric','R','Kind','honey cakes','flowers','cruelty','A field medic who sings while she stitches.','Hold still. This will only hurt a lot.'],
+ ['vex','Vex','x','Rogue','R','Skeptic','sweet buns','knives','prayers','Owes money to three thieves\' guilds. Paid none.','Gods, huh? What\'s your cut?'],
+ ['aldous','Aldous','m','Mage','R','Pious','spiced stew','old books','haste','A scholar who swears the stars told him to come.','The constellations were very insistent.'],
+ ['maren','Maren','f','Bard','R','Greedy','smoked fish','music boxes','bad reviews','A tavern star chasing a story worth singing.','Make this dramatic. I\'m writing it down.'],
+ ['seraphine','Seraphine','f','Paladin','E','Pious','plain bread','holy relics','the undead','A knight of a fallen order, still keeping its vows alone.','I swore an oath to a dead order. Now I swear it to you.'],
+ ['kestrel','Kestrel','m','Ranger','E','Lonely','smoked fish','maps','crowds','The last scout of a vanished company. He never stopped looking.','I\'ve walked deeper than this. Alone. Not this time.'],
+ ['mordecai','Mordecai','m','Necromancer','E','Greedy','mushroom pie','skull trinkets','cheerfulness','A noble who bargained with death and won on a technicality.','Death owes me a favor. Let\'s spend it wisely.'],
+ ['liora','Liora','f','Mage','E','Brave','honey cakes','star charts','being underestimated','A storm-caller who left the academy through its roof.','Stand back. Further. No, further.'],
+ ['ember','Ember','x','Cleric','L','Pious','honey cakes','candles','the dark','Born in the glow of your first spark. They say they remember it.','I knew you before you knew yourself, little flame.'],
+ ['thorne','Thorne','m','Warrior','L','Brave','roast meat','old banners','cowards','A legend from a war nobody else survived. He won\'t talk about it.','I\'ve buried better armies than this dungeon. Let\'s go.']
+].map(a=>({key:a[0],name:a[1],g:a[2],cls:a[3],r:a[4],trait:a[5],food:a[6],gift:a[7],hate:a[8],bio:a[9],line:a[10]}));
+const SUMMON={cost:10,pityE:20,pityL:60,
+ pay:[{id:'shards',ic:'💠',have:()=>S.shards||0,price:()=>SUMMON.cost,take:n=>{S.shards-=n;}},{id:'faith',ic:'✨',have:()=>S.power,price:()=>voidCost(null).pw,take:n=>{S.power-=n;}}]};
+const taken21=()=>new Set(rosterAll().map(h=>h.key).concat((S.hall||[]).map(f=>f.key)).filter(Boolean));
+function pool21(r){const t=taken21();return ROSTER.filter(x=>x.r===r&&!t.has(x.key));}
+function roll21(free){S.pity=S.pity||{e:0,l:0};S.pity.e++;S.pity.l++;let r;
+ if(free)r='C';else if(S.pity.l>=SUMMON.pityL)r='L';else if(S.pity.e>=SUMMON.pityE)r=Math.random()<.2?'L':'E';
+ else{const x=Math.random();r=x<RAR.L.odds?'L':x<RAR.L.odds+RAR.E.odds?'E':x<RAR.L.odds+RAR.E.odds+RAR.R.odds?'R':'C';}
+ const order=['L','E','R','C'];let i=order.indexOf(r),p=pool21(r);// if a tier is used up, step down (then up) to the nearest tier with a free hero
+ for(let d=1;!p.length&&d<4;d++){const lo=order[i+d],hi=order[i-d];p=(lo&&pool21(lo))||[];if(!p.length&&hi)p=pool21(hi);}
+ const pk=p.length?pick(p):null;if(pk){if(pk.r==='L'||pk.r==='E')S.pity.e=0;if(pk.r==='L')S.pity.l=0;}return pk;}
+function fromRoster(x){const h=mkHero({gender:x.g,name:x.name});const C=CLASSES[x.cls];h.cls=x.cls;h.trait=x.trait;h.color=C.col;h.key=x.key;h.rar=x.r;
+ const m=RAR[x.r].st;h.base={mhp:Math.round((C.hp+pk('vit')*10)*m),atk:(C.atk+pk('mig'))*m,def:C.def+pk('har')};h.hp=mhp(h);h.likes={food:x.food,gift:x.gift,hate:x.hate};h.bio=x.bio;
+ S.chat=S.chat.filter(c=>!(c.h===h.id&&/so I'll be the/.test(c.m)));S.log=S.log.filter(l=>!/takes up the path of the/.test(l.m)||!l.m.includes(h.name));say(h,x.line);return h;}
+// voidPull keeps its name (sims, tests and old buttons call it) but now summons from the roster.
+voidPull=function(hallId,opt){CX();opt=opt||{};const free=!!opt.free;
+ if(rosterAll().length>=8)return toast('Your roster is full (8).');
+ if(alive().length>=partyCap()&&S.phase==='dungeon'&&S.bench.length>=3)return toast('No room in the party or at base.');
+ let src=null;if(!free){src=SUMMON.pay.find(p=>(!opt.src||p.id===opt.src)&&p.have()>=p.price());if(!src){const s0=SUMMON.pay[0],s1=SUMMON.pay[1];return toast(`A summon needs ${s0.ic}${s0.price()} or ${s1.ic}${s1.price()}.`);}}
+ const x=roll21(free);if(src)src.take(src.price());let h;
+ if(x){h=fromRoster(x);log(`🌀 ${RAR[x.r].n} soul answers the call: ${h.name} the ${h.cls}.`,h);}
+ else{h=mkHero();log(`🌀 A nameless soul answers the call: ${h.name} the ${h.cls}.`,h);}
+ if(!h.likes)h.likes=likes21();
+ placeNew(h);alive().forEach(o=>{if(o!==h){hope(o,5);social(o,8);}});if(FXON())summonFx21(h,x);render();return h;};
+function likes21(){const F=['roast meat','apples','plain bread','sweet buns','honey cakes','spiced stew','mushroom pie','smoked fish'],G=['candles','old books','shiny stones','music boxes','maps','flowers','knives','carved birds'];return{food:pick(F),gift:pick(G),hate:pick(['silence','mud','waiting','crowds','the dark'])};}
+// shards: floors, bosses; bond milestones add more in the care system
+{const _ds=descend;descend=function(){const f=S.floor;_ds.apply(this,arguments);if(S.floor>f)S.shards=(S.shards||0)+(S.floor<=20?2:3);};}
+{const _k=killMob;killMob=function(e,h){const r=_k.apply(this,arguments);if(e.boss)S.shards=(S.shards||0)+5;return r;};}
+{const _f=fresh;fresh=function(){const s=_f.apply(this,arguments);s.shards=30;s.pity={e:0,l:0};return s;};}
+// an empty party is never a dead end: one free Common call
+function needFree21(){return S&&!S.title&&!rosterAll().length;}
+// ---- summon screen
+function openVoidSummon(){CX();const n=alive().length,cap=partyCap(),c1=voidCost(null).pw,free=needFree21();
+ const odds=['C','R','E','L'].map(r=>`<span style="color:${RAR[r].col}">${RAR[r].n} ${Math.round(RAR[r].odds*100)}%</span>`).join(' · ');
+ const left=['L','E','R','C'].map(r=>`${RAR[r].n[0]}${pool21(r).length}`).join(' ');
+ ov(`<h2>🌀 Call a Soul</h2><div class="small">Heroes waiting in the dark answer your light. Party ${n}/${cap} · Roster ${rosterAll().length}/8 · 💠${S.shards||0} shards.</div>
+ <div class="sm21">${odds}</div><div class="small">An Epic or better is guaranteed within ${SUMMON.pityE} calls (${Math.max(0,SUMMON.pityE-((S.pity||{}).e||0))} to go); a Legendary within ${SUMMON.pityL}. Heroes still waiting: ${left}. A living hero never answers twice; the fallen never answer at all.</div>
+ ${free?`<button class="btn gold" style="width:100%" data-act="sum21" data-src="free">🌀 Call a Soul · free (your party is empty)</button>`:
+ `<div class="row"><button class="btn ${(S.shards||0)>=SUMMON.cost?'gold':'off'}" style="flex:1" data-act="sum21" data-src="shards">🌀 Call · 💠${SUMMON.cost}</button><button class="btn ${S.power>=c1?'gold':'off'}" style="flex:1" data-act="sum21" data-src="faith">🌀 Call · ✨${c1}</button></div>`}
+ <div class="small">Earn 💠 shards by descending (+2 a floor, +3 past 20), slaying bosses (+5) and deepening bonds.</div>
+ <button class="btn" style="width:100%" data-act="close">Close</button>`);}
+openVoid=openVoidSummon;
+document.addEventListener('pointerdown',ev=>{const b=ev.target.closest('[data-act="sum21"]');if(!b)return;ev.preventDefault();ev.stopPropagation();const s=b.dataset.src;
+ const h=s==='free'?(needFree21()?voidPull(null,{free:true}):null):voidPull(null,{src:s});if(h&&h.alive!==undefined)summonCard21(h);else openVoidSummon();},true);
+function summonCard21(h){const r=RAR[h.rar||'C'];
+ ov(`<div class="sc21 r${h.rar||'C'}" style="--rc:${r.col}"><div class="sc21g"></div><div class="sc21c">${avatar(h.cls,h.color,h)}<div class="sc21r" style="color:${r.col}">${'★'.repeat('CREL'.indexOf(h.rar||'C')+1)} ${r.n}</div><h2 style="color:${h.color}">${h.name}</h2><div class="small">${h.trait} ${h.cls} · ${CLASSES[h.cls].role}</div><p class="small"><i>${h.bio||'A lost soul, drawn to your light.'}</i></p>${h.likes?`<div class="small">Loves ${h.likes.food} and ${h.likes.gift} · dislikes ${h.likes.hate}</div>`:''}</div></div>
+ <div class="row"><button class="btn gold" style="flex:1" data-act="void">🌀 Call again</button><button class="btn" style="flex:1" data-act="close">Welcome, ${h.name}</button></div>`);}
+function summonFx21(h,x){try{const r=x?x.r:'C';shake(r==='L'?6:r==='E'?3:1);const c=RAR[r].col;burst(CAM.x+LW/2,CAM.y+LH/2,c,r==='L'?60:r==='E'?40:24,2.6,60);}catch(e){}}
+// each new run starts with one free Common soul from the roster (never a dead end)
+function freeSoul(){CX();const x=roll21(true);const h=x?fromRoster(x):mkHero();if(!h.likes)h.likes=likes21();return h;}
+// older saves: grant starting shards once and give existing heroes likes
+{const _ld=load;load=function(){const r=_ld.apply(this,arguments);try{if(S&&S.shards==null){S.shards=30;S.pity={e:0,l:0};}if(S)rosterAll().forEach(h=>{if(!h.likes)h.likes=likes21();});}catch(e){}return r;};}
+{const _mk=mkHero;mkHero=function(){const h=_mk.apply(this,arguments);if(!h.likes)h.likes=likes21();return h;};}
 
 </script>
 </body></html>
