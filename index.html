@@ -236,6 +236,65 @@ body,#app{font-variant-numeric:tabular-nums}#pw,#ak{display:inline-block;min-wid
 .ca22 small{font-size:9px;opacity:.8;min-height:11px;white-space:nowrap}
 .cb22{margin-top:8px;padding:8px;border:1px solid #4a3d5e;border-radius:10px;background:#0003}
 @media (prefers-reduced-motion:reduce){.hop22,.n22.low i{animation:none!important}}
+/* v23 Shrine of Calling */
+#shr23{position:fixed;inset:0;z-index:65;display:none;background:#05030b;opacity:0;transition:opacity .42s ease;touch-action:manipulation;user-select:none;-webkit-user-select:none;overflow:hidden;color:#eee;font-family:system-ui,sans-serif}
+#shr23.in{opacity:1}
+#shr23 canvas{position:absolute;inset:0;width:100%;height:100%;transform:scale(1.05);transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+#shr23.in canvas{transform:none}
+.s23ui{position:absolute;inset:0;padding:calc(var(--sat,env(safe-area-inset-top)) + 8px) calc(var(--sar,env(safe-area-inset-right)) + 10px) calc(var(--sab,env(safe-area-inset-bottom)) + 8px) calc(var(--sal,env(safe-area-inset-left)) + 10px);display:flex;flex-direction:column;pointer-events:none;transition:opacity .35s}
+.s23ui>*{pointer-events:auto}
+#shr23.seq .s23ui{opacity:0}#shr23.seq .s23ui *{pointer-events:none}
+.s23hd{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.s23hd .btn{min-height:44px}
+.s23bal{display:flex;gap:12px;margin-left:auto;background:#000a;border:1px solid #c9a24e66;border-radius:12px;padding:6px 12px;font-weight:700;color:#ffe6a6;font-size:14px}
+.s23pn{margin-top:auto;background:linear-gradient(#1a1426ee,#0f0b18f4);border:1px solid #c9a24e88;border-radius:14px;padding:10px;max-height:54%;overflow:auto;box-shadow:0 0 30px #000a;transform:translateY(16px);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+#shr23.in .s23pn{transform:none}
+@media (orientation:landscape){.s23pn{position:absolute;right:calc(var(--sar,env(safe-area-inset-right)) + 10px);top:calc(var(--sat,env(safe-area-inset-top)) + 60px);bottom:calc(var(--sab,env(safe-area-inset-bottom)) + 8px);width:min(370px,46vw);max-height:none;margin:0;transform:translateX(20px)}}
+.s23tt{margin:0 0 6px;font-size:18px;color:#ffe6a6;text-shadow:0 0 12px #f90}
+.s23tabs{display:flex;gap:6px;margin-bottom:8px}.s23tabs .btn{flex:1;min-height:40px;padding:4px 6px}
+.s23od{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:8px 0}.s23od span{color:var(--rc);font-size:13px;background:#0006;border:1px solid color-mix(in srgb,var(--rc) 40%,transparent);border-radius:8px;padding:4px 6px}
+.s23py{display:grid;grid-template-columns:auto 1fr;gap:4px 8px;align-items:center;font-size:12px;margin:6px 0}.s23py i{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--rc) calc(var(--p)*100%),#ffffff1a 0)}
+.s23cta{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 6px}.s23cta .btn{flex:1 1 45%;min-height:46px}.s23big{flex-basis:100%!important;min-height:54px!important;font-size:16px;animation:s23glow 1.8s ease-in-out infinite}
+.s23bk{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:6px}
+.s23c{display:flex;flex-direction:column;align-items:center;gap:2px;background:#0007;border:1px solid color-mix(in srgb,var(--rc) 55%,transparent);border-radius:10px;padding:5px 2px;color:#eee;font:12px system-ui;min-height:44px}
+.s23c .av{width:48px;height:48px;border-radius:8px;object-fit:cover}.s23c em{font-style:normal;color:var(--rc);font-size:10px}.s23c.on{box-shadow:0 0 10px var(--rc)}
+.s23c.sil .av{filter:brightness(0) drop-shadow(0 0 3px var(--rc));opacity:.85}.s23c.sil span{opacity:.5}
+.s23dt{border:1px solid var(--rc);border-radius:10px;padding:6px 8px;margin-bottom:8px;background:#0008}.s23dt b{color:var(--rc)}
+.s23pn .mem20 .av{width:40px;height:40px}.s23pn h3{margin:4px 0}
+.s23tap{position:absolute;left:0;right:0;bottom:calc(var(--sab,env(safe-area-inset-bottom)) + 14px);text-align:center;opacity:0;transition:opacity .4s;pointer-events:none;color:#fff9}
+#shr23.seq .s23tap{opacity:1}#shr23.rv .s23tap{opacity:0}
+.s23rv{position:absolute;inset:0;display:none;align-items:center;justify-content:center;padding:calc(var(--sat,env(safe-area-inset-top)) + 10px) calc(var(--sar,env(safe-area-inset-right)) + 12px) calc(var(--sab,env(safe-area-inset-bottom)) + 10px) calc(var(--sal,env(safe-area-inset-left)) + 12px)}
+.s23rv.show{display:flex}
+.s23card,.s23sum{position:relative;width:min(340px,100%);max-height:100%;overflow:hidden auto;text-align:center;padding:16px 14px 12px;border-radius:16px;background:radial-gradient(ellipse at 50% 18%,color-mix(in srgb,var(--rc,#c9a24e) 24%,#161022),#0d0a15f2 75%);border:2px solid var(--rc,#c9a24e);box-shadow:0 0 40px color-mix(in srgb,var(--rc,#c9a24e) 50%,transparent),inset 0 0 30px color-mix(in srgb,var(--rc,#c9a24e) 22%,transparent);animation:s23card .55s cubic-bezier(.2,1.2,.3,1) both}
+.s23tx{position:relative}
+.s23pt{position:relative;display:inline-block}
+.s23pt .av{width:118px;height:118px;border-radius:14px;border:2px solid var(--rc);box-shadow:0 0 26px var(--rc);object-fit:cover;animation:s23pt 1s .1s ease-out both}
+.s23st i{display:inline-block;font-style:normal;color:var(--rc);font-size:22px;margin:0 1px;text-shadow:0 0 10px var(--rc);animation:s23pop .42s calc(.55s + var(--j)*.18s) cubic-bezier(.2,1.8,.4,1) both}
+.s23rn{font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--rc);font-size:12px;animation:s23up .4s 1.05s both}
+.s23card h2{margin:2px 0;font-size:24px;animation:s23up .45s 1.15s both}
+.s23cl{opacity:.85;font-size:13px;animation:s23up .45s 1.25s both}
+.s23say{position:relative;margin:12px auto 8px;background:#fff;color:#1a1424;border-radius:14px;padding:8px 12px;font-size:14px;max-width:290px;animation:s23say .45s 1.5s cubic-bezier(.2,1.4,.4,1) both;transform-origin:50% 0}
+.s23say:before{content:'';position:absolute;top:-8px;left:50%;margin-left:-8px;border:8px solid transparent;border-top:0;border-bottom-color:#fff}
+.s23sc{animation:s23up .4s 1.7s both}
+.s23bt{display:flex;gap:8px;margin-top:6px;animation:s23up .4s 1.8s both}.s23bt .btn{flex:1;min-height:46px}
+.s23card.fast,.s23card.fast *,.s23sum.fast,.s23sum.fast *{animation-delay:0s!important;animation-duration:.15s!important}
+.s23card.fast .s23rays{animation:s23spin 14s linear infinite!important}
+.s23rays{position:absolute;left:50%;top:76px;width:560px;height:560px;margin:-280px 0 0 -280px;background:repeating-conic-gradient(from 0deg,color-mix(in srgb,var(--rc) 30%,transparent) 0 6deg,transparent 6deg 20deg);border-radius:50%;-webkit-mask:radial-gradient(circle,#000 15%,transparent 68%);mask:radial-gradient(circle,#000 15%,transparent 68%);animation:s23spin 14s linear infinite;pointer-events:none}
+.rL .s23rn{background:linear-gradient(90deg,#ffd76a,#fff6d0,#ffd76a);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:s23up .4s 1.05s both,s23shine 2.2s 1.5s linear infinite}
+.rL h2{text-shadow:0 0 16px #ffc94a}.rL .s23pt:after{content:'';position:absolute;inset:-6px;border-radius:18px;border:2px solid #ffe9a8;animation:s23halo 1.6s 1s ease-out infinite;pointer-events:none}
+.s23sg{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:8px 0}.s23sg div{display:flex;flex-direction:column;align-items:center;width:58px;font-size:12px}.s23sg .av{width:52px;height:52px;border-radius:10px;border:2px solid var(--rc);box-shadow:0 0 10px var(--rc);object-fit:cover}.s23sg em{font-style:normal;color:var(--rc);font-size:10px}
+@media (orientation:landscape) and (max-height:540px){.s23card{width:min(580px,100%);display:grid;grid-template-columns:auto 1fr;gap:14px;text-align:left;align-items:center;padding:12px 14px}.s23say{margin:8px 0}.s23say:before{left:16px;margin-left:0}.s23pt .av{width:132px;height:132px}.s23rays{left:80px;top:50%}}
+.shr23b.pulse{animation:s23glow 1.8s ease-in-out infinite}
+.s23first{text-align:center}.s23first .hart{font-size:44px}
+@keyframes s23card{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+@keyframes s23pt{0%{opacity:0;transform:scale(.7);filter:brightness(3) blur(4px)}60%{opacity:1;filter:brightness(1.6)}100%{opacity:1;transform:none;filter:none}}
+@keyframes s23pop{0%{opacity:0;transform:scale(0) rotate(-40deg)}100%{opacity:1;transform:none}}
+@keyframes s23up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes s23say{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:none}}
+@keyframes s23spin{to{transform:rotate(1turn)}}
+@keyframes s23shine{to{background-position:-200% 0}}
+@keyframes s23halo{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.25)}}
+@keyframes s23glow{0%,100%{box-shadow:0 0 6px #ffb04a66}50%{box-shadow:0 0 18px #ffb04a}}
+@media (prefers-reduced-motion:reduce){#shr23,#shr23 canvas,.s23pn{transition:opacity .2s!important;transform:none!important}.s23card,.s23card *,.s23sum,.s23sum *,.s23big,.shr23b.pulse{animation:none!important}}
 </style><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(r=>r.update()));
@@ -250,7 +309,7 @@ document.body.appendChild(b)});
 </head><body>
 <div id="app">
  <div id="top"><span><b class="brand" data-act="menu" title="First Flame: menu / save slots" aria-label="First Flame menu">🔥</b> · <b id="fl">F1</b> · ✨<b id="pw">0</b> · 📜<b id="ak">0</b> · <b id="tier"></b> <span id="eye"></span></span>
-  <span><button class="btn" data-act="base" title="Base (B)">🏰</button> <button class="btn" data-act="void" title="The Void (V)">🌀</button> <button class="btn" data-act="codex" id="codexbtn" title="Codex (K)">📖 Codex</button> <button class="btn gold" data-act="council" title="War Council (C)">⚔️</button> <button class="btn" data-act="pause" id="pause" aria-label="Pause"><i class="ic-pause"></i></button> <button class="btn" id="think13" title="Think for yourself: heroes handle minor needs" aria-label="Think for yourself">🧠</button> <button class="btn" data-act="speed" id="spd">1x</button> <button class="btn" data-act="help" id="helpbtn">? Help</button> <button class="btn" id="qmbtn" aria-label="Options" title="Options: settings, text size, HUD, asks">⚙</button></span></div>
+  <span><button class="btn" data-act="base" title="Base (B)">🏰</button> <button class="btn" data-act="void" id="shr23top" title="Shrine of Calling (V), at camp">🕯️</button> <button class="btn" data-act="codex" id="codexbtn" title="Codex (K)">📖 Codex</button> <button class="btn gold" data-act="council" title="War Council (C)">⚔️</button> <button class="btn" data-act="pause" id="pause" aria-label="Pause"><i class="ic-pause"></i></button> <button class="btn" id="think13" title="Think for yourself: heroes handle minor needs" aria-label="Think for yourself">🧠</button> <button class="btn" data-act="speed" id="spd">1x</button> <button class="btn" data-act="help" id="helpbtn">? Help</button> <button class="btn" id="qmbtn" aria-label="Options" title="Options: settings, text size, HUD, asks">⚙</button></span></div>
  <div id="left"><canvas id="cv"></canvas><div id="hint"></div><div id="powers"></div></div>
  <div id="mid"><div id="party"></div></div>
  <div id="right"><div id="card"></div><div id="tabs"></div><div id="panel"></div></div>
@@ -1248,7 +1307,7 @@ function newRun(){
  S.floor=1;S.deepest=1;S.waypoint=1;S.stall=0;S.tripDeep=0;S.tripStart=1;S.loopTrips=0;S.maxStall=0;S.heroes=S.heroes.filter(h=>h.alive&&false);S.choices=[];S.dead=false;S.cd={};S.scd={};S.fateUsed=0;S.phase='dungeon';S.decision=null;S.leader=null;S.cmdReturn=false;
  S.ents=[];S.runStats={bosses:0,kills:0,startT:S.tick};S.runs++;
  log(`— Run ${S.runs} begins —`);
- S.heroes.push(S.founder&&!S.founderUsed?(S.founderUsed=1,mkFounder(S.founder)):(typeof freeSoul==='function'?freeSoul():mkHero()));
+ if(typeof startParty23==='function')startParty23();else S.heroes.push(S.founder&&!S.founderUsed?(S.founderUsed=1,mkFounder(S.founder)):mkHero());
  restock();
  genFloor();}
 function endRun(){
@@ -1686,7 +1745,7 @@ const _apply=applyTool;applyTool=function(id,x,y){const ok=_apply(id,x,y);if(ok)
 function rr(x,y,w,h,r){cx.beginPath();cx.moveTo(x+r,y);cx.arcTo(x+w,y,x+w,y+h,r);cx.arcTo(x+w,y+h,x,y+h,r);cx.arcTo(x,y+h,x,y,r);cx.arcTo(x,y,x+w,y,r);cx.closePath();}
 function hpRing(px,py,rad,f,col){cx.lineWidth=2.2;cx.strokeStyle='#0008';cx.beginPath();cx.arc(px,py,rad,0,6.283);cx.stroke();cx.strokeStyle=col;cx.beginPath();cx.arc(px,py,rad,-1.571,-1.571+6.283*clamp(f,0,1));cx.stroke();}
 function hash(x,y){return ((x*73856093)^(y*19349663)^(S.floor*83492791))>>>0;}
-function frame(now){requestAnimationFrame(frame);if(typeof S==='undefined'||!S)return;try{drawFrame(now);}catch(e){if(!frame.err){frame.err=1;console.warn(e);}}}
+function frame(now){requestAnimationFrame(frame);if(typeof S==='undefined'||!S||(window.SH23&&SH23.on&&SH23.full))return;try{drawFrame(now);}catch(e){if(!frame.err){frame.err=1;console.warn(e);}}}
 let lastF=0;
 function drawFrame(now){const dt=Math.min(50,now-(lastF||now));lastF=now;FX.t+=dt;FX.dt=dt||16;fitCanvas();
  const key=S.phase+S.floor;if(key!==FX.lastKey){if(FX.lastKey)FX.fade=1;FX.lastKey=key;FX.parts=[];FX.nums=[];CAM.snap=1;}
@@ -1890,9 +1949,9 @@ const STATIONS={kitchen:'Cook: +2 rations per camp',forge:'Smith: chance to impr
 // ---- balance: tier costs (AK) and power thresholds raised
 [0,12,32,75,150,280].forEach((a,i)=>{if(TIERS[i])TIERS[i].ak=a;});
 TIERS[0].n='Ember';TIERS[0].d='The First Flame, barely lit. Faint omens, a little healing, marking targets.';
-{const m=MIRACLES.find(x=>x.id==='soul');if(m){m.n='Call a Soul';m.ic='🌀';m.cost=0;m.cd=0;m.tier=0;m.d='Summon a hero from the roster of waiting souls';}}
+{const m=MIRACLES.find(x=>x.id==='soul');if(m){m.n='Shrine';m.ic='🕯️';m.cost=0;m.cd=0;m.tier=0;m.d='Open the Shrine of Calling to summon heroes (at camp only)';}}
 TIERS.forEach((t,i)=>{t.unlock=t.unlock.map(u=>/^Party of/.test(u)?u.replace('Party of','Call a Soul: party up to'):u);});
-TIERS[0].unlock=['Call a Soul: party up to 2'].concat(TIERS[0].unlock);
+TIERS[0].unlock=['Call a Soul: party up to 2'].concat(TIERS[0].unlock);TIERS.forEach(t=>{t.d=t.d.replace(', call new souls mid-run','');t.unlock=t.unlock.filter(u=>u!=='Call a Soul');});
 TIERS[0].cap=2;
 const BOONS={blessed:{n:'Blessed',d:'+20 faith, +10 hope'},sturdy:{n:'Sturdy',d:'+20% max HP'},keen:{n:'Keen Edge',d:'+2 attack'},provisioned:{n:'Provisioned',d:'Extra potions, food and a Grand Elixir'},bonded:{n:'Bonded',d:'Starts at 50 affection'}};
 const HERO_COLORS=['#d9534f','#e8954a','#f0e68c','#5fd35f','#3cb371','#4ea4ff','#7b68ee','#c46cff','#ff69b4','#f5f5dc','#6c6c8a','#556b2f'];
@@ -2142,7 +2201,7 @@ function renderBase(){if(!baseOpen)return;CX();const b=baseSel&&BUILD.find(x=>x.
  $('ovb').innerHTML=`<div class="base"><div class="ch"><h2>🏰 Base</h2><div class="small">💰${S.gold} · Stash ${stashUsed()}/${stashCap()} · Armory ${S.armory.length}/12 ${atCamp?'· <b>The party is at camp</b>':'· The party is in the dungeon (swap heroes at camp)'}</div></div>
  <div class="ccols"><div class="ccol"><div class="bgrid">${BUILD.map(tile).join('')}</div>${det||'<div class="small">Tap a building.</div>'}</div>
  <div class="ccol"><h3>Party ${alive().length}/${partyCap()}</h3>${alive().map(h=>hrow(h,1)).join('')}<h3>At base</h3>${S.bench.map(h=>hrow(h,0)).join('')||'<div class="small">Nobody. Pull souls from the Void.</div>'}
- <div class="seg"><button class="btn gold" data-act="void">🌀 The Void</button><button class="btn" data-act="codex">📖 Codex</button></div>
+ <div class="seg"><button class="btn gold" data-act="void">🕯️ Shrine</button><button class="btn" data-act="codex">📖 Codex</button></div>
  <h3>Black market</h3><div class="row"><div class="small">Buy a rare-or-better item for the armory</div><button class="btn ${S.gold>=mc?'gold':'off'}" data-act="bmarket">💰${mc}</button></div></div></div>
  <button class="btn" style="width:100%;margin-top:6px" data-act="bclose">Close</button></div>`;
  $('ov').style.display='flex';$('ov').classList.add('wide');}
@@ -2190,23 +2249,14 @@ function showTitle(){S.title=true;S.paused=true;const sl=[1,2,3].map(n=>{const m
  $('ovb').innerHTML=`<div class="title"><div class="flame">🔥</div><h1>First Flame</h1><div class="small">A god is born as a single ember in the dark. Heroes will come to its light, and it will grow with them.</div>${sl}</div>`;$('ov').style.display='flex';$('ov').classList.remove('wide');}
 let NEWG={};
 function pvKey(g){const f=g.cls.toLowerCase();return g.pvar==='m'?f:g.pvar==='_f'?f+'_f':null;}
-function showCreate(n){NEWG=Object.assign({slot:n,gender:'f',cls:'Warrior',trait:'Brave',color:CLASSES.Warrior.col,boon:'blessed',name:''},NEWG.slot===n?NEWG:{});const g=NEWG;
- const opt=(k,v,lbl)=>`<button class="btn s ${g[k]===v?'on':''}" data-act="cset" data-k="${k}" data-v="${v}">${lbl}</button>`;
- $('ovb').innerHTML=`<div class="create"><h2>🔥 Your first hero</h2><div class="small">The first soul to answer your light.</div>
- <div class="sheet">${portrait(g.cls,true,{gender:g.gender,color:g.color,portrait:pvKey(g)})}<div style="flex:1">
- <div class="seg"><span class="small">Name</span><input id="cname" maxlength="14" placeholder="${g.gender==='f'?'Lyra':g.gender==='m'?'Aldric':'Ash'}" value="${g.name}"></div>
- <div class="seg"><span class="small">Gender</span>${opt('gender','f','She/her')}${opt('gender','m','He/him')}${opt('gender','x','They/them')}</div>
- <div class="seg"><span class="small">Class</span>${Object.keys(CLASSES).map(c=>opt('cls',c,CLASSES[c].ic+' '+c)).join('')}</div>
- <div class="small">${CLASSES[g.cls].d}</div>
- <div class="seg"><span class="small">Trait</span>${Object.keys(TRAITS).map(t=>opt('trait',t,t)).join('')}</div>
- <div class="seg"><span class="small">Color</span>${HERO_COLORS.map(c=>`<button class="sw2 ${g.color===c?'on':''}" data-act="cset" data-k="color" data-v="${c}" style="background:${c}"></button>`).join('')}</div>
- <div class="seg"><span class="small">Portrait</span>${opt('pvar','','Match gender')}${opt('pvar','m','Art A')}${opt('pvar','_f','Art B')}</div>
- <div class="seg"><span class="small">Boon</span>${Object.keys(BOONS).map(b=>opt('boon',b,BOONS[b].n)).join('')}</div><div class="small">${BOONS[g.boon].d}</div>
- </div></div><div class="seg"><button class="btn" data-act="ctitle">Back</button><button class="btn gold" data-act="cstart" style="flex:1">Light the Flame</button></div></div>`;}
-function startNewGame(){const g=NEWG;const inp=$('cname');const name=(inp&&inp.value.trim())||nameFor(g.gender);CUR_SLOT=g.slot;
- S=fresh();S.founder={name:name.slice(0,14),gender:g.gender,cls:g.cls,trait:g.trait,color:g.color,portrait:pvKey(g),boon:g.boon};newRun();S.title=false;S.paused=false;S.helpSeen=false;closeOv();save();render();help();}
+function showCreate(n){NEWG=Object.assign({slot:n},NEWG.slot===n?NEWG:{});
+ // design rule: no starting hero is made for you; the first soul is called at the Shrine of Calling in camp
+ $('ovb').innerHTML=`<div class="create"><h2>🔥 A new flame</h2><div class="small">You begin as one small ember at a quiet camp. No one sits by your fire yet: your first soul answers at the 🕯️ Shrine of Calling, and that first call is free.</div>
+ <div class="seg"><button class="btn" data-act="ctitle">Back</button><button class="btn gold" data-act="cstart" style="flex:1">Light the Flame</button></div></div>`;}
+function startNewGame(){const g=NEWG;const inp=$('cname');const name=(inp&&inp.value.trim())||nameFor(g.gender||'f');CUR_SLOT=g.slot;
+ S=fresh();S.founder=g.quick?{name:name.slice(0,14),gender:g.gender,cls:g.cls,trait:g.trait,color:g.color,portrait:pvKey(g),boon:g.boon}:null;newRun();S.title=false;S.paused=false;S.helpSeen=false;closeOv();save();render();help();}
 function continueSlot(n){if(!load(n)){showTitle();return;}S.title=false;S.paused=false;CX();if(!S.map||!S.heroes.length)newRun();else simulateAway((Date.now()-S.lastSave)/1000);closeOv();render();if(S.dead)showDeath();}
-function quickStart(n){NEWG={slot:n||3,gender:pickGender(),cls:pick(Object.keys(CLASSES)),trait:pick(Object.keys(TRAITS)),color:pick(HERO_COLORS),boon:'blessed',name:''};startNewGame();closeOv();}
+function quickStart(n){NEWG={slot:n||3,gender:pickGender(),cls:pick(Object.keys(CLASSES)),trait:pick(Object.keys(TRAITS)),color:pick(HERO_COLORS),boon:'blessed',name:'',quick:1};startNewGame();closeOv();}// dev/test shortcut: starts with a ready-made hero
 function bootTitle(){S=fresh();newRun();showTitle();}
 // ---- input
 document.addEventListener('pointerdown',ev=>{const b=ev.target.closest('[data-act]');if(!b)return;const a=b.dataset.act,d=b.dataset;
@@ -2231,8 +2281,8 @@ document.getElementById('left').appendChild(mini);
 let hudSig='';
 function hudRow(h){return `<div class="hp2" data-act="selh" data-h="${h.id}" id="hr${h.id}">${avatar(h.cls,h.color,h)}<div class="hb"><div class="hn"><b style="color:${h.color}">${h.name}</b><span class="small"> ${CLASSES[h.cls].ic}${h.lvl}</span><span class="hm"></span></div>
  <div class="bar2 hpb2"><i></i><em></em></div><div class="needs2"><i class="nf"></i><i class="nw"></i><i class="ne"></i></div></div><button class="hsh" data-act="sheet" data-h="${h.id}">⋯</button></div>`;}
-function renderPartyHUD(){const ps=S.heroes.filter(h=>h.alive||S.phase==='dungeon');const sig=ps.map(h=>h.id).join(',')+'|'+(S.bench||[]).length;const el=$('party');
- if(sig!==hudSig||!el.querySelector('.hp2')){hudSig=sig;el.innerHTML=`<div class="hudh">Party <span class="small">${alive().length}/${partyCap()}${(S.bench||[]).length?' · '+S.bench.length+' at base':''}</span></div>`+ps.map(hudRow).join('')+(alive().length<partyCap()?`<button class="btn s gold" data-act="void" style="width:100%">🌀 Call a Soul (${alive().length}/${partyCap()})</button>`:'');}
+function renderPartyHUD(){const ps=S.heroes.filter(h=>h.alive||S.phase==='dungeon');const sig=ps.map(h=>h.id).join(',')+'|'+(S.bench||[]).length+'|'+S.phase;const el=$('party');
+ if(sig!==hudSig||!el.querySelector('.hp2')){hudSig=sig;el.innerHTML=`<div class="hudh">Party <span class="small">${alive().length}/${partyCap()}${(S.bench||[]).length?' · '+S.bench.length+' at base':''}</span></div>`+ps.map(hudRow).join('')+(S.phase==='camp'?`<button class="btn s gold shr23b ${alive().length?'':'pulse'}" data-act="void" style="width:100%">🕯️ Go to the Shrine</button>`:alive().length<partyCap()?`<button class="btn s off" data-act="void" style="width:100%" aria-disabled="true">🔒 Summon at camp</button>`:'');}
  for(const h of ps){const r=document.getElementById('hr'+h.id);if(!r)continue;const M=mhp(h),f=h.alive?h.hp/M:0;
   r.classList.toggle('dead',!h.alive);r.classList.toggle('down',!!h.downed);r.classList.toggle('sel',S.sel===h.id);r.classList.toggle('req',!!h.req);
   const b=r.querySelector('.hpb2 i');b.style.width=Math.round(f*100)+'%';b.style.background=h.downed?'#888':f<.35?'linear-gradient(90deg,#c22,#f55)':'linear-gradient(90deg,#3a3,#7e5)';
@@ -2245,7 +2295,7 @@ function godMeter(){const t=TIERS[S.tier],n=TIERS[S.tier+1];const p=n?Math.min(1
 const _render5=render;render=function(){_render5();if(!S.title)godMeter();};
 // minimap
 let miniT=0;
-function drawMini(now){requestAnimationFrame(drawMini);if(now-miniT<250)return;miniT=now;
+function drawMini(now){requestAnimationFrame(drawMini);if(now-miniT<250||window.SH23&&SH23.on&&SH23.full)return;miniT=now;
  if(!S||!S.map||S.phase!=='dungeon'||S.title){mini.style.display='none';return;}mini.style.display='block';
  const s=3,dpr=Math.min(2,devicePixelRatio||1);if(mini.width!==W*s*dpr){mini.width=W*s*dpr;mini.height=H*s*dpr;mini.style.width=W*s+'px';mini.style.height=H*s+'px';}
  mx.setTransform(dpr,0,0,dpr,0,0);mx.clearRect(0,0,W*s,H*s);mx.fillStyle='#000a';mx.fillRect(0,0,W*s,H*s);
@@ -3538,13 +3588,13 @@ const _ht13=heroTick;heroTick=function(h){if(h&&h.alive&&h.mend>0){h.mend--;if(!
 // v15: How to Play — a small card deck in the fledgling god's voice. Replaces the old help text.
 const HTP=[
  {a:'<div class="hart big">🔥</div>',t:'Hello, little god',p:['You are a newborn god: one small ember in a very big dark.','Heroes pray to you, and their faith ✨ is your power. No faith, no miracles. (No pressure.)']},
- {a:'<div class="hart">🌀<span>👥</span></div>',t:'Gather your flock',p:['Tap <b>🌀 Call a Soul</b> to summon a hero: each one is hand-made, with a story, likes and a rarity (odds shown, with a pity counter). Spend 💠 shards from descending, or faith.','Up to <b>5</b> descend together; extras wait at the 🏰 base. They explore, fight and loot <b>on their own</b>, in real time (1x · 2x · 4x).']},
+ {a:'<div class="hart">🕯️<span>👥</span></div>',t:'Gather your flock',p:['Every journey starts at an empty camp. Visit the <b>🕯️ Shrine of Calling</b> (camp only) and call your first soul: it\'s free. Each hero is hand-made, with a story, likes and a rarity (odds and pity shown). Spend 💠 shards or faith; ×5 when you have room. The 📖 Souls book shows who you\'ve met.','Up to <b>5</b> descend together; extras wait at the 🏰 base. They explore, fight and loot <b>on their own</b>, in real time (1x · 2x · 4x).']},
  {a:()=>'<div class="hmock">'+['heal','mend','soul','mark','bless'].map(id=>{const m=MIRACLES.find(x=>x.id===id);return m?`<span class="btn p">${m.ic}<br>${m.n.replace('Ember ','')}</span>`:'';}).join('')+'</div>',t:'Divine interventions',p:['Your powers live in the bar under the map. Tap one to cast; 🎯 tools like Mark then want a tap on the map.','❤️ <b>Heal</b> is the big save. 🕯️ <b>Ember Mend</b> is a cheap, slow warmth for everyone. 🌟 <b>Bless</b> sharpens blades.']},
  {a:'<div class="hart">⬆️<span>📜</span></div>',t:'Climbing the pantheon',p:['When a party falls, you keep 📜 <b>Ancient Knowledge</b>. Fill the ⬆️ bar up top to <b>ascend</b>.','Ember → Wisp → Spirit → … → Primordial. Every rank brings new tricks. Gods grow up too.']},
  {a:'<div class="hart"><i class="hbub">💬 I\'m hungry…</i>💞</div>',t:'Tend your heroes',p:['Portraits show 🍖 fed, 💤 rest, 🎈 spirit and 💛 bond. The dungeon drains them; camp restores. Tap <b>💞 Tend</b> to feed, comfort, gift or play. Cared-for heroes fight harder; neglected ones sulk, and may leave (they warn you first).','Tap <b>🧠</b>: <b>Think</b> lets them handle small stuff (and tend themselves a little); <b>⚡ Full</b> lets them decide everything.']},
  {a:'<div class="hart">🏕️<span>🎒</span></div>',t:'Home sweet camp',p:['Between floors, heroes rest at camp to eat, drink and sleep. Build it up from the 🏰 base.','Backpacks are small. Loot gets hauled home to storage; bigger packs carry more.']},
  {a:'<div class="hart">⚔️<span>🐭</span></div>',t:'The War Council',p:['Tap ⚔️ to see what lurks ahead and who counters it.','Tanks hold the line, rogues dive the backline, mages melt swarms, and clerics cure the poison mice. Yes, poison mice.']},
- {a:'<div class="hart">🪦<span>❤️‍🔥</span></div>',t:'The long descent',p:['Floors 1–20 are a gentle beginner\'s descent (once per save). <b>Floor 20 is where it gets real.</b>','The fallen rest at the camp memorial. Bringing one back takes the <b>Rekindling</b>: a very rare ❤️‍🔥 Soul Ember, a deep bond and a mountain of faith. So keep them alive. Your game saves itself.']}];
+ {a:'<div class="hart">🪦<span>❤️‍🔥</span></div>',t:'The long descent',p:['Floors 1–20 are a gentle beginner\'s descent (once per save). <b>Floor 20 is where it gets real.</b>','The fallen rest at the memorial in the Shrine. Bringing one back takes the <b>Rekindling</b> ritual there: a very rare ❤️‍🔥 Soul Ember, a deep bond and a mountain of faith. So keep them alive. Your game saves itself.']}];
 const HT={i:0,first:false,el:null,wasP:false};
 function htpBuild(){if(HT.el)return HT.el;const d=document.createElement('div');d.id='htp';d.setAttribute('role','dialog');d.setAttribute('aria-label','How to Play');
  d.innerHTML=`<div class="hc"><div class="hp"><div class="ha"></div><div class="ht"><div class="hn small"></div><h3></h3><div class="hx"></div></div></div><div class="hf"><button class="btn hb" data-h="back"></button><div class="hdots">${HTP.map((_,i)=>`<i data-h="dot" data-i="${i}"></i>`).join('')}</div><button class="btn gold hb" data-h="next"></button></div></div>`;
@@ -3947,6 +3997,192 @@ setInterval(()=>{if(S&&!S.title&&tend22open())openTend22(true);},1000);
  ov(`<div class="aw22"><h2>⏳ While you were away</h2><div class="small">${Math.round(sec/60)} min passed. ${S.runs!==run0?'A new run began.':S.floor!==f0?`They went from floor ${f0} to ${S.phase==='camp'?'camp':'floor '+S.floor}.`:'They held their ground.'}</div>${lines}<div class="row"><button class="btn gold" style="flex:1" data-act="tend22">💞 Tend them</button><button class="btn" style="flex:1" data-act="close">Back to it</button></div></div>`);};}
 // coming back to a saved game counts as time away too (capped like any absence)
 {const _ld=load;load=function(){const r=_ld.apply(this,arguments);try{if(S&&!S.title&&S.lastSave){const gap=(Date.now()-S.lastSave)/1000;if(gap>120){const p=S.paused;S.paused=false;setTimeout(()=>{try{simulateAway(gap);}catch(e){}S.paused=p;render();},400);}}}catch(e){}return r;};}
+
+</script>
+<script>
+'use strict';
+// v23: The Shrine of Calling. A full-screen place at camp where souls are called, catalogued and rekindled.
+// Scene = one canvas (starry void, altar, floating candles, rune ring, motes, the god's flame) + a light DOM panel.
+// The summon plays in the scene: darken → rune circle draws and spins → motes swirl in → pillar and orb build →
+// rarity tease (white → blue → purple → gold) → flash → reveal card (portrait, stars, title, first words).
+// Tap skips the build; a second tap finishes the reveal. Reduce-motion: a short fade, no particles or shake.
+// Summoning happens only at camp. New games start at an empty camp; the first call is free.
+const SH={el:null,cv:null,g:null,w:0,h:0,dpr:1,on:false,raf:0,last:0,view:'call',bk:null,wasP:false,P:[],seq:null,spr:{},bg:null,tw:[],shk:0,fl:0,flc:[255,255,255],fz:0,ax:0,ay:0,sc:1,rot:0,rise:[]};
+const RM23=()=>!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+const CAP23=()=>RM23()?0:SET.gfx==='low'?50:SET.gfx==='high'?160:110;
+const TINT23={C:[236,240,248],R:[95,180,255],E:[192,122,255],L:[255,201,74],K:[255,122,60]};
+const TT23=[0,1500,2200,2900],DUR23=[2700,3200,3800,4500];
+const mix23=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t),rgba23=(c,a)=>`rgba(${c[0]|0},${c[1]|0},${c[2]|0},${a})`,cl23=v=>v<0?0:v>1?1:v,ez23=t=>1-Math.pow(1-cl23(t),3);
+// procedural runes: font-independent, a stem plus a few strokes each
+const GLY23=(()=>{let s=11;const r=()=>(s=s*16807%2147483647)/2147483647;const o=[];for(let i=0;i<16;i++){const L=[[0,-1,0,1]];for(let j=0,n=1+(r()*3|0);j<n;j++)L.push([0,r()*2-1,(r()<.5?-1:1)*(.4+r()*.5),r()*2-1].map(v=>Math.round(v*2)/2));o.push(L);}return o;})();
+function glow23(c){const q=c.map(v=>Math.round(v/17)*17),k=q.join();if(SH.spr[k])return SH.spr[k];const s=document.createElement('canvas');s.width=s.height=64;const g=s.getContext('2d'),gr=g.createRadialGradient(32,32,0,32,32,32);
+ gr.addColorStop(0,rgba23(q,1));gr.addColorStop(.22,rgba23(q,.5));gr.addColorStop(1,rgba23(q,0));g.fillStyle=gr;g.fillRect(0,0,64,64);return SH.spr[k]=s;}
+// ---- feedback: light haptics, optional soft synth (Settings → Shrine sound, default off)
+const vib23=p=>{if(SET.hap!==0&&navigator.vibrate)try{navigator.vibrate(p);}catch(e){}};
+const AU23={c:null,m:null};
+function au23(){if(!SET.snd)return null;try{if(!AU23.c){const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;AU23.c=new C();AU23.m=AU23.c.createGain();AU23.m.connect(AU23.c.destination);}
+ AU23.m.gain.value=SET.snd===2?.13:.05;if(AU23.c.state==='suspended')AU23.c.resume();return AU23.c;}catch(e){return null;}}
+function tone23(f,dur,type,vol,at,f2){const c=au23();if(!c)return null;const t=c.currentTime+(at||0),o=c.createOscillator(),g=c.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+dur);
+ g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+Math.min(.25,dur/3));g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g);g.connect(AU23.m);o.start(t);o.stop(t+dur+.05);return g;}
+const SND23={rise:D=>{SH.rise=[tone23(110,D/1000,'sine',.3,0,330),tone23(165,D/1000,'triangle',.12,0,495)].filter(Boolean);},
+ hush:()=>{const c=AU23.c;if(c)SH.rise.forEach(g=>{try{g.gain.cancelScheduledValues(c.currentTime);g.gain.setTargetAtTime(.0001,c.currentTime,.05);}catch(e){}});SH.rise=[];},
+ chime:k=>{const f=[523,659,784,988][k]||523;tone23(f,1.1,'sine',.35);tone23(f*1.5,.9,'sine',.12,.04);},
+ boom:()=>tone23(90,.9,'sine',.5,0,38),
+ reveal:k=>{[523,659,784,1047,1319].slice(0,2+k).forEach((f,i)=>tone23(f,1.4,'triangle',.2,i*.09));if(k===3)[2093,2637,3136].forEach((f,i)=>tone23(f,1.8,'sine',.06,.4+i*.12));}};
+// ---- scene
+function build23(){if(SH.el)return SH.el;const d=document.createElement('div');d.id='shr23';d.setAttribute('role','dialog');d.setAttribute('aria-label','Shrine of Calling');
+ d.innerHTML=`<canvas aria-hidden="true"></canvas><div class="s23ui"><div class="s23hd"><button class="btn s" data-s23="exit">🏕️ Back to camp</button><div class="s23bal"></div></div>
+ <div class="s23pn"><h2 class="s23tt">🕯️ Shrine of Calling</h2><div class="s23tabs"></div><div class="s23body"></div></div></div><div class="s23rv" aria-live="polite"></div><div class="s23tap small">Tap to hasten</div>`;
+ document.body.appendChild(d);SH.el=d;SH.cv=d.querySelector('canvas');SH.g=SH.cv.getContext('2d');
+ d.addEventListener('pointerdown',ev=>{ev.stopPropagation();const b=ev.target.closest('[data-s23]');if(b){ev.preventDefault();act23(b);return;}
+  const q=SH.seq;if(!q)return;if(q.ph==='build'){q.t0=performance.now()-q.D+60;SND23.hush();}else{const c=d.querySelector('.s23card,.s23sum');if(c)c.classList.add('fast');}});
+ addEventListener('resize',()=>{if(SH.on)lay23();});addEventListener('keydown',e=>{if(SH.on&&e.key==='Escape'&&!SH.seq){e.stopPropagation();closeShrine23();}},true);return d;}
+function lay23(){const W=innerWidth,H=innerHeight;SH.w=W;SH.h=H;SH.dpr=Math.min(1.5,devicePixelRatio||1);SH.cv.width=Math.round(W*SH.dpr);SH.cv.height=Math.round(H*SH.dpr);
+ const p=SH.el.querySelector('.s23pn').getBoundingClientRect(),land=W>H;const fw=land?p.left:W,fh=land?H:p.top;SH.ax=fw/2;SH.ay=land?H*.58:Math.max(120,fh*.58);SH.sc=Math.max(.55,Math.min(1.35,Math.min(fw,fh*1.2)/420));
+ // cached backdrop: void gradient, nebulae, still stars
+ const b=SH.bg||(SH.bg=document.createElement('canvas'));b.width=SH.cv.width;b.height=SH.cv.height;const g=b.getContext('2d');g.setTransform(SH.dpr,0,0,SH.dpr,0,0);
+ let gr=g.createRadialGradient(W*.5,H*.35,0,W*.5,H*.4,Math.max(W,H)*.8);gr.addColorStop(0,'#1b1430');gr.addColorStop(.55,'#0b0816');gr.addColorStop(1,'#030207');g.fillStyle=gr;g.fillRect(0,0,W,H);
+ let s=5;const r=()=>(s=s*16807%2147483647)/2147483647;g.globalCompositeOperation='lighter';
+ for(const [x,y,R,c] of [[.2,.25,.45,'60,30,110'],[.8,.2,.35,'20,40,110'],[.6,.7,.4,'90,30,70']]){gr=g.createRadialGradient(W*x,H*y,0,W*x,H*y,Math.max(W,H)*R);gr.addColorStop(0,`rgba(${c},.18)`);gr.addColorStop(1,`rgba(${c},0)`);g.fillStyle=gr;g.fillRect(0,0,W,H);}
+ for(let i=0;i<Math.min(260,W*H/1800);i++){const a=.15+r()*.6;g.fillStyle=`rgba(${200+r()*55|0},${200+r()*55|0},255,${a})`;const z=r()<.08?1.6:.9;g.fillRect(r()*W,r()*H,z,z);}
+ g.globalCompositeOperation='source-over';
+ // floor haze under the altar
+ gr=g.createRadialGradient(SH.ax,SH.ay+60*SH.sc,0,SH.ax,SH.ay+60*SH.sc,260*SH.sc);gr.addColorStop(0,'rgba(80,60,120,.35)');gr.addColorStop(1,'rgba(80,60,120,0)');g.fillStyle=gr;g.fillRect(0,0,W,H);
+ SH.tw=Array.from({length:RM23()?0:36},()=>[r()*W,r()*H*.8,r()*6.28,.6+r()*1.4]);if(!SH.raf)draw23(performance.now());}
+// sequence state at time now
+function st23(now){const q=SH.seq;if(!q)return null;const t=now-q.t0,k=q.k,D=q.D;
+ if(q.ph==='build'){let s=0;if(!q.rm)for(let i=1;i<=k;i++)if(t>=TT23[i])s=i;const pal=q.kind==='K'?['C','K','K','K']:['C','R','E','L'];
+  const c=q.rm?TINT23[pal[k]]:s?mix23(TINT23[pal[s-1]],TINT23[pal[s]],cl23((t-TT23[s])/300)):TINT23.C;
+  if(s>q.s){q.s=s;SND23.chime(s);vib23(8);ring23(c,s);}
+  return{t,d:cl23(t/450),ring:q.rm?1:ez23((t-300)/1200),pil:q.rm?cl23(t/D):ez23((t-900)/(D-900)),c,s,k};}
+ const u=now-q.tr;return{t,d:1,ring:1,pil:Math.max(0,1-u/700),c:q.c,s:k,k,rv:u};}
+function ring23(c,s){if(RM23())return;SH.P.push({ring:1,x:0,y:0,r:10,v:420+s*80,a:.9,c});}
+function draw23(now){const g=SH.g;if(!g)return;const W=SH.w,H=SH.h,s=SH.sc,dt=Math.min(50,now-(SH.last||now));SH.last=now;const rm=RM23(),q=SH.seq,st=st23(now);
+ if(q&&q.ph==='build'&&st.t>=q.D)reveal23(now);
+ SH.fz+=((q?1:0)-SH.fz)*(rm?1:Math.min(1,dt/220));const ax=SH.ax+(W/2-SH.ax)*SH.fz,ay=SH.ay+(H*.56-SH.ay)*SH.fz;SH.cx=ax;SH.cy=ay;
+ g.setTransform(SH.dpr,0,0,SH.dpr,0,0);g.globalCompositeOperation='source-over';g.globalAlpha=1;g.drawImage(SH.bg,0,0,W,H);
+ for(const t of SH.tw){g.fillStyle=`rgba(220,220,255,${.35+.35*Math.sin(now/600*t[3]+t[2])})`;g.fillRect(t[0],t[1],1.4,1.4);}
+ let ox=0,oy=0;if(SH.shk>.1&&!rm&&SET.shake!==0){ox=(Math.random()*2-1)*SH.shk;oy=(Math.random()*2-1)*SH.shk;}SH.shk*=Math.pow(.9,dt/16);g.translate(ox,oy);
+ if(st){g.fillStyle=`rgba(2,1,6,${.66*st.d})`;g.fillRect(-20,-20,W+40,H+40);}
+ const tint=st?st.c:[255,186,110],spin=st?(.25+2.6*st.pil*(st.rv!==undefined?.3:1)):.12;if(!rm)SH.rot+=spin*dt/1000;
+ const fy=ay-82*s+(rm?0:Math.sin(now/900)*5*s);
+ // rune ring on the floor (drawn flattened for depth); grows and brightens while calling
+ g.save();g.translate(ax,ay+50*s);g.scale(1,.3);const R=(st?150+40*st.ring:140)*s,pr=st?st.ring:1;g.globalCompositeOperation='lighter';
+ const ra=st?.35+.55*st.ring:.28;if(st){g.strokeStyle=rgba23(tint,ra*.25);g.lineWidth=12*s/.6;g.beginPath();g.arc(0,0,R,SH.rot,SH.rot+6.283*pr);g.stroke();}
+ g.strokeStyle=rgba23(tint,ra);g.lineWidth=(st?3:2)*s/.6;g.beginPath();g.arc(0,0,R,SH.rot,SH.rot+6.283*pr);g.stroke();g.lineWidth=1.5*s/.6;g.beginPath();g.arc(0,0,R*.78,-SH.rot*1.4,-SH.rot*1.4+6.283*cl23(pr*1.3-.3));g.stroke();
+ g.lineWidth=2*s/.6;for(let i=0;i<16;i++){if(i/16>pr)break;const a=SH.rot+i/16*6.283,x=Math.cos(a)*R*.89,y=Math.sin(a)*R*.89,z=9*s;g.save();g.translate(x,y);g.rotate(a+1.571);g.beginPath();for(const l of GLY23[i]){g.moveTo(l[0]*z,l[1]*z);g.lineTo(l[2]*z,l[3]*z);}g.stroke();g.restore();}
+ g.restore();
+ // candles orbiting slowly: back half, altar, front half
+ const cn=7,cand=[];for(let i=0;i<cn;i++){const a=i/cn*6.283+now/14000*(rm?0:1);cand.push([Math.cos(a)*175*s,Math.sin(a),i]);}
+ const candle=([x,z,i])=>{const y=ay-20*s+z*34*s+(rm?0:Math.sin(now/700+i*1.7)*6*s),sz=s*(.8+.25*z);g.globalCompositeOperation='source-over';g.fillStyle='#e9dcc0';g.fillRect(ax+x-3*sz,y,6*sz,16*sz);g.fillStyle='#bfae8e';g.fillRect(ax+x-3*sz,y+12*sz,6*sz,4*sz);
+  const f=rm?1:.85+.15*Math.sin(now/90+i*3);g.globalCompositeOperation='lighter';g.drawImage(glow23([255,170,80]),ax+x-22*sz,y-26*sz,44*sz,44*sz);g.fillStyle=`rgba(255,226,150,${f})`;g.beginPath();g.ellipse(ax+x,y-5*sz,2.4*sz,5.5*sz*f,0,0,6.283);g.fill();};
+ cand.filter(c=>c[1]<0).forEach(candle);
+ // altar: weathered stone with a glowing rune
+ g.globalCompositeOperation='source-over';const aw=70*s,ah=58*s;let gr=g.createLinearGradient(0,ay-ah*.5,0,ay+ah*.5);gr.addColorStop(0,'#4a4258');gr.addColorStop(1,'#1f1a29');g.fillStyle=gr;
+ g.beginPath();g.moveTo(ax-aw*.62,ay-ah*.4);g.lineTo(ax+aw*.62,ay-ah*.4);g.lineTo(ax+aw*.8,ay+ah*.55);g.lineTo(ax-aw*.8,ay+ah*.55);g.closePath();g.fill();
+ g.fillStyle='#5d546e';g.fillRect(ax-aw*.86,ay-ah*.55,aw*1.72,ah*.18);g.fillStyle='#2a2436';g.fillRect(ax-aw*.95,ay+ah*.5,aw*1.9,ah*.14);
+ g.globalCompositeOperation='lighter';g.strokeStyle=rgba23(tint,st?.9:.55+.2*Math.sin(now/800));g.lineWidth=2*s;g.beginPath();for(const l of GLY23[3]){g.moveTo(ax+l[0]*12*s,ay+8*s+l[1]*12*s);g.lineTo(ax+l[2]*12*s,ay+8*s+l[3]*12*s);}g.stroke();
+ cand.filter(c=>c[1]>=0).forEach(candle);
+ // pillar, orb and rays while calling
+ if(st&&st.pil>0){const p=st.pil,bw=(8+34*p)*s*(rm?1:1+.08*Math.sin(now/70));gr=g.createLinearGradient(ax-bw,0,ax+bw,0);gr.addColorStop(0,rgba23(tint,0));gr.addColorStop(.5,rgba23(tint,.55*p));gr.addColorStop(1,rgba23(tint,0));g.fillStyle=gr;g.fillRect(ax-bw,-20,bw*2,ay-ah*.5+20);
+  g.fillStyle=`rgba(255,255,255,${.5*p})`;g.fillRect(ax-1.5*s*(1+p),-20,3*s*(1+p),ay-ah*.5+20);
+  if(st.s>=1&&!rm){const n=6+4*st.s,L=Math.max(W,H);g.fillStyle=rgba23(tint,.05*st.s*p);g.beginPath();for(let i=0;i<n;i++){const a=i/n*6.283-SH.rot*.6,w=.028;g.moveTo(ax,fy);g.lineTo(ax+Math.cos(a-w)*L,fy+Math.sin(a-w)*L);g.lineTo(ax+Math.cos(a+w)*L,fy+Math.sin(a+w)*L);}g.fill();}
+  const orr=(26+70*p+st.k*12)*s;g.drawImage(glow23(tint),ax-orr,fy-orr,orr*2,orr*2);g.drawImage(glow23([255,255,255]),ax-orr*.35,fy-orr*.35,orr*.7,orr*.7);}
+ // the god's flame hovers above the altar
+ const fl=rm?1:.9+.1*Math.sin(now/120)+.05*Math.sin(now/53);g.drawImage(glow23([255,150,60]),ax-60*s,fy-60*s,120*s,120*s);
+ for(const [c,w,hh] of [['255,120,40',13,30],['255,190,90',9,22],['255,245,210',4.5,12]]){g.fillStyle=`rgba(${c},.9)`;g.beginPath();g.moveTo(ax,fy-hh*s*fl);g.quadraticCurveTo(ax+w*s,fy,ax,fy+8*s);g.quadraticCurveTo(ax-w*s,fy,ax,fy-hh*s*fl);g.fill();}
+ // particles: ambient embers, inward swirl while calling, bursts, rings
+ const cap=CAP23(),P=SH.P;if(cap){const amb=P.reduce((a,p)=>a+(p.amb?1:0),0);if(amb<cap*.22&&Math.random()<dt/60)P.push({amb:1,x:ax+(Math.random()-.5)*360*s,y:ay+40*s,vx:(Math.random()-.5)*8,vy:-(14+Math.random()*24),a:0,life:0,max:3500+Math.random()*2500,sz:(2+Math.random()*3)*s,c:[255,170+Math.random()*60,90]});
+  if(st&&q.ph==='build'){const want=(1.2+st.k*.9)*st.pil*dt/16;for(let i=0;i<want&&P.length<cap;i++){const a=Math.random()*6.283,r=Math.max(W,H)*(.45+Math.random()*.3);P.push({sw:1,a0:a,r,w:1.4+st.k*.5+Math.random(),v:(r/(q.D-st.t+400))*1000*(.8+Math.random()*.4),life:0,max:9e9,sz:(2+Math.random()*3)*s,c:mix23(st.c,[255,255,255],Math.random()*.4)});}}}
+ for(let i=P.length-1;i>=0;i--){const p=P[i];p.life+=dt;let x,y,al;
+  if(p.ring){p.r+=p.v*dt/1000;p.a-=dt/700;if(p.a<=0){P.splice(i,1);continue;}g.strokeStyle=rgba23(p.c,p.a);g.lineWidth=3*s;g.beginPath();g.ellipse(ax,fy,p.r,p.r*.92,0,0,6.283);g.stroke();continue;}
+  if(p.sw){p.r-=p.v*dt/1000;p.a0+=p.w*dt/1000*(220/Math.max(40,p.r));if(p.r<10*s||!q){P.splice(i,1);continue;}x=ax+Math.cos(p.a0)*p.r;y=fy+Math.sin(p.a0)*p.r;al=cl23(p.life/300);}
+  else{p.x+=p.vx*dt/1000;p.y+=p.vy*dt/1000;if(p.g)p.vy+=p.g*dt/1000;if(p.dr)p.vx*=Math.pow(p.dr,dt/16),p.vy*=Math.pow(p.dr,dt/16);if(p.life>p.max){P.splice(i,1);continue;}x=p.x;y=p.y;al=Math.min(1,p.life/400,(p.max-p.life)/600);}
+  const z=p.sz*4;g.globalAlpha=al;g.drawImage(glow23(p.c),x-z/2,y-z/2,z,z);}
+ g.globalAlpha=1;
+ if(SH.fl>.01){g.globalCompositeOperation='source-over';g.fillStyle=rgba23(SH.flc,SH.fl*.85);g.fillRect(-20,-20,W+40,H+40);SH.fl*=Math.pow(.88,dt/16);}
+ // keep animating while open (static frame only for reduce-motion when nothing is happening)
+ SH.raf=0;if(SH.on&&(!rm||q||SH.fl>.01))SH.raf=requestAnimationFrame(draw23);}
+function burst23(c,n,sp,gv){const cap=CAP23();for(let i=0;i<n&&SH.P.length<cap+40;i++){const a=Math.random()*6.283,v=(sp||220)*(.3+Math.random());SH.P.push({x:SH.cx,y:SH.cy-82*SH.sc,vx:Math.cos(a)*v,vy:Math.sin(a)*v,g:gv||0,dr:.96,life:0,max:900+Math.random()*900,sz:(2+Math.random()*3)*SH.sc,c:mix23(c,[255,255,255],Math.random()*.5)});}}
+// ---- open / close
+function openShrine23(){CX();if(!S||S.title||S.dead)return;if(S.phase!=='camp')return toast('🏕️ Summon at camp: the Shrine of Calling waits by the fire.');
+ const d=build23();closeOv();if(!SH.on){SH.wasP=!!S.paused;S.paused=true;}SH.on=true;SH.view=SH.view||'call';d.style.display='block';paint23();lay23();
+ requestAnimationFrame(()=>d.classList.add('in'));clearTimeout(SH.ft);SH.ft=setTimeout(()=>{if(SH.on)SH.full=true;},RM23()?150:450);if(!SH.raf)SH.raf=requestAnimationFrame(draw23);}
+function closeShrine23(){if(!SH.on||SH.seq)return;const d=SH.el;d.classList.remove('in');SH.on=false;SH.full=false;clearTimeout(SH.ft);S.paused=SH.wasP;
+ setTimeout(()=>{if(!SH.on){d.style.display='none';SH.P.length=0;}},RM23()?120:420);
+ if(alive().length&&S.wait23===0){S.wait23=null;log(`🏕️ ${alive()[0].name} sits by your fire. When the party is ready, they set out for floor ${S.floor}.`);}render();}
+window.openShrine23=openShrine23;window.closeShrine23=closeShrine23;
+openVoid=openShrine23;summonFx21=function(){};
+// ---- panel
+function canCall23(src,n){n=n||1;if(!S||S.phase!=='camp'||rosterAll().length+n>8)return false;if(n>1&&['C','R','E','L'].reduce((a,r)=>a+pool21(r).length,0)<n)return false;
+ if(src==='free')return needFree21();if(needFree21())return false;const p=SUMMON.pay.find(x=>x.id===src);return !!p&&p.have()>=p.price()*n;}
+function paint23(){const d=SH.el;if(!d)return;const seen=new Set(S.seen23||[]);
+ d.querySelector('.s23bal').innerHTML=`<span title="Soul shards">💠 ${S.shards||0}</span><span title="Faith">✨ ${Math.floor(S.power)}</span><span title="Soul Embers">❤️‍🔥 ${S.embers||0}</span>`;
+ d.querySelector('.s23tabs').innerHTML=[['call','🕯️ Call'],['book',`📖 Souls ${seen.size}/${ROSTER.length}`],['mem',`🪦 Memorial ${(S.hall||[]).length}`]].map(([v,l])=>`<button class="btn s ${SH.view===v?'on':''}" data-s23="v" data-v="${v}">${l}</button>`).join('');
+ let h='';
+ if(SH.view==='call'){const py=S.pity||{e:0,l:0},pe=Math.max(0,SUMMON.pityE-py.e),pl=Math.max(0,SUMMON.pityL-py.l),c1=voidCost(null).pw,free=needFree21();
+  h=`<div class="small">${free?'Your fire burns, but no one sits by it yet. The first soul answers for free.':'Heroes waiting in the dark answer your light. Each is hand-made, with a story, likes and a rarity.'}</div>
+  <div class="s23od">${['C','R','E','L'].map((r,i)=>`<span style="--rc:${RAR[r].col}">${'★'.repeat(i+1)} ${RAR[r].n} <b>${Math.round(RAR[r].odds*100)}%</b></span>`).join('')}</div>
+  <div class="s23py"><span>Epic or better within <b>${pe}</b> calls</span><i style="--p:${cl23(py.e/SUMMON.pityE)};--rc:${RAR.E.col}"></i><span>Legendary within <b>${pl}</b> calls</span><i style="--p:${cl23(py.l/SUMMON.pityL)};--rc:${RAR.L.col}"></i></div>
+  <div class="small">Party ${alive().length}/${partyCap()} · Roster ${rosterAll().length}/8 · ${['C','R','E','L'].reduce((a,r)=>a+pool21(r).length,0)} souls still waiting. The living never answer twice; the fallen only through the Rekindling.</div>
+  <div class="s23cta">${free?`<button class="btn gold s23big" data-s23="call" data-src="free">🕯️ Call your first soul · free</button>`:
+  `<button class="btn ${canCall23('shards')?'gold':'off'}" data-s23="call" data-src="shards">Call ×1 · 💠${SUMMON.cost}</button><button class="btn ${canCall23('faith')?'gold':'off'}" data-s23="call" data-src="faith">Call ×1 · ✨${c1}</button>${canCall23('shards',5)?`<button class="btn gold" data-s23="call" data-src="shards" data-n="5">Call ×5 · 💠${SUMMON.cost*5}</button>`:''}`}</div>
+  <div class="small">Earn 💠 by descending (+2 a floor, +3 past 20), slaying bosses (+5) and deepening bonds. ×5 needs room for five.</div>`;}
+ else if(SH.view==='book'){const st=x=>rosterAll().some(h=>h.key===x.key)?'🏕️':(S.hall||[]).some(f=>f.key===x.key)?'🪦':'';const L=ROSTER.slice().sort((a,b)=>'LERC'.indexOf(a.r)-'LERC'.indexOf(b.r));const x=SH.bk&&seen.has(SH.bk)&&ROSTER.find(r=>r.key===SH.bk);
+  h=(x?`<div class="s23dt" style="--rc:${RAR[x.r].col}"><b>${x.name}</b> <span class="small">${'★'.repeat('CREL'.indexOf(x.r)+1)} ${RAR[x.r].n} ${x.trait} ${x.cls}</span><div class="small"><i>${x.bio}</i></div><div class="small">Loves ${x.food} and ${x.gift} · dislikes ${x.hate}</div><div class="small">“${x.line}”</div></div>`:`<div class="small">Every soul you have met. Silhouettes are still waiting in the dark.</div>`)+
+  `<div class="s23bk">${L.map(x=>{const k=seen.has(x.key);return `<button class="s23c ${k?'':'sil'} ${SH.bk===x.key?'on':''}" style="--rc:${RAR[x.r].col}" data-s23="bk" data-k="${x.key}" aria-label="${k?x.name:'Unknown soul'}">${avatar(x.cls,CLASSES[x.cls].col,{gender:x.g==='f'?'f':'m',art:x.art})}<span>${k?x.name:'???'}</span><em>${'★'.repeat('CREL'.indexOf(x.r)+1)}${k?' '+st(x):''}</em></button>`;}).join('')}</div>`;}
+ else h=(typeof memorialHTML==='function'&&memorialHTML())||`<div class="small">No one has fallen yet. Should it happen, they rest here, and the Rekindling ritual (a ❤️‍🔥 Soul Ember, a deep bond and great faith) can call them back, weakened.</div>`;
+ const b=d.querySelector('.s23body');b.innerHTML=h;}
+function act23(b){const a=b.dataset.s23;if(a==='exit')closeShrine23();else if(a==='v'){SH.view=b.dataset.v;paint23();lay23();}else if(a==='bk'){SH.bk=SH.bk===b.dataset.k?null:b.dataset.k;paint23();}
+ else if(a==='call')call23(b.dataset.src,+(b.dataset.n||1));else if(a==='next')next23();else if(a==='done')done23();else if(a==='again'){const s=SH.seq&&SH.seq.src;done23();call23(s,1);}else if(a==='go'){closeOv();openShrine23();}}
+// ---- the calling
+function call23(src,n){if(SH.seq||!canCall23(src,n)){paint23();return;}const hs=[];
+ for(let i=0;i<n;i++){const h=src==='free'?voidPull(null,{free:true}):voidPull(null,{src});if(h&&h.alive!==undefined)hs.push(h);else break;}
+ if(hs.length)seq23(hs,src);else paint23();}
+function seq23(hs,src,kind){const k=kind==='K'?2:Math.max(...hs.map(h=>'CREL'.indexOf(h.rar||'C'))),rm=RM23();
+ SH.seq={hs,src,kind,k,i:0,s:0,t0:performance.now(),D:rm?900:DUR23[k],ph:'build',rm};SH.el.classList.add('seq');SH.el.querySelector('.s23rv').className='s23rv';
+ SND23.rise(SH.seq.D);vib23(10);if(!SH.raf)SH.raf=requestAnimationFrame(draw23);}
+function reveal23(now){const q=SH.seq;q.ph='reveal';SH.el.classList.add('rv');q.tr=now;const pal=q.kind==='K'?'K':'CREL'[q.k];q.c=TINT23[pal];SND23.hush();SND23.boom();SND23.reveal(q.k);
+ const big=q.k>=2&&!q.rm;SH.flc=big?mix23(q.c,[255,255,255],.6):[255,255,255];SH.fl=q.rm?0:big?1:.55;SH.shk=big?(q.k===3?9:5):0;vib23(q.k===3?[30,50,30,50,70]:q.k===2?[20,40,30]:15);
+ if(!q.rm){burst23(q.c,40+q.k*25,260+q.k*60);if(q.k===3){ring23(q.c,3);setTimeout(()=>{if(SH.seq===q){ring23([255,240,200],3);burst23([255,220,120],50,320);vib23(20);}},450);}}
+ card23();}
+function card23(){const q=SH.seq,h=q.hs[q.i],r=h.rar||'C',R=RAR[r],k='CREL'.indexOf(r),K=q.kind==='K',col=K?'#ff7a3c':R.col,last=q.i>=q.hs.length-1;
+ const line=h.line23||((S.chat||[]).filter(c=>c.h===h.id).pop()||{}).m||'I heard you calling.';
+ const bt=K?`<button class="btn gold" data-s23="done">Welcome back, ${h.name}</button>`:!last?`<button class="btn gold" data-s23="next">Next soul (${q.i+2}/${q.hs.length}) ›</button>`:q.hs.length>1?`<button class="btn gold" data-s23="next">See all ${q.hs.length}</button>`:
+  `${canCall23(q.src)?`<button class="btn" data-s23="again">Call again</button>`:''}<button class="btn gold" data-s23="done">Welcome, ${h.name}</button>`;
+ const v=SH.el.querySelector('.s23rv');v.innerHTML=`<div class="s23card r${r}${K?' rK':''}" style="--rc:${col}">${r==='L'||K?'<div class="s23rays"></div>':''}<div class="s23pt">${avatar(h.cls,h.color,h)}</div>
+ <div class="s23tx"><div class="s23st">${Array.from({length:k+1},(_,j)=>`<i style="--j:${j}">★</i>`).join('')}</div><div class="s23rn">${K?'Rekindled':R.n}</div><h2 style="color:${h.color}">${h.name}</h2><div class="s23cl">${h.trait} ${h.cls} · ${CLASSES[h.cls].role}</div>
+ <div class="s23say"><b>${h.name}:</b> “${line}”</div>${K&&h.scar&&window.SCARS?`<div class="small s23sc">${SCARS[h.scar]}</div>`:''}<div class="s23bt">${bt}</div></div></div>`;v.className='s23rv show';
+ if(q.i>0&&!q.rm){burst23(TINT23[r],24+k*14,220);SND23.chime(k);vib23(k>=2?20:8);if(r==='L'){SH.fl=.7;SH.flc=[255,236,170];SH.shk=6;ring23(TINT23.L,3);}}}
+function next23(){const q=SH.seq;if(!q)return;if(q.i<q.hs.length-1){q.i++;card23();return;}
+ SH.el.querySelector('.s23rv').innerHTML=`<div class="s23sum"><h2>${q.hs.length} souls answered</h2><div class="s23sg">${q.hs.map(h=>`<div style="--rc:${RAR[h.rar||'C'].col}">${avatar(h.cls,h.color,h)}<b style="color:${h.color}">${h.name}</b><em>${'★'.repeat('CREL'.indexOf(h.rar||'C')+1)}</em></div>`).join('')}</div><div class="s23bt"><button class="btn gold" data-s23="done">Welcome them</button></div></div>`;}
+function done23(){if(!SH.seq)return;SH.seq=null;SH.el.classList.remove('seq','rv');SH.el.querySelector('.s23rv').className='s23rv';if(S.wait23)S.wait23=0;paint23();render();if(!SH.raf)SH.raf=requestAnimationFrame(draw23);}
+// remember who first spoke, and every soul ever met (for the book)
+{const _fr=fromRoster;fromRoster=function(x){const h=_fr.apply(this,arguments);h.line23=x.line;return h;};}
+{const _vp=voidPull;voidPull=function(){const h=_vp.apply(this,arguments);if(h&&h.key){S.seen23=S.seen23||[];if(!S.seen23.includes(h.key))S.seen23.push(h.key);}return h;};}
+{const _ld=load;load=function(){const r=_ld.apply(this,arguments);try{if(S){S.seen23=S.seen23||[];rosterAll().concat(S.hall||[]).forEach(h=>{if(h.key&&!S.seen23.includes(h.key))S.seen23.push(h.key);});}}catch(e){}return r;};}
+// the Rekindling plays in the shrine too
+{const _rk=rekindle;rekindle=function(id){const n0=(S.hall||[]).length,f=(S.hall||[]).find(x=>x.id===id);_rk.apply(this,arguments);if(f&&S.hall.length<n0){const h=rosterAll().find(x=>x.name===f.name&&x.rekAt);if(h&&SH.on&&!SH.seq)seq23([h],null,'K');else if(SH.on)paint23();}};}
+// ---- camp only: the miracle bar's soul button and the party panel button open the shrine (locked in the dungeon)
+{const _c=cast;cast=function(id){if(id==='soul'){openShrine23();return;}return _c.apply(this,arguments);};}
+{const _r=render;render=function(){_r.apply(this,arguments);const b=document.querySelector('[data-act="cast"][data-id="soul"]');if(b){const c=S.phase==='camp',t=`🕯️<br>Shrine<br><span class="small">${c?'at camp':'🔒 camp'}</span>`;if(b.dataset.s23k!==String(c)){b.dataset.s23k=String(c);b.innerHTML=t;}b.classList.toggle('off',!c);}const t=document.getElementById('shr23top');if(t)t.classList.toggle('off',S.phase!=='camp');};}
+// ---- new games and restarts begin at an empty camp; the first soul is called at the shrine
+function startParty23(){if(S.founder&&!S.founderUsed){S.founderUsed=1;S.heroes.push(mkFounder(S.founder));return;}
+ if(window.SIM_MODE||offline){S.heroes.push(typeof freeSoul==='function'?freeSoul():mkHero());return;}S.wait23=1;}
+{const _nr=newRun;newRun=function(){if(S.wait23&&!S.dead&&S.phase==='camp'&&S.map&&!rosterAll().length)return;const r=_nr.apply(this,arguments);
+ if(S.wait23&&!alive().length){S.phase='camp';S.campT=16;log('🏕️ A quiet camp. No one sits by your fire yet: visit the 🕯️ Shrine of Calling, where the first call is free.');}return r;};}
+{const _ct=campTick;campTick=function(){if(!alive().length&&!window.SIM_MODE)return;return _ct.apply(this,arguments);};}
+function first23(){if(!S||S.title||!S.wait23||alive().length||S.phase!=='camp')return;
+ ov(`<div class="s23first"><div class="hart">🕯️</div><h2>Your first soul</h2><p>Your fire is lit, but no one sits by it yet. Walk to the <b>Shrine of Calling</b> at the edge of camp and call: the first soul answers for free.</p><p class="small">Then they set out for floor 1${S.beginner==='on'?', the start of the gentle beginner\'s descent':''}.</p><button class="btn gold" style="width:100%;min-height:44px" data-s23="go">🕯️ Go to the Shrine</button></div>`);}
+{const _hc=htpClose;htpClose=function(){const r=_hc.apply(this,arguments);setTimeout(first23,60);return r;};}
+{const _sg=startNewGame;startNewGame=function(){const r=_sg.apply(this,arguments);setTimeout(()=>{if(!(HT.el&&HT.el.style.display==='flex'))first23();},80);return r;};}
+document.addEventListener('pointerdown',ev=>{const b=ev.target.closest('#ov [data-s23="go"]');if(!b)return;ev.preventDefault();ev.stopPropagation();closeOv();openShrine23();},true);
+// ---- settings: shrine sound (off by default) and haptics
+{const _os=openSettings;openSettings=function(){_os();const row=(l,a,o,c)=>`<div class="srow"><span>${l}</span><div class="seg">${o.map(([v,t])=>`<button class="btn s ${c===v?'on':''}" data-act="${a}" data-v="${v}">${t}</button>`).join('')}</div></div>`;
+ const rows=$('ovb').querySelectorAll('.srow'),c=rows[rows.length-1];if(c)c.insertAdjacentHTML('afterend',row('Shrine sound','set23s',[[0,'Off'],[1,'Soft'],[2,'On']],SET.snd||0)+row('Haptics','set23h',[[1,'On'],[0,'Off']],SET.hap===0?0:1));};}
+document.addEventListener('pointerdown',ev=>{const b=ev.target.closest('[data-act="set23s"],[data-act="set23h"]');if(!b)return;ev.preventDefault();ev.stopPropagation();if(b.dataset.act==='set23s'){SET.snd=+b.dataset.v;if(SET.snd)SND23.chime(1);}else SET.hap=+b.dataset.v;saveSet();openSettings();},true);
+// test hook: freeze the scene at a moment of a sequence
+window.SH23=SH;window.seq23=seq23;
 
 </script>
 </body></html>
