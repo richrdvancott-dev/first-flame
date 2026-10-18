@@ -214,6 +214,28 @@ body,#app{font-variant-numeric:tabular-nums}#pw,#ak{display:inline-block;min-wid
 .sc21.rC .sc21g{opacity:.07}.sc21.rL .sc21g{opacity:.32;animation-duration:4s}
 @keyframes sc21in{from{opacity:0;transform:scale(.4) rotate(-8deg)}to{opacity:1;transform:none}}@keyframes sc21spin{to{transform:rotate(1turn)}}
 @media (prefers-reduced-motion:reduce){.sc21 .av,.sc21r,.sc21g{animation:none!important}}
+
+/* v22 care: portrait mood badge, four need meters, Tend screen */
+.avw22{position:relative;flex:0 0 auto;line-height:0;display:block}
+.mb22{position:absolute;right:-5px;bottom:-5px;font-size:12px;line-height:1;font-style:normal;filter:drop-shadow(0 1px 1px #000);pointer-events:none}
+.nd22{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;margin-top:2px}
+.n22{display:flex;align-items:center;gap:1px;min-width:0}
+.n22 b{font-size:8px;line-height:1;font-weight:400}
+.n22 u{flex:1;height:4px;background:#0008;border-radius:2px;overflow:hidden;text-decoration:none;display:block;min-width:0}
+.n22 i{display:block;height:100%;border-radius:2px;transition:width .6s}
+.n22fed i{background:#f0a24a}.n22rest i{background:#6aa8ff}.n22spirit i{background:#ff8ad8}.n22bond i{background:#ffd76a}
+.n22.low i{background:#ff4a4a!important;animation:low22 .9s infinite alternate}@keyframes low22{to{opacity:.4}}
+.nd22.big{gap:6px;margin:4px 0}.nd22.big b{font-size:13px}.nd22.big u{height:7px}
+.hop22{animation:hop22 .55s cubic-bezier(.3,1.6,.5,1)}@keyframes hop22{35%{transform:translateY(-6px) scale(1.1)}}
+.tend22{float:right;padding:0 8px!important;font-size:12px!important;line-height:18px;min-height:0!important;height:20px;margin-top:-2px}
+.tr22{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #ffffff14}
+.tr22 .av{width:46px;height:46px;border-radius:10px;border:2px solid #a8862e}.tr22 .mb22{font-size:18px}
+.tm22{flex:1;min-width:0}
+.ca22{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin-top:4px}
+.ca22 .btn{min-height:44px;padding:2px;font-size:19px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}
+.ca22 small{font-size:9px;opacity:.8;min-height:11px;white-space:nowrap}
+.cb22{margin-top:8px;padding:8px;border:1px solid #4a3d5e;border-radius:10px;background:#0003}
+@media (prefers-reduced-motion:reduce){.hop22,.n22.low i{animation:none!important}}
 </style><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(r=>r.update()));
@@ -3519,7 +3541,7 @@ const HTP=[
  {a:'<div class="hart">🌀<span>👥</span></div>',t:'Gather your flock',p:['Tap <b>🌀 Call a Soul</b> to summon a hero: each one is hand-made, with a story, likes and a rarity (odds shown, with a pity counter). Spend 💠 shards from descending, or faith.','Up to <b>5</b> descend together; extras wait at the 🏰 base. They explore, fight and loot <b>on their own</b>, in real time (1x · 2x · 4x).']},
  {a:()=>'<div class="hmock">'+['heal','mend','soul','mark','bless'].map(id=>{const m=MIRACLES.find(x=>x.id===id);return m?`<span class="btn p">${m.ic}<br>${m.n.replace('Ember ','')}</span>`:'';}).join('')+'</div>',t:'Divine interventions',p:['Your powers live in the bar under the map. Tap one to cast; 🎯 tools like Mark then want a tap on the map.','❤️ <b>Heal</b> is the big save. 🕯️ <b>Ember Mend</b> is a cheap, slow warmth for everyone. 🌟 <b>Bless</b> sharpens blades.']},
  {a:'<div class="hart">⬆️<span>📜</span></div>',t:'Climbing the pantheon',p:['When a party falls, you keep 📜 <b>Ancient Knowledge</b>. Fill the ⬆️ bar up top to <b>ascend</b>.','Ember → Wisp → Spirit → … → Primordial. Every rank brings new tricks. Gods grow up too.']},
- {a:'<div class="hart"><i class="hbub">💬 I\'m hungry…</i>🧠</div>',t:'They talk. A lot.',p:['Heroes get hungry, lonely and opinionated. Small asks float up as bubbles; tap one to answer.','Tired of babysitting? Tap <b>🧠</b>: <b>Think</b> lets them handle small stuff; <b>⚡ Full autonomy</b> lets them decide everything. You can still cast anytime.']},
+ {a:'<div class="hart"><i class="hbub">💬 I\'m hungry…</i>💞</div>',t:'Tend your heroes',p:['Portraits show 🍖 fed, 💤 rest, 🎈 spirit and 💛 bond. The dungeon drains them; camp restores. Tap <b>💞 Tend</b> to feed, comfort, gift or play. Cared-for heroes fight harder; neglected ones sulk, and may leave (they warn you first).','Tap <b>🧠</b>: <b>Think</b> lets them handle small stuff (and tend themselves a little); <b>⚡ Full</b> lets them decide everything.']},
  {a:'<div class="hart">🏕️<span>🎒</span></div>',t:'Home sweet camp',p:['Between floors, heroes rest at camp to eat, drink and sleep. Build it up from the 🏰 base.','Backpacks are small. Loot gets hauled home to storage; bigger packs carry more.']},
  {a:'<div class="hart">⚔️<span>🐭</span></div>',t:'The War Council',p:['Tap ⚔️ to see what lurks ahead and who counters it.','Tanks hold the line, rogues dive the backline, mages melt swarms, and clerics cure the poison mice. Yes, poison mice.']},
  {a:'<div class="hart">🪦<span>❤️‍🔥</span></div>',t:'The long descent',p:['Floors 1–20 are a gentle beginner\'s descent (once per save). <b>Floor 20 is where it gets real.</b>','The fallen rest at the camp memorial. Bringing one back takes the <b>Rekindling</b>: a very rare ❤️‍🔥 Soul Ember, a deep bond and a mountain of faith. So keep them alive. Your game saves itself.']}];
@@ -3736,12 +3758,12 @@ const REK={bond:75,cd:3600e3,cost:n=>500*(n+1)*(n+2)/2};// 500, 1500, 3000, ...
 {const _k=killMob;killMob=function(e,h){const r=_k.apply(this,arguments);try{{const p=e.boss&&S.floor>=10?.12:e.elite&&S.floor>=20?.015:0;
  if(p&&Math.random()<p){S.embers=(S.embers||0)+1;log(`❤️‍🔥 A Soul Ember drifts up from ${e.name}. Keep it safe.`);if(typeof toast==='function'&&!offline)toast('❤️‍🔥 A Soul Ember! It can rekindle a fallen hero.');}}}catch(x){}return r;};}
 // remember when a hero was last rekindled, so their memorial entry carries the cooldown
-{const _d=dieHero;dieHero=function(h){const was=h.alive;const r=_d.apply(this,arguments);if(was&&!h.alive&&S.hall&&S.hall.length){const f=S.hall[S.hall.length-1];if(f.id===h.id){f.rekAt=h.rekAt||0;f.pulls=h.pulls||0;f.key=h.key;f.likes=h.likes;f.rar=h.rar;f.bio=h.bio;}}return r;};}
+{const _d=dieHero;dieHero=function(h){const was=h.alive;const r=_d.apply(this,arguments);if(was&&!h.alive&&S.hall&&S.hall.length){const f=S.hall[S.hall.length-1];if(f.id===h.id){f.rekAt=h.rekAt||0;f.pulls=h.pulls||0;f.key=h.key;f.likes=h.likes;f.rar=h.rar;f.bio=h.bio;f.art=h.art;}}return r;};}
 function rekCheck(f){const n=f.pulls||0,c=REK.cost(n),cdLeft=f.rekAt?Math.max(0,REK.cd-(Date.now()-f.rekAt)):0;const why=[];
  if((S.embers||0)<1)why.push('needs a ❤️‍🔥 Soul Ember');if((f.aff||0)<REK.bond)why.push(`needs bond 💛${REK.bond}+ (was ${f.aff})`);if(S.power<c)why.push(`needs ✨${c}`);
  if(cdLeft)why.push(`their soul is still settling (${Math.ceil(cdLeft/60000)} min)`);if(rosterAll().length>=8)why.push('roster is full');if(S.phase!=='camp')why.push('only at camp');return{ok:!why.length,why,c};}
 function rekindle(id){const f=(S.hall||[]).find(x=>x.id===id);if(!f)return;const k=rekCheck(f);if(!k.ok)return toast('The Rekindling '+k.why[0]+'.');
- S.embers--;S.power-=k.c;const h=mkHero({gender:f.gender,name:f.name});const C=CLASSES[f.cls];h.cls=f.cls;h.trait=f.trait;h.color=f.color;h.portrait=f.portrait;if(f.key)h.key=f.key;h.likes=f.likes;h.rar=f.rar;h.bio=f.bio;
+ S.embers--;S.power-=k.c;const h=mkHero({gender:f.gender,name:f.name});const C=CLASSES[f.cls];h.cls=f.cls;h.trait=f.trait;h.color=f.color;h.portrait=f.portrait;if(f.key)h.key=f.key;h.likes=f.likes;h.rar=f.rar;h.bio=f.bio;h.art=f.art;
  h.base={mhp:C.hp+pk('vit')*10,atk:C.atk+pk('mig'),def:C.def+pk('har')};const lv=Math.max(1,Math.floor(f.lvl/2));for(let i=1;i<lv;i++)lvlUp(h,true);
  h.arcsDone=f.arcsDone||[];h.aff=clamp(Math.round(f.aff*.6),0,100);h.pulls=(f.pulls||0)+1;h.rekAt=Date.now();h.kills=0;h.rel={};
  h.scar=pick(Object.keys(SCARS));if(h.scar==='frail')h.base.mhp=Math.round(h.base.mhp*.9);if(h.scar==='haunted')h.hope=25;if(h.scar==='voidtouched')h.aff=clamp(h.aff+10,0,100);h.hp=mhp(h);
@@ -3784,10 +3806,14 @@ const ROSTER=[
  ['ember','Ember','x','Cleric','L','Pious','honey cakes','candles','the dark','Born in the glow of your first spark. They say they remember it.','I knew you before you knew yourself, little flame.'],
  ['thorne','Thorne','m','Warrior','L','Brave','roast meat','old banners','cowards','A legend from a war nobody else survived. He won\'t talk about it.','I\'ve buried better armies than this dungeon. Let\'s go.']
 ].map(a=>({key:a[0],name:a[1],g:a[2],cls:a[3],r:a[4],trait:a[5],food:a[6],gift:a[7],hate:a[8],bio:a[9],line:a[10]}));
+// Custom heroes slot in here (Richard's own designs). Same fields as above, as objects; optional `art` (image URL or data: URI) and `lines` (extra barks):
+// {key:'unique-id',name:'Name',g:'f'|'m'|'x',cls:'Warrior',r:'C'|'R'|'E'|'L',trait:'Brave',food:'…',gift:'…',hate:'…',bio:'…',line:'first words',art:'assets/heroes/name.png'}
+const CUSTOM_ROSTER=[];
+ROSTER.push(...CUSTOM_ROSTER.filter(x=>x&&x.key&&CLASSES[x.cls]&&RAR[x.r]&&!ROSTER.some(y=>y.key===x.key)));
 const SUMMON={cost:10,pityE:20,pityL:60,
  pay:[{id:'shards',ic:'💠',have:()=>S.shards||0,price:()=>SUMMON.cost,take:n=>{S.shards-=n;}},{id:'faith',ic:'✨',have:()=>S.power,price:()=>voidCost(null).pw,take:n=>{S.power-=n;}}]};
 const taken21=()=>new Set(rosterAll().map(h=>h.key).concat((S.hall||[]).map(f=>f.key)).filter(Boolean));
-function pool21(r){const t=taken21();return ROSTER.filter(x=>x.r===r&&!t.has(x.key));}
+function pool21(r){const t=taken21(),nm=new Set(rosterAll().map(h=>h.name));return ROSTER.filter(x=>x.r===r&&!t.has(x.key)&&!nm.has(x.name));}
 function roll21(free){S.pity=S.pity||{e:0,l:0};S.pity.e++;S.pity.l++;let r;
  if(free)r='C';else if(S.pity.l>=SUMMON.pityL)r='L';else if(S.pity.e>=SUMMON.pityE)r=Math.random()<.2?'L':'E';
  else{const x=Math.random();r=x<RAR.L.odds?'L':x<RAR.L.odds+RAR.E.odds?'E':x<RAR.L.odds+RAR.E.odds+RAR.R.odds?'R':'C';}
@@ -3795,7 +3821,7 @@ function roll21(free){S.pity=S.pity||{e:0,l:0};S.pity.e++;S.pity.l++;let r;
  for(let d=1;!p.length&&d<4;d++){const lo=order[i+d],hi=order[i-d];p=(lo&&pool21(lo))||[];if(!p.length&&hi)p=pool21(hi);}
  const pk=p.length?pick(p):null;if(pk){if(pk.r==='L'||pk.r==='E')S.pity.e=0;if(pk.r==='L')S.pity.l=0;}return pk;}
 function fromRoster(x){const h=mkHero({gender:x.g,name:x.name});const C=CLASSES[x.cls];h.cls=x.cls;h.trait=x.trait;h.color=C.col;h.key=x.key;h.rar=x.r;
- const m=RAR[x.r].st;h.base={mhp:Math.round((C.hp+pk('vit')*10)*m),atk:(C.atk+pk('mig'))*m,def:C.def+pk('har')};h.hp=mhp(h);h.likes={food:x.food,gift:x.gift,hate:x.hate};h.bio=x.bio;
+ const m=RAR[x.r].st;h.base={mhp:Math.round((C.hp+pk('vit')*10)*m),atk:(C.atk+pk('mig'))*m,def:C.def+pk('har')};h.hp=mhp(h);h.likes={food:x.food,gift:x.gift,hate:x.hate};h.bio=x.bio;if(x.art)h.art=x.art;if(x.lines)h.lines=x.lines;
  S.chat=S.chat.filter(c=>!(c.h===h.id&&/so I'll be the/.test(c.m)));S.log=S.log.filter(l=>!/takes up the path of the/.test(l.m)||!l.m.includes(h.name));say(h,x.line);return h;}
 // voidPull keeps its name (sims, tests and old buttons call it) but now summons from the roster.
 voidPull=function(hallId,opt){CX();opt=opt||{};const free=!!opt.free;
@@ -3836,6 +3862,91 @@ function freeSoul(){CX();const x=roll21(true);const h=x?fromRoster(x):mkHero();i
 // older saves: grant starting shards once and give existing heroes likes
 {const _ld=load;load=function(){const r=_ld.apply(this,arguments);try{if(S&&S.shards==null){S.shards=30;S.pity={e:0,l:0};}if(S)rosterAll().forEach(h=>{if(!h.likes)h.likes=likes21();});}catch(e){}return r;};}
 {const _mk=mkHero;mkHero=function(){const h=_mk.apply(this,arguments);if(!h.likes)h.likes=likes21();return h;};}
+// custom art: a hero with `art` shows it everywhere a portrait appears
+{const _av=avatar;avatar=function(cls,col,h){return h&&h.art?`<img class="av" src="${h.art}" alt="">`:_av.apply(this,arguments);};}
+
+</script>
+<script>
+// v22: tend your heroes. Four clear needs on every portrait, quick caring taps, and real consequences both ways.
+// Needs: 🍖 Fed (food & water), 💤 Rest (energy), 🎈 Spirit (hope & company), 💛 Bond (affection for you).
+const N22={fed:h=>Math.min(h.food,h.water),rest:h=>h.energy,spirit:h=>h.hope*.6+h.social*.4,bond:h=>h.aff||0};
+const care22=h=>(N22.fed(h)+N22.rest(h)+N22.spirit(h)+N22.bond(h))/4;
+const bondLv22=h=>Math.min(4,Math.floor((h.aff||0)/25));
+const BONDM22=[-.12,-.06,-.03,-.01,0];const tended22=h=>care22(h)>=70&&(h.aff||0)>=50;
+const BONDN22=['Stranger','Friendly','Trusted','Devoted','Soulbound'];
+function moodFace22(h){if(!h.alive)return'🪦';if(h.downed)return'😵';const c=care22(h);if(N22.fed(h)<20)return'😫';if(N22.rest(h)<20)return'😪';if(N22.spirit(h)<25)return'😢';if(c<35)return'😠';if(c>=75&&bondLv22(h)>=3)return'🥰';if(c>=65)return'😊';return'🙂';}
+// ---------- care actions (small costs; per-hero cooldowns so nothing can be spammed) ----------
+const CARE22=[
+ {id:'feed',ic:'🍖',n:'Feed',camp:1,dun:0,cd:40,cost:()=>(S.stash.ration||0)>0?{ration:1}:(S.stash.meat||0)>0?{meat:1}:{power:4},go:(h,fav)=>{h.food=clamp(h.food+45,0,100);h.water=clamp(h.water+35,0,100);return fav?[5,`${cap22(h.likes.food)}! You remembered!`]:[2,pick(['Mm. Thank you.','Warm food. Bless you.','*happy chewing*'])];}},
+ {id:'rest',ic:'💤',n:'Tuck in',camp:1,dun:0,cd:45,cost:()=>({}),go:h=>{h.energy=clamp(h.energy+30,0,100);return[2,pick(['Just five more minutes…','*yawn* Goodnight, little flame.','Zzz…'])];}},
+ {id:'pet',ic:'🤗',n:'Comfort',camp:1,dun:1,cd:30,cost:()=>({}),go:h=>{hope(h,8);social(h,15);return[2,pick(['I feel… lighter.','You\'re warm. Like a hearth.','Thank you for being here.'])];}},
+ {id:'gift',ic:'🎁',n:'Gift',camp:1,dun:0,cd:90,cost:()=>({gold:15}),go:h=>{hope(h,8);return[7,`${cap22(h.likes.gift)}? For me? I'll treasure them.`];}},
+ {id:'pray',ic:'🙏',n:'Pray with',camp:1,dun:1,cd:60,cost:()=>({}),go:h=>{faith(h,5);hope(h,4);if(typeof devotion==='function')devotion(h,2);return[2,pick(['Together, then. I can feel you listening.','My prayer feels answered just by you being here.'])];}},
+ {id:'play',ic:'🎲',n:'Play',camp:1,dun:0,cd:50,cost:()=>({}),go:h=>{social(h,20);hope(h,6);h.energy=clamp(h.energy-5,0,100);return[3,pick(['Ha! Again! Best of three!','I haven\'t laughed like that in ages.','You cheat. Gods cheat. I love it.'])];}}];
+const cap22=s=>(s||'').replace(/^./,c=>c.toUpperCase());
+function canPay22(c){for(const k in c){if(k==='power'){if(S.power<c[k])return false;}else if(k==='gold'){if(S.gold<c[k])return false;}else if((S.stash[k]||0)<c[k])return false;}return true;}
+function pay22(c){for(const k in c){if(k==='power')S.power-=c[k];else if(k==='gold')S.gold-=c[k];else stashTake(k,c[k]);}}
+function careState22(h,a){if(!h.alive||h.downed)return'not now';const inCamp=S.phase==='camp';if(!(inCamp?a.camp:a.dun))return'camp only';const cd=((h.cd22||{})[a.id]||0);if(cd>0)return Math.ceil(cd*TICK/1000)+'s';if(!canPay22(a.cost()))return'can\'t afford';return'';}
+function doCare22(hid,aid){const h=heroById(hid),a=CARE22.find(x=>x.id===aid);if(!h||!a)return;const st=careState22(h,a);if(st){if(!SIM_MODE22())toast(`${a.ic} ${st}`);return;}
+ const c=a.cost();pay22(c);h.cd22=h.cd22||{};h.cd22[a.id]=S.phase==='camp'?a.cd:a.cd*2;const fav=a.id==='feed'&&Math.random()<.35;const[bond,line]=a.go(h,fav);
+ affect(h,bond*(S.phase==='camp'?1:.6),'care');attended(h);say(h,line);ST22.care++;if(SIM_MODE22())return;react22(h,a.ic);render();if(tend22open())openTend22(true);}
+// cute feedback: an emoji floats off the hero and their portrait does a happy hop (transform only)
+function react22(h,ic){try{if(FXON()){const v=V(h);FX.nums.push({x:(v.x??h.x)*TS+12,y:(v.y??h.y)*TS-2,t:ic,c:'#fff',l:60,big:1,s:0});}}catch(e){}
+ for(const el of document.querySelectorAll(`#hr${h.id} .av,.tr22[data-h="${h.id}"] .av`)){el.classList.remove('hop22');void el.offsetWidth;el.classList.add('hop22');}}
+const ST22={care:0,self:0,warn:0,left:0};
+// cooldowns tick in game time
+{const _t=tick;tick=function(){_t.apply(this,arguments);if(!S||S.title)return;for(const h of rosterAll()){if(h.cd22)for(const k in h.cd22)if(h.cd22[k]>0)h.cd22[k]--;}life22();};}
+// ---------- living needs: the dungeon is stressful, camp restores; dislikes sting a little ----------
+const HATE22={'waiting':()=>S.phase==='camp'&&S.campT<4,'the dark':()=>S.phase==='dungeon','crowds':()=>alive().length>=5,'silence':()=>!watching(),'mud':()=>S.phase==='dungeon'&&theme().n==='Dripping Caves','loud noises':()=>S.ents.some(e=>e.boss),'sunshine':()=>false};
+function life22(){const camp=S.phase==='camp';
+ for(const h of alive()){if(h.downed)continue;
+  if(!camp){if(S.ents.some(e=>e.t==='mob'&&dist(e,h)<=3))h.hope=clamp(h.hope-.04,0,100);if(S.tick-(h.lastAttn||0)>300)h.aff=clamp((h.aff||0)-.02,0,100);}// bond fades without attentionelse{h.hope=clamp(h.hope+.25,0,100);h.sb22=0;}
+  const hz=h.likes&&HATE22[h.likes.hate];if(hz&&hz()&&Math.random()<.01){hope(h,-1);if(Math.random()<.15&&watching())say(h,`Ugh, ${h.likes.hate}.`);}
+  // autonomy: Think/Full heroes tend themselves, at half the effect and with no bond gain
+  if(typeof think13==='function'&&think13()&&camp&&Math.random()<.04){if(N22.spirit(h)<45){hope(h,3);social(h,6);ST22.self++;}if(N22.rest(h)<40)h.energy=clamp(h.energy+6,0,100);}
+  // bond milestones
+  const L=bondLv22(h);if(L>(h.bl22||0)){h.bl22=L;S.shards=(S.shards||0)+3;log(`💛 ${h.name} is now ${BONDN22[L]} with you. (+3 💠)${L===4?' Soulbound: your light will hold them once per trip from camp.':L===3?' Devoted: they pray for you on their own.':''}`,h);
+   if(!offline)say(h,['','I think… I trust you.','You never let me fall. I won\'t let you down.','I\'d walk into the dark for you. I do, actually. Daily.','Whatever happens down there, I\'m yours.'][L]);}
+  if(L>=3&&Math.random()<.004)faith(h,1);
+  // neglect: warnings first, then (only at camp, only with a weak bond) they walk away. Never sudden, never while away.
+  const c=care22(h);if(c<15&&(h.aff||0)<25&&!offline&&!SIM_MODE22()){h.ng22=(h.ng22||0)+1;
+   if(h.ng22===300||h.ng22===600){ST22.warn++;say(h,h.ng22===300?'I\'m tired, hungry and alone. Do you even see me?':'If nothing changes, I\'m leaving at the next camp. I mean it.');log(`⚠️ ${h.name} feels neglected${h.ng22===600?' and will leave at the next camp unless cared for':''}.`,h);}
+   if(h.ng22>=600&&camp&&alive().length>1){ST22.left++;log(`💔 ${h.name} packs up and walks back to the surface. Neglect has a price.`,h);say(h,'Goodbye. I hope the next one gets more of you.');h.alive=false;h.cause='left, feeling neglected';h.deserted=1;S.heroes=S.heroes.filter(x=>x!==h);}}
+  else if(c>=25)h.ng22=Math.max(0,(h.ng22||0)-3);}}
+const SIM_MODE22=()=>!!window.SIM_MODE;
+// ---------- consequences in battle ----------
+{const _a=heroAtk;heroAtk=function(h,e){let a=_a.apply(this,arguments);const c=care22(h);a*=(c<35?.9:1)*(1+BONDM22[bondLv22(h)]);return a;};}
+{const _hh=hurtHero;hurtHero=function(h,d){if(h&&h.alive&&tended22(h))arguments[1]=d*.98;return _hh.apply(this,arguments);};}
+{const _dn=downHero;downHero=function(h){if(h&&h.alive&&!h.downed&&bondLv22(h)>=4&&!h.sb22){h.sb22=1;h.hp=1;if(!offline){say(h,'Your light… it\'s holding me up!');log(`💛 Soulbound: ${h.name} refuses to fall.`,h);}return;}return _dn.apply(this,arguments);};}
+// grumpy heroes may ignore commands
+{const _sp=speak;speak=function(id,hid){const h=heroById(hid)||alive()[0];if(/^c_/.test(id)&&h&&h.alive&&care22(h)<35&&Math.random()<.5){S.scd[id]=4;say(h,pick(['Why should I listen? You never look after us.','Not today. Feed us first.','Order someone who\'s been cared for.']));log(`😠 ${h.name} ignores your command.`,h);render();return;}return _sp.apply(this,arguments);};}
+// ---------- portrait meters (HUD rows rebuilt with four labelled needs; values update in place) ----------
+hudRow=function(h){return `<div class="hp2" data-act="selh" data-h="${h.id}" id="hr${h.id}"><span class="avw22">${avatar(h.cls,h.color,h)}<i class="mb22"></i></span><div class="hb"><div class="hn"><b style="color:${h.color}">${h.name}</b><span class="small"> ${CLASSES[h.cls].ic}${h.lvl}</span><span class="hm"></span></div>
+ <div class="bar2 hpb2"><i></i><em></em></div><div class="nd22">${['fed','rest','spirit','bond'].map(k=>`<span class="n22 n22${k}" title="${k}"><b>${{fed:'🍖',rest:'💤',spirit:'🎈',bond:'💛'}[k]}</b><u><i></i></u></span>`).join('')}</div></div><div class="needs2" style="display:none!important"><i class="nf"></i><i class="nw"></i><i class="ne"></i></div><button class="hsh" data-act="sheet" data-h="${h.id}">⋯</button></div>`;};
+{const _r=renderPartyHUD;renderPartyHUD=function(){_r.apply(this,arguments);const el=$('party');const hd=el.querySelector('.hudh');if(hd&&!hd.querySelector('.tend22'))hd.insertAdjacentHTML('beforeend','<button class="btn s tend22" data-act="tend22" aria-label="Tend your heroes">💞 Tend</button>');
+ for(const h of S.heroes){const r=document.getElementById('hr'+h.id);if(!r||!r.querySelector('.nd22'))continue;for(const k in N22){const v=Math.round(clamp(N22[k](h),0,100));const s=r.querySelector('.n22'+k);const i=s.querySelector('i');const w=v+'%';if(i.style.width!==w)i.style.width=w;s.classList.toggle('low',v<25&&h.alive);}
+  const m=r.querySelector('.mb22'),f=moodFace22(h);if(m.textContent!==f)m.textContent=f;const hm=r.querySelector('.hm');const t=(S.leader===h.id||leaderHero()===h?' 👑':'')+(h.req?' ❗':'');if(hm.textContent!==t)hm.textContent=t;}};}
+// ---------- the Tend screen ----------
+const tend22open=()=>$('ov').style.display==='flex'&&!!$('ovb').querySelector('.tend22w');
+function tendRows22(){return rosterAll().filter(h=>h.alive&&S.heroes.includes(h)).map(h=>`<div class="tr22" data-h="${h.id}"><span class="avw22">${avatar(h.cls,h.color,h)}<i class="mb22">${moodFace22(h)}</i></span><div class="tm22"><b style="color:${h.color}">${h.name}</b> <span class="small">${BONDN22[bondLv22(h)]} · loves ${h.likes?h.likes.food+', '+h.likes.gift:'?'}</span>
+ <div class="nd22 big">${Object.keys(N22).map(k=>{const v=Math.round(clamp(N22[k](h),0,100));return `<span class="n22 n22${k}${v<25?' low':''}"><b>${{fed:'🍖',rest:'💤',spirit:'🎈',bond:'💛'}[k]}</b><u><i style="width:${v}%"></i></u></span>`;}).join('')}</div>
+ <div class="ca22">${CARE22.map(a=>{const st=careState22(h,a);const c=a.cost();const cs=c.power?'✨'+c.power:c.gold?'💰'+c.gold:c.ration?'🍞':c.meat?'🍖':'';return `<button class="btn ${st?'off':''}" data-act="care22" data-h="${h.id}" data-a="${a.id}" title="${a.n}${st?' · '+st:''}" aria-label="${a.n} ${h.name}">${a.ic}<small>${st&&st!=='camp only'?st:cs}</small></button>`;}).join('')}</div></div></div>`).join('');}
+function openTend22(refresh){const html=`<div class="tend22w"><h2>💞 Tend your heroes</h2><div class="small">${S.phase==='camp'?'At camp you can feed, tuck in, comfort, gift, pray with and play with them.':'In the dungeon you can only comfort and pray with them. The real care happens at camp.'} Well-tended heroes fight harder; neglected ones sulk, ignore orders, and may leave.</div><div class="tl22">${tendRows22()}</div><button class="btn" style="width:100%" data-act="close">Close</button></div>`;
+ if(refresh&&tend22open()){const t=document.createElement('template');t.innerHTML=html;morphKids($('ovb'),t.content);}else ov(html);}
+document.addEventListener('pointerdown',ev=>{const b=ev.target.closest('[data-act="care22"],[data-act="tend22"]');if(!b)return;ev.preventDefault();ev.stopPropagation();if(b.dataset.act==='tend22')openTend22();else doCare22(+b.dataset.h,b.dataset.a);},true);
+setInterval(()=>{if(S&&!S.title&&tend22open())openTend22(true);},1000);
+// ---------- character sheet: care & bond block ----------
+{const _rs=renderSheet;renderSheet=function(){_rs.apply(this,arguments);const h=heroById(sheetId);const box=$('ovb').querySelector('.sheet');if(!h||!box)return;
+ const html=`<div class="cb22" data-keep="1"><div class="sk17h">💞 Care & bond</div><div class="small"><b>${BONDN22[bondLv22(h)]}</b> (💛${Math.round(h.aff||0)}) · loves <b>${h.likes?h.likes.food:'?'}</b> and <b>${h.likes?h.likes.gift:'?'}</b> · dislikes ${h.likes?h.likes.hate:'?'}</div><div class="small">${h.bio?'<i>'+h.bio+'</i> ':''}${tended22(h)?'✨ Well tended: −2% damage taken.':care22(h)<35?'😠 Neglected: −10% damage, may ignore commands.':''} Bond: ${BONDM22[bondLv22(h)]<0?'':'+'}${Math.round(BONDM22[bondLv22(h)]*100)}% damage${bondLv22(h)>=3?' · prays for you':''}${bondLv22(h)>=4?' · Soulbound (survives one lethal blow per trip)':''}.</div></div>`;
+ const col=box.lastElementChild;const ex=col&&col.querySelector(':scope>.cb22');if(ex){const t=document.createElement('template');t.innerHTML=html;morphKids(ex,t.content.firstElementChild);}else if(col)col.insertAdjacentHTML('beforeend',html);};}
+// ---------- while you were away ----------
+{const _sa=simulateAway;simulateAway=function(sec){const before=alive().map(h=>({h,c:care22(h),fl:S.floor}));const f0=S.floor,run0=S.runs;_sa.apply(this,arguments);
+ if(sec<60||!before.length)return;for(const h of alive()){h.food=Math.max(h.food,25);h.water=Math.max(h.water,25);h.energy=Math.max(h.energy,25);h.hope=Math.max(h.hope,25);h.social=Math.max(h.social,25);}// gentle floor: never punishing
+ if($('ov').style.display==='flex'||($('pm')&&$('pm').style.display==='flex'))return;
+ const lines=alive().map(h=>{const b=before.find(x=>x.h===h);const c=care22(h);const t=N22.fed(h)<40?`is peckish and eyeing the ${h.likes?h.likes.food:'rations'}`:N22.rest(h)<40?'could use a nap':N22.spirit(h)<45?'missed you':pick(['kept watch by the fire','told stories about you','practised their swing','tidied the camp','hummed to themselves']);return `<div class="row">${avatar(h.cls,h.color,h)}<div><b style="color:${h.color}">${h.name}</b> ${moodFace22(h)} <span class="small">${t}.</span></div></div>`;}).join('');
+ ov(`<div class="aw22"><h2>⏳ While you were away</h2><div class="small">${Math.round(sec/60)} min passed. ${S.runs!==run0?'A new run began.':S.floor!==f0?`They went from floor ${f0} to ${S.phase==='camp'?'camp':'floor '+S.floor}.`:'They held their ground.'}</div>${lines}<div class="row"><button class="btn gold" style="flex:1" data-act="tend22">💞 Tend them</button><button class="btn" style="flex:1" data-act="close">Back to it</button></div></div>`);};}
+// coming back to a saved game counts as time away too (capped like any absence)
+{const _ld=load;load=function(){const r=_ld.apply(this,arguments);try{if(S&&!S.title&&S.lastSave){const gap=(Date.now()-S.lastSave)/1000;if(gap>120){const p=S.paused;S.paused=false;setTimeout(()=>{try{simulateAway(gap);}catch(e){}S.paused=p;render();},400);}}}catch(e){}return r;};}
 
 </script>
 </body></html>
