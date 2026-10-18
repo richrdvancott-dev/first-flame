@@ -295,6 +295,8 @@ body,#app{font-variant-numeric:tabular-nums}#pw,#ak{display:inline-block;min-wid
 @keyframes s23halo{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.25)}}
 @keyframes s23glow{0%,100%{box-shadow:0 0 6px #ffb04a66}50%{box-shadow:0 0 18px #ffb04a}}
 @media (prefers-reduced-motion:reduce){#shr23,#shr23 canvas,.s23pn{transition:opacity .2s!important;transform:none!important}.s23card,.s23card *,.s23sum,.s23sum *,.s23big,.shr23b.pulse{animation:none!important}}
+#view24.al24{animation:al24 1.2s ease-in-out infinite}@keyframes al24{0%,100%{box-shadow:0 0 0 #f44}50%{box-shadow:0 0 12px #f44}}@media (prefers-reduced-motion:reduce){#view24.al24{animation:none;border-color:#f66}}
+@media (max-width:480px){#shr23top{display:none}}
 </style><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(r=>r.update()));
@@ -309,7 +311,7 @@ document.body.appendChild(b)});
 </head><body>
 <div id="app">
  <div id="top"><span><b class="brand" data-act="menu" title="First Flame: menu / save slots" aria-label="First Flame menu">🔥</b> · <b id="fl">F1</b> · ✨<b id="pw">0</b> · 📜<b id="ak">0</b> · <b id="tier"></b> <span id="eye"></span></span>
-  <span><button class="btn" data-act="base" title="Base (B)">🏰</button> <button class="btn" data-act="void" id="shr23top" title="Shrine of Calling (V), at camp">🕯️</button> <button class="btn" data-act="codex" id="codexbtn" title="Codex (K)">📖 Codex</button> <button class="btn gold" data-act="council" title="War Council (C)">⚔️</button> <button class="btn" data-act="pause" id="pause" aria-label="Pause"><i class="ic-pause"></i></button> <button class="btn" id="think13" title="Think for yourself: heroes handle minor needs" aria-label="Think for yourself">🧠</button> <button class="btn" data-act="speed" id="spd">1x</button> <button class="btn" data-act="help" id="helpbtn">? Help</button> <button class="btn" id="qmbtn" aria-label="Options" title="Options: settings, text size, HUD, asks">⚙</button></span></div>
+  <span><button class="btn" data-act="base" title="Base (B)">🏰</button> <button class="btn" id="view24" title="Visit camp (the party keeps exploring)" aria-pressed="false">🏕️</button> <button class="btn" data-act="void" id="shr23top" title="Shrine of Calling (V), at camp">🕯️</button> <button class="btn" data-act="codex" id="codexbtn" title="Codex (K)">📖 Codex</button> <button class="btn gold" data-act="council" title="War Council (C)">⚔️</button> <button class="btn" data-act="pause" id="pause" aria-label="Pause"><i class="ic-pause"></i></button> <button class="btn" id="think13" title="Think for yourself: heroes handle minor needs" aria-label="Think for yourself">🧠</button> <button class="btn" data-act="speed" id="spd">1x</button> <button class="btn" data-act="help" id="helpbtn">? Help</button> <button class="btn" id="qmbtn" aria-label="Options" title="Options: settings, text size, HUD, asks">⚙</button></span></div>
  <div id="left"><canvas id="cv"></canvas><div id="hint"></div><div id="powers"></div></div>
  <div id="mid"><div id="party"></div></div>
  <div id="right"><div id="card"></div><div id="tabs"></div><div id="panel"></div></div>
@@ -1466,7 +1468,7 @@ document.addEventListener('pointerdown',ev=>{const b=ev.target.closest('[data-ac
   case 'ascend':ascend();return;case 'blessf':blessFloor(d.id);break;
   case 'newrun':closeOv();newRun();save();break;}
  render();});
-cv.addEventListener('pointerdown',ev=>{const r=cv.getBoundingClientRect();const sx=(ev.clientX-r.left)/r.width*VW*TS,sy=(ev.clientY-r.top)/r.height*VH*TS;const camOn=S.phase!=='camp';const x=Math.floor((sx+(camOn?CAM.x:0))/TS),y=Math.floor((sy+(camOn?CAM.y:0))/TS);tapTile(x,y);});
+cv.addEventListener('pointerdown',ev=>{const r=cv.getBoundingClientRect();const sx=(ev.clientX-r.left)/r.width*VW*TS,sy=(ev.clientY-r.top)/r.height*VH*TS;const camOn=S.phase!=='camp'&&!(window.camV24&&camV24());const x=Math.floor((sx+(camOn?CAM.x:0))/TS),y=Math.floor((sy+(camOn?CAM.y:0))/TS);tapTile(x,y);});
 document.addEventListener('dblclick',e=>e.preventDefault());
 
 </script>
@@ -2223,7 +2225,7 @@ drawCampF=function(){const T=FX.t;const g=cx.createRadialGradient(LW/2,LH/2,10,L
  if(S.chat.length!==FX.chatN){const nw=S.chat.slice(Math.max(0,FX.chatN-S.chat.length));FX.chatN=S.chat.length;for(const c of nw.slice(-2))if(c.h!=null)FX.bub.push({h:c.h,m:c.m,l:150});if(FX.bub.length>3)FX.bub.splice(0,FX.bub.length-3);}
  cx.font='9px system-ui';for(const b of FX.bub){b.l--;const p=hpos[b.h];if(!p)continue;const m=b.m.length>34?b.m.slice(0,32)+'…':b.m;const w=cx.measureText(m).width+10;const bx=clamp(p[0]-w/2,2,LW-w-2),by=Math.max(2,p[1]-30);cx.globalAlpha=Math.min(1,b.l/25);cx.fillStyle='#f3ecdcee';rr(bx,by,w,14,5);cx.fill();cx.fillStyle='#1a1420';cx.textAlign='left';cx.fillText(m,bx+5,by+7.5);cx.textAlign='center';cx.globalAlpha=1;}
  FX.bub=FX.bub.filter(b=>b.l>0);
- cx.fillStyle='#fffb';cx.textAlign='left';cx.font='9px system-ui';cx.fillText(S.phase==='camp'?`Camp · resting (${Math.max(0,S.campT)}) · tap a building`:'Base',4,LH-6);};
+ cx.fillStyle='#fffb';cx.textAlign='left';cx.font='9px system-ui';cx.fillText(window.VIEW24&&VIEW24.dw?'Camp · the party is away · tap a building':S.phase==='camp'?`Camp · resting (${Math.max(0,S.campT)}) · tap a building`:'Base',4,LH-6);};
 // ---- CODEX
 let codexTab='beasts';
 function openCodex(t){if(t)codexTab=t;CX();const C=S.codex;let s='';
@@ -2281,8 +2283,8 @@ document.getElementById('left').appendChild(mini);
 let hudSig='';
 function hudRow(h){return `<div class="hp2" data-act="selh" data-h="${h.id}" id="hr${h.id}">${avatar(h.cls,h.color,h)}<div class="hb"><div class="hn"><b style="color:${h.color}">${h.name}</b><span class="small"> ${CLASSES[h.cls].ic}${h.lvl}</span><span class="hm"></span></div>
  <div class="bar2 hpb2"><i></i><em></em></div><div class="needs2"><i class="nf"></i><i class="nw"></i><i class="ne"></i></div></div><button class="hsh" data-act="sheet" data-h="${h.id}">⋯</button></div>`;}
-function renderPartyHUD(){const ps=S.heroes.filter(h=>h.alive||S.phase==='dungeon');const sig=ps.map(h=>h.id).join(',')+'|'+(S.bench||[]).length+'|'+S.phase;const el=$('party');
- if(sig!==hudSig||!el.querySelector('.hp2')){hudSig=sig;el.innerHTML=`<div class="hudh">Party <span class="small">${alive().length}/${partyCap()}${(S.bench||[]).length?' · '+S.bench.length+' at base':''}</span></div>`+ps.map(hudRow).join('')+(S.phase==='camp'?`<button class="btn s gold shr23b ${alive().length?'':'pulse'}" data-act="void" style="width:100%">🕯️ Go to the Shrine</button>`:alive().length<partyCap()?`<button class="btn s off" data-act="void" style="width:100%" aria-disabled="true">🔒 Summon at camp</button>`:'');}
+function renderPartyHUD(){const ps=S.heroes.filter(h=>h.alive||S.phase==='dungeon');const sig=ps.map(h=>h.id).join(',')+'|'+(S.bench||[]).length+'|'+S.phase+(window.camV24&&camV24()?'v':'');const el=$('party');
+ if(sig!==hudSig||!el.querySelector('.hp2')){hudSig=sig;el.innerHTML=`<div class="hudh">Party <span class="small">${alive().length}/${partyCap()}${(S.bench||[]).length?' · '+S.bench.length+' at base':''}</span></div>`+ps.map(hudRow).join('')+((S.phase==='camp'||window.camV24&&camV24())?`<button class="btn s gold shr23b ${alive().length?'':'pulse'}" data-act="void" style="width:100%">🕯️ Go to the Shrine</button>`:alive().length<partyCap()?`<button class="btn s off" data-act="void" style="width:100%" aria-disabled="true">🔒 Summon at camp</button>`:'');}
  for(const h of ps){const r=document.getElementById('hr'+h.id);if(!r)continue;const M=mhp(h),f=h.alive?h.hp/M:0;
   r.classList.toggle('dead',!h.alive);r.classList.toggle('down',!!h.downed);r.classList.toggle('sel',S.sel===h.id);r.classList.toggle('req',!!h.req);
   const b=r.querySelector('.hpb2 i');b.style.width=Math.round(f*100)+'%';b.style.background=h.downed?'#888':f<.35?'linear-gradient(90deg,#c22,#f55)':'linear-gradient(90deg,#3a3,#7e5)';
@@ -3163,11 +3165,11 @@ window.R9DG=function(dt){const st=th9(),T=FX.t;const key=S.floor+'|'+S.runs+'|'+
  cx.textAlign='right';cx.fillText(`${pl.preset?PRESETS[pl.preset].n:'No formation'} · ${TACTICS.stance.o[pl.stance]}${pl.bonus>1?' · +'+Math.round((pl.bonus-1)*100)+'%':''}`,CAM.x+LW-4,CAM.y+LH-6);};
 // ---------- frame: particles, numbers, iris, motes, dust ----------
 drawFrame=function(now){let dt=Math.min(50,now-(lastF||now));lastF=now;if(R9.stop>0){R9.stop-=dt;dt*=.15;}FX.t+=dt;FX.dt=dt||16;fitCanvas();
- const key=S.phase+S.floor;if(key!==FX.lastKey){if(FX.lastKey){R9.iris=1;R9.irisT=0;R9.card=S.phase==='camp'?'🏕️ Camp':`Floor ${S.floor} · ${theme().n}`;}FX.lastKey=key;FX.parts=[];FX.nums=[];R9.fx=[];R9.ghosts=[];CAM.snap=1;}
- const dg=S.phase!=='camp'&&!!S.map;if(dg)camUpdate(dt);
+ const cv24=(window.camV24&&camV24());const key=S.phase+S.floor+(cv24?'v':'');if(key!==FX.lastKey){if(FX.lastKey){R9.iris=1;R9.irisT=0;R9.card=S.phase==='camp'||cv24?'🏕️ Camp':`Floor ${S.floor} · ${theme().n}`;}FX.lastKey=key;FX.parts=[];FX.nums=[];R9.fx=[];R9.ghosts=[];CAM.snap=1;}
+ const dg=S.phase!=='camp'&&!!S.map&&!cv24;if(dg)camUpdate(dt);
  cx.setTransform(FXK,0,0,FXK,0,0);const sh=SET.shake?FX.shake:0;const shx=sh>0?(Math.random()-.5)*sh:0,shy=sh>0?(Math.random()-.5)*sh:0;FX.shake=Math.max(0,FX.shake-dt*.03);
  cx.save();cx.translate(shx-(dg?Math.round(CAM.x):0),shy-(dg?Math.round(CAM.y):0));
- if(S.phase==='camp')drawCampF();else if(S.map)drawDungeonF(dt);
+ if(S.phase==='camp')drawCampF();else if(cv24)drawCampAway24();else if(S.map)drawDungeonF(dt);
  const cap=Q()===0?150:Q()===1?260:400;
  for(const p of FX.parts){p.x+=p.vx;p.y+=p.vy;p.vy+=p.g??.03;p.vx*=.97;p.l--;}
  cx.save();for(const p of FX.parts){cx.globalCompositeOperation=p.add&&Q()?'lighter':'source-over';cx.globalAlpha=Math.max(0,p.l/p.m);cx.fillStyle=p.c;cx.fillRect(p.x-p.r,p.y-p.r,p.r*2,p.r*2);}cx.restore();
@@ -3592,7 +3594,7 @@ const HTP=[
  {a:()=>'<div class="hmock">'+['heal','mend','soul','mark','bless'].map(id=>{const m=MIRACLES.find(x=>x.id===id);return m?`<span class="btn p">${m.ic}<br>${m.n.replace('Ember ','')}</span>`:'';}).join('')+'</div>',t:'Divine interventions',p:['Your powers live in the bar under the map. Tap one to cast; 🎯 tools like Mark then want a tap on the map.','❤️ <b>Heal</b> is the big save. 🕯️ <b>Ember Mend</b> is a cheap, slow warmth for everyone. 🌟 <b>Bless</b> sharpens blades.']},
  {a:'<div class="hart">⬆️<span>📜</span></div>',t:'Climbing the pantheon',p:['When a party falls, you keep 📜 <b>Ancient Knowledge</b>. Fill the ⬆️ bar up top to <b>ascend</b>.','Ember → Wisp → Spirit → … → Primordial. Every rank brings new tricks. Gods grow up too.']},
  {a:'<div class="hart"><i class="hbub">💬 I\'m hungry…</i>💞</div>',t:'Tend your heroes',p:['Portraits show 🍖 fed, 💤 rest, 🎈 spirit and 💛 bond. The dungeon drains them; camp restores. Tap <b>💞 Tend</b> to feed, comfort, gift or play. Cared-for heroes fight harder; neglected ones sulk, and may leave (they warn you first).','Tap <b>🧠</b>: <b>Think</b> lets them handle small stuff (and tend themselves a little); <b>⚡ Full</b> lets them decide everything.']},
- {a:'<div class="hart">🏕️<span>🎒</span></div>',t:'Home sweet camp',p:['Between floors, heroes rest at camp to eat, drink and sleep. Build it up from the 🏰 base.','Backpacks are small. Loot gets hauled home to storage; bigger packs carry more.']},
+ {a:'<div class="hart">🏕️<span>🎒</span></div>',t:'Home sweet camp',p:['Between floors, heroes rest at camp to eat, drink and sleep. Build it up from the 🏰 base. Tap <b>🏕️</b> up top to visit camp any time: the party keeps exploring on its own (🗺️ takes you back; it glows red if someone is hurt).','Backpacks are small. Loot gets hauled home to storage; bigger packs carry more.']},
  {a:'<div class="hart">⚔️<span>🐭</span></div>',t:'The War Council',p:['Tap ⚔️ to see what lurks ahead and who counters it.','Tanks hold the line, rogues dive the backline, mages melt swarms, and clerics cure the poison mice. Yes, poison mice.']},
  {a:'<div class="hart">🪦<span>❤️‍🔥</span></div>',t:'The long descent',p:['Floors 1–20 are a gentle beginner\'s descent (once per save). <b>Floor 20 is where it gets real.</b>','The fallen rest at the memorial in the Shrine. Bringing one back takes the <b>Rekindling</b> ritual there: a very rare ❤️‍🔥 Soul Ember, a deep bond and a mountain of faith. So keep them alive. Your game saves itself.']}];
 const HT={i:0,first:false,el:null,wasP:false};
@@ -4007,6 +4009,7 @@ setInterval(()=>{if(S&&!S.title&&tend22open())openTend22(true);},1000);
 // rarity tease (white → blue → purple → gold) → flash → reveal card (portrait, stars, title, first words).
 // Tap skips the build; a second tap finishes the reveal. Reduce-motion: a short fade, no particles or shake.
 // Summoning happens only at camp. New games start at an empty camp; the first call is free.
+window.atCamp24=window.atCamp24||(()=>!!S&&S.phase==='camp');window.camV24=window.camV24||(()=>false);
 const SH={el:null,cv:null,g:null,w:0,h:0,dpr:1,on:false,raf:0,last:0,view:'call',bk:null,wasP:false,P:[],seq:null,spr:{},bg:null,tw:[],shk:0,fl:0,flc:[255,255,255],fz:0,ax:0,ay:0,sc:1,rot:0,rise:[]};
 const RM23=()=>!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
 const CAP23=()=>RM23()?0:SET.gfx==='low'?50:SET.gfx==='high'?160:110;
@@ -4105,16 +4108,16 @@ function draw23(now){const g=SH.g;if(!g)return;const W=SH.w,H=SH.h,s=SH.sc,dt=Ma
  SH.raf=0;if(SH.on&&(!rm||q||SH.fl>.01))SH.raf=requestAnimationFrame(draw23);}
 function burst23(c,n,sp,gv){const cap=CAP23();for(let i=0;i<n&&SH.P.length<cap+40;i++){const a=Math.random()*6.283,v=(sp||220)*(.3+Math.random());SH.P.push({x:SH.cx,y:SH.cy-82*SH.sc,vx:Math.cos(a)*v,vy:Math.sin(a)*v,g:gv||0,dr:.96,life:0,max:900+Math.random()*900,sz:(2+Math.random()*3)*SH.sc,c:mix23(c,[255,255,255],Math.random()*.5)});}}
 // ---- open / close
-function openShrine23(){CX();if(!S||S.title||S.dead)return;if(S.phase!=='camp')return toast('🏕️ Summon at camp: the Shrine of Calling waits by the fire.');
- const d=build23();closeOv();if(!SH.on){SH.wasP=!!S.paused;S.paused=true;}SH.on=true;SH.view=SH.view||'call';d.style.display='block';paint23();lay23();
+function openShrine23(){CX();if(!S||S.title||S.dead)return;if(!atCamp24())return toast('🏕️ Summon at camp: the Shrine of Calling waits by the fire.');
+ const d=build23();closeOv();if(!SH.on){SH.pz=S.phase==='camp';SH.wasP=!!S.paused;if(SH.pz)S.paused=true;}SH.on=true;SH.view=SH.view||'call';d.style.display='block';paint23();lay23();
  requestAnimationFrame(()=>d.classList.add('in'));clearTimeout(SH.ft);SH.ft=setTimeout(()=>{if(SH.on)SH.full=true;},RM23()?150:450);if(!SH.raf)SH.raf=requestAnimationFrame(draw23);}
-function closeShrine23(){if(!SH.on||SH.seq)return;const d=SH.el;d.classList.remove('in');SH.on=false;SH.full=false;clearTimeout(SH.ft);S.paused=SH.wasP;
+function closeShrine23(){if(!SH.on||SH.seq)return;const d=SH.el;d.classList.remove('in');SH.on=false;SH.full=false;clearTimeout(SH.ft);if(SH.pz)S.paused=SH.wasP;
  setTimeout(()=>{if(!SH.on){d.style.display='none';SH.P.length=0;}},RM23()?120:420);
  if(alive().length&&S.wait23===0){S.wait23=null;log(`🏕️ ${alive()[0].name} sits by your fire. When the party is ready, they set out for floor ${S.floor}.`);}render();}
 window.openShrine23=openShrine23;window.closeShrine23=closeShrine23;
 openVoid=openShrine23;summonFx21=function(){};
 // ---- panel
-function canCall23(src,n){n=n||1;if(!S||S.phase!=='camp'||rosterAll().length+n>8)return false;if(n>1&&['C','R','E','L'].reduce((a,r)=>a+pool21(r).length,0)<n)return false;
+function canCall23(src,n){n=n||1;if(!S||!atCamp24()||rosterAll().length+n>8)return false;if(n>1&&['C','R','E','L'].reduce((a,r)=>a+pool21(r).length,0)<n)return false;
  if(src==='free')return needFree21();if(needFree21())return false;const p=SUMMON.pay.find(x=>x.id===src);return !!p&&p.have()>=p.price()*n;}
 function paint23(){const d=SH.el;if(!d)return;const seen=new Set(S.seen23||[]);
  d.querySelector('.s23bal').innerHTML=`<span title="Soul shards">💠 ${S.shards||0}</span><span title="Faith">✨ ${Math.floor(S.power)}</span><span title="Soul Embers">❤️‍🔥 ${S.embers||0}</span>`;
@@ -4165,7 +4168,7 @@ function done23(){if(!SH.seq)return;SH.seq=null;SH.el.classList.remove('seq','rv
 {const _rk=rekindle;rekindle=function(id){const n0=(S.hall||[]).length,f=(S.hall||[]).find(x=>x.id===id);_rk.apply(this,arguments);if(f&&S.hall.length<n0){const h=rosterAll().find(x=>x.name===f.name&&x.rekAt);if(h&&SH.on&&!SH.seq)seq23([h],null,'K');else if(SH.on)paint23();}};}
 // ---- camp only: the miracle bar's soul button and the party panel button open the shrine (locked in the dungeon)
 {const _c=cast;cast=function(id){if(id==='soul'){openShrine23();return;}return _c.apply(this,arguments);};}
-{const _r=render;render=function(){_r.apply(this,arguments);const b=document.querySelector('[data-act="cast"][data-id="soul"]');if(b){const c=S.phase==='camp',t=`🕯️<br>Shrine<br><span class="small">${c?'at camp':'🔒 camp'}</span>`;if(b.dataset.s23k!==String(c)){b.dataset.s23k=String(c);b.innerHTML=t;}b.classList.toggle('off',!c);}const t=document.getElementById('shr23top');if(t)t.classList.toggle('off',S.phase!=='camp');};}
+{const _r=render;render=function(){_r.apply(this,arguments);const b=document.querySelector('[data-act="cast"][data-id="soul"]');if(b){const c=atCamp24(),t=`🕯️<br>Shrine<br><span class="small">${c?'at camp':'🔒 camp'}</span>`;if(b.dataset.s23k!==String(c)){b.dataset.s23k=String(c);b.innerHTML=t;}b.classList.toggle('off',!c);}const t=document.getElementById('shr23top');if(t)t.classList.toggle('off',!atCamp24());};}
 // ---- new games and restarts begin at an empty camp; the first soul is called at the shrine
 function startParty23(){if(S.founder&&!S.founderUsed){S.founderUsed=1;S.heroes.push(mkFounder(S.founder));return;}
  if(window.SIM_MODE||offline){S.heroes.push(typeof freeSoul==='function'?freeSoul():mkHero());return;}S.wait23=1;}
@@ -4183,6 +4186,31 @@ document.addEventListener('pointerdown',ev=>{const b=ev.target.closest('#ov [dat
 document.addEventListener('pointerdown',ev=>{const b=ev.target.closest('[data-act="set23s"],[data-act="set23h"]');if(!b)return;ev.preventDefault();ev.stopPropagation();if(b.dataset.act==='set23s'){SET.snd=+b.dataset.v;if(SET.snd)SND23.chime(1);}else SET.hap=+b.dataset.v;saveSet();openSettings();},true);
 // test hook: freeze the scene at a moment of a sequence
 window.SH23=SH;window.seq23=seq23;
+
+</script>
+<script>
+'use strict';
+// v24: switch views between camp and dungeon at any time. While the party explores, the camp view shows the quiet camp
+// (and anyone waiting there) and the dungeon keeps simulating; heroes act on their own. The Shrine works from the camp
+// view; a soul called while the party is away waits by the fire and joins when they return.
+const VIEW24={v:null,ph:null};
+window.camV24=()=>!!S&&S.phase!=='camp'&&VIEW24.v==='camp'&&!S.title&&!S.dead;
+const atCamp24=()=>S.phase==='camp'||camV24();
+function setView24(v){if(S.phase==='camp'){toast('🏕️ The party is at camp.');return;}VIEW24.v=v;closeCtx&&closeCtx();S.tool=null;render();}
+// draw the camp as it is while the party is away: no party heroes in it, combat sparks left behind in the dungeon
+function drawCampAway24(){const ph=S.phase,hs=S.heroes;S.phase='camp';S.heroes=[];VIEW24.dw=1;try{drawCampF();}finally{S.phase=ph;S.heroes=hs;VIEW24.dw=0;}FX.parts.length=0;FX.nums.length=0;
+ const hurt=alive().some(h=>h.downed||h.hp/mhp(h)<.35),t=`🗺️ Party on floor ${S.floor}${hurt?' · ⚠️ someone is hurt':''}`;
+ cx.save();cx.font='bold 10px system-ui';cx.textAlign='center';const w=cx.measureText(t).width+16;cx.fillStyle=hurt?'#5a1010d0':'#000a';cx.fillRect(LW/2-w/2,4,w,16);cx.fillStyle=hurt?'#ffb0a0':'#ffe6a6';cx.textBaseline='middle';cx.fillText(t,LW/2,12);cx.restore();}
+{const _t=tapTile;tapTile=function(x,y){if(!camV24())return _t.apply(this,arguments);const ph=S.phase,hs=S.heroes;S.phase='camp';S.heroes=[];try{return _t.apply(this,arguments);}finally{S.phase=ph;S.heroes=hs;}};}
+// a soul called while the party is away waits at camp, then joins on their return
+{const _p=placeNew;placeNew=function(h){if(!camV24())return _p.apply(this,arguments);S.bench.push(h);h.wait24=1;log(`🏕️ ${h.name} waits by the fire for the party to come back.`,h);};}
+{const _e=enterCamp;enterCamp=function(){const r=_e.apply(this,arguments);for(const h of S.bench.slice())if(h.wait24&&h.alive&&alive().length<partyCap()){S.bench.splice(S.bench.indexOf(h),1);delete h.wait24;S.heroes.push(h);log(`🏕️ ${h.name} joins the party at camp.`,h);say(h,pick(['Finally! I\'ve been keeping your seat warm.','So you\'re the ones I\'ve heard about.']));}return r;};}
+// the toggle in the top bar; follows the party again whenever the phase changes
+{const _r=render;render=function(){if(S&&S.phase!==VIEW24.ph){VIEW24.ph=S.phase;VIEW24.v=null;}_r.apply(this,arguments);const b=document.getElementById('view24');if(!b||!S)return;
+ const away=camV24(),c=S.phase==='camp',al=away&&alive().some(h=>h.downed||h.hp/mhp(h)<.35||h.req),t=away?'🗺️':'🏕️';
+ if(b.textContent!==t)b.textContent=t;b.title=c?'The party is at camp':away?'Watch the dungeon':'Visit camp (the party keeps exploring)';b.classList.toggle('off',c);b.classList.toggle('al24',!!al);b.setAttribute('aria-pressed',away?'true':'false');};}
+document.addEventListener('pointerdown',ev=>{const b=ev.target.closest('#view24');if(!b)return;ev.preventDefault();ev.stopPropagation();setView24(camV24()?null:'camp');},true);
+window.setView24=setView24;window.atCamp24=atCamp24;
 
 </script>
 </body></html>
