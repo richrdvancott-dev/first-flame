@@ -2225,7 +2225,7 @@ drawCampF=function(){const T=FX.t;const g=cx.createRadialGradient(LW/2,LH/2,10,L
  if(S.chat.length!==FX.chatN){const nw=S.chat.slice(Math.max(0,FX.chatN-S.chat.length));FX.chatN=S.chat.length;for(const c of nw.slice(-2))if(c.h!=null)FX.bub.push({h:c.h,m:c.m,l:150});if(FX.bub.length>3)FX.bub.splice(0,FX.bub.length-3);}
  cx.font='9px system-ui';for(const b of FX.bub){b.l--;const p=hpos[b.h];if(!p)continue;const m=b.m.length>34?b.m.slice(0,32)+'…':b.m;const w=cx.measureText(m).width+10;const bx=clamp(p[0]-w/2,2,LW-w-2),by=Math.max(2,p[1]-30);cx.globalAlpha=Math.min(1,b.l/25);cx.fillStyle='#f3ecdcee';rr(bx,by,w,14,5);cx.fill();cx.fillStyle='#1a1420';cx.textAlign='left';cx.fillText(m,bx+5,by+7.5);cx.textAlign='center';cx.globalAlpha=1;}
  FX.bub=FX.bub.filter(b=>b.l>0);
- cx.fillStyle='#fffb';cx.textAlign='left';cx.font='9px system-ui';cx.fillText(window.VIEW24&&VIEW24.dw?'Camp · the party is away · tap a building':S.phase==='camp'?`Camp · resting (${Math.max(0,S.campT)}) · tap a building`:'Base',4,LH-6);};
+ cx.fillStyle='#fffb';cx.textAlign='left';cx.font='9px system-ui';cx.fillText((typeof VIEW24!=='undefined'&&VIEW24.dw)?'Camp · the party is away · tap a building':S.phase==='camp'?`Camp · resting (${Math.max(0,S.campT)}) · tap a building`:'Base',4,LH-6);};
 // ---- CODEX
 let codexTab='beasts';
 function openCodex(t){if(t)codexTab=t;CX();const C=S.codex;let s='';
@@ -2558,7 +2558,7 @@ drawCampF=function(){const now=performance.now();const dt=Math.min(60,now-(camp6
  if(S.chat.length!==FX.chatN){const nw=S.chat.slice(Math.max(0,FX.chatN-S.chat.length));FX.chatN=S.chat.length;for(const c of nw.slice(-2))if(c.h!=null)FX.bub.push({h:c.h,m:c.m,l:150});if(FX.bub.length>3)FX.bub.splice(0,FX.bub.length-3);}
  cx.font='8.5px system-ui';cx.textAlign='left';for(const bb of FX.bub){bb.l--;const p=hpos[bb.h];if(!p)continue;const m=bb.m.length>36?bb.m.slice(0,34)+'…':bb.m;const w=cx.measureText(m).width+10;const bx=clamp(p[0]-w/2,2,LW-w-2),by=Math.max(2,p[1]-34);cx.globalAlpha=Math.min(1,bb.l/25);cx.fillStyle='#f3ecdcee';rr(bx,by,w,13,5);cx.fill();cx.fillStyle='#1a1420';cx.fillText(m,bx+5,by+7);cx.globalAlpha=1;}
  FX.bub=FX.bub.filter(b=>b.l>0);cx.textAlign='center';
- cx.fillStyle='#000a';rr(2,LH-14,170,12,4);cx.fill();cx.fillStyle='#fffc';cx.textAlign='left';cx.font='8.5px system-ui';cx.fillText(`🏕️ Camp · resting (${Math.max(0,S.campT)}) · tap a building`,6,LH-6.5);cx.textAlign='center';};
+ cx.fillStyle='#000a';rr(2,LH-14,170,12,4);cx.fill();cx.fillStyle='#fffc';cx.textAlign='left';cx.font='8.5px system-ui';cx.fillText((typeof VIEW24!=='undefined'&&VIEW24.dw)?'🏕️ Camp · party away · tap a building':`🏕️ Camp · resting (${Math.max(0,S.campT)}) · tap a building`,6,LH-6.5);cx.textAlign='center';};
 function drawHeroCamp(h,v,doing,T,i,b,benched){const x=v.cx,y=v.cy;let bob=0,ly=0,rot=0;
  if(doing==='walk')bob=-Math.abs(Math.sin(T/90+i))*2.2;else if(doing==='sleep'){rot=1.4;ly=4;}else if(doing==='pray'){ly=3;}else if(doing==='eat'||doing==='sit'||doing==='drink2')bob=Math.sin(T/400+i)*.6;
  cx.fillStyle='#0007';cx.beginPath();cx.ellipse(x,y+8,doing==='sleep'?10:6,2.4,0,0,6.283);cx.fill();
