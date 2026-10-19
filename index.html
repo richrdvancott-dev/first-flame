@@ -370,6 +370,7 @@ body,#app{font-variant-numeric:tabular-nums}#pw,#ak{display:inline-block;min-wid
 #readyp:not(.open) .rph{margin:0}#readyp:not(.open) .rpb{margin:0}#readyp:not(.open) .rpb .btn{min-height:28px;padding:2px 8px}
 #readyp .rph{cursor:pointer}#readyp.open .rph::after{content:' ▾'}#readyp:not(.open) .rph::after{content:' ▸'}
 .hp2 .hn{position:relative}.bf28{position:absolute;left:46%;top:-1px;font-size:10px;line-height:14px;padding:0 4px;border-radius:7px;background:#000a;color:#ffe9a8;white-space:nowrap;pointer-events:none;font-variant-numeric:tabular-nums}
+.btn.p{position:relative}.rk29{position:absolute;top:1px;right:3px;font-size:9px;font-weight:700;color:#ffd76a;letter-spacing:.3px;pointer-events:none}.g29{display:flex;gap:6px;align-items:baseline;flex-wrap:wrap;padding:2px 0;border-bottom:1px solid #2a2236}.g29i{width:18px}
 </style><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(r=>r.update()));
@@ -1036,7 +1037,7 @@ function endPossess(){const P=S.possess;S.possess=null;const h=heroById(P.hid);i
 
 // ---- combat ----
 function heroAtk(h,e){let a=(h.base.atk+(h.gear.w?h.gear.w.v:0));
- a*=(h.bless>0?(has('u_potency')?1.75:1.5):1)*(h.song>0?1.1:1)*(h.fed>0?1.1:1)*(.85+h.hope/400)*(h.energy<20?.8:1);
+ a*=(h.bless>0?1+(h.blessP||.5)*(has('u_potency')?1.5:1):1)*(h.song>0?1.1:1)*(h.fed>0?1.1:1)*(.85+h.hope/400)*(h.energy<20?.8:1);
  if(h.gear.r&&h.gear.r.r==='u_void')a*=1.5;
  if(alive().some(o=>o!==h&&dist(o,h)<=1&&rel(h,o)>40))a*=1.1;
  if(e){a*=1+kb(h,e.name);a*=planAtkMul(h,e);if(e===S.mark)a*=1.15;if(h.cls==='Paladin'&&e.undead)a*=2;if(S.floorBless==='sunlight'&&e.undead)a*=1.15;}
@@ -1252,6 +1253,7 @@ function rowW(a){return a.hero?(rowOf(a.u)==='front'?-1.5:rowOf(a.u)==='back'?1:
 
 </script>
 <script>
+function spR(id){return Math.max(1,Math.min(6,((S&&S.tier)||0)+1));}
 'use strict';
 // ===================== GOD: miracles, map tools, speech, tiers, camp management =====================
 function regen(){return .02+(has('u_regen1')?.03:0)+(has('u_regen2')?.06:0)+.01*bl('shrine')+.01*S.tier;}
@@ -1264,24 +1266,24 @@ function cast(id,forH){
  const hs=alive();if(!hs.length)return;
  if(id==='soul'&&hs.length>=TIERS[S.tier].cap)return toast('The party is full');
  S.power-=m.cost;S.cd[id]=m.cd;overuse();hs.forEach(attended);
- const pot=has('u_potency')?1.5:1;
+ const pot=has('u_potency')?1.5:1;const r=spR(id==='massheal'?'heal':id);
  const w=forH&&forH.alive?forH:hs.find(h=>h.downed)||hs.slice().sort((a,b)=>a.hp/mhp(a)-b.hp/mhp(b))[0];
  const healOne=(x,p)=>{if(x.downed){x.downed=0;x.hp=Math.round(mhp(x)*p);say(x,'I was fading... and then light. Thank you!');hope(x,12);faith(x,8);return;}
   if(x.hp/mhp(x)>.9)hope(x,-4,'I was fine. Why waste your gifts?');x.hp=Math.min(mhp(x),x.hp+Math.round(mhp(x)*p));
   if(x.req&&x.req.k==='heal'){x.req=null;affect(x,10,1);hope(x,10,pick(['My prayer was answered!','You heard me!']));faith(x,5);social(x,10);}};
  switch(id){
-  case 'heal':healOne(w,.4*pot);if(w&&(w.mend||0)<2){w.mend=2;w.mendM=2;}log(`❤️ Divine light heals ${w.name}.`,w);break;
-  case 'massheal':hs.forEach(x=>healOne(x,.5*pot));log('💖 Healing light washes over the party.');break;
-  case 'bless':hs.forEach(h=>{h.bless=36;faith(h,2);});log('🌟 The party glows with blessing.');break;
-  case 'shield':hs.forEach(h=>h.shield=22);log('🛡️ A divine shield surrounds the party.');break;
+  case 'massheal':case 'heal':{const p=(.4+.04*(r-1))*pot,o=r>=5?.5:r>=3?.25:0;healOne(w,p);if(w&&(w.mend||0)<2){w.mend=2;w.mendM=2;}if(o)hs.forEach(x=>{if(x!==w&&(x.downed||x.hp<mhp(x)))healOne(x,p*o);});log(o?`❤️ Divine light heals ${w.name}, and spills over the party.`:`❤️ Divine light heals ${w.name}.`,w);break;}
+  case 'bless':hs.forEach(h=>{h.bless=36+2*Math.max(0,r-2);h.blessP=.5+.05*Math.max(0,r-2);faith(h,2);});log('🌟 The party glows with blessing.');break;
+  case 'shield':hs.forEach(h=>h.shield=22+2*Math.max(0,r-3));log('🛡️ A divine shield surrounds the party.');break;
   case 'smite':{const mobs=S.ents.filter(e=>e.t==='mob');if(!mobs.length){hs.forEach(h=>hope(h,-5,chance(.5)?'Lightning... at nothing? Is our god mad?':null));break;}
    const tgt=S.mark&&S.ents.includes(S.mark)?S.mark:mobs.sort((a,b)=>Math.min(...hs.map(h=>mdist(h,a)))-Math.min(...hs.map(h=>mdist(h,b))))[0];
-   const dmg=Math.round((22+S.floor*7)*pot*(tgt.boss?1.5:1));log(`⚡ Smite strikes ${tgt.name} for ${dmg}!`);
-   if(!has('u_precise'))hs.forEach(h=>{if(mdist(h,tgt)<=1){h.hp=Math.max(1,h.hp-Math.round(mhp(h)*.15));hope(h,-10,'You burned ME too! Are you even on our side?');}});
-   tgt.hp-=dmg;if(tgt.hp<=0)killMob(tgt,null);break;}
+   const dmg=Math.round((22+S.floor*7)*pot*(tgt.boss?1.5:1)*(1+.15*Math.max(0,r-3)));log(`⚡ Smite strikes ${tgt.name} for ${dmg}!`);
+   if(!has('u_precise')&&r<4)hs.forEach(h=>{if(mdist(h,tgt)<=1){h.hp=Math.max(1,h.hp-Math.round(mhp(h)*.15));hope(h,-10,'You burned ME too! Are you even on our side?');}});
+   tgt.hp-=dmg;if(tgt.hp<=0)killMob(tgt,null);
+   if(r>=6){const t2=S.ents.filter(e=>e.t==='mob'&&e!==tgt&&e.hp>0).sort((a,b)=>mdist(a,tgt)-mdist(b,tgt))[0];if(t2&&mdist(t2,tgt)<=4){const d2=Math.round(dmg*.5);t2.hp-=d2;log(`⚡ The bolt arcs to ${t2.name} for ${d2}!`);if(t2.hp<=0)killMob(t2,null);}}break;}
   case 'gift':{let it='potion';if(w.water<40&&!countItem(w,'water'))it='water';else if(w.food<40&&!countItem(w,'ration'))it='ration';else if(w.poison&&!countItem(w,'antidote'))it='antidote';
-   if(addItem(w,it,2)){const p=nearFree(w.x,w.y);if(p)S.ents.push({t:'loot',x:p[0],y:p[1],it:{id:it,q:2}});}faith(w,3);hope(w,4,`${ITEMS[it].n}! From the heavens!`);break;}
-  case 'reveal':S.seen=S.map.map(r=>r.map(()=>1));S.revealT=S.floor;S.ents.forEach(e=>{if(e.t==='trap')e.known=true;});hs.forEach(h=>['w','a','r'].forEach(k=>{if(h.gear[k]&&h.gear[k].curse)h.gear[k].known=true;}));log('👁️ The floor is laid bare: traps, omens and curses.');break;
+   if(addItem(w,it,r>=4?3:2)){const p=nearFree(w.x,w.y);if(p)S.ents.push({t:'loot',x:p[0],y:p[1],it:{id:it,q:2}});}faith(w,3);hope(w,4,`${ITEMS[it].n}! From the heavens!`);break;}
+  case 'reveal':S.seen=S.map.map(r=>r.map(()=>1));S.revealT=S.floor;S.ents.forEach(e=>{if(e.t==='trap')e.known=true;});if(r>=3){const n=S.ents.filter(e=>e.t==='trap'&&!e.god).length;S.ents=S.ents.filter(e=>!(e.t==='trap'&&!e.god));if(n)log(`🔧 ${n} trap${n>1?'s':''} crumble under your gaze.`);}hs.forEach(h=>['w','a','r'].forEach(k=>{if(h.gear[k]&&h.gear[k].curse)h.gear[k].known=true;}));log('👁️ The floor is laid bare: traps, omens and curses.');break;
   case 'cleanse':hs.forEach(h=>{h.poison=0;h.root=0;['w','a','r'].forEach(k=>{const g=h.gear[k];if(g&&g.curse){g.curse=null;g.known=false;say(h,`The curse on my ${g.n} is gone!`);hope(h,6);faith(h,4);}});});break;
   case 'soul':{S.power+=m.cost;S.cd[m.id]=0;openVoid();break;}}
  render();}
@@ -3662,9 +3664,9 @@ window.ST13={mendCasts:0,mendHealed:0};
 const _cast13=cast;cast=function(id,forH){if(id!=='mend')return _cast13(id,forH);const m=MIRACLES.find(x=>x.id==='mend');
  if(S.phase!=='dungeon'||(S.cd.mend||0)>0||S.power<m.cost)return;const hs=alive().filter(h=>!h.downed);if(!hs.length)return;
  S.power-=m.cost;S.cd.mend=m.cd;overuse();hs.forEach(attended);ST13.mendCasts++;
- for(const h of hs){h.mend=9;h.mendM=9;if(h.req&&h.req.k==='heal'){h.req=null;affect(h,6,1);hope(h,6,'Warmth... I can feel it mending.');faith(h,3);}}
+ const r=spR('mend'),T=9+(r>=2)+(r>=4)+(r>=6);for(const h of hs){h.mend=T;h.mendM=T;if(r>=3){h.poison=0;h.root=0;}if(r>=5)['w','a','r'].forEach(k=>{const g=h.gear[k];if(g&&g.curse){g.curse=null;g.known=false;say(h,`The curse on my ${g.n} is gone!`);}});if(h.req&&h.req.k==='heal'){h.req=null;affect(h,6,1);hope(h,6,'Warmth... I can feel it mending.');faith(h,3);}}
  log('🕯️ Ember Mend: a slow warmth settles on the party.');if(typeof render==='function'&&!offline)render();};
-const _ht13=heroTick;heroTick=function(h){if(h&&h.alive&&h.mend>0){h.mend--;if(!h.downed){const M=mhp(h),a=Math.max(1,Math.round(M*mendPct13()));const g=Math.min(a,M-h.hp);if(g>0){h.hp+=g;ST13.mendHealed+=g;}}}return _ht13(h);};
+const _ht13=heroTick;heroTick=function(h){if(h&&h.alive&&h.mend>0){h.mend--;if(!h.downed){const M=mhp(h),a=Math.max(1,Math.round(M*mendPct13()*(1+.08*(spR('mend')-1))));const g=Math.min(a,M-h.hp);if(g>0){h.hp+=g;ST13.mendHealed+=g;}}}return _ht13(h);};
 {const _cg=canGive13;canGive13=function(k){if(k==='heal'){const m=MIRACLES.find(x=>x.id==='mend');if(S.phase==='dungeon'&&!((S.cd.mend||0)>0)&&S.power>=m.cost)return true;}return _cg(k);};}
 
 </script><script>
@@ -3672,8 +3674,8 @@ const _ht13=heroTick;heroTick=function(h){if(h&&h.alive&&h.mend>0){h.mend--;if(!
 const HTP=[
  {a:'<div class="hart big">🔥</div>',t:'Hello, little god',p:['You are a newborn god: one small ember in a very big dark.','Heroes pray to you, and their faith ✨ is your power. No faith, no miracles. (No pressure.)']},
  {a:'<div class="hart">🕯️<span>👥</span></div>',t:'Gather your flock',p:['Every journey starts at an empty camp. Visit the <b>🕯️ Shrine of Calling</b> (camp only) and call your first soul: it\'s free. Each hero is hand-made, with a story, likes and a rarity (odds and pity shown). Spend 💠 shards or faith; ×5 when you have room. The 📖 Souls book shows who you\'ve met.','Up to <b>5</b> descend together; extras wait at the 🏰 base. They explore, fight and loot <b>on their own</b>, in real time (1x · 2x · 4x).']},
- {a:()=>'<div class="hmock">'+['heal','mend','soul','mark','bless'].map(id=>{const m=MIRACLES.find(x=>x.id===id);return m?`<span class="btn p">${m.ic}<br>${m.n.replace('Ember ','')}</span>`:'';}).join('')+'</div>',t:'Divine interventions',p:['Your powers live in the bar under the map. Tap one to cast; 🎯 tools like Mark then want a tap on the map.','❤️ <b>Heal</b> is the big save. 🕯️ <b>Ember Mend</b> is a cheap, slow warmth for everyone. 🌟 <b>Bless</b> sharpens blades.']},
- {a:'<div class="hart">⬆️<span>📜</span></div>',t:'Climbing the pantheon',p:['When a party falls, you keep 📜 <b>Ancient Knowledge</b>. Fill the ⬆️ bar up top to <b>ascend</b>.','Ember → Wisp → Spirit → … → Primordial. Every rank brings new tricks. Gods grow up too.']},
+ {a:()=>'<div class="hmock">'+['heal','mend','soul','mark','bless'].map(id=>{const m=MIRACLES.find(x=>x.id===id);return m?`<span class="btn p">${m.ic}<br>${m.n.replace('Ember ','')}</span>`:'';}).join('')+'</div>',t:'Divine interventions',p:['Your powers live in the bar under the map. Tap one to cast; 🎯 tools like Mark then want a tap on the map.','❤️ <b>Heal</b> is the big save. 🕯️ <b>Ember Mend</b> is a cheap, slow warmth for everyone. 🌟 <b>Bless</b> sharpens blades. The small numeral on a button is the spell\'s rank.']},
+ {a:'<div class="hart">⬆️<span>📜</span></div>',t:'Climbing the pantheon',p:['When a party falls, you keep 📜 <b>Ancient Knowledge</b>. Fill the ⬆️ bar up top to <b>ascend</b>.','Ember → Spirit → Minor Deity → God → Elder God → Primordial. Each ascension <b>ranks up every spell</b> (I–VI): stronger, longer, cheaper, and a new twist at some ranks (Heal III spills onto the whole party). The Ascension screen lists what your spells gain.']},
  {a:'<div class="hart"><i class="hbub">💬 I\'m hungry…</i>💞</div>',t:'Tend your heroes',p:['Portraits show 🍖 fed, 💤 rest, 🎈 spirit and 💛 bond. The dungeon drains them; camp restores. Tap <b>💞 Tend</b> to feed, comfort, gift or play. Cared-for heroes fight harder; neglected ones sulk, and may leave (they warn you first).','Tap <b>🧠</b>: <b>Think</b> lets them handle small stuff (and tend themselves a little); <b>⚡ Full</b> lets them decide everything.']},
  {a:'<div class="hart">🏕️<span>🎒</span></div>',t:'Home sweet camp',p:['Between floors, heroes rest at camp to eat, drink and sleep. Build it up from the 🏰 base. Tap <b>🏕️</b> up top to visit camp any time: the party keeps exploring on its own (🗺️ takes you back; it glows red if someone is hurt).','Backpacks are small. Loot gets hauled home to storage; bigger packs carry more.']},
  {a:'<div class="hart">⚔️<span>🐭</span></div>',t:'The War Council',p:['Tap ⚔️ to see what lurks ahead and who counters it.','Tanks hold the line, rogues dive the backline, mages melt swarms, and clerics cure the poison mice. Yes, poison mice.']},
@@ -4583,6 +4585,49 @@ const secs28=t=>Math.max(1,Math.ceil(t*TICK/1000/(typeof speed==='number'&&speed
  for(const h of S.heroes){const r=document.getElementById('hr'+h.id);if(!r)continue;const hn=r.querySelector('.hn');if(!hn)continue;let el=hn.querySelector('.bf28');
   if(!el){el=document.createElement('span');el.className='bf28';hn.appendChild(el);}
   const t=h.alive?buffs28(h).map(b=>`${b.ic}${secs28(b.t)}s`).join(' '):'';if(el._t!==t){el._t=t;el.textContent=t;el.style.display=t?'':'none';}}};}
+
+</script><script>
+// v29: a lean spell bar. Ascending ranks up every core spell (I–VI) instead of adding new ones.
+// Mass Heal → Heal III/V, Cleanse → Ember Mend III/V, Disarm → Reveal III.
+const RN29=['I','II','III','IV','V','VI'];
+const SP29={
+ heal:{cost:r=>r>=3?14:12,cd:r=>r>=4?8:10,d:r=>`Heal ${40+4*(r-1)}% (weakest or downed hero)${r>=5?'; the party gets half of it':r>=3?'; the party gets a quarter of it':''}`,
+  g:['Heal 40% of one hero','+4% heal','+4% heal; a quarter of it spills onto the whole party; cost 12→14','+4% heal; cooldown 10→8s','+4% heal; party spill rises to half','+4% heal (60%)']},
+ mend:{cost:r=>8,cd:r=>r>=5?18:22,d:r=>`Party regenerates over ${9+(r>=2)+(r>=4)+(r>=6)} ticks (+${8*(r-1)}%)${r>=5?'; lifts poison, roots & curses':r>=3?'; lifts poison & roots':''}`,
+  g:['Party regen over 9 ticks','+1 tick, +8% regen','+8% regen; lifts poison & roots','+1 tick, +8% regen','+8% regen; also lifts curses; cooldown 22→18','+1 tick, +8% regen']},
+ bless:{cost:r=>22,cd:r=>40,d:r=>`Party +${50+5*Math.max(0,r-2)}% attack, ${36+2*Math.max(0,r-2)} ticks`,
+  g:['—','Party +50% attack, 36 ticks','+5% attack, +2 ticks','+5% attack, +2 ticks','+5% attack, +2 ticks','+5% attack, +2 ticks']},
+ gift:{cost:r=>r>=5?10:15,cd:r=>20,d:r=>`Drop the item a hero needs most (×${r>=4?3:2})`,
+  g:['—','Drop 2 of the item a hero needs','—','Drops 3','Cost 15→10','—']},
+ reveal:{cost:r=>r>=5?10:15,cd:r=>25,d:r=>`Reveal floor, traps, omens & curses${r>=3?'; destroys the traps':''}`,
+  g:['—','Reveal the floor, traps & curses','Also destroys every trap on the floor','—','Cost 15→10','—']},
+ shield:{cost:r=>26,cd:r=>r>=5?30:34,d:r=>`Party −80% damage, ${22+2*Math.max(0,r-3)} ticks`,
+  g:['—','—','Party −80% damage, 22 ticks','+2 ticks','+2 ticks; cooldown 34→30','+2 ticks']},
+ smite:{cost:r=>25,cd:r=>r>=5?12:15,d:r=>`Strike the marked (or nearest) enemy, +${15*Math.max(0,r-3)}% dmg${r>=4?'; never burns heroes':'; splashes adjacent heroes'}${r>=6?'; arcs to a 2nd foe':''}`,
+  g:['—','—','Strike an enemy (splashes adjacent heroes)','+15% damage; no longer burns heroes','+15% damage; cooldown 15→12','+15% damage; the bolt arcs to a second foe']}};
+const rn29=m=>RN29[spR(m.id)-1];
+// trim the bar and the map tools
+for(const id of ['massheal','cleanse']){const i=MIRACLES.findIndex(m=>m.id===id);if(i>=0)MIRACLES.splice(i,1);}
+{const i=TOOLS.findIndex(t=>t.id==='disarm');if(i>=0)TOOLS.splice(i,1);}
+for(const m of MIRACLES){const sp=SP29[m.id];if(!sp)continue;delete m.cost;delete m.cd;delete m.d;
+ Object.defineProperty(m,'cost',{get:()=>sp.cost(spR(m.id)),configurable:true});Object.defineProperty(m,'cd',{get:()=>sp.cd(spR(m.id)),configurable:true});Object.defineProperty(m,'d',{get:()=>sp.d(spR(m.id)),configurable:true});}
+{const cast0=cast;cast=function(id,forH){if(id==='massheal')id='heal';if(id==='cleanse')id='mend';return cast0.call(this,id,forH);};}
+// unlock lists
+{const U=[null,['Reveal, Bless, Gift','Map: Treasure'],['Smite, Shield'],null,null,null];
+ TIERS.forEach((t,i)=>{t.unlock=t.unlock.filter(u=>!/Mass Heal|Disarm|Cleanse/.test(u)).map(u=>u.replace('Map: Treasure, Disarm','Map: Treasure').replace('Smite, Shield, Cleanse','Smite, Shield'));if(i>0)t.unlock.push(`Every spell → rank ${RN29[i]}`);});}
+// rank on buttons + tooltips
+{const _r=render;render=function(){_r.apply(this,arguments);if(!S||S.title)return;for(const b of document.querySelectorAll('[data-act="cast"]')){const m=MIRACLES.find(x=>x.id===b.dataset.id);if(!m||!SP29[m.id])continue;
+ const t=`${m.n} ${rn29(m)}: ${m.d} · ✨${m.cost} · ${m.cd}t cooldown`;if(b.title!==t)b.title=t;let k=b.querySelector('.rk29');if(!k){k=document.createElement('span');k.className='rk29';b.appendChild(k);}const v=rn29(m);if(k.textContent!==v)k.textContent=v;}};}
+// ascension: what your spells gain
+function gains29(i){return MIRACLES.filter(m=>SP29[m.id]&&m.tier<=i).map(m=>{const g=SP29[m.id].g[i];const nw=m.tier===i;return g&&g!=='—'?`<div class="g29"><span class="g29i">${m.ic}</span><b>${m.n} ${RN29[i]}</b>${nw?' <span class="achip">new</span>':''}<span class="small"> ${g}</span></div>`:'';}).join('');}
+{const _oa=openAscend;openAscend=function(){_oa.apply(this,arguments);const box=document.querySelector('#ovb .asc');if(!box)return;const n=S.tier+1;
+ const cur=`<h3>Your spells now (rank ${RN29[S.tier]})</h3><div class="small">${MIRACLES.filter(m=>SP29[m.id]&&m.tier<=S.tier).map(m=>`${m.ic} <b>${m.n} ${RN29[S.tier]}</b>: ${m.d}`).join('<br>')}</div>`;
+ const nx=n<6?`<h3>What your spells gain at ${TIERS[n].n}</h3><div class="g29l">${gains29(n)}</div>`:'';
+ box.querySelector('.anext')?box.querySelector('.anext').insertAdjacentHTML('afterend',nx+cur):box.querySelector('h2').insertAdjacentHTML('afterend',cur);
+ box.querySelectorAll('h3').forEach(h=>{if(h.textContent==='New miracles'){h.nextElementSibling&&h.nextElementSibling.remove();h.remove();}});};}
+{const _oa=openAscend;openAscend=function(){_oa.apply(this,arguments);const s=document.querySelector('#ovb .asc > .small');if(s)s.innerHTML=s.innerHTML.replace('new miracles, a bigger party, new map tools','every spell ranks up, a bigger party, new map tools');};}
+// old saves: rank comes from the tier, so a Primordial save is rank VI at once; drop retired spell state
+{const _l=load;load=function(){const ok=_l.apply(this,arguments);if(ok&&S){if(S.cd){delete S.cd.massheal;delete S.cd.cleanse;}if(S.tool==='disarm')S.tool=null;}return ok;};}
 
 </script>
 </body></html>
