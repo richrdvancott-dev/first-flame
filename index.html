@@ -371,6 +371,22 @@ body,#app{font-variant-numeric:tabular-nums}#pw,#ak{display:inline-block;min-wid
 #readyp .rph{cursor:pointer}#readyp.open .rph::after{content:' ▾'}#readyp:not(.open) .rph::after{content:' ▸'}
 .hp2 .hn{position:relative}.bf28{position:absolute;left:46%;top:-1px;font-size:10px;line-height:14px;padding:0 4px;border-radius:7px;background:#000a;color:#ffe9a8;white-space:nowrap;pointer-events:none;font-variant-numeric:tabular-nums}
 .btn.p{position:relative}.rk29{position:absolute;top:1px;right:3px;font-size:9px;font-weight:700;color:#ffd76a;letter-spacing:.3px;pointer-events:none}.g29{display:flex;gap:6px;align-items:baseline;flex-wrap:wrap;padding:2px 0;border-bottom:1px solid #2a2236}.g29i{width:18px}
+#st32{position:fixed;inset:0;z-index:70;display:none;justify-content:center;background:radial-gradient(ellipse at 50% 30%,#2e2418 0%,#16100a 65%,#0a0705 100%);opacity:0;transition:opacity .2s;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);touch-action:none;user-select:none;-webkit-user-select:none}
+#st32.in{opacity:1}.s32in{width:100%;max-width:980px;display:flex;flex-direction:column;padding:8px;gap:8px;overflow-y:auto;color:#ece6d6}
+.s32hd{display:flex;align-items:center;gap:10px}.s32hd .btn{min-height:40px;min-width:76px}.s32sp{flex:1}
+.s32menu{display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto;width:100%}.s32big{display:flex;flex-direction:column;align-items:flex-start;text-align:left;min-height:64px;padding:8px 12px;font-size:15px}.s32big .small{font-size:11px;opacity:.85;margin-top:2px}
+.s32leg{display:flex;flex-wrap:wrap;gap:8px;font-size:11px}.s32leg i,.s32pr>i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:4px;vertical-align:-1px}.s32cr{display:inline-block;border:1px solid;border-radius:6px;padding:0 4px;margin:1px}
+.s32body{display:flex;flex-direction:column;align-items:center;gap:10px}#st32.land .s32body{flex-direction:row;align-items:flex-start;justify-content:center}
+.s32brd{position:relative;background:#120d08;border:2px solid #6a4a2a;border-radius:6px;box-sizing:content-box;flex:none}.s32brd b,.s32brd i,.s32brd u,.s32brd em{position:absolute;margin:1px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:14px}
+.s32c{background:#241a10}.s32f{box-shadow:inset 0 -3px 0 #0005,inset 0 2px 0 #fff3}.s32pv{text-decoration:none;pointer-events:none}.s32pv.ok{background:#8fe08f66;outline:2px solid #bfffbf}.s32pv.no{background:#e0606044}
+.s32fx{pointer-events:none;background:#fff;animation:s32spark .5s ease-out forwards}@keyframes s32spark{from{opacity:.95;transform:scale(1)}to{opacity:0;transform:scale(.3)}}
+.s32side{display:flex;flex-direction:column;gap:8px;align-items:stretch;min-width:0;max-width:420px;width:100%}#st32.land .s32side{width:auto;flex:1}
+.s32tray{display:flex;flex-wrap:wrap;gap:6px}.s32ti{display:flex;align-items:center;gap:6px;background:#1d1610;border:1px solid #3a2a1a;border-radius:8px;padding:4px 6px}.s32ti .btn{min-width:36px;min-height:36px}
+.s32drag{touch-action:none;cursor:grab;padding:3px}.s32drag.lift{opacity:.35}.s32pc{position:relative}.s32pc i{position:absolute;margin:1px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:11px;box-shadow:inset 0 -2px 0 #0005}
+.s32ghost{position:fixed;left:0;top:0;z-index:90;pointer-events:none;opacity:.85;will-change:transform}
+.s32offer{display:flex;gap:8px;justify-content:space-around;min-height:120px}.s32slot{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:90px;min-height:110px;background:#1d1610;border:1px solid #3a2a1a;border-radius:10px;padding:4px}
+.s32seal{min-height:46px}.s32warn{color:#e8b07a}.s32pick{display:flex;flex-direction:column;gap:4px;max-width:560px;width:100%;margin:0 auto}.s32pr{display:flex;align-items:center;gap:6px;background:#1d1610;border:1px solid #3a2a1a;border-radius:8px;padding:3px 6px;min-height:40px}.s32pr>span{flex:1}.s32pr .btn{min-width:38px;min-height:36px}.s32pr.on{border-color:#d9a83a}.s32pr.arm{border-color:#e05050}
+.s32go{min-height:48px;max-width:560px;width:100%;margin:0 auto}.s32res{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;margin-top:14px}.s32gr{font:bold 48px/1.1 Georgia,serif;color:#ffd76a}.s32res.max .s32gr{animation:s32max 1.2s ease-in-out infinite alternate;color:#fff2b0;text-shadow:0 0 18px #ffcf6a}@keyframes s32max{to{transform:scale(1.12)}}.s32row{display:flex;gap:8px}.s32row .btn{min-height:44px;min-width:120px}
 </style><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(r=>r.update()));
@@ -4628,6 +4644,212 @@ function gains29(i){return MIRACLES.filter(m=>SP29[m.id]&&m.tier<=i).map(m=>{con
 {const _oa=openAscend;openAscend=function(){_oa.apply(this,arguments);const s=document.querySelector('#ovb .asc > .small');if(s)s.innerHTML=s.innerHTML.replace('new miracles, a bigger party, new map tools','every spell ranks up, a bigger party, new map tools');};}
 // old saves: rank comes from the tier, so a Primordial save is rank VI at once; drop retired spell state
 {const _l=load;load=function(){const ok=_l.apply(this,arguments);if(ok&&S){if(S.cd){delete S.cd.massheal;delete S.cd.cleanse;}if(S.tool==='disarm')S.tool=null;}return ok;};}
+
+</script><script>
+// v32 STOREHOUSE: (1) Pack the crate: fill a crate completely with stash items to store them compactly.
+// (2) Dump: chosen items become blocks on an 8x8 board; clearing rows/columns destroys them for good.
+const CAT32={w:{n:'Weapons',c:'#c9574a',sh:[[0,0],[1,0],[2,0]]},a:{n:'Armor',c:'#4a82c9',sh:[[0,0],[1,0],[0,1],[1,1]]},pot:{n:'Potions',c:'#b45ac9',sh:[[0,0]]},
+ food:{n:'Food & water',c:'#d9a83a',sh:[[0,0],[0,1],[1,1]]},mat:{n:'Materials',c:'#8a6440',sh:[[0,0],[1,0]]},junk:{n:'Junk',c:'#7d7d86',sh:[[0,0],[1,0],[2,0],[1,1]]}};
+function cat32(id){if(typeof id==='object')return id.kind==='w'?'w':'a';if(/^imp\d$/.test(id)||(typeof POT25!=='undefined'&&POT25[id])||id==='antidote'||id==='potion'||id==='elixir')return 'pot';
+ if(['ration','water','meat'].includes(id))return 'food';const it=ITEMS[id];if(it&&it.kind==='mat')return 'mat';return 'junk';}
+function shape32(it){const k=cat32(it);if(typeof it==='object'&&it.kind==='r')return [[0,0],[1,0]];return CAT32[k].sh;}
+const rot32=(sh,r)=>{let s=sh.map(p=>p.slice());for(let i=0;i<(r||0)%4;i++)s=s.map(([x,y])=>[-y,x]);const mx=Math.min(...s.map(p=>p[0])),my=Math.min(...s.map(p=>p[1]));return s.map(([x,y])=>[x-mx,y-my]);};
+const icon32=it=>typeof it==='object'?(it.kind==='w'?'🗡️':it.kind==='a'?'🛡️':'💍'):(ITEMS[it]&&ITEMS[it].ic)||(typeof POT25!=='undefined'&&POT25[it]&&POT25[it].ic)||'📦';
+const name32=it=>typeof it==='object'?it.n:(ITEMS[it]&&ITEMS[it].n)||(typeof POT25!=='undefined'&&POT25[it]&&POT25[it].n)||it;
+const rare32=it=>typeof it==='object'&&(it.leg||(it.rar||0)>=2);
+// ---- crates: sealed crates make their items take less room (½, or ⅓ when the crate is one colour)
+function crateMax32(){return 2+bl('storehouse');}
+function crateDisc32(){const C=S.crates32||[];if(!C.length)return 0;const left={};let disc=0;
+ for(const c of C){let u=0;for(const id in c.items){const have=(S.stash[id]||0)-(left[id]||0);const n=Math.max(0,Math.min(c.items[id],have));left[id]=(left[id]||0)+n;u+=n;}disc+=u-Math.ceil(u*(c.mono?1/3:1/2));}return disc;}
+{const _su=stashUsed;stashUsed=function(){return Math.max(0,_su()-crateDisc32());};}
+function packedCount32(id){return (S.crates32||[]).reduce((a,c)=>a+(c.items[id]||0),0);}
+function tidyCrates32(){if(!S.crates32)return;const left={};S.crates32=S.crates32.filter(c=>{let u=0;for(const id in c.items){const have=(S.stash[id]||0)-(left[id]||0);const n=Math.max(0,Math.min(c.items[id],have));left[id]=(left[id]||0)+n;c.items[id]=n;if(!n)delete c.items[id];u+=n;}return u>0;});}
+// ---- UI shell
+const ST32={el:null,on:false,mode:'menu',cs:30,drag:null,pk:null,armed:null};
+function build32(){if(ST32.el)return ST32.el;const d=document.createElement('div');d.id='st32';d.innerHTML='<div class="s32in"></div>';document.body.appendChild(d);ST32.el=d;
+ d.addEventListener('click',ev=>{const t=ev.target.closest('[data-s32]');if(t)act32(t.dataset.s32,t);});d.addEventListener('pointerdown',down32);
+ let rz=0;addEventListener('resize',()=>{if(!ST32.on)return;clearTimeout(rz);rz=setTimeout(()=>{const c=ST32.cs;lay32();if(c!==ST32.cs)paint32();},120);});return d;}
+function openStore32(mode){if(S.phase!=='camp')return toast('🏚️ The storehouse is at camp.');build32();ST32.on=true;if(S.blast32)ST32.mode='blast';else ST32.mode=mode||'menu';
+ if(ST32.mode==='pack')newPack32();ST32.el.style.display='flex';requestAnimationFrame(()=>ST32.el.classList.add('in'));S.paused=true;lay32();paint32();}
+function closeStore32(){if(!ST32.el)return;ST32.on=false;ST32.el.classList.remove('in');ST32.el.style.display='none';ST32.drag=null;S.paused=false;if(typeof save==='function')save();render();}
+function lay32(){const W=innerWidth,H=innerHeight,land=W>H;const n=ST32.mode==='blast'?8:(ST32.pk?Math.max(ST32.pk.w,ST32.pk.h):5);
+ const bw=land?Math.min(W*.5,H-120):Math.min(W-32,H*.46);ST32.cs=Math.max(22,Math.min(54,Math.floor(bw/n)));ST32.el.classList.toggle('land',land);}
+const sv32=()=>{try{save();}catch(e){}};
+const tink32=f=>{if(typeof tone23==='function')tone23(f||660,.12,'triangle',.15,0);};
+function act32(a,t){const v=t.dataset.v;
+ if(a==='close')return closeStore32();
+ if(a==='menu'){ST32.mode='menu';ST32.pk=null;}
+ else if(a==='pack'){if((S.crates32||[]).length>=crateMax32())return toast(`All ${crateMax32()} crate spots are full. Upgrade the storehouse for more.`);ST32.mode='pack';newPack32();}
+ else if(a==='rot'&&ST32.pk){const T=ST32.pk.tray.find(x=>x.id===v);if(T)T.r=(T.r+1)%4;}
+ else if(a==='seal')return seal32();
+ else if(a==='unpl'&&ST32.pk){const P=ST32.pk;const i=+v;P.placed=P.placed.filter(p=>p.n!==i);P.cells=P.cells.map(c=>c===i?-1:c);}
+ else if(a==='pick'&&S.blast32){ST32.mode='blast';}
+ else if(a==='pick'){ST32.mode='pick';ST32.sel={};ST32.gsel={};ST32.armed=null;}
+ else if(a==='pm'||a==='pp'){const have=(S.stash[v]||0)-packedCount32(v);const n=(ST32.sel[v]||0)+(a==='pp'?1:-1);ST32.sel[v]=Math.max(0,Math.min(have,n));}
+ else if(a==='pall'){const have=(S.stash[v]||0)-packedCount32(v);ST32.sel[v]=ST32.sel[v]===have?0:have;}
+ else if(a==='pg'){const g=S.armory[+v];if(!g)return;if(ST32.gsel[+v]){delete ST32.gsel[+v];}else if(rare32(g)&&ST32.armed!==+v){ST32.armed=+v;}else{ST32.gsel[+v]=1;ST32.armed=null;}}
+ else if(a==='go')return startBlast32();
+ else if(a==='end')return endBlast32();
+ lay32();paint32();}
+// ---- Part 1: pack the crate
+function newPack32(){const w=bl('storehouse')>=3?5:4,h=4;const tray=[];
+ for(const id of Object.keys(S.stash)){if(/^imp\d/.test(id))continue;const n=(S.stash[id]||0)-packedCount32(id);if(n>0)tray.push({id,n,r:0});}
+ tray.sort((a,b)=>cat32(a.id).localeCompare(cat32(b.id)));ST32.pk={w,h,cells:Array(w*h).fill(-1),placed:[],tray,seq:0};}
+function trayLeft32(T){return T.n-ST32.pk.placed.filter(p=>p.id===T.id).length;}
+function fits32(cells,w,h,sh,x,y){return sh.every(([dx,dy])=>{const X=x+dx,Y=y+dy;return X>=0&&Y>=0&&X<w&&Y<h&&cells[Y*w+X]===-1;});}
+function placePack32(T,x,y){const P=ST32.pk,sh=rot32(shape32(T.id),T.r);if(trayLeft32(T)<=0||!fits32(P.cells,P.w,P.h,sh,x,y))return false;const n=++P.seq;
+ P.placed.push({n,id:T.id,sh,x,y});sh.forEach(([dx,dy])=>P.cells[(y+dy)*P.w+x+dx]=n);tink32(520+P.placed.length*20);return true;}
+function seal32(){const P=ST32.pk;if(!P||P.cells.some(c=>c===-1))return toast('Fill every square of the crate first.');
+ const items={};P.placed.forEach(p=>items[p.id]=(items[p.id]||0)+1);const cats=new Set(P.placed.map(p=>cat32(p.id)));const mono=cats.size===1;
+ S.crates32=S.crates32||[];S.crates32.push({items,mono,cat:[...cats][0]});const u=P.placed.length;const saved=u-Math.ceil(u*(mono?1/3:1/2));
+ S.storeSt32=S.storeSt32||{crates:0,dumped:0,best:null,max:0};S.storeSt32.crates++;sv32();
+ if(typeof ding25==='function')ding25();ST32.mode='sealed';ST32.lastSeal={u,saved,mono,cat:CAT32[[...cats][0]].n};ST32.pk=null;paint32();}
+// ---- Part 2: dump (block blast)
+function startBlast32(){if(S.blast32){ST32.mode='blast';lay32();paint32();return;}const pieces=[];for(const id in ST32.sel){const n=ST32.sel[id]|0;if(n>0){const have=(S.stash[id]||0)-packedCount32(id);const k=Math.min(n,have);S.stash[id]-=k;if(S.stash[id]<=0)delete S.stash[id];for(let i=0;i<k;i++)pieces.push({id});}}
+ const gi=Object.keys(ST32.gsel).map(Number).sort((a,b)=>b-a);for(const i of gi){const g=S.armory.splice(i,1)[0];if(g)pieces.push({g});}
+ if(!pieces.length)return toast('Choose something to dump first.');for(let i=pieces.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pieces[i],pieces[j]]=[pieces[j],pieces[i]];}
+ S.blast32={cells:Array(64).fill(-1),pieces,q:pieces.map((_,i)=>i),offer:[],gone:[],placed:[],lines:0,combos:0,gold:0,ore:0,n:pieces.length};refill32();ST32.mode='blast';sv32();lay32();paint32();}
+function bItem32(p){return p.g||p.id;}
+function refill32(){const B=S.blast32;if(B.offer.filter(x=>x!=null).length===0){B.offer=[];for(let i=0;i<3&&B.q.length;i++)B.offer.push(B.q.shift());}}
+function bShape32(i){const p=S.blast32.pieces[i];return rot32(shape32(bItem32(p)),p.r||0);}
+function anyFit32(){const B=S.blast32;for(const i of B.offer){if(i==null)continue;for(let r=0;r<4;r++){const sh=rot32(shape32(bItem32(B.pieces[i])),r);for(let y=0;y<8;y++)for(let x=0;x<8;x++)if(fits32(B.cells,8,8,sh,x,y))return true;}}return false;}
+function placeBlast32(oi,x,y){const B=S.blast32,i=B.offer[oi];if(i==null)return false;const sh=bShape32(i);if(!fits32(B.cells,8,8,sh,x,y))return false;
+ sh.forEach(([dx,dy])=>B.cells[(y+dy)*8+x+dx]=i);B.placed.push(i);B.offer[oi]=null;
+ const rows=[],cols=[];for(let k=0;k<8;k++){let r=1,c=1;for(let j=0;j<8;j++){if(B.cells[k*8+j]<0)r=0;if(B.cells[j*8+k]<0)c=0;}if(r)rows.push(k);if(c)cols.push(k);}
+ const clr=new Set();rows.forEach(k=>{for(let j=0;j<8;j++)clr.add(k*8+j);});cols.forEach(k=>{for(let j=0;j<8;j++)clr.add(j*8+k);});const L=rows.length+cols.length;
+ if(L){const hit=new Set();clr.forEach(c=>{hit.add(B.cells[c]);B.cells[c]=-1;});hit.forEach(p=>{if(!B.gone.includes(p))B.gone.push(p);});B.lines+=L;B.gold+=4*L;if(L>=2){B.combos++;B.ore+=L-1;B.gold+=6*L;}
+  ST32.flash=[...clr];if(typeof tone23==='function'){tone23(700,.18,'triangle',.16,0);if(L>=2)tone23(1050,.25,'sine',.14,.08);}}else tink32(440);
+ refill32();sv32();if(!B.offer.some(x=>x!=null)&&!B.q.length||!anyFit32())setTimeout(()=>{if(S.blast32===B)endBlast32();},L?650:350);return true;}
+function grade32(B){const d=B.gone.length/Math.max(1,B.n);return d>=1&&B.n>=4?'MAX':d>=.85?'S':d>=.65?'A':d>=.4?'B':'C';}
+function endBlast32(){const B=S.blast32;if(!B)return;// whatever was not destroyed goes back
+ B.pieces.forEach((p,i)=>{if(B.gone.includes(i))return;if(p.g)S.armory.push(p.g);else S.stash[p.id]=(S.stash[p.id]||0)+1;});
+ S.gold+=B.gold;if(B.ore)S.stash.ore=(S.stash.ore||0)+B.ore;const gr=grade32(B);S.storeSt32=S.storeSt32||{crates:0,dumped:0,best:null,max:0};const st=S.storeSt32;st.dumped+=B.gone.length;
+ const ORD=['C','B','A','S','MAX'];if(!st.best||ORD.indexOf(gr)>ORD.indexOf(st.best))st.best=gr;if(gr==='MAX')st.max++;
+ ST32.res={gr,gone:B.gone.length,n:B.n,lines:B.lines,combos:B.combos,gold:B.gold,ore:B.ore};S.blast32=null;ST32.mode='result';sv32();lay32();paint32();if(gr==='MAX'&&typeof ding25==='function')ding25();}
+// ---- painting
+function pieceHTML32(sh,col,cs,ic){const w=Math.max(...sh.map(p=>p[0]))+1,h=Math.max(...sh.map(p=>p[1]))+1;
+ return `<div class="s32pc" style="width:${w*cs}px;height:${h*cs}px">${sh.map(([x,y],k)=>`<i style="left:${x*cs}px;top:${y*cs}px;width:${cs-2}px;height:${cs-2}px;background:${col}">${k===0?ic:''}</i>`).join('')}</div>`;}
+function paint32(){const el=ST32.el.querySelector('.s32in'),cs=ST32.cs,m=ST32.mode;let h='';
+ const hd=(t,sub)=>`<div class="s32hd"><button class="btn" data-s32="${m==='menu'?'close':'menu'}">${m==='menu'?'✕ Close':'‹ Back'}</button><div><b>${t}</b><div class="small">${sub||''}</div></div><span class="s32sp"></span></div>`;
+ if(m==='menu'){const st=S.storeSt32||{};const C=S.crates32||[];
+  h=hd('🏚️ Storehouse',`Stash ${stashUsed()}/${stashCap()} · crates ${C.length}/${crateMax32()}`)+`<div class="s32menu">
+  <button class="btn gold s32big" data-s32="pack">📦 Pack a crate<span class="small">Fill a crate completely: its items then take half the room (a third if all one colour).</span></button>
+  <button class="btn s32big" data-s32="pick">🧱 Dump junk<span class="small">Pick items to throw out. They become blocks: clear rows and columns to destroy them for scrap. No undo.</span></button>
+  <div class="s32leg">${Object.values(CAT32).map(c=>`<span><i style="background:${c.c}"></i>${c.n}</span>`).join('')}</div>
+  ${C.length?`<div class="small">Sealed: ${C.map(c=>`<span class="s32cr" style="border-color:${CAT32[c.cat]?CAT32[c.cat].c:'#888'}">📦${Object.values(c.items).reduce((a,b)=>a+b,0)}${c.mono?'★':''}</span>`).join(' ')}</div>`:''}
+  ${st.crates||st.dumped?`<div class="small">Crates sealed ${st.crates||0} · items dumped ${st.dumped||0}${st.best?' · best dump '+st.best:''}${st.max?' · MAX ×'+st.max:''}</div>`:''}</div>`;}
+ else if(m==='pack'){const P=ST32.pk;const full=!P.cells.some(c=>c===-1);
+  h=hd('📦 Pack the crate','Drag items in · ⟳ rotates · tap a packed item to take it out')+`<div class="s32body"><div class="s32brd" style="width:${P.w*cs}px;height:${P.h*cs}px;--cs:${cs}px" data-board="pack">${P.cells.map((c,i)=>`<b class="s32c" style="left:${(i%P.w)*cs}px;top:${Math.floor(i/P.w)*cs}px;width:${cs-2}px;height:${cs-2}px"></b>`).join('')}
+   ${P.placed.map(p=>p.sh.map(([dx,dy],k)=>`<i class="s32f" data-s32="unpl" data-v="${p.n}" style="left:${(p.x+dx)*cs}px;top:${(p.y+dy)*cs}px;width:${cs-2}px;height:${cs-2}px;background:${CAT32[cat32(p.id)].c}">${k===0?icon32(p.id):''}</i>`).join('')).join('')}</div>
+   <div class="s32side"><div class="s32tray">${P.tray.filter(T=>trayLeft32(T)>0).map(T=>`<div class="s32ti"><div class="s32drag" data-tray="${T.id}">${pieceHTML32(rot32(shape32(T.id),T.r),CAT32[cat32(T.id)].c,Math.round(cs*.62),icon32(T.id))}</div><span class="small">${name32(T.id)} ×${trayLeft32(T)}</span><button class="btn s" data-s32="rot" data-v="${T.id}">⟳</button></div>`).join('')||'<div class="small">Nothing left to pack.</div>'}</div>
+   <button class="btn ${full?'gold glow':'off'} s32seal" data-s32="seal">${full?'🔒 Seal the crate':`${P.cells.filter(c=>c===-1).length} squares left`}</button></div></div>`;}
+ else if(m==='sealed'){const L=ST32.lastSeal;h=hd('📦 Crate sealed','')+`<div class="s32res"><div class="s32gr">📦</div><b>${L.u} items packed tight${L.mono?' · one colour ★':''}</b><div>They now take ${L.u-L.saved} slots instead of ${L.u} (+${L.saved} stash space).</div>
+  <div class="s32row"><button class="btn gold" data-s32="pack">📦 Pack another</button><button class="btn" data-s32="menu">Done</button></div></div>`;}
+ else if(m==='pick'){const ids=Object.keys(S.stash).filter(id=>(S.stash[id]||0)-packedCount32(id)>0);const tot=Object.values(ST32.sel).reduce((a,b)=>a+b,0)+Object.keys(ST32.gsel).length;
+  h=hd('🧱 Choose what to dump','Only what you pick goes in. Destroyed items are gone for good.')+`<div class="s32pick">${ids.map(id=>{const have=(S.stash[id]||0)-packedCount32(id),n=ST32.sel[id]||0;return `<div class="s32pr ${n?'on':''}"><i style="background:${CAT32[cat32(id)].c}"></i><span>${icon32(id)} ${name32(id)} <span class="small">(${have})</span></span><button class="btn s" data-s32="pm" data-v="${id}">−</button><b>${n}</b><button class="btn s" data-s32="pp" data-v="${id}">+</button><button class="btn s" data-s32="pall" data-v="${id}">all</button></div>`;}).join('')}
+   ${S.armory.length?`<div class="small" style="margin-top:6px">Armory (not equipped)</div>`+S.armory.map((g,i)=>`<div class="s32pr ${ST32.gsel[i]?'on':''} ${ST32.armed===i?'arm':''}" data-s32="pg" data-v="${i}"><i style="background:${CAT32[cat32(g)].c}"></i><span style="color:${gCol(g)}">${icon32(g)} ${g.n}${rare32(g)?' ⚠️':''}${ST32.armed===i?' <span class="small" style="color:#ff9a8a">rare! tap again to dump it</span>':''}</span><b>${ST32.gsel[i]?'✔':''}</b></div>`).join(''):''}</div>
+   <button class="btn ${tot?'gold':'off'} s32go" data-s32="go">🧱 Dump ${tot} item${tot===1?'':'s'}: start</button>`;}
+ else if(m==='blast'){const B=S.blast32;const fl=new Set(ST32.flash||[]);ST32.flash=null;
+  h=hd('🧱 Dump',`Destroyed ${B.gone.length}/${B.n} · lines ${B.lines} · 💰${B.gold}${B.ore?' 🪨'+B.ore:''} · left ${B.q.length}`)+`<div class="s32body"><div class="s32brd" style="width:${8*cs}px;height:${8*cs}px" data-board="blast">${B.cells.map((c,i)=>{const p=c>=0?B.pieces[c]:null;return `<b class="s32c" style="left:${(i%8)*cs}px;top:${Math.floor(i/8)*cs}px;width:${cs-2}px;height:${cs-2}px"></b>${p?`<i class="s32f" style="left:${(i%8)*cs}px;top:${Math.floor(i/8)*cs}px;width:${cs-2}px;height:${cs-2}px;background:${CAT32[cat32(bItem32(p))].c}"></i>`:''}${fl.has(i)?`<em class="s32fx" style="left:${(i%8)*cs}px;top:${Math.floor(i/8)*cs}px;width:${cs-2}px;height:${cs-2}px"></em>`:''}`;}).join('')}</div>
+   <div class="s32side"><div class="s32offer">${B.offer.map((i,k)=>i==null?'<div class="s32slot"></div>':`<div class="s32slot"><div class="s32drag" data-offer="${k}">${pieceHTML32(bShape32(i),CAT32[cat32(bItem32(B.pieces[i]))].c,Math.round(cs*.6),icon32(bItem32(B.pieces[i])))}</div><span class="small">${name32(bItem32(B.pieces[i]))}</span></div>`).join('')}</div>
+   <div class="small s32warn">No undo. When nothing fits, the round ends and leftovers return to the stash.</div><button class="btn s" data-s32="end">Stop here</button></div></div>`;}
+ else if(m==='result'){const R=ST32.res;h=hd('🧱 Dump finished','')+`<div class="s32res ${R.gr==='MAX'?'max':''}"><div class="s32gr g${R.gr}">${R.gr}</div><b>${R.gone}/${R.n} items destroyed</b><div>${R.lines} lines · ${R.combos} combo${R.combos===1?'':'s'} · +💰${R.gold}${R.ore?' · +🪨'+R.ore:''}</div><div class="small">${R.n-R.gone?`${R.n-R.gone} item(s) went back to the stash.`:'Not a crumb left.'}</div>
+  <div class="s32row"><button class="btn gold" data-s32="pick">🧱 Dump more</button><button class="btn" data-s32="menu">Done</button></div></div>`;}
+ el.innerHTML=h;}
+// ---- dragging (ghost follows the finger, lifted above it on touch; the board shows where it lands)
+function down32(ev){const d=ev.target.closest('.s32drag');if(!d)return;ev.preventDefault();const tray=d.dataset.tray,off=d.dataset.offer;
+ const sh=tray!=null?rot32(shape32(tray),ST32.pk.tray.find(T=>T.id===tray).r):bShape32(S.blast32.offer[+off]);
+ const col=tray!=null?CAT32[cat32(tray)].c:CAT32[cat32(bItem32(S.blast32.pieces[S.blast32.offer[+off]]))].c;const cs=ST32.cs;
+ const g=document.createElement('div');g.className='s32ghost';g.innerHTML=pieceHTML32(sh,col,cs,'');document.body.appendChild(g);
+ const lift=ev.pointerType==='mouse'?0:cs*1.3;ST32.drag={tray,off:off!=null?+off:null,sh,g,lift,x:-1,y:-1,id:ev.pointerId};d.classList.add('lift');move32(ev);
+ const mv=e=>{if(e.pointerId===ST32.drag.id)move32(e);},up=e=>{if(!ST32.drag||e.pointerId!==ST32.drag.id)return;removeEventListener('pointermove',mv);removeEventListener('pointerup',up);removeEventListener('pointercancel',up);drop32();};
+ addEventListener('pointermove',mv);addEventListener('pointerup',up);addEventListener('pointercancel',up);}
+function move32(e){const D=ST32.drag;if(!D)return;const cs=ST32.cs,w=Math.max(...D.sh.map(p=>p[0]))+1,h=Math.max(...D.sh.map(p=>p[1]))+1;
+ const gx=e.clientX-w*cs/2,gy=e.clientY-h*cs/2-D.lift;D.g.style.transform=`translate(${gx}px,${gy}px)`;
+ const brd=ST32.el.querySelector('.s32brd');const r=brd.getBoundingClientRect();const x=Math.round((gx-r.left)/cs),y=Math.round((gy-r.top)/cs);
+ if(x===D.x&&y===D.y)return;D.x=x;D.y=y;brd.querySelectorAll('.s32pv').forEach(n=>n.remove());
+ const P=D.tray!=null?ST32.pk:null,cells=P?P.cells:S.blast32.cells,W=P?P.w:8,H=P?P.h:8;if(x<-1||y<-1||x>W||y>H)return;const ok=fits32(cells,W,H,D.sh,x,y);
+ brd.insertAdjacentHTML('beforeend',D.sh.filter(([dx,dy])=>x+dx>=0&&y+dy>=0&&x+dx<W&&y+dy<H).map(([dx,dy])=>`<u class="s32pv ${ok?'ok':'no'}" style="left:${(x+dx)*cs}px;top:${(y+dy)*cs}px;width:${cs-2}px;height:${cs-2}px"></u>`).join(''));}
+function drop32(){const D=ST32.drag;ST32.drag=null;D.g.remove();let ok=false;
+ if(D.tray!=null){const T=ST32.pk.tray.find(t=>t.id===D.tray);ok=T&&placePack32(T,D.x,D.y);}else if(S.blast32)ok=placeBlast32(D.off,D.x,D.y);
+ if(ST32.on&&(ST32.mode==='pack'||ST32.mode==='blast'))paint32();}
+// ---- hooks: tap the storehouse in camp, or the button in Base
+{const _tp=tapTile;tapTile=function(x,y){if(S.phase==='camp'){const [bx,by]=CAMP_POS.storehouse,d=Math.hypot(bx-(x*TS+12),by-(y*TS+12));let best=1e9;for(const id in CAMP_POS){const p=CAMP_POS[id];best=Math.min(best,Math.hypot(p[0]-(x*TS+12),p[1]-(y*TS+12)));}
+  if(d<36&&d<=best+.01&&bl('storehouse')>0){openStore32();return;}}return _tp.apply(this,arguments);};}
+{const _rb=renderBase;renderBase=function(){_rb.apply(this,arguments);if(!baseOpen||baseSel!=='storehouse'||!bl('storehouse'))return;const d=$('ovb').querySelector('.bdet');if(d&&!d.querySelector('.st32b'))d.insertAdjacentHTML('afterbegin',`<button class="btn gold st32b" data-act="st32" style="width:100%;margin-bottom:6px">📦 Pack crates · 🧱 Dump junk</button>`);};}
+document.addEventListener('pointerdown',e=>{const b=e.target.closest('[data-act="st32"]');if(b){e.preventDefault();closeOv();openStore32();}},true);
+// spending items keeps crates honest
+{const _r=render;render=function(){if(S&&S.crates32&&S.crates32.length)tidyCrates32();return _r.apply(this,arguments);};}
+if(typeof HTP!=='undefined'){const i=HTP.findIndex(x=>x.t==='The Apothecary');HTP.splice(i<0?HTP.length-1:i+1,0,{a:'<div class="hart">📦<span>🧱</span></div>',t:'The Storehouse',
+ p:['Tap the 🏚️ <b>Storehouse</b> at camp. Items have shapes and colours by kind.','📦 <b>Pack a crate</b>: drag items in (⟳ rotates) until it is full. Sealed items take half the room (a third if one colour).','🧱 <b>Dump</b>: picked items drop in as blocks; full rows or columns destroy them for scrap. <b>No undo.</b>']});}
+
+</script><script>
+// v30 cozy pass: lived-in details on camp buildings and a gentle, static campfire warmth.
+// Everything is drawn once into the cached camp background (no per-frame cost, no particles).
+const COZY30={
+ lantern(g,x,y,post){if(post){g.fillStyle='#3a2a1a';g.fillRect(x-.5,y,1.4,10);}
+  const h=g.createRadialGradient(x,y,0,x,y,9);h.addColorStop(0,'rgba(255,196,110,.32)');h.addColorStop(1,'rgba(255,196,110,0)');g.fillStyle=h;g.fillRect(x-9,y-9,18,18);
+  g.fillStyle='#2a1c10';g.fillRect(x-2,y-3,4,1);g.fillStyle='#ffcf7a';g.fillRect(x-1.5,y-2,3,3.5);g.fillStyle='#2a1c10';g.fillRect(x-2,y+1.5,4,1);},
+ line(g,x1,y1,x2,y2,cols){g.strokeStyle='#3a2a1a';g.lineWidth=.8;g.beginPath();g.moveTo(x1,y1);g.quadraticCurveTo((x1+x2)/2,y1+3,x2,y2);g.stroke();
+  cols.forEach((c,i)=>{const t=(i+1)/(cols.length+1),x=x1+(x2-x1)*t,y=y1+(y2-y1)*t+3*4*t*(1-t)*.5;g.fillStyle=c;g.fillRect(x-2,y,4,4+(i%2));});},
+ pot(g,x,y,c){g.fillStyle='#8a5a3a';g.fillRect(x-2,y,4,3);g.fillStyle=c||'#5a8a3a';g.beginPath();g.arc(x,y-.5,2.2,0,6.283);g.fill();},
+ sack(g,x,y){g.fillStyle='#b89a6a';g.beginPath();g.ellipse(x,y,3,3.6,0,0,6.283);g.fill();g.fillStyle='#8a7048';g.fillRect(x-1,y-4,2,1.4);},
+ roll(g,x,y,c){g.fillStyle=c;g.beginPath();g.ellipse(x,y,6,2.2,0,0,6.283);g.fill();g.strokeStyle='#0004';g.lineWidth=.6;g.beginPath();g.moveTo(x-2,y-2);g.lineTo(x-2,y+2);g.moveTo(x+2,y-2);g.lineTo(x+2,y+2);g.stroke();},
+ candle(g,x,y){g.fillStyle='#efe4c8';g.fillRect(x-.6,y-2.5,1.2,2.5);g.fillStyle='#ffcf6a';g.fillRect(x-.5,y-3.6,1,1.1);}};
+{const _db=drawBuilding;drawBuilding=function(g,id,l){_db(g,id,l);if(!l)return;const C=COZY30;g.save();g.globalAlpha=1;
+ switch(id){
+  case 'kitchen':C.line(g,-18,-8,8,-12,['#6a8a3a','#8a6a2a','#5a7a3a']);C.lantern(g,24,-6,1);C.pot(g,-34,10,'#8aa04a');break;
+  case 'well':g.fillStyle='#7a5a32';g.fillRect(-21,6,5,5);g.fillStyle='#3a2a1a';g.fillRect(-21,6,5,1);C.pot(g,15,10,'#d77a9a');break;
+  case 'beds':C.line(g,-26,-6,-12,-9,['#d8cfb8','#9ab0c8','#c88a7a']);g.fillStyle='#3a2a1a';g.fillRect(-27,-7,1.4,18);C.roll(g,18,11,'#7a6a9a');C.lantern(g,26,-2,1);break;
+  case 'infirmary':g.fillStyle='#d8d0bc';g.fillRect(-26,6,8,2);g.fillStyle='#b8b09c';g.fillRect(-26,8,8,2);C.pot(g,21,10,'#6aa04a');C.lantern(g,-20,-6,1);break;
+  case 'storehouse':C.sack(g,-14,10);C.sack(g,-8,11);C.lantern(g,9,-4,0);g.fillStyle='#8a6a3a';g.fillRect(-6,-16,12,4);g.fillStyle='#3a2a1a';g.fillRect(-4,-15,8,1);break;
+  case 'forge':g.fillStyle='#5a4a3a';g.beginPath();g.ellipse(24,8,4,5,0,0,6.283);g.fill();g.fillStyle='#3a5a7a';g.beginPath();g.ellipse(24,4,3.4,1.4,0,0,6.283);g.fill();g.strokeStyle='#999';g.lineWidth=1;g.beginPath();g.moveTo(-2,-8);g.lineTo(-2,-2);g.moveTo(2,-8);g.lineTo(3,-3);g.stroke();break;
+  case 'apothecary':for(let i=0;i<5;i++){g.fillStyle=i%2?'#c9a46a':'#8a4a5a';g.beginPath();g.moveTo(-16+i*6.4,-12);g.lineTo(-16+(i+1)*6.4,-12);g.lineTo(-16+(i+.5)*6.4,-9);g.closePath();g.fill();}
+   g.fillStyle='#5a3a1e';g.fillRect(-17,-13,34,1.4);g.fillStyle='#6a8a3a';g.fillRect(-21,-6,2,5);g.fillStyle='#8a6a2a';g.fillRect(-19,-5,2,4);C.lantern(g,-22,-12,0);break;
+  case 'shrine':C.candle(g,-9,12);C.candle(g,9,12);C.candle(g,-5,12);C.pot(g,15,11,'#e0b04a');break;
+  case 'training':g.fillStyle='#c9aa5a';g.fillRect(-26,-2,9,6);g.strokeStyle='#a08a40';g.lineWidth=.6;g.beginPath();g.moveTo(-26,0);g.lineTo(-17,0);g.moveTo(-26,2);g.lineTo(-17,2);g.stroke();g.fillStyle='#8a6a3a';g.fillRect(9,6,10,1.5);g.fillRect(10,2,1.4,6);break;
+  case 'tavern':g.fillStyle='#3a2a1a';g.fillRect(-26,-12,6,1.2);g.fillRect(-25,-12,1,4);g.fillStyle='#c9a46a';g.fillRect(-27,-8,6,4);g.fillStyle='#7a3a2a';g.fillRect(-26,-7,4,2);C.lantern(g,6,-14,0);C.pot(g,-26,11,'#d77a9a');break;
+  case 'waystone':g.fillStyle='#4a6a3a';g.fillRect(-7,8,4,2);g.fillRect(3,6,3,2);C.pot(g,11,11,'#a0b0e0');break;}
+ g.restore();};}
+{const _bg=drawBG;drawBG=function(){const c=_bg.apply(this,arguments);if(c._cozy30)return c;c._cozy30=1;const g=c.getContext('2d');g.save();g.setTransform(2,0,0,2,0,0);
+ const w=g.createRadialGradient(FIRE[0],FIRE[1],6,FIRE[0],FIRE[1],LW*.55);w.addColorStop(0,'rgba(255,170,80,.10)');w.addColorStop(.55,'rgba(255,150,70,.04)');w.addColorStop(1,'rgba(255,140,60,0)');g.fillStyle=w;g.fillRect(0,0,LW,LH);
+ const v=g.createRadialGradient(LW/2,LH/2,LH*.45,LW/2,LH/2,LW*.7);v.addColorStop(0,'rgba(20,10,4,0)');v.addColorStop(1,'rgba(20,10,4,.35)');g.fillStyle=v;g.fillRect(0,0,LW,LH);g.restore();return c;};}
+
+</script><script>
+// v31 personal looks: every hero gets their own small touches (skin, hair, scarf, trinket) on the map sprite,
+// and a gently individual portrait (own tint, light side, frame colour). All cached once per hero.
+function hue31(hex,dh,l){let r=parseInt(hex.slice(1,3),16)/255,g=parseInt(hex.slice(3,5),16)/255,b=parseInt(hex.slice(5,7),16)/255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b);let h=0,s=0,L=(mx+mn)/2;if(mx!==mn){const d=mx-mn;s=L>.5?d/(2-mx-mn):d/(mx+mn);h=mx===r?(g-b)/d+(g<b?6:0):mx===g?(b-r)/d+2:(r-g)/d+4;h*=60;}h=(h+dh+360)%360;L=Math.min(.9,L*l);
+ const f=n=>{const k=(n+h/30)%12,a=s*Math.min(L,1-L);return Math.round(255*(L-a*Math.max(-1,Math.min(k-3,9-k,1)))).toString(16).padStart(2,'0');};return '#'+f(0)+f(8)+f(4);}
+function hash31(s){let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0;}
+const SKIN31=['#e8c4a0','#f0d0b0','#d8a880','#c08a62','#9a6a48','#f3d9c2'];
+const HAIR31=['#2a1a10','#5a3a1e','#a8643a','#d9b45a','#8a8a90','#1a1418','#7a2a1a'];
+const ACC31=['#c84a3a','#3a7ac8','#d9b45a','#4aa070','#a05ac8','#e0e0d0','#d87a3a'];
+function look31(h){if(!h.look){const r=hash31((h.key||'')+h.name+h.id);h.look={s:r%SKIN31.length,hr:(r>>3)%HAIR31.length,a:(r>>6)%ACC31.length,t:(r>>9)%5,m:(r>>12)&1,hue:((r>>13)%31)-15};}return h.look;}
+{const _hi=heroImg;heroImg=function(h,white){const L=look31(h);const k='L31'+h.id+(white?'w':'')+h.cls+h.color+L.s+L.hr+L.a+L.t;if(SPR.has(k))return SPR.get(k);
+ const base=_hi(Object.assign({},h,{color:hue31(h.color||'#aaa',L.hue*2.2,L.s%2?.92:1.06)}),white);const c=document.createElement('canvas');c.width=base.width;c.height=base.height;const g=c.getContext('2d');g.drawImage(base,0,0);
+ if(!white){const s=c.width/28;const id=g.getImageData(0,0,c.width,c.height),d=id.data;const sk=SKIN31[L.s],R=parseInt(sk.slice(1,3),16),G=parseInt(sk.slice(3,5),16),B=parseInt(sk.slice(5,7),16);
+  for(let i=0;i<d.length;i+=4){if(d[i+3]>0&&Math.abs(d[i]-232)<14&&Math.abs(d[i+1]-196)<14&&Math.abs(d[i+2]-160)<14){d[i]=R;d[i+1]=G;d[i+2]=B;}}g.putImageData(id,0,0);
+  g.save();g.scale(s,s);const x=14,acc=ACC31[L.a],hair=HAIR31[L.hr],hood=['Rogue','Ranger','Necromancer','Cleric','Warrior','Paladin'].includes(h.cls);
+  g.lineWidth=.8;g.strokeStyle='#120c16';
+  if(!hood&&h.cls!=='Mage'&&h.cls!=='Porter'){g.fillStyle=hair;g.beginPath();g.arc(x,8,5.2,Math.PI*1.05,Math.PI*1.95);g.fill();}// hair fringe
+  if(L.t===0){g.fillStyle=acc;g.fillRect(x-5,13,10,1.8);g.fillRect(x+2,14.5,2,3);}// scarf
+  else if(L.t===1){g.strokeStyle=acc;g.lineWidth=.9;g.beginPath();g.moveTo(x+3,4.5);g.quadraticCurveTo(x+7,1,x+8,-1.5);g.stroke();}// feather
+  else if(L.t===2){g.fillStyle=acc;g.beginPath();g.arc(x-4.6,7,1.3,0,6.283);g.fill();g.fillStyle='#ffe9a8';g.fillRect(x-4.9,6.7,.6,.6);}// flower
+  else if(L.t===3){g.fillStyle='#ffd76a';g.fillRect(x+4.6,11,1,1.4);g.fillStyle=acc;g.fillRect(x-6,19,12,1.4);}// earring + sash
+  else if(h.gender!=='f'){g.fillStyle=hair;g.beginPath();g.moveTo(x-3.6,12);g.quadraticCurveTo(x,16,x+3.6,12);g.lineTo(x+2.6,12.6);g.quadraticCurveTo(x,14,x-2.6,12.6);g.closePath();g.fill();}// beard
+  else{g.fillStyle=hair;g.beginPath();g.ellipse(x+5.6,13,1.3,3.2,.3,0,6.283);g.fill();}// braid
+  g.restore();}
+ SPR.set(k,c);return c;};}
+// portraits: one small, individual variant per hero
+const PV31=new Map();
+function pv31(h,src){const k=h.id+'|'+src.length+src.slice(-24);if(PV31.has(k))return PV31.get(k)||src;PV31.set(k,null);const L=look31(h);const im=new Image();
+ im.onload=()=>{try{const W=192,H=288,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');g.filter=`hue-rotate(${L.hue}deg) saturate(${.9+((L.a%3)*.08)})`;
+  if(L.m){g.translate(W,0);g.scale(-1,1);}g.drawImage(im,0,0,W,H);g.setTransform(1,0,0,1,0,0);g.filter='none';
+  const gr=g.createRadialGradient(W*(L.m?.25:.75),H*.25,10,W*(L.m?.25:.75),H*.25,W);gr.addColorStop(0,'rgba(255,190,110,.14)');gr.addColorStop(1,'rgba(255,190,110,0)');g.fillStyle=gr;g.fillRect(0,0,W,H);
+  const url=c.toDataURL('image/jpeg',.82);PV31.set(k,url);document.querySelectorAll(`img[data-pv="${h.id}"]`).forEach(e=>{if(e.getAttribute('src')!==url)e.src=url;});}catch(e){}};im.src=src;return src;}
+{const _av=avatar;avatar=function(cls,col,h){const html=_av.apply(this,arguments);if(!h||!h.id||!/^<img/.test(html))return html;const m=html.match(/src="([^"]+)"/);if(!m)return html;const u=pv31(h,m[1]);
+ return html.replace(m[0],`src="${u}" data-pv="${h.id}" style="border-color:${h.color||'#fff3'}"`);};}
+{const _p=portrait;portrait=function(cls,big,h){const html=_p.apply(this,arguments);if(!h||!h.id)return html;const m=String(html).match(/<img[^>]*src="([^"]+)"/);if(!m)return html;const u=pv31(h,m[1]);return html.replace(`src="${m[1]}"`,`src="${u}" data-pv="${h.id}"`);};}
 
 </script>
 </body></html>
