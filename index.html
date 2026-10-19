@@ -633,7 +633,10 @@ function relic(h,r){return h.gear&&h.gear.r&&h.gear.r.r===r;}
 function cursed(h,c){return h.gear&&['w','a','r'].some(k=>h.gear[k]&&h.gear[k].curse===c);}
 // ---- save ----
 let CUR_SLOT=1;const slotKey=n=>'firstflame_slot'+n;
-function save(){if(!S||S.title)return;S.lastSave=Date.now();try{localStorage.setItem(slotKey(CUR_SLOT),JSON.stringify(S,(k,v)=>(k==='ev'||k==='target'||k==='hRef')?undefined:v));}catch(e){}}
+const SKIP_SAVE=(k,v)=>(k==='ev'||k==='target'||k==='hRef'||k==='engage'||k==='tg')?undefined:v;
+function safeJSON(o){// drops live cross-references (hero<->mob) so a fight in progress can never make a save fail
+ const st=[];return JSON.stringify(o,function(k,v){v=SKIP_SAVE(k,v);if(v&&typeof v==='object'){while(st.length&&st[st.length-1]!==this)st.pop();if(st.includes(v))return undefined;st.push(v);}return v;});}
+function save(){if(!S||S.title)return;S.lastSave=Date.now();try{localStorage.setItem(slotKey(CUR_SLOT),safeJSON(S));}catch(e){}}
 function load(n){if(n)CUR_SLOT=n;try{if(CUR_SLOT===1&&!localStorage.getItem(slotKey(1))&&localStorage.getItem(SAVE))localStorage.setItem(slotKey(1),localStorage.getItem(SAVE));const t=localStorage.getItem(slotKey(CUR_SLOT));if(!t)return false;S=Object.assign(fresh(),JSON.parse(t));S.choices=[];S.decision=null;S.possess=null;S.tool=null;S.council=null;S.paused=false;S.heroes.forEach(h=>{h.target=null;h.req=null;});return true;}catch(e){return false;}}
 
 </script>
@@ -1018,7 +1021,7 @@ function leaderMove(h,cmd){
  if(!stepToward(h,target.x+(sz(target)>1?1:0),target.y,true)){const d=bfs(target.x,target.y);const bv=d[h.y][h.x];const blk=nbrs(h.x,h.y).map(n=>mobAt(n[0],n[1])).find(m=>m);if(blk)return attack(h,blk);
   const n=pick(nbrs(h.x,h.y));if(n&&!mobAt(n[0],n[1])&&!heroAt(n[0],n[1],h)){h.x=n[0];h.y=n[1];}}
  if(h.x!==ox||h.y!==oy){h.energy=clamp(h.energy-.25,0,100);h.idleT=0;}
- else if(++h.idleT>25){h.idleT=0;alive().forEach(x=>x.cmd={k:'fight',t:25});say(h,pick(['We cannot hide here forever. CHARGE!','Enough waiting. Through them!']));}
+ else if((h.idleT=(h.idleT||0)+1)>25){h.idleT=0;alive().forEach(x=>x.cmd={k:'fight',t:25});say(h,pick(['We cannot hide here forever. CHARGE!','Enough waiting. Through them!']));}
  arrive(h);if(watching())chatter(h);}
 function possessedAct(h){
  const P=S.possess;if(--P.t<=0){endPossess();return;}
