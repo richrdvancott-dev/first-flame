@@ -336,6 +336,39 @@ body,#app{font-variant-numeric:tabular-nums}#pw,#ak{display:inline-block;min-wid
 .a25j{font-size:26px;filter:hue-rotate(calc(var(--b)*40deg))}.a25cont{width:100%;min-height:44px;margin-top:8px}.a25warn{margin-top:14px;opacity:.8}
 .pb25{display:flex;flex-wrap:wrap;gap:2px;margin:4px 0}.imp25b{width:100%;margin:4px 0}.imp25b.arm{background:#8a1c1c;color:#fff}
 @media (prefers-reduced-motion:reduce){.v25,.v25.pour{transition:none}.c25.out,.c25.in,.st25,.sp25 b{animation-duration:.01s}}
+
+/* v27 apothecary: no do-overs, filter, grade */
+.a25ft{min-height:44px}.a25mv{font-size:12px;opacity:.8;min-width:64px}.a25mv:last-child{text-align:right}.a25wn{flex:1;text-align:center;font-size:12px;color:#ffb36a;font-weight:600;line-height:1.25}
+.fz25 .v25 .gl25{animation:fz25 .5s ease-in-out 2;filter:grayscale(.85) brightness(.65);transition:filter .6s}.fz25 .v25.bad .gl25{border-color:#ff5a4a;box-shadow:0 0 14px #ff5a4a88}
+@keyframes fz25{25%{transform:translateX(-3px) rotate(-2deg)}75%{transform:translateX(3px) rotate(2deg)}}
+.sm25{position:absolute;left:50%;top:6px;width:26px;height:26px;margin-left:-13px;border-radius:50%;background:radial-gradient(circle,#b8b0a8aa,#6a625a00 70%);pointer-events:none;opacity:0;animation:sm25 1.1s ease-out forwards;z-index:7}
+@keyframes sm25{0%{opacity:0;transform:translate(0,0) scale(.4)}25%{opacity:.9}100%{opacity:0;transform:translate(var(--dx),-70px) scale(2.2)}}
+.v25.flt .c25{animation:flt25 .55s ease-in forwards;animation-delay:var(--fd,0ms);transform-origin:50% 100%}
+.v25.flt .gl25:before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#fff0,#fff6 50%,#fff0);background-size:100% 40%;background-repeat:no-repeat;animation:fls25 .6s linear;animation-delay:var(--fd,0ms);z-index:2}
+@keyframes flt25{to{transform:scaleY(0);opacity:0;filter:brightness(2)}}@keyframes fls25{from{background-position:0 -40%}to{background-position:0 140%}}
+.res25 .a25win{position:relative;min-width:230px}.rk25{font:900 64px/1 Georgia,serif;color:var(--gc,#ffd76a);text-shadow:0 0 18px var(--gc,#ffd76a),0 3px 0 #0008;margin:2px 0 4px;animation:rk25 .5s cubic-bezier(.2,1.6,.4,1)}.rk25.f{font-size:52px;text-shadow:none;animation:none}
+@keyframes rk25{from{transform:scale(.2) rotate(-20deg);opacity:0}}
+.res25.lose{border-color:#a0605088}.res25.lose b{color:#e8b8a0}
+.res25.max{border-color:#ffd76a;box-shadow:0 0 40px #ffd76a66}.res25.max .rk25{font-size:58px;letter-spacing:2px}
+.ry25{position:absolute;left:50%;top:38px;width:260px;height:260px;margin:-130px 0 0 -130px;background:repeating-conic-gradient(#ffd76a33 0 10deg,#0000 10deg 30deg);border-radius:50%;-webkit-mask:radial-gradient(circle,#000 20%,#0000 70%);mask:radial-gradient(circle,#000 20%,#0000 70%);animation:ry25 6s linear infinite;pointer-events:none;z-index:-1}
+@keyframes ry25{to{transform:rotate(360deg)}}
+.cf25{position:absolute;left:50%;top:38px;width:7px;height:7px;margin:-3px;border-radius:2px;background:var(--c);animation:cf25 1.1s ease-out forwards;pointer-events:none}
+@keyframes cf25{from{transform:rotate(var(--a)) translateY(0) scale(1.3);opacity:1}to{transform:rotate(var(--a)) translateY(calc(-1*var(--d))) rotate(200deg) scale(.4);opacity:0}}
+.ch25.bonus{background:#5a4a1acc;color:#ffe9a8}
+@media (prefers-reduced-motion:reduce){.fz25 .v25 .gl25,.v25.flt .c25,.rk25,.cf25,.ry25{animation-duration:.01s}}
+/* portrait top bar: keep ✨ and 📜 always visible; tier shrinks to its icon */
+@media (orientation:portrait) and (max-width:480px){#top #tier,#top #eye,#top .mx{display:none}#top>span:first-child>*{flex:none}#top #pw,#top #ak{min-width:0}#top>span:first-child{font-size:11px}#top .sp{display:none}#top #fl{margin-right:3px}#top #pw{margin-right:3px}#top .btn{padding:3px 0;min-width:0;width:26px;text-align:center}#top>span:last-child{gap:1px}#top>span:first-child{gap:1px}#top>span:last-child{gap:2px}#top>span:first-child{overflow:visible}}
+@media (orientation:portrait) and (max-width:400px){#top .btn{width:22px;font-size:11px}#top #fl{margin-right:1px}#top #pw{margin-right:1px}#top>span:first-child{font-size:10.5px}#top{padding:2px 4px}}
+/* portrait: page never overflows the viewport, so iOS toolbars cannot start a show/hide resize loop after rotating */
+@media (orientation:portrait){html,body{height:100%;overflow:hidden}#app{height:100dvh;max-height:100dvh;overflow:hidden}#right{min-height:0}#panel{min-height:48px}}
+/* base: stack grid, detail and party/market in one column (portrait); camp 'ready' card docks below the map instead of covering buildings */
+@media (orientation:portrait){.base .ccols{grid-template-columns:minmax(0,1fr)}}
+#readyp:not(.open){position:static!important;width:auto!important;max-width:none;margin:2px 0 0;padding:2px 6px!important;flex:none}
+#readyp.open{left:6px!important;right:6px!important;top:auto!important;bottom:6px!important;width:auto!important;z-index:4}
+#readyp:not(.open) .rpr,#readyp:not(.open) .rpw,#readyp:not(.open) .rpb .s{display:none}
+#readyp:not(.open){display:flex!important;align-items:center;justify-content:space-between;gap:6px;white-space:nowrap}
+#readyp:not(.open) .rph{margin:0}#readyp:not(.open) .rpb{margin:0}#readyp:not(.open) .rpb .btn{min-height:28px;padding:2px 8px}
+#readyp .rph{cursor:pointer}#readyp.open .rph::after{content:' ▾'}#readyp:not(.open) .rph::after{content:' ▸'}
 </style><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(r=>r.update()));
@@ -349,7 +382,7 @@ document.body.appendChild(b)});
 </script>
 </head><body>
 <div id="app">
- <div id="top"><span><b class="brand" data-act="menu" title="First Flame: menu / save slots" aria-label="First Flame menu">🔥</b> · <b id="fl">F1</b> · ✨<b id="pw">0</b> · 📜<b id="ak">0</b> · <b id="tier"></b> <span id="eye"></span></span>
+ <div id="top"><span><b class="brand" data-act="menu" title="First Flame: menu / save slots" aria-label="First Flame menu">🔥</b><i class="sp"> · </i><b id="fl">F1</b><i class="sp"> · </i>✨<b id="pw">0</b><i class="sp"> · </i>📜<b id="ak">0</b><i class="sp"> · </i><b id="tier"></b> <span id="eye"></span></span>
   <span><button class="btn" data-act="base" title="Base (B)">🏰</button> <button class="btn" id="view24" title="Visit camp (the party keeps exploring)" aria-pressed="false">🏕️</button> <button class="btn" data-act="void" id="shr23top" title="Shrine of Calling (V), at camp">🕯️</button> <button class="btn" data-act="codex" id="codexbtn" title="Codex (K)">📖 Codex</button> <button class="btn gold" data-act="council" title="War Council (C)">⚔️</button> <button class="btn" data-act="pause" id="pause" aria-label="Pause"><i class="ic-pause"></i></button> <button class="btn" id="think13" title="Think for yourself: heroes handle minor needs" aria-label="Think for yourself">🧠</button> <button class="btn" data-act="speed" id="spd">1x</button> <button class="btn" data-act="help" id="helpbtn">? Help</button> <button class="btn" id="qmbtn" aria-label="Options" title="Options: settings, text size, HUD, asks">⚙</button></span></div>
  <div id="left"><canvas id="cv"></canvas><div id="hint"></div><div id="powers"></div></div>
  <div id="mid"><div id="party"></div></div>
@@ -1359,6 +1392,7 @@ function endRun(){
 
 </script>
 <script>
+function cmp26(n){if(!(innerWidth<=480&&innerHeight>innerWidth)||n<10000)return String(n);return n<1e6?(n/1e3).toFixed(n<1e5?1:0).replace(/\.0$/,'')+'k':(n/1e6).toFixed(1).replace(/\.0$/,'')+'M';}
 'use strict';
 // ===================== UI: rendering, panels, input, overlays =====================
 const $=id=>document.getElementById(id);
@@ -1399,7 +1433,7 @@ function drawCamp(){
  alive().forEach((h,i)=>{const a=i/5*Math.PI*2,x=cv.width/2+Math.cos(a)*36,y=cv.height/2+Math.sin(a)*30;cx.fillStyle=h.color;cx.fillRect(x-9,y-9,18,18);cx.fillStyle='#000';cx.font='bold 10px sans-serif';cx.fillText(CLASSES[h.cls].glyph,x,y+1);});
  cx.fillStyle='#fffa';cx.textAlign='left';cx.font='10px sans-serif';cx.fillText(`Camp · resting (${Math.max(0,S.campT)})`,3,cv.height-6);}
 function render(){
- $('fl').textContent=S.phase==='camp'?'Camp':'F'+S.floor;$('pw').textContent=Math.floor(S.power);$('ak').textContent=S.ak;
+ $('fl').textContent=S.phase==='camp'?'Camp':'F'+S.floor;$('pw').textContent=cmp26(Math.floor(S.power));$('ak').textContent=cmp26(S.ak);
  if(typeof godMeter!=='function')$('tier').textContent=TIERS[S.tier].ic+' '+tierN();$('eye').textContent=watching()?'👁️':'';
  {const pc=S.paused?'ic-play':'ic-pause';if(!$('pause').querySelector('.'+pc))$('pause').innerHTML=`<i class="${pc}"></i>`;}
  if(S.phase==='camp')drawCamp();else drawDungeon();
@@ -2784,7 +2818,7 @@ const ascBtn=document.createElement('button');ascBtn.id='ascbtn';ascBtn.classNam
 (function(){const sp=document.querySelector('#top > span:nth-of-type(2)');if(sp)sp.prepend(ascBtn);else document.body.appendChild(ascBtn);})();
 const ascHint=document.createElement('div');ascHint.id='aschint';ascHint.dataset.act='ascopen';document.body.appendChild(ascHint);
 function ascUI(){if(!S||S.title){ascBtn.style.display='none';return;}ascBtn.style.display='';const n=nextTier();
- if(!n){ascBtn.innerHTML='❂ Max';ascBtn.classList.remove('glow');return;}
+ if(!n){ascBtn.innerHTML='❂<span class="mx"> Max</span>';ascBtn.classList.remove('glow');return;}
  const p=Math.min(1,S.ak/n.ak),q=Math.min(1,S.power/Math.max(1,n.pw)),pc=Math.round(Math.min(p,q)*100);const ok=canAsc();
  const h=`${ok?'⬆️ Ascend!':'⬆️ '+pc+'%'}<i class="ascp" style="width:${pc}%"></i>`;if(ascBtn._h!==h){ascBtn._h=h;ascBtn.innerHTML=h;}
  ascBtn.classList.toggle('glow',ok);ascBtn.title=`Next: ${n.ic} ${n.n} · needs 📜${n.ak} AK and ✨${n.pw} power`;
@@ -2907,6 +2941,7 @@ function readyUI(){if(!S||S.title||S.phase!=='camp'||!isLive()||S.dead){if(rp.st
  hs.forEach((h,i)=>{const row=rp.querySelector(`.rpr[data-h="${h.id}"]`);if(!row)return;const [r,why]=st[i];setTxt(row.querySelector('.rpm'),r?'✅':'⏳');setTxt(row.querySelector('.rps'),r?'Ready':why);row.classList.toggle('ok',r);});
  setTxt(rp.querySelector('.rpc'),`${st.filter(x=>x[0]).length}/${hs.length}`);}
 setInterval(readyUI,250);
+rp.addEventListener('pointerdown',e=>{if(e.target.closest('.rph'))rp.classList.toggle('open');});
 document.addEventListener('pointerdown',ev=>{const b=ev.target.closest('[data-act]');if(!b)return;const a=b.dataset.act,v=b.dataset.v;
  if(a==='ascopen')openAscend();else if(a==='ascdo'){ascend();if(!S.title)openAscend();}
  else if(a==='pcraft')craftPack(v);
@@ -3599,7 +3634,7 @@ syncThink13();
 // Landscape fit: the map takes what is left of the grid row after the power bar (and hint), so powers are always on-screen.
 (function(){let busy=0;function fit(){if(busy)return;const L=document.getElementById('left'),pw=document.getElementById('powers'),hn=document.getElementById('hint');if(!L||!pw)return;
   busy=1;L.style.width='';if(innerWidth>innerHeight){const R=L.getBoundingClientRect();const hh=hn&&getComputedStyle(hn).display!=='none'?hn.getBoundingClientRect().height:0;
-  const avail=R.height-pw.getBoundingClientRect().height-hh-6;const w=Math.floor(Math.min(R.width,avail*15/11));if(w<R.width-1)L.style.width=Math.max(160,w)+'px';}busy=0;}
+  const rq=document.getElementById('readyp'),rh=rq&&rq.offsetParent&&getComputedStyle(rq).position==='static'?rq.getBoundingClientRect().height+2:0;const avail=R.height-pw.getBoundingClientRect().height-hh-rh-6;const w=Math.floor(Math.min(R.width,avail*15/11));if(w<R.width-1)L.style.width=Math.max(160,w)+'px';}busy=0;}
  window.fit13=fit;addEventListener('resize',()=>requestAnimationFrame(fit));addEventListener('orientationchange',()=>setTimeout(fit,300));setTimeout(fit,50);setInterval(fit,1500);
  const _ah=applyHud;applyHud=function(){_ah.apply(this,arguments);fit();};})();
 // Ask only for what the god can give; dedupe, per-ask cooldowns, one grumble until it becomes possible.
@@ -4338,22 +4373,29 @@ function solved25(v){return v.every(x=>!x.length||(x.length===CAPV25&&x.every(y=
 function canPour25(v,i,j){const a=v[i],b=v[j];if(i===j||!a||!b||!a.length||b.length>=CAPV25)return false;return !b.length||b[b.length-1]===a[a.length-1];}
 function runOf25(a){const c=a[a.length-1];let r=1;while(r<a.length&&a[a.length-1-r]===c)r++;return r;}
 function pourN25(v,i,j){return Math.min(runOf25(v[i]),CAPV25-v[j].length);}
-function solve25(v0,limit){limit=limit||80000;const seen=new Set(),path=[];let nodes=0;const key=v=>v.map(x=>x.join(',')).sort().join('|');
- const dfs=v=>{if(solved25(v))return true;if(++nodes>limit)return false;const kk=key(v);if(seen.has(kk))return false;seen.add(kk);
-  for(let i=0;i<v.length;i++){const a=v[i];if(!a.length)continue;const r=runOf25(a);if(r===a.length&&a.length===CAPV25)continue;
-   for(let j=0;j<v.length;j++){if(!canPour25(v,i,j)||(!v[j].length&&r===a.length))continue;const m=pourN25(v,i,j),nv=v.map(x=>x.slice());for(let t=0;t<m;t++)nv[j].push(nv[i].pop());path.push([i,j]);if(dfs(nv))return true;path.pop();}}
-  return false;};
- return dfs(v0.map(x=>x.slice()))?path.slice():null;}
-function gen25(b){const ids=recipe25(b),k=ids.length;let best=null;
+const fullV25=x=>x.length===CAPV25&&x.every(y=>y===x[0]);
+// the goal: every potion colour bottled (murky layers get filtered away afterwards)
+const goal25=ids=>{const P=ids.filter(id=>POT25[id]);return v=>P.every(c=>v.some(x=>fullV25(x)&&x[0]===c));};
+const key25=v=>v.map(x=>x.join(',')).sort().join('|');
+function moves25(v){const out=[];for(let i=0;i<v.length;i++){const a=v[i];if(!a.length||fullV25(a))continue;const r=runOf25(a);for(let j=0;j<v.length;j++)if(canPour25(v,i,j)&&!(!v[j].length&&r===a.length))out.push([i,j]);}return out;}
+function app25(v,[i,j]){const m=pourN25(v,i,j),nv=v.map(x=>x.slice());for(let t=0;t<m;t++)nv[j].push(nv[i].pop());return nv;}
+// depth-first solver: a path to the goal, null if none (or 'cap' if it gave up)
+function solve25(v0,limit,goal){limit=limit||80000;goal=goal||solved25;const seen=new Set(),path=[];let n=0,cap=false;
+ const f=v=>{if(goal(v))return true;if(++n>limit){cap=true;return false;}const k=key25(v);if(seen.has(k))return false;seen.add(k);for(const m of moves25(v)){path.push(m);if(f(app25(v,m)))return true;path.pop();}return false;};
+ const ok=f(v0.map(x=>x.slice()));return ok?path.slice():cap?'cap':null;}
+// breadth-first: the fewest pours that can finish (the brew's "par")
+function par25(v0,goal,limit){limit=limit||250000;let fr=[v0],seen=new Set([key25(v0)]),d=0,n=0;while(fr.length){for(const v of fr)if(goal(v))return d;const nx=[];for(const v of fr)for(const m of moves25(v)){const w=app25(v,m),k=key25(w);if(seen.has(k))continue;seen.add(k);nx.push(w);if(++n>limit)return null;}fr=nx;d++;}return null;}
+const dead25=P=>solve25(P.v,60000,goal25(P.ids))===null;
+function gen25(b){const ids=recipe25(b),k=ids.length,G=goal25(ids);let best=null;
  for(let t=0;t<300;t++){const u=[];for(let i=0;i<k;i++)for(let j=0;j<CAPV25;j++)u.push(i);for(let i=u.length-1;i>0;i--){const r=Math.floor(Math.random()*(i+1));[u[i],u[r]]=[u[r],u[i]];}
   const v=[];for(let i=0;i<k;i++)v.push(u.slice(i*CAPV25,i*CAPV25+CAPV25).map(x=>ids[x]));v.push([],[]);
-  if(v.some(x=>x.length===CAPV25&&x.every(y=>y===x[0])))continue;let pairs=0;v.forEach(x=>{for(let j=1;j<x.length;j++)if(x[j]===x[j-1])pairs++;});if(pairs>Math.ceil(k*.5))continue;
-  const sol=solve25(v);if(!sol)continue;best={b,ids,v,init:v.map(x=>x.slice()),done:[],moves:0,par:sol.length};if(sol.length>=k+2)break;}
+  if(v.some(fullV25))continue;let pairs=0;v.forEach(x=>{for(let j=1;j<x.length;j++)if(x[j]===x[j-1])pairs++;});if(pairs>Math.ceil(k*.5))continue;
+  const sol=solve25(v,80000,G);if(!Array.isArray(sol))continue;const par=par25(v,G)||sol.length;best={b,ids,v,init:v.map(x=>x.slice()),done:[],moves:0,par};if(par>=ids.filter(x=>POT25[x]).length+2)break;}
  return best;}
 // a puzzle for the sims (or a quick skip): yields as if solved
 function apoAuto25(){let n=0;for(let b=1;b<=5;b++){while((S.stash['imp'+b]||0)>0){S.stash['imp'+b]--;n++;recipe25(b).filter(id=>POT25[id]).forEach(id=>{stashAdd(id,1);ST25.yield[id]=(ST25.yield[id]||0)+1;});}}return n;}
 // ---- the bench UI (DOM vials; one row in landscape, two in portrait; input locked while a pour plays)
-const A25={el:null,bd:null,sel:-1,lock:false,undo:[],view:'shelf',pz:false,wasP:false,on:false};
+const A25={el:null,bd:null,sel:-1,lock:false,view:'shelf',pz:false,wasP:false,on:false};
 const lum25=h=>{const n=parseInt(h.slice(1),16);return((n>>16)*.299+(n>>8&255)*.587+(n&255)*.114)/255;};
 const vib25=p=>{if(SET.hap!==0&&navigator.vibrate)try{navigator.vibrate(p);}catch(e){}};
 const glug25=m=>{if(typeof tone23!=='function')return;for(let i=0;i<Math.min(4,m+1);i++)tone23(260-i*30+Math.random()*40,.09,'sine',.25,i*.07,150);};
@@ -4369,12 +4411,12 @@ function paint25(){const P=S.apo25,inn=A25.el.querySelector('.a25in');const n=im
  const hd=`<div class="a25hd"><button class="btn" data-a25="x">🏕️ Camp</button><b>⚗️ Apothecary</b><span class="a25cnt">🫙 ${n}</span></div>`;
  if(A25.view==='puz'&&P){const leg=P.ids.map(id=>`<span class="lg25 ${P.done.includes(id)?'ok':''} ${POT25[id]?'':'mk'}" style="--c:${colOf25(id).c}"><i></i>${POT25[id]?nameOf25(id):colOf25(id).n}${P.done.includes(id)?' ✓':''}</span>`).join('');
   inn.innerHTML=hd+`<div class="a25leg">${leg}</div><div class="a25bd"><svg class="a25sv"></svg>${P.v.map((_,i)=>vial25(i)).join('')}<div class="a25msg"></div></div>
-  <div class="a25ft"><button class="btn" data-a25="u" ${A25.undo.length?'':'disabled'}>↶ Undo</button><span class="small">Moves ${P.moves} · Impure ${['I','II','III','IV','V'][P.b-1]}</span><button class="btn" data-a25="r">⟲ Restart</button></div>`;
-  A25.bd=inn.querySelector('.a25bd');lay25();if(P.fin)fin25();else stuck25();return;}
+  <div class="a25ft"><span class="a25mv">Pours ${P.moves}</span><span class="a25wn">⚠️ No do-overs: one wrong pour ruins the brew</span><span class="a25mv">Impure ${['I','II','III','IV','V'][P.b-1]}</span></div>`;
+  A25.bd=inn.querySelector('.a25bd');lay25();if(P.fin)result25();return;}
  const rows=[1,2,3,4,5].filter(b=>S.stash['imp'+b]).map(b=>`<div class="a25row"><span class="a25j" style="--b:${b}">🫙</span><div><b>${ITEMS['imp'+b].n} ×${S.stash['imp'+b]}</b><div class="small">Floors ${(b-1)*6+1}${b<5?'–'+b*6:'+'} · ${[3,4,5,6,7][b-1]} colours · ${[1,2,2,3,3][b-1]} potion${b>1?'s':''} inside${b>=4?' · rare kinds':''}</div></div><button class="btn gold" data-a25="p" data-b="${b}">Purify</button></div>`).join('');
  const pure=Object.keys(POT25).filter(id=>S.stash[id]).map(id=>chip25(id,S.stash[id])).join('');
- inn.innerHTML=hd+`<div class="a25shelf"><div class="small a25how">Pour the top layer onto the same colour or into an empty vial. Fill a vial with one colour to bottle that potion. Sludge is thrown away.</div>
- ${P&&!P.fin?`<button class="btn gold a25cont" data-a25="c">⚗️ Continue the bottle on the bench</button>`:''}
+ inn.innerHTML=hd+`<div class="a25shelf"><div class="small a25how">Pour the top layer onto the same colour or into an empty vial. Bottle every potion colour and the sludge filters away. <b>⚠️ No do-overs:</b> a pour that doesn't fit, or one that makes the brew impossible, ruins it and the impure potion is lost.</div>
+ ${P&&!P.fin?`<button class="btn gold a25cont" data-a25="c">⚗️ Continue the brew on the bench</button>`:''}
  <h4>Impure potions</h4>${rows||'<div class="small">None yet. Heroes find them all over the dungeon. Deeper ones are richer.</div>'}
  <h4>Pure potions in storage</h4><div class="a25pure">${pure||'<span class="small">None yet.</span>'}</div>
  <div class="small a25warn">☠️ Drinking an impure potion straight is a gamble. It might heal, or it might kill. (Hero sheet → bag)</div></div>`;A25.bd=null;}
@@ -4386,21 +4428,21 @@ function lay25(){const bd=A25.bd;if(!bd||!S.apo25)return;const n=S.apo25.v.lengt
  let w=Math.min(68,(W-gap*(cols+1))/cols),h=Math.min(w*3.4,(H-gap*(rows+1)-rows*18)/rows-24);w=Math.max(40,Math.min(w,h/2.6));h=Math.max(110,Math.min(h,w*3.6));
  bd.style.setProperty('--vw',w.toFixed(1)+'px');bd.style.setProperty('--vh',h.toFixed(1)+'px');bd.style.setProperty('--cols',cols);bd.style.setProperty('--gap',gap.toFixed(1)+'px');}
 function act25(a,t){if(A25.lock&&a!=='x')return;const P=S.apo25;
- if(a==='x'){if(A25.view==='puz'&&P&&!P.fin){A25.view='shelf';A25.sel=-1;paint25();return;}closeApo25();}
- else if(a==='p'){const b=+t.dataset.b;if(!(S.stash['imp'+b]>0))return;if(P&&!P.fin){toast('Finish the bottle on the bench first.');A25.view='puz';paint25();return;}S.stash['imp'+b]--;S.apo25=gen25(b);A25.undo=[];A25.sel=-1;A25.view='puz';paint25();if(typeof save==='function')save();}
+ if(a==='x'){if(A25.lock)return;if(A25.view==='puz'&&P&&!P.fin){A25.view='shelf';A25.sel=-1;paint25();return;}closeApo25();}
+ else if(a==='p'){const b=+t.dataset.b;if(!(S.stash['imp'+b]>0))return;if(P&&!P.fin){toast('Finish the brew on the bench first.');A25.view='puz';paint25();return;}S.stash['imp'+b]--;S.apo25=gen25(b);A25.sel=-1;A25.view='puz';paint25();sv25();}
  else if(a==='c'){A25.view='puz';paint25();}
- else if(a==='n'){S.apo25=null;const b=[5,4,3,2,1].find(x=>S.stash['imp'+x]>0);if(b){S.stash['imp'+b]--;S.apo25=gen25(b);A25.undo=[];A25.view='puz';}else A25.view='shelf';paint25();}
+ else if(a==='n'){S.apo25=null;const b=[5,4,3,2,1].find(x=>S.stash['imp'+x]>0);if(b){S.stash['imp'+b]--;S.apo25=gen25(b);A25.view='puz';}else A25.view='shelf';A25.sel=-1;paint25();sv25();}
  else if(a==='sh'){S.apo25=null;A25.view='shelf';paint25();}
- else if(a==='u'&&P&&A25.undo.length&&!P.fin){P.v=A25.undo.pop();P.moves=Math.max(0,P.moves-1);A25.sel=-1;paint25();}
- else if(a==='r'&&P&&!P.fin){P.v=P.init.map(x=>x.slice());A25.undo=[];P.moves=0;A25.sel=-1;paint25();}
  else if(a==='v'&&P&&!P.fin)tapV25(+t.dataset.i);}
+const sv25=()=>{if(typeof save==='function'&&!window.SIM_MODE)try{save();}catch(e){}};
 function vEl25(i){return A25.bd.querySelectorAll('.v25')[i];}
-function tapV25(i){const P=S.apo25,s=A25.sel;if(s<0){const a=P.v[i];if(!a.length||(a.length===CAPV25&&a.every(x=>x===a[0])))return;A25.sel=i;vEl25(i).classList.add('sel');vib25(5);return;}
- vEl25(s).classList.remove('sel');A25.sel=-1;if(s===i)return;if(!canPour25(P.v,s,i)){const e=vEl25(i);e.classList.remove('no');void e.offsetWidth;e.classList.add('no');vib25([4,30,4]);return;}pour25(s,i);}
-function pour25(i,j){const P=S.apo25,m=pourN25(P.v,i,j),c=P.v[i][P.v[i].length-1],col=colOf25(c).c;A25.lock=true;A25.undo.push(P.v.map(x=>x.slice()));if(A25.undo.length>60)A25.undo.shift();
+// selecting is free; a pour that can't happen, or one that makes the brew impossible, ruins it
+function tapV25(i){const P=S.apo25,s=A25.sel;if(s<0){const a=P.v[i];if(!a.length||fullV25(a))return;A25.sel=i;vEl25(i).classList.add('sel');vib25(5);return;}
+ vEl25(s).classList.remove('sel');A25.sel=-1;if(s===i)return;if(!canPour25(P.v,s,i)){fail25(P.v[i].length>=CAPV25?'full':'mix',s,i);return;}pour25(s,i);}
+function pour25(i,j){const P=S.apo25,m=pourN25(P.v,i,j),c=P.v[i][P.v[i].length-1],col=colOf25(c).c;A25.lock=true;
  const src=vEl25(i),dst=vEl25(j),br=A25.bd.getBoundingClientRect(),sr=src.getBoundingClientRect(),dr=dst.getBoundingClientRect();const left=dr.left<sr.left;
  const tx=(dr.left+dr.width/2-(sr.left+sr.width/2))*.45,lift=Math.min(36,sr.height*.18);src.style.setProperty('--tx',tx.toFixed(1)+'px');src.style.setProperty('--ty',(-lift).toFixed(1)+'px');src.style.setProperty('--rot',(left?-1:1)*38+'deg');src.classList.add('pour');
- const from=P.v[i].length,to=P.v[j].length;for(let t=0;t<m;t++)P.v[j].push(P.v[i].pop());P.moves++;
+ const from=P.v[i].length,to=P.v[j].length;for(let t=0;t<m;t++)P.v[j].push(P.v[i].pop());P.moves++;sv25();
  const RMo=typeof RM23==='function'&&RM23(),T1=RMo?40:150,T2=RMo?120:360,T3=RMo?160:470;
  setTimeout(()=>{const sx=sr.left+sr.width/2+tx-br.left,sy=sr.top-lift-br.top+4,ex=dr.left+dr.width/2-br.left,ey=dr.top-br.top+dr.height*(1-to/CAPV25)-dr.height*.04;
   const sv=A25.bd.querySelector('.a25sv');const cx=(sx+ex)/2,cy=Math.min(sy,ey-20)-Math.abs(ex-sx)*.12;
@@ -4409,19 +4451,40 @@ function pour25(i,j){const P=S.apo25,m=pourN25(P.v,i,j),c=P.v[i][P.v[i].length-1
   const gl=dst.querySelector('.gl25');for(let t=0;t<m;t++){gl.insertAdjacentHTML('beforeend',cell25(c,to+t,'in'));gl.lastElementChild.style.animationDelay=(60+t*55)+'ms';}
   glug25(m);vib25(8);},T1);
  setTimeout(()=>{src.classList.remove('pour');const p=A25.bd&&A25.bd.querySelector('.st25');if(p)p.classList.add('off');},T2);
- setTimeout(()=>{A25.lock=false;if(!A25.on||A25.view!=='puz')return;const sv=A25.bd.querySelector('.a25sv');sv.innerHTML='';src.outerHTML=vial25(i);dst.outerHTML=vial25(j);const ft=A25.el.querySelector('[data-a25=u]');if(ft)ft.disabled=false;
-  A25.el.querySelector('.a25ft .small').textContent=`Moves ${P.moves} · Impure ${['I','II','III','IV','V'][P.b-1]}`;check25(j);},T3);}
-function check25(j){const P=S.apo25,a=P.v[j];if(a.length===CAPV25&&a.every(x=>x===a[0])&&!P.done.includes(a[0])){const id=a[0];P.done.push(id);const e=vEl25(j);
-  if(POT25[id]){S.stash[id]=(S.stash[id]||0)+1;ST25.yield[id]=(ST25.yield[id]||0)+1;ding25();vib25([10,40,18]);spark25(e,colOf25(id).c,`+1 ${nameOf25(id)}`);}else spark25(e,'#9a8f80','sludge, tossed',1);
+ setTimeout(()=>{A25.lock=false;if(!A25.on||A25.view!=='puz')return;A25.bd.querySelector('.a25sv').innerHTML='';src.outerHTML=vial25(i);dst.outerHTML=vial25(j);
+  A25.el.querySelector('.a25mv').textContent=`Pours ${P.moves}`;check25(j);},T3);}
+function check25(j){const P=S.apo25,a=P.v[j];if(fullV25(a)&&!P.done.includes(a[0])){const id=a[0];P.done.push(id);const e=vEl25(j);
+  if(POT25[id]){ding25();vib25([10,40,18]);spark25(e,colOf25(id).c,`${nameOf25(id)} ✓`);}else spark25(e,'#9a8f80','sludge',1);
   const lg=A25.el.querySelectorAll('.lg25')[P.ids.indexOf(id)];if(lg){lg.classList.add('ok');lg.lastChild.textContent+=' ✓';}}
- if(solved25(P.v)){P.fin=1;ST25.solved++;setTimeout(fin25,RM23()?50:650);if(typeof save==='function')save();}else stuck25();}
+ if(goal25(P.ids)(P.v))filter25();else if(dead25(P))fail25('dead',-1,j);}
 function spark25(e,c,txt,dull){const r=document.createElement('span');r.className='sp25'+(dull?' dull':'');r.style.setProperty('--c',c);let h='';if(!dull&&!RM23())for(let k=0;k<10;k++)h+=`<i style="--a:${k*36+Math.random()*20}deg;--d:${26+Math.random()*22}px"></i>`;r.innerHTML=h+`<b>${txt}</b>`;e.appendChild(r);setTimeout(()=>r.remove(),1400);}
-function stuck25(){const P=S.apo25,m=A25.bd&&A25.bd.querySelector('.a25msg');if(!m)return;let any=false;for(let i=0;i<P.v.length&&!any;i++)for(let j=0;j<P.v.length;j++)if(canPour25(P.v,i,j)&&!(P.v[j].length===0&&runOf25(P.v[i])===P.v[i].length)){any=true;break;}
- m.className='a25msg'+(any?'':' on');m.innerHTML=any?'':'No pours left. ↶ Undo or ⟲ Restart.';}
-function fin25(){const P=S.apo25,m=A25.bd&&A25.bd.querySelector('.a25msg');if(!m)return;const got=P.ids.filter(id=>POT25[id]);const more=impCount25();
- m.className='a25msg on fin';m.innerHTML=`<div class="a25win"><b>✨ Purified!</b><div>${got.map(id=>chip25(id,1)).join('')}</div><div class="small">Bottled in ${P.moves} pours. Stored at camp.</div>
- <div class="row">${more?`<button class="btn gold" data-a25="n">Next (🫙 ${more})</button>`:''}<button class="btn" data-a25="sh">Shelf</button></div></div>`;}
-document.addEventListener('keydown',e=>{if(!A25.on)return;if(e.key==='Escape'){act25('x');e.stopPropagation();}else if(e.key==='z'||e.key==='u'){act25('u');e.stopPropagation();}},true);
+// ---- failure: the brew fizzles into smoke and the impure potion is lost (nothing bottled, not even finished vials)
+const FAIL25={mix:'Wrong pour: those don\'t mix.',full:'That vial was already full.',dead:'That pour sealed it: this brew can no longer be purified.'};
+function fail25(kind,s,i){const P=S.apo25;P.fin=1;P.failed=kind;A25.lock=true;A25.sel=-1;const st=stat25();st.fails++;st.brews++;sv25();
+ const bd=A25.bd;bd.classList.add('fz25');if(!RM23())bd.querySelectorAll('.v25').forEach((e,k)=>{for(let q=0;q<3;q++){const p=document.createElement('span');p.className='sm25';p.style.cssText=`--dx:${(Math.random()*30-15).toFixed(0)}px;animation-delay:${k*50+q*140}ms`;e.appendChild(p);}});
+ [i,s].forEach(x=>{const e=x>=0&&vEl25(x);if(e)e.classList.add('bad');});
+ if(typeof tone23==='function'){tone23(220,.5,'sawtooth',.12,0,55);tone23(160,.6,'triangle',.1,.1,40);}vib25([30,60,30,60,80]);
+ setTimeout(()=>{A25.lock=false;result25();},RM23()?200:1300);}
+// ---- success: the murk filters away, then the grade
+function filter25(){const P=S.apo25;P.fin=1;A25.lock=true;let k=0;A25.bd.querySelectorAll('.v25').forEach((e,vi)=>{const a=P.v[vi];if(!a.length||POT25[a[0]]&&fullV25(a))return;e.classList.add('flt');e.style.setProperty('--fd',(k++*110)+'ms');});
+ if(typeof tone23==='function')[523,659,784].forEach((f,q)=>tone23(f,.25,'sine',.08,q*.12));
+ setTimeout(()=>{P.v=P.v.map(a=>a.length&&POT25[a[0]]&&fullV25(a)?a:[]);A25.lock=false;bank25();result25();},RM23()?150:900+k*110);}
+const GR25={MAX:{c:'#ffd76a',t:'Masterwork!',d:'Not a single wasted pour.'},S:{c:'#ff9ad8',t:'Superb',d:'One pour off perfect.'},A:{c:'#7fd6ff',t:'Clean work',d:'A steady hand.'},B:{c:'#9be37a',t:'Good',d:'A few wasted pours.'},C:{c:'#c8b8a0',t:'Messy, but it works',d:'Plenty of wasted pours.'}},ORD25=['C','B','A','S','MAX'];
+function grade25(P){const d=P.moves-P.par;return d<=0?'MAX':d<=1?'S':d<=Math.max(2,Math.ceil(P.par*.2))?'A':d<=Math.max(4,Math.ceil(P.par*.5))?'B':'C';}
+function stat25(){return S.apoSt25=S.apoSt25||{brews:0,fails:0,max:0,best:null};}
+function bank25(){const P=S.apo25;if(P.banked)return;P.banked=1;P.grade=grade25(P);const got=P.ids.filter(id=>POT25[id]);got.forEach(id=>{S.stash[id]=(S.stash[id]||0)+1;ST25.yield[id]=(ST25.yield[id]||0)+1;});
+ if(P.grade==='MAX'){const h=got.find(x=>HEAL25.includes(x))||got[0];S.stash[h]=(S.stash[h]||0)+1;P.bonus=h;}
+ const st=stat25();st.brews++;if(P.grade==='MAX')st.max++;P.newBest=!st.best||ORD25.indexOf(P.grade)>ORD25.indexOf(st.best);if(P.newBest)st.best=P.grade;ST25.solved++;sv25();}
+function result25(){const P=S.apo25,m=A25.bd&&A25.bd.querySelector('.a25msg');if(!m)return;const more=impCount25(),st=stat25();
+ const btn=`<div class="row">${more?`<button class="btn gold" data-a25="n">Next brew (🫙 ${more})</button>`:''}<button class="btn" data-a25="sh">Shelf</button></div>`;
+ if(P.failed){m.className='a25msg on fin res25 lose';m.innerHTML=`<div class="a25win"><div class="rk25 f">💨</div><b>The brew fizzled</b><div>${FAIL25[P.failed]}</div><div class="small">The impure potion is lost. Nothing was bottled.</div>${btn}</div>`;return;}
+ const g=P.grade||grade25(P),G=GR25[g],got=P.ids.filter(id=>POT25[id]);
+ m.className='a25msg on fin res25'+(g==='MAX'?' max':'');m.style.setProperty('--gc',G.c);
+ m.innerHTML=`<div class="a25win">${g==='MAX'&&!RM23()?'<div class="ry25"></div>'+Array.from({length:16},(_,k)=>`<i class="cf25" style="--a:${k*22.5}deg;--d:${70+Math.random()*50}px;--c:${['#ffd76a','#ff9ad8','#7fd6ff','#9be37a'][k%4]}"></i>`).join(''):''}
+ <div class="rk25">${g}</div><b>${G.t}</b><div class="small">${G.d} ${P.moves} pours · best possible ${P.par}</div><div>${got.map(id=>chip25(id,1)).join('')}${P.bonus?`<span class="ch25 bonus" style="--c:${colOf25(P.bonus).c}"><i></i>+1 ${nameOf25(P.bonus)} (MAX bonus)</span>`:''}</div>
+ <div class="small">${P.newBest?'🏅 New best rank! · ':''}Best ${st.best} · MAX brews ${st.max} · Ruined ${st.fails}</div>${btn}</div>`;
+ if(g==='MAX'){vib25([20,40,20,40,60]);if(typeof tone23==='function')[523,659,784,1047].forEach((f,q)=>tone23(f,.6,'triangle',.12,q*.09));}}
+document.addEventListener('keydown',e=>{if(!A25.on)return;if(e.key==='Escape'){act25('x');e.stopPropagation();}},true);
 // ---- hooks: the camp bench, the building panel, the hero sheet, the camp hint
 {const _tp=tapTile;tapTile=function(x,y){if(S.phase==='camp'||camV24()){const [bx,by]=CAMP_POS.apothecary,d=Math.hypot(bx-(x*TS+12),by-(y*TS+12));let best=1e9;for(const id in CAMP_POS){const p=CAMP_POS[id];best=Math.min(best,Math.hypot(p[0]-(x*TS+12),p[1]-(y*TS+12)));}
   if(d<36&&d<=best+.01){openApo25();return;}}return _tp.apply(this,arguments);};}
@@ -4441,11 +4504,11 @@ document.addEventListener('pointerdown',e=>{const t=e.target.closest('[data-act=
  if(n){const bx=x+15,by=y-16,pu=1+Math.sin(T/12)*.06;cx.save();cx.translate(bx,by);cx.scale(pu,pu);cx.fillStyle='#2a1d12';cx.beginPath();cx.arc(0,0,7,0,6.283);cx.fill();cx.strokeStyle='#ffd76a';cx.lineWidth=1;cx.stroke();
   cx.fillStyle='#ffd76a';cx.font='bold 7px system-ui';cx.textAlign='center';cx.textBaseline='middle';cx.fillText(n>99?'99':n,0,.5);cx.restore();cx.textBaseline='alphabetic';}};}
 // impure potions don't feed the camp's "carry potions" logic, and older saves gain the bench state
-{const _ld=load;load=function(){const r=_ld.apply(this,arguments);try{if(S&&S.apo25&&!S.apo25.v)S.apo25=null;}catch(e){}return r;};}
-window.APO25={gen25,solve25,canPour25,pourN25,solved25,recipe25,drinkImpure25,usePotion25,drinkHeal25,apoAuto25,openApo25,closeApo25,A25,POT25,GAMBLE25,band25};
+{const _ld=load;load=function(){const r=_ld.apply(this,arguments);try{if(S&&S.apo25&&!S.apo25.v)S.apo25=null;if(S&&S.apo25&&S.apo25.par==null)S.apo25.par=par25(S.apo25.v,goal25(S.apo25.ids))||S.apo25.moves+20;}catch(e){}return r;};}
+window.APO25={gen25,solve25,par25,goal25,dead25,grade25,moves25,app25,canPour25,pourN25,solved25,recipe25,drinkImpure25,usePotion25,drinkHeal25,apoAuto25,openApo25,closeApo25,A25,POT25,GAMBLE25,band25};
 // How to Play: the Apothecary card (after "Home sweet camp")
 if(typeof HTP!=='undefined'){const i=HTP.findIndex(x=>x.t==='Home sweet camp');HTP.splice(i<0?HTP.length-1:i+1,0,{a:'<div class="hart">🫙<span>🧪</span></div>',t:'The Apothecary',
- p:['Every potion found below is <b>🫙 impure</b>. At camp, tap the <b>⚗️ Apothecary</b>: tap a vial, then where to pour. One colour per vial bottles a real potion.',
+ p:['Every potion found below is <b>🫙 impure</b>. At camp, tap the <b>⚗️ Apothecary</b>: tap a vial, then where to pour. Fill a vial with one colour to bottle it. <b>No do-overs:</b> one wrong pour ruins the brew.',
  'Pinks to crimson heal (I–V); also 🛡️ Shield, 🔥 Fire, ⚡ Speed, ☠️ Poison, 👻 Invisibility, 💢 Fury. Deeper finds are richer.',
  'Drinking one impure is a gamble: big heal, tiny hero… or an explosion.']});}
 // ---- everything found below is impure: drops, chests, events, the dungeon merchant (camp-made potions, the god's own gifts and the Porter's weak field brew are the exceptions)
