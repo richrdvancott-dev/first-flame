@@ -297,6 +297,45 @@ body,#app{font-variant-numeric:tabular-nums}#pw,#ak{display:inline-block;min-wid
 @media (prefers-reduced-motion:reduce){#shr23,#shr23 canvas,.s23pn{transition:opacity .2s!important;transform:none!important}.s23card,.s23card *,.s23sum,.s23sum *,.s23big,.shr23b.pulse{animation:none!important}}
 #view24.al24{animation:al24 1.2s ease-in-out infinite}@keyframes al24{0%,100%{box-shadow:0 0 0 #f44}50%{box-shadow:0 0 12px #f44}}@media (prefers-reduced-motion:reduce){#view24.al24{animation:none;border-color:#f66}}
 @media (max-width:480px){#shr23top{display:none}}
+
+/* v25 apothecary */
+#apo25{position:fixed;inset:0;z-index:70;display:none;align-items:stretch;justify-content:center;background:radial-gradient(ellipse at 50% 30%,#3a2a1c 0%,#1a120c 60%,#0b0806 100%);opacity:0;transition:opacity .2s;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);touch-action:manipulation;user-select:none;-webkit-user-select:none}
+#apo25.in{opacity:1}
+.a25in{display:flex;flex-direction:column;width:100%;max-width:980px;height:100%;padding:8px 10px;box-sizing:border-box;gap:6px}
+.a25hd{display:flex;align-items:center;gap:10px;flex:0 0 auto}.a25hd b{flex:1;text-align:center;font-size:17px;color:#f3d9a6}.a25cnt{min-width:64px;text-align:right;color:#ffd76a;font-weight:700}
+.a25hd .btn,.a25ft .btn{min-height:44px;min-width:88px}
+.a25leg{display:flex;flex-wrap:wrap;gap:4px 8px;justify-content:center;flex:0 0 auto;min-height:22px}
+.lg25,.ch25{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:#e8dcc8;background:#0006;border-radius:10px;padding:2px 8px 2px 4px;white-space:nowrap}
+.lg25 i,.ch25 i{width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:0 0 0 1px #fff5 inset}.lg25.mk{opacity:.6}.lg25.ok{background:#3b5a2a99;color:#dfffc8}.ch25{margin:2px}
+.a25bd{position:relative;flex:1 1 auto;min-height:0;display:grid;grid-template-columns:repeat(var(--cols,5),var(--vw,56px));justify-content:center;align-content:center;gap:calc(var(--gap,14px) + 10px) var(--gap,14px)}
+.a25sv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:5}
+.st25{fill:none;stroke-width:6;stroke-linecap:round;stroke-dasharray:400;stroke-dashoffset:400;animation:st25 .16s ease-out forwards;opacity:.95}.st25.off{transition:opacity .1s;opacity:0}
+@keyframes st25{to{stroke-dashoffset:0}}
+.v25{position:relative;width:var(--vw,56px);height:calc(var(--vh,170px) + 18px);padding:14px 0 4px;margin:0;border:0;background:none;cursor:pointer;transform:translate(0,0);transition:transform .14s ease-out;transform-origin:50% 14px;-webkit-tap-highlight-color:transparent}
+.v25.sel{transform:translateY(-16px)}
+.v25.pour{transform:translate(var(--tx),var(--ty)) rotate(var(--rot));transition:transform .15s ease-out;z-index:6}
+.v25.no{animation:no25 .28s}@keyframes no25{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.gl25{position:relative;display:block;width:100%;height:var(--vh,170px);box-sizing:border-box;border:3px solid #dce8f2aa;border-top-width:2px;border-radius:6px 6px calc(var(--vw,56px)/2) calc(var(--vw,56px)/2);overflow:hidden;background:linear-gradient(90deg,#ffffff10,#ffffff26 30%,#ffffff08 60%,#0000)}
+.gl25:after{content:'';position:absolute;left:18%;top:6%;width:12%;height:70%;border-radius:4px;background:#ffffff30;pointer-events:none}
+.c25{position:absolute;left:0;right:0;bottom:calc(var(--j)*25%);height:25%;background:var(--c);display:flex;align-items:center;justify-content:center;font:700 13px system-ui;font-style:normal;box-shadow:0 -1px 0 #0003 inset}
+.c25.out{animation:out25 .2s ease-in forwards;transform-origin:50% 0}.c25.in{transform:scaleY(0);transform-origin:50% 100%;animation:in25 .2s ease-out forwards}
+@keyframes out25{to{transform:scaleY(0)}}@keyframes in25{to{transform:scaleY(1)}}
+.v25 em{position:absolute;left:-12px;right:-12px;bottom:-14px;font:700 10px system-ui;font-style:normal;color:#ffe9a8;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v25.done .gl25{border-color:#ffe08a;box-shadow:0 0 14px #ffd76a66}.v25.done.mk .gl25{border-color:#888;box-shadow:none;opacity:.55}.v25.mk em{color:#999}
+.sp25{position:absolute;left:50%;top:40%;pointer-events:none;z-index:7}.sp25 i{position:absolute;width:6px;height:6px;margin:-3px;border-radius:50%;background:#fff;box-shadow:0 0 6px var(--c);animation:sp25 .7s ease-out forwards}
+@keyframes sp25{from{transform:rotate(var(--a)) translateY(0) scale(1.2);opacity:1}to{transform:rotate(var(--a)) translateY(calc(-1*var(--d))) scale(.2);opacity:0}}
+.sp25 b{position:absolute;left:50%;top:-30px;transform:translateX(-50%);white-space:nowrap;font:700 12px system-ui;color:#fff;text-shadow:0 1px 3px #000;animation:up25 1.3s ease-out forwards}.sp25.dull b{color:#aaa}
+@keyframes up25{from{opacity:0;margin-top:6px}20%{opacity:1}to{opacity:0;margin-top:-26px}}
+.a25msg{position:absolute;left:50%;bottom:0;transform:translateX(-50%);display:none;z-index:8;color:#ffd9a0;font-size:13px;background:#000a;border-radius:10px;padding:6px 12px;text-align:center}.a25msg.on{display:block}
+.a25msg.fin{top:50%;bottom:auto;transform:translate(-50%,-50%);background:#2a1d12f2;border:1px solid #ffd76a88;padding:14px 18px;animation:pop25 .3s ease-out}
+@keyframes pop25{from{opacity:0;transform:translate(-50%,-50%) scale(.85)}}
+.a25win>b{display:block;font-size:20px;color:#ffe08a;margin-bottom:6px}.a25win .row{justify-content:center;gap:8px;margin-top:8px}.a25win .btn{min-height:44px;min-width:110px}
+.a25ft{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:0 0 auto}.a25ft .small{text-align:center;flex:1}
+.a25shelf{overflow:auto;flex:1;color:#e8dcc8;max-width:620px;width:100%;margin:0 auto}.a25shelf h4{margin:12px 0 6px;color:#f3d9a6}
+.a25row{display:flex;align-items:center;gap:10px;background:#0005;border-radius:10px;padding:8px 10px;margin:6px 0}.a25row>div{flex:1}.a25row .btn{min-height:44px;min-width:90px}
+.a25j{font-size:26px;filter:hue-rotate(calc(var(--b)*40deg))}.a25cont{width:100%;min-height:44px;margin-top:8px}.a25warn{margin-top:14px;opacity:.8}
+.pb25{display:flex;flex-wrap:wrap;gap:2px;margin:4px 0}.imp25b{width:100%;margin:4px 0}.imp25b.arm{background:#8a1c1c;color:#fff}
+@media (prefers-reduced-motion:reduce){.v25,.v25.pour{transition:none}.c25.out,.c25.in,.st25,.sp25 b{animation-duration:.01s}}
 </style><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(r=>r.update()));
@@ -875,7 +914,7 @@ function heroTick(h){
   else{if(watching()&&!h.req&&S.tick-S.lastReq>5)makeReq(h,it==='ration'?'food':'water',it==='ration'?'I\'m starving. Please, anything to eat...':'Water... please, I\'m so thirsty.');
    if(!alive().some(o=>countItem(o,it))&&S.phase==='dungeon'&&!S.cmdReturn&&campHas(it)){S.cmdReturn=true;alive().forEach(o=>o.cmd={k:'descend',t:60});say(leaderHero(),'We\'re out of supplies. Straight to the stairs, then home!');}}}
  // consumables
- if(hpR<potionAt(h)&&countItem(h,'potion')){takeItem(h,'potion',1);h.hp=Math.min(M,h.hp+Math.round(M*.5));log(`${h.name} drinks a potion.`,h);return;}
+ if(hpR<potionAt(h)&&countItem(h,'potion')){const p=typeof drinkHeal25==='function'?drinkHeal25(h,1-hpR):(takeItem(h,'potion',1),{f:.5,n:'potion'});h.hp=Math.min(M,h.hp+Math.round(M*p.f));log(`${h.name} drinks a ${p.n}.`,h);return;}
  const ps=alive();const partyHp=ps.reduce((a,x)=>a+x.hp/mhp(x),0)/ps.length;
  if(partyHp<.28&&!campStalled()&&countItem(h,'scroll')&&!ps.some(x=>countItem(x,'potion'))&&S.phase==='dungeon'){takeItem(h,'scroll',1);log(`📜 ${h.name} reads a Return Scroll! The party is whisked home.`,h);say(h,'We\'re leaving. NOW.');S.pendingCamp=true;return;}
  // pray
@@ -3456,7 +3495,7 @@ TIERS.forEach(t=>{t.cap=5;t.unlock=t.unlock.map(u=>/^Party of/.test(u)?'Stronger
 // per-class speeds, continuous interpolation, smooth turn-to-face =====================
 const SPD_CLS={Rogue:1.25,Ranger:1.2,Mage:1,Cleric:1,Bard:1,Necromancer:1,Warrior:.95,Paladin:.9};
 const SPD_ARCH={charger:1.35,flanker:1.25,critter:1.1,swarm:1,ranged:.9,brute:.7,chonk:.65};
-const spdOf=u=>u.t==='mob'?(u.boss?.6:(SPD_ARCH[archOf10(u)]||1)*(u.aff&&u.aff.includes('swift')?1.2:1)):u.t==='ally'?1:(SPD_CLS[u.cls]||1);
+const spdOf=u=>u.t==='mob'?(u.boss?.6:(SPD_ARCH[archOf10(u)]||1)*(u.aff&&u.aff.includes('swift')?1.2:1)):u.t==='ally'?1:(SPD_CLS[u.cls]||1)*(u.haste25>0?1.35:1)*(u.slow25>0?.6:1);
 const RT={retarget:0,held:0};window.RT12=RT;
 // path commitment + hysteresis + flip-flop guard, all inside stepToward
 const _sT12=stepToward;stepToward=function(u,tx,ty,isH){
@@ -4211,6 +4250,202 @@ function drawCampAway24(){const ph=S.phase,hs=S.heroes;S.phase='camp';S.heroes=[
  if(b.textContent!==t)b.textContent=t;b.title=c?'The party is at camp':away?'Watch the dungeon':'Visit camp (the party keeps exploring)';b.classList.toggle('off',c);b.classList.toggle('al24',!!al);b.setAttribute('aria-pressed',away?'true':'false');};}
 document.addEventListener('pointerdown',ev=>{const b=ev.target.closest('#view24');if(!b)return;ev.preventDefault();ev.stopPropagation();setView24(camV24()?null:'camp');},true);
 window.setView24=setView24;window.atCamp24=atCamp24;
+
+</script>
+<script>
+'use strict';
+// v25: the Apothecary. Heroes haul back IMPURE potions (the most common find). At camp the player purifies them in a
+// sort puzzle: pour the top layer onto the same colour or into an empty vial; a vial full of one colour is done.
+// Every pure colour yields that potion into storage; murky sludge yields nothing. Deeper impure potions mean more colours,
+// higher healing tiers and rarer kinds. Drinking an impure potion straight is a dangerous gamble.
+// ---- potions
+const POT25={
+ potion:{c:'#ffb3c1',g:'I',k:'heal',f:.5},potion2:{n:'Healing Draught',c:'#ff7f98',g:'II',k:'heal',f:.6},potion3:{n:'Greater Healing',c:'#f0405f',g:'III',k:'heal',f:.7},
+ potion4:{n:'Superior Healing',c:'#b51f3c',g:'IV',k:'heal',f:.85},potion5:{n:'Supreme Healing',c:'#6f0d25',g:'V',k:'heal',f:1},
+ pshield:{n:'Shield Potion',ic:'🛡️',c:'#3fa9ff',g:'◆',k:'shield'},pfire:{n:'Fire Bomb',ic:'🔥',c:'#ff8a1f',g:'✹',k:'fire'},pspeed:{n:'Speed Potion',ic:'⚡',c:'#ffe14a',g:'»',k:'speed'},
+ ppoison:{n:'Poison Coating',ic:'☠️',c:'#7ed321',g:'☣',k:'poison'},pinvis:{n:'Invisibility',ic:'👻',c:'#e3ecf7',g:'◌',k:'invis'},pdmg:{n:'Fury Tonic',ic:'💢',c:'#a64dff',g:'✦',k:'dmg'}};
+const MURK25=[{id:'murk',n:'Sludge',c:'#6b5a46',g:'≈'},{id:'ash',n:'Ash',c:'#5b6170',g:'∴'},{id:'bile',n:'Bile',c:'#7d7a2f',g:'~'}];
+const HEAL25=['potion','potion2','potion3','potion4','potion5'],UTIL25=['pshield','pfire','pspeed','ppoison','pinvis','pdmg'];
+for(const id in POT25)if(id!=='potion')ITEMS[id]={n:POT25[id].n,ic:POT25[id].ic||'🧪',kind:'cons',val:8+HEAL25.indexOf(id)*4,stack:5};
+for(let b=1;b<=5;b++)ITEMS['imp'+b]={n:`Impure Potion ${['I','II','III','IV','V'][b-1]}`,ic:'🫙',kind:'cons',val:3+b,stack:5};
+const isImp25=id=>/^imp[1-5]$/.test(id),band25=f=>Math.min(5,1+Math.floor((Math.max(1,f)-1)/6));
+// 'potion' in old code means "any healing potion": count all tiers, spend the lowest first
+{const _c=countItem;countItem=function(h,id){return id==='potion'?HEAL25.reduce((a,x)=>a+_c(h,x),0):_c(h,id);};
+ const _t=takeItem;takeItem=function(h,id,q){if(id!=='potion')return _t(h,id,q);let got=0;for(const x of HEAL25){if(got>=q)break;got+=_t(h,x,q-got);}return got;};
+ window.countRaw25=_c;window.takeRaw25=_t;}
+// a hurt hero drinks the smallest tier that does the job (else the strongest they have)
+function drinkHeal25(h,need){const have=HEAL25.filter(x=>countRaw25(h,x));if(!have.length)return null;const id=have.find(x=>POT25[x].f>=need+.1)||have[have.length-1];takeRaw25(h,id,1);
+ if(id==='potion5'){h.poison=0;}return{f:POT25[id].f*(S.phase==='dungeon'?deepP25():1),n:ITEMS[id].n};}
+// ---- utility potions in the dungeon: one every few ticks, only when it makes sense
+const deepP25=()=>S.floor<=20?1:Math.max(.55,1-(S.floor-20)*.03);
+const USE25={
+ pshield:h=>(h.hp/mhp(h)<.55&&near17(h,2).length>=2||near17(h,3).some(e=>e.boss))&&!(h.ward25>0),
+ pfire:h=>!!fireTarget25(h),pspeed:h=>!(h.haste25>0)&&(near17(h,4).some(e=>e.boss||e.elite)||near17(h,3).length>=3),
+ ppoison:h=>!(h.coat25>0)&&near17(h,CLASSES[h.cls].range+1).some(e=>e.boss||e.elite||e.mhp>=mhp(h)*1.5),
+ pinvis:h=>!(h.vanish>0)&&h.hp/mhp(h)<.25&&near17(h,1).length>=1&&!countItem(h,'potion'),pdmg:h=>!(h.fury25>0)&&near17(h,3).some(e=>e.boss||e.elite)};
+function fireTarget25(h){const ms=near17(h,4);return ms.find(e=>e.boss||ms.filter(o=>mdist(o,e)<=1).length>=3)||null;}
+function usePotion25(h,id,quiet){const P=POT25[id],nm=ITEMS[id].n;if(!takeRaw25(h,id,1))return false;h.pcd25=5;
+ switch(P.k){case 'shield':h.ward25=8;break;case 'speed':h.haste25=8;break;case 'poison':h.coat25=4;break;case 'invis':h.vanish=5;break;case 'dmg':h.fury25=8;break;
+  case 'fire':{const tg=fireTarget25(h)||near17(h,4)[0];if(tg){const d=Math.round((20+S.floor*5)*deepP25());near17(tg,1).concat(tg.t==='mob'&&!near17(tg,1).includes(tg)?[tg]:[]).forEach(o=>dmgMob(o,d,h));if(FXON()&&typeof burst==='function')burst(tg.x*TS+12,tg.y*TS+12,'#ff8a1f',26,2.4,40);}break;}}
+ if(!quiet&&!offline){log(`${ITEMS[id].ic} ${h.name} ${P.k==='fire'?'hurls':'drinks'} a ${nm}!`,h);if(chance(.35))say(h,{shield:'Skin like iron. Come on, then.',speed:'Everything is so SLOW.',poison:'A little something on the blade.',invis:'You can\'t see me. Right? RIGHT?',dmg:'I feel like punching a mountain.',fire:'Catch!'}[P.k]);}
+ return true;}
+{const _ht=heroTick;heroTick=function(h){if(h&&h.alive&&!h.downed){for(const k of ['pcd25','ward25','haste25','fury25','slow25','conf25'])if(h[k]>0)h[k]--;
+  if(h.conf25>0&&S.phase==='dungeon'&&chance(.5)){if(chance(.15))say(h,pick(['Why is the floor singing?','Who keeps moving the walls?','I can taste colours.']));return;}
+  if(S.phase==='dungeon'&&!(h.pcd25>0))for(const id of UTIL25)if(countRaw25(h,id)){let ok=false;try{ok=USE25[id](h);}catch(e){}if(ok&&usePotion25(h,id))break;}
+  if(S.phase==='dungeon'&&!(h.pcd25>0))gamble25(h);}
+ return _ht.apply(this,arguments);};}
+{const _hu=hurtHero;hurtHero=function(h,d,src,how){if(h&&h.ward25>0)d=d*.65;return _hu.call(this,h,d,src,how);};}
+{const _ha=heroAtk;heroAtk=function(h,e){let a=_ha.apply(this,arguments);if(h.fury25>0)a*=1+.3*deepP25();if(h.haste25>0)a*=1+.2*deepP25();if(h.slow25>0)a*=.6;return a;};}
+let PD25=0;
+{const _dm=dmgMob;dmgMob=function(e,d,h){const r=_dm.apply(this,arguments);if(!PD25&&h&&h.coat25>0&&e&&e.hp>0&&S.ents.includes(e)){h.coat25--;e.pois25=5;e.poisBy25=h.id;e.poisD25=Math.max(2,Math.round(heroAtk(h,e)*.3));}return r;};}
+{const _mt=mobTick;mobTick=function(){for(const e of S.ents.slice())if(e.t==='mob'&&e.pois25>0){e.pois25--;PD25=1;try{dmgMob(e,e.poisD25||2,heroById(e.poisBy25)||alive()[0]);}finally{PD25=0;}}return _mt.apply(this,arguments);};}
+// ---- the gamble: drinking an impure potion straight
+const GAMBLE25=[
+ [16,'heal',(h,M)=>{h.hp=M;h.poison=0;return `It tastes like lightning and strawberries. ${h.name} feels INCREDIBLE.`;}],
+ [16,'buff',h=>{const k=pick(['ward25','haste25','fury25']);h[k]=10;return {ward25:`${h.name}'s skin turns to bark. Sturdy, slightly mossy bark.`,haste25:`${h.name} vibrates. Visibly. Constantly.`,fury25:`${h.name}'s eyes glow red. Nobody wants to stand near them now.`}[k];}],
+ [14,'confused',h=>{h.conf25=8;return `${h.name} is having a deep conversation with a wall. The wall is winning.`;}],
+ [14,'poison',h=>{h.poison=(h.poison||0)+8;return `${h.name} turns a worrying shade of green. Then a worse one.`;}],
+ [12,'burst',(h,M)=>{const d=Math.round(M*(.35+Math.random()*.5));if(d>=h.hp&&chance(.5)){dieHero(h,null,'an impure potion');return `It EXPLODED. Inside ${h.name}. They did not survive the bubbles.`;}hurtHero(h,d,null,'an impure potion');return `It EXPLODES. Inside ${h.name}. (-${d} HP)`;}],
+ [12,'shrink',h=>{h.slow25=10;return `${h.name} is now the size of a teacup. Tiny. Furious.`;}],
+ [9,'teleport',h=>{if(S.phase!=='dungeon'||typeof freeTile!=='function'){h.energy=clamp(h.energy-30,0,100);return `${h.name} blinks out and back in, missing a boot and most of their dignity.`;}const p=freeTile();if(p){h.x=p[0];h.y=p[1];}return `${h.name} pops out of existence… and reappears somewhere else, screaming.`;}],
+ [7,'nothing',h=>`Nothing happens. Then ${h.name} burps, and it echoes for a full minute.`]];
+function impOf25(h){return [5,4,3,2,1].map(b=>'imp'+b).find(id=>countRaw25(h,id));}
+function drinkImpure25(h,byPlayer){const id=impOf25(h);if(!id||!h.alive||h.downed)return null;takeRaw25(h,id,1);const M=mhp(h);let w=GAMBLE25.reduce((a,x)=>a+x[0],0)*Math.random(),r;for(r of GAMBLE25){w-=r[0];if(w<=0)break;}
+ const t=r[2](h,M);log(`🫙 ${h.name} drinks an impure potion${byPlayer?' (you asked)':''}… ${t}`,h);if(!offline&&typeof toast==='function'&&byPlayer)toast(`🫙 ${t}`);h.pcd25=6;ST25.gambles++;ST25.out[r[1]]=(ST25.out[r[1]]||0)+1;return r[1];}
+// desperate heroes may risk it under autonomy: rarely, and the careful or clever never do
+function gamble25(h){if(!impOf25(h)||countItem(h,'potion')||h.hp/mhp(h)>.15||!near17(h,2).length)return;if(['Cautious','Skeptic'].includes(h.trait)||h.cls==='Mage'||h.cls==='Cleric')return;
+ if(alive().some(o=>o!==h&&o.cls==='Cleric'&&!o.downed&&mdist(o,h)<=4))return;if(!(SET.think>0||window.SIM_MODE||offline))return;if(chance(.04)){say(h,pick(['It\'s this or nothing. Bottoms up.','I don\'t like the way it\'s bubbling.']));drinkImpure25(h,false);}}
+window.ST25={gambles:0,out:{},solved:0,yield:{}};
+// ---- drops: impure potions are the most common find; deeper ones are richer
+{const _le=lootEnt;lootEnt=function(p,rich){const e=_le.apply(this,arguments);if(e&&e.it&&!e.it.gear&&chance(.32))e.it={id:'imp'+band25(S.floor),q:1};return e;};}
+// they sit on their own shelf in storage (not counted against the stash cap)
+{const _su=stashUsed;stashUsed=function(){return _su()-[1,2,3,4,5].reduce((a,b)=>a+(S.stash['imp'+b]||0),0);};}
+// heroes leave camp with the best healing potions in storage, plus a utility potion (Porters carry more)
+{const _rs=restock;restock=function(){try{for(const h of alive()){let need=2-countItem(h,'potion');for(const id of HEAL25.slice().reverse()){while(need>0&&(S.stash[id]||0)>0){if(addItem(h,id,1))break;S.stash[id]--;need--;}}
+  let u=(h.cls==='Porter'?3:1)-UTIL25.reduce((a,x)=>a+countRaw25(h,x),0);const av=()=>UTIL25.filter(x=>(S.stash[x]||0)>0);while(u>0&&av().length){const id=pick(av());if(addItem(h,id,1))break;S.stash[id]--;u--;}}}catch(e){}
+ return _rs.apply(this,arguments);};}
+// ---- the puzzle: colours, generation (scrambled from the solved state, then proven solvable by a solver), rules
+const CAPV25=4;MURK25.push({id:'tar',n:'Tar',c:'#2f2b36',g:'▪'});
+const colOf25=id=>POT25[id]||MURK25.find(m=>m.id===id);
+const nameOf25=id=>POT25[id]?ITEMS[id].n:colOf25(id).n;
+const UNLOCK25={pshield:1,pfire:2,pspeed:2,ppoison:3,pdmg:3,pinvis:4},WT25={pshield:4,pfire:3,pspeed:3,ppoison:2,pdmg:2,pinvis:1};
+function recipe25(b){const k=[3,4,5,6,7][b-1],np=[1,2,2,3,3][b-1],out=[];const ht=Math.max(1,Math.min(5,b-(chance(.35)?1:0)));out.push(HEAL25[ht-1]);
+ for(let g=0;out.length<np&&g<40;g++){let id;if(b>=2&&chance(.25))id=HEAL25[Math.max(0,ht-2)];else{const u=UTIL25.filter(x=>b>=UNLOCK25[x]&&!out.includes(x));let w=u.reduce((a,x)=>a+WT25[x],0)*Math.random();id=u.find(x=>(w-=WT25[x])<=0)||u[0];}if(id&&!out.includes(id))out.push(id);}
+ MURK25.slice(0,k-out.length).forEach(m=>out.push(m.id));return out;}
+function solved25(v){return v.every(x=>!x.length||(x.length===CAPV25&&x.every(y=>y===x[0])));}
+function canPour25(v,i,j){const a=v[i],b=v[j];if(i===j||!a||!b||!a.length||b.length>=CAPV25)return false;return !b.length||b[b.length-1]===a[a.length-1];}
+function runOf25(a){const c=a[a.length-1];let r=1;while(r<a.length&&a[a.length-1-r]===c)r++;return r;}
+function pourN25(v,i,j){return Math.min(runOf25(v[i]),CAPV25-v[j].length);}
+function solve25(v0,limit){limit=limit||80000;const seen=new Set(),path=[];let nodes=0;const key=v=>v.map(x=>x.join(',')).sort().join('|');
+ const dfs=v=>{if(solved25(v))return true;if(++nodes>limit)return false;const kk=key(v);if(seen.has(kk))return false;seen.add(kk);
+  for(let i=0;i<v.length;i++){const a=v[i];if(!a.length)continue;const r=runOf25(a);if(r===a.length&&a.length===CAPV25)continue;
+   for(let j=0;j<v.length;j++){if(!canPour25(v,i,j)||(!v[j].length&&r===a.length))continue;const m=pourN25(v,i,j),nv=v.map(x=>x.slice());for(let t=0;t<m;t++)nv[j].push(nv[i].pop());path.push([i,j]);if(dfs(nv))return true;path.pop();}}
+  return false;};
+ return dfs(v0.map(x=>x.slice()))?path.slice():null;}
+function gen25(b){const ids=recipe25(b),k=ids.length;let best=null;
+ for(let t=0;t<300;t++){const u=[];for(let i=0;i<k;i++)for(let j=0;j<CAPV25;j++)u.push(i);for(let i=u.length-1;i>0;i--){const r=Math.floor(Math.random()*(i+1));[u[i],u[r]]=[u[r],u[i]];}
+  const v=[];for(let i=0;i<k;i++)v.push(u.slice(i*CAPV25,i*CAPV25+CAPV25).map(x=>ids[x]));v.push([],[]);
+  if(v.some(x=>x.length===CAPV25&&x.every(y=>y===x[0])))continue;let pairs=0;v.forEach(x=>{for(let j=1;j<x.length;j++)if(x[j]===x[j-1])pairs++;});if(pairs>Math.ceil(k*.5))continue;
+  const sol=solve25(v);if(!sol)continue;best={b,ids,v,init:v.map(x=>x.slice()),done:[],moves:0,par:sol.length};if(sol.length>=k+2)break;}
+ return best;}
+// a puzzle for the sims (or a quick skip): yields as if solved
+function apoAuto25(){let n=0;for(let b=1;b<=5;b++){while((S.stash['imp'+b]||0)>0){S.stash['imp'+b]--;n++;recipe25(b).filter(id=>POT25[id]).forEach(id=>{stashAdd(id,1);ST25.yield[id]=(ST25.yield[id]||0)+1;});}}return n;}
+// ---- the bench UI (DOM vials; one row in landscape, two in portrait; input locked while a pour plays)
+const A25={el:null,bd:null,sel:-1,lock:false,undo:[],view:'shelf',pz:false,wasP:false,on:false};
+const lum25=h=>{const n=parseInt(h.slice(1),16);return((n>>16)*.299+(n>>8&255)*.587+(n&255)*.114)/255;};
+const vib25=p=>{if(SET.hap!==0&&navigator.vibrate)try{navigator.vibrate(p);}catch(e){}};
+const glug25=m=>{if(typeof tone23!=='function')return;for(let i=0;i<Math.min(4,m+1);i++)tone23(260-i*30+Math.random()*40,.09,'sine',.25,i*.07,150);};
+const ding25=()=>{if(typeof tone23!=='function')return;tone23(880,.35,'triangle',.18,0);tone23(1320,.4,'sine',.12,.08);};
+function impCount25(){return [1,2,3,4,5].reduce((a,b)=>a+(S.stash['imp'+b]||0),0);}
+function build25(){if(A25.el)return A25.el;const d=document.createElement('div');d.id='apo25';d.innerHTML='<div class="a25in"></div>';document.body.appendChild(d);A25.el=d;
+ d.addEventListener('click',ev=>{const t=ev.target.closest('[data-a25]');if(t)act25(t.dataset.a25,t);});addEventListener('resize',()=>{if(A25.on)lay25();});return d;}
+function openApo25(){if(!(atCamp24()||camV24())){toast('⚗️ The Apothecary is back at camp.');return;}const d=build25();closeOv();
+ if(!A25.on){A25.pz=S.phase==='camp';A25.wasP=!!S.paused;if(A25.pz)S.paused=true;}A25.on=true;A25.sel=-1;A25.view=S.apo25&&!S.apo25.fin?'puz':'shelf';d.style.display='flex';paint25();requestAnimationFrame(()=>d.classList.add('in'));}
+function closeApo25(){if(!A25.on||A25.lock)return;A25.on=false;A25.el.classList.remove('in');A25.el.style.display='none';if(A25.pz)S.paused=A25.wasP;if(S.apo25&&S.apo25.fin)S.apo25=null;if(typeof render==='function')render();}
+function chip25(id,n){const c=colOf25(id);return `<span class="ch25" style="--c:${c.c}"><i></i>${nameOf25(id)}${n!=null?` <b>×${n}</b>`:''}</span>`;}
+function paint25(){const P=S.apo25,inn=A25.el.querySelector('.a25in');const n=impCount25();
+ const hd=`<div class="a25hd"><button class="btn" data-a25="x">🏕️ Camp</button><b>⚗️ Apothecary</b><span class="a25cnt">🫙 ${n}</span></div>`;
+ if(A25.view==='puz'&&P){const leg=P.ids.map(id=>`<span class="lg25 ${P.done.includes(id)?'ok':''} ${POT25[id]?'':'mk'}" style="--c:${colOf25(id).c}"><i></i>${POT25[id]?nameOf25(id):colOf25(id).n}${P.done.includes(id)?' ✓':''}</span>`).join('');
+  inn.innerHTML=hd+`<div class="a25leg">${leg}</div><div class="a25bd"><svg class="a25sv"></svg>${P.v.map((_,i)=>vial25(i)).join('')}<div class="a25msg"></div></div>
+  <div class="a25ft"><button class="btn" data-a25="u" ${A25.undo.length?'':'disabled'}>↶ Undo</button><span class="small">Moves ${P.moves} · Impure ${['I','II','III','IV','V'][P.b-1]}</span><button class="btn" data-a25="r">⟲ Restart</button></div>`;
+  A25.bd=inn.querySelector('.a25bd');lay25();if(P.fin)fin25();else stuck25();return;}
+ const rows=[1,2,3,4,5].filter(b=>S.stash['imp'+b]).map(b=>`<div class="a25row"><span class="a25j" style="--b:${b}">🫙</span><div><b>${ITEMS['imp'+b].n} ×${S.stash['imp'+b]}</b><div class="small">Floors ${(b-1)*6+1}${b<5?'–'+b*6:'+'} · ${[3,4,5,6,7][b-1]} colours · ${[1,2,2,3,3][b-1]} potion${b>1?'s':''} inside${b>=4?' · rare kinds':''}</div></div><button class="btn gold" data-a25="p" data-b="${b}">Purify</button></div>`).join('');
+ const pure=Object.keys(POT25).filter(id=>S.stash[id]).map(id=>chip25(id,S.stash[id])).join('');
+ inn.innerHTML=hd+`<div class="a25shelf"><div class="small a25how">Pour the top layer onto the same colour or into an empty vial. Fill a vial with one colour to bottle that potion. Sludge is thrown away.</div>
+ ${P&&!P.fin?`<button class="btn gold a25cont" data-a25="c">⚗️ Continue the bottle on the bench</button>`:''}
+ <h4>Impure potions</h4>${rows||'<div class="small">None yet. Heroes find them all over the dungeon. Deeper ones are richer.</div>'}
+ <h4>Pure potions in storage</h4><div class="a25pure">${pure||'<span class="small">None yet.</span>'}</div>
+ <div class="small a25warn">☠️ Drinking an impure potion straight is a gamble. It might heal, or it might kill. (Hero sheet → bag)</div></div>`;A25.bd=null;}
+function vial25(i){const P=S.apo25,a=P.v[i];const top=a.length?a[a.length-1]:null,full=a.length===CAPV25&&a.every(x=>x===a[0]);
+ return `<button class="v25 ${A25.sel===i?'sel':''} ${full?'done':''} ${full&&!POT25[a[0]]?'mk':''}" data-a25="v" data-i="${i}" aria-label="vial ${i+1}"><span class="gl25">${a.map((c,j)=>cell25(c,j)).join('')}</span><em>${full?(POT25[a[0]]?nameOf25(a[0]).replace(/ Potion| Coating| Tonic/,''):'sludge'):''}</em></button>`;}
+function cell25(c,j,cls){const k=colOf25(c);return `<i class="c25 ${cls||''}" style="--c:${k.c};--j:${j};color:${lum25(k.c)<.5?'#fffc':'#0009'}">${k.g}</i>`;}
+function lay25(){const bd=A25.bd;if(!bd||!S.apo25)return;const n=S.apo25.v.length,W=bd.clientWidth,H=bd.clientHeight;const land=W>H*1.25;
+ let rows=land?1:2;if(!land&&n<=5&&W>=n*72)rows=1;const cols=Math.ceil(n/rows);const gap=Math.max(8,Math.min(22,W*.03));
+ let w=Math.min(68,(W-gap*(cols+1))/cols),h=Math.min(w*3.4,(H-gap*(rows+1)-rows*18)/rows-24);w=Math.max(40,Math.min(w,h/2.6));h=Math.max(110,Math.min(h,w*3.6));
+ bd.style.setProperty('--vw',w.toFixed(1)+'px');bd.style.setProperty('--vh',h.toFixed(1)+'px');bd.style.setProperty('--cols',cols);bd.style.setProperty('--gap',gap.toFixed(1)+'px');}
+function act25(a,t){if(A25.lock&&a!=='x')return;const P=S.apo25;
+ if(a==='x'){if(A25.view==='puz'&&P&&!P.fin){A25.view='shelf';A25.sel=-1;paint25();return;}closeApo25();}
+ else if(a==='p'){const b=+t.dataset.b;if(!(S.stash['imp'+b]>0))return;if(P&&!P.fin){toast('Finish the bottle on the bench first.');A25.view='puz';paint25();return;}S.stash['imp'+b]--;S.apo25=gen25(b);A25.undo=[];A25.sel=-1;A25.view='puz';paint25();if(typeof save==='function')save();}
+ else if(a==='c'){A25.view='puz';paint25();}
+ else if(a==='n'){S.apo25=null;const b=[5,4,3,2,1].find(x=>S.stash['imp'+x]>0);if(b){S.stash['imp'+b]--;S.apo25=gen25(b);A25.undo=[];A25.view='puz';}else A25.view='shelf';paint25();}
+ else if(a==='sh'){S.apo25=null;A25.view='shelf';paint25();}
+ else if(a==='u'&&P&&A25.undo.length&&!P.fin){P.v=A25.undo.pop();P.moves=Math.max(0,P.moves-1);A25.sel=-1;paint25();}
+ else if(a==='r'&&P&&!P.fin){P.v=P.init.map(x=>x.slice());A25.undo=[];P.moves=0;A25.sel=-1;paint25();}
+ else if(a==='v'&&P&&!P.fin)tapV25(+t.dataset.i);}
+function vEl25(i){return A25.bd.querySelectorAll('.v25')[i];}
+function tapV25(i){const P=S.apo25,s=A25.sel;if(s<0){const a=P.v[i];if(!a.length||(a.length===CAPV25&&a.every(x=>x===a[0])))return;A25.sel=i;vEl25(i).classList.add('sel');vib25(5);return;}
+ vEl25(s).classList.remove('sel');A25.sel=-1;if(s===i)return;if(!canPour25(P.v,s,i)){const e=vEl25(i);e.classList.remove('no');void e.offsetWidth;e.classList.add('no');vib25([4,30,4]);return;}pour25(s,i);}
+function pour25(i,j){const P=S.apo25,m=pourN25(P.v,i,j),c=P.v[i][P.v[i].length-1],col=colOf25(c).c;A25.lock=true;A25.undo.push(P.v.map(x=>x.slice()));if(A25.undo.length>60)A25.undo.shift();
+ const src=vEl25(i),dst=vEl25(j),br=A25.bd.getBoundingClientRect(),sr=src.getBoundingClientRect(),dr=dst.getBoundingClientRect();const left=dr.left<sr.left;
+ const tx=(dr.left+dr.width/2-(sr.left+sr.width/2))*.45,lift=Math.min(36,sr.height*.18);src.style.setProperty('--tx',tx.toFixed(1)+'px');src.style.setProperty('--ty',(-lift).toFixed(1)+'px');src.style.setProperty('--rot',(left?-1:1)*38+'deg');src.classList.add('pour');
+ const from=P.v[i].length,to=P.v[j].length;for(let t=0;t<m;t++)P.v[j].push(P.v[i].pop());P.moves++;
+ const RMo=typeof RM23==='function'&&RM23(),T1=RMo?40:150,T2=RMo?120:360,T3=RMo?160:470;
+ setTimeout(()=>{const sx=sr.left+sr.width/2+tx-br.left,sy=sr.top-lift-br.top+4,ex=dr.left+dr.width/2-br.left,ey=dr.top-br.top+dr.height*(1-to/CAPV25)-dr.height*.04;
+  const sv=A25.bd.querySelector('.a25sv');const cx=(sx+ex)/2,cy=Math.min(sy,ey-20)-Math.abs(ex-sx)*.12;
+  sv.innerHTML=`<path d="M${sx.toFixed(1)},${sy.toFixed(1)} Q${cx.toFixed(1)},${cy.toFixed(1)} ${ex.toFixed(1)},${ey.toFixed(1)}" stroke="${col}" class="st25"/>`;
+  const gs=src.querySelectorAll('.c25');for(let t=0;t<m;t++){const e=gs[from-1-t];if(e){e.style.animationDelay=(t*45)+'ms';e.classList.add('out');}}
+  const gl=dst.querySelector('.gl25');for(let t=0;t<m;t++){gl.insertAdjacentHTML('beforeend',cell25(c,to+t,'in'));gl.lastElementChild.style.animationDelay=(60+t*55)+'ms';}
+  glug25(m);vib25(8);},T1);
+ setTimeout(()=>{src.classList.remove('pour');const p=A25.bd&&A25.bd.querySelector('.st25');if(p)p.classList.add('off');},T2);
+ setTimeout(()=>{A25.lock=false;if(!A25.on||A25.view!=='puz')return;const sv=A25.bd.querySelector('.a25sv');sv.innerHTML='';src.outerHTML=vial25(i);dst.outerHTML=vial25(j);const ft=A25.el.querySelector('[data-a25=u]');if(ft)ft.disabled=false;
+  A25.el.querySelector('.a25ft .small').textContent=`Moves ${P.moves} · Impure ${['I','II','III','IV','V'][P.b-1]}`;check25(j);},T3);}
+function check25(j){const P=S.apo25,a=P.v[j];if(a.length===CAPV25&&a.every(x=>x===a[0])&&!P.done.includes(a[0])){const id=a[0];P.done.push(id);const e=vEl25(j);
+  if(POT25[id]){S.stash[id]=(S.stash[id]||0)+1;ST25.yield[id]=(ST25.yield[id]||0)+1;ding25();vib25([10,40,18]);spark25(e,colOf25(id).c,`+1 ${nameOf25(id)}`);}else spark25(e,'#9a8f80','sludge, tossed',1);
+  const lg=A25.el.querySelectorAll('.lg25')[P.ids.indexOf(id)];if(lg){lg.classList.add('ok');lg.lastChild.textContent+=' ✓';}}
+ if(solved25(P.v)){P.fin=1;ST25.solved++;setTimeout(fin25,RM23()?50:650);if(typeof save==='function')save();}else stuck25();}
+function spark25(e,c,txt,dull){const r=document.createElement('span');r.className='sp25'+(dull?' dull':'');r.style.setProperty('--c',c);let h='';if(!dull&&!RM23())for(let k=0;k<10;k++)h+=`<i style="--a:${k*36+Math.random()*20}deg;--d:${26+Math.random()*22}px"></i>`;r.innerHTML=h+`<b>${txt}</b>`;e.appendChild(r);setTimeout(()=>r.remove(),1400);}
+function stuck25(){const P=S.apo25,m=A25.bd&&A25.bd.querySelector('.a25msg');if(!m)return;let any=false;for(let i=0;i<P.v.length&&!any;i++)for(let j=0;j<P.v.length;j++)if(canPour25(P.v,i,j)&&!(P.v[j].length===0&&runOf25(P.v[i])===P.v[i].length)){any=true;break;}
+ m.className='a25msg'+(any?'':' on');m.innerHTML=any?'':'No pours left. ↶ Undo or ⟲ Restart.';}
+function fin25(){const P=S.apo25,m=A25.bd&&A25.bd.querySelector('.a25msg');if(!m)return;const got=P.ids.filter(id=>POT25[id]);const more=impCount25();
+ m.className='a25msg on fin';m.innerHTML=`<div class="a25win"><b>✨ Purified!</b><div>${got.map(id=>chip25(id,1)).join('')}</div><div class="small">Bottled in ${P.moves} pours. Stored at camp.</div>
+ <div class="row">${more?`<button class="btn gold" data-a25="n">Next (🫙 ${more})</button>`:''}<button class="btn" data-a25="sh">Shelf</button></div></div>`;}
+document.addEventListener('keydown',e=>{if(!A25.on)return;if(e.key==='Escape'){act25('x');e.stopPropagation();}else if(e.key==='z'||e.key==='u'){act25('u');e.stopPropagation();}},true);
+// ---- hooks: the camp bench, the building panel, the hero sheet, the camp hint
+{const _tp=tapTile;tapTile=function(x,y){if(S.phase==='camp'||camV24()){const [bx,by]=CAMP_POS.apothecary,d=Math.hypot(bx-(x*TS+12),by-(y*TS+12));let best=1e9;for(const id in CAMP_POS){const p=CAMP_POS[id];best=Math.min(best,Math.hypot(p[0]-(x*TS+12),p[1]-(y*TS+12)));}
+  if(d<36&&d<=best+.01){openApo25();return;}}return _tp.apply(this,arguments);};}
+{const _rb=renderBase;renderBase=function(){_rb.apply(this,arguments);if(!baseOpen||baseSel!=='apothecary')return;const d=$('ovb').querySelector('.bdet');if(d&&!d.querySelector('.apo25b'))d.insertAdjacentHTML('afterbegin',`<button class="btn gold apo25b" data-act="apo25" style="width:100%;margin-bottom:6px">⚗️ Purify potions · 🫙 ${impCount25()}</button>`);};}
+const ARM25={id:null,t:0,txt:'☠️ Really? It could kill them. Tap again'};
+document.addEventListener('pointerdown',e=>{const t=e.target.closest('[data-act=apo25],[data-act=imp25]');if(!t)return;e.stopPropagation();e.preventDefault();
+ if(t.dataset.act==='apo25'){openApo25();return;}const h=heroById(+t.dataset.h);if(!h)return;
+ if(!(ARM25.id===h.id&&performance.now()-ARM25.t<4000)){ARM25.id=h.id;ARM25.t=performance.now();t.classList.add('arm');t.textContent=ARM25.txt;return;}ARM25.id=null;const r=drinkImpure25(h,true);if(r&&typeof renderSheet==='function'&&heroById(sheetId))renderSheet();render();},true);
+{const _rs=renderSheet;renderSheet=function(){_rs.apply(this,arguments);const h=heroById(sheetId);if(!h)return;const bag=$('ovb').querySelector('.bag');if(!bag)return;
+ const ps=Object.keys(POT25).filter(id=>countRaw25(h,id)).map(id=>chip25(id,countRaw25(h,id))).join('');const im=[1,2,3,4,5].reduce((a,b)=>a+countRaw25(h,'imp'+b),0);
+ if(ps||im)bag.insertAdjacentHTML('afterend',`<div class="pb25">${ps}${im?`<span class="ch25 imp" style="--c:#6b5a46"><i></i>Impure ×${im}</span>`:''}</div>${im&&h.alive&&!h.downed?(()=>{const arm=ARM25.id===h.id&&performance.now()-ARM25.t<4000;return `<button class="btn s red imp25b ${arm?'arm':''}" data-act="imp25" data-h="${h.id}">${arm?ARM25.txt:'🫙 Drink an impure potion…'}</button>`;})():''}`);};}
+{const _ec=enterCamp;enterCamp=function(){const r=_ec.apply(this,arguments);try{for(const h of alive())for(let b=1;b<=5;b++){const n=countRaw25(h,'imp'+b);if(n){takeRaw25(h,'imp'+b,n);S.stash['imp'+b]=(S.stash['imp'+b]||0)+n;}}
+  const n=impCount25();if(n&&!offline&&!window.SIM_MODE)log(`⚗️ ${n} impure potion${n>1?'s':''} on the shelf. Tap the Apothecary to purify ${n>1?'them':'it'}.`);}catch(e){}return r;};}
+// the camp bench: little coloured vials and a count badge
+{const _dc=drawCampF;drawCampF=function(){_dc.apply(this,arguments);if(S.phase!=='camp'||typeof cx==='undefined')return;const [x,y]=CAMP_POS.apothecary,n=impCount25(),T=FX.t||0;
+ const cs=['#ff7f98','#3fa9ff','#ffe14a','#7ed321'];cs.forEach((c,i)=>{const vx=x-11+i*7,vy=y-12;cx.fillStyle='#dfe8f055';cx.fillRect(vx-1,vy-1,5,11);cx.fillStyle=c;cx.fillRect(vx,vy+3+(i%2),3,6-(i%2));});
+ if(n){const bx=x+15,by=y-16,pu=1+Math.sin(T/12)*.06;cx.save();cx.translate(bx,by);cx.scale(pu,pu);cx.fillStyle='#2a1d12';cx.beginPath();cx.arc(0,0,7,0,6.283);cx.fill();cx.strokeStyle='#ffd76a';cx.lineWidth=1;cx.stroke();
+  cx.fillStyle='#ffd76a';cx.font='bold 7px system-ui';cx.textAlign='center';cx.textBaseline='middle';cx.fillText(n>99?'99':n,0,.5);cx.restore();cx.textBaseline='alphabetic';}};}
+// impure potions don't feed the camp's "carry potions" logic, and older saves gain the bench state
+{const _ld=load;load=function(){const r=_ld.apply(this,arguments);try{if(S&&S.apo25&&!S.apo25.v)S.apo25=null;}catch(e){}return r;};}
+window.APO25={gen25,solve25,canPour25,pourN25,solved25,recipe25,drinkImpure25,usePotion25,drinkHeal25,apoAuto25,openApo25,closeApo25,A25,POT25,GAMBLE25,band25};
+// How to Play: the Apothecary card (after "Home sweet camp")
+if(typeof HTP!=='undefined'){const i=HTP.findIndex(x=>x.t==='Home sweet camp');HTP.splice(i<0?HTP.length-1:i+1,0,{a:'<div class="hart">🫙<span>🧪</span></div>',t:'The Apothecary',
+ p:['Heroes haul back <b>🫙 impure potions</b>, the most common find down there. At camp, tap the <b>⚗️ Apothecary</b> to purify them: tap a vial, then tap where to pour. Fill a vial with one colour to bottle that potion.',
+ 'Pink-to-crimson are healing (I–V), plus 🛡️ Shield, 🔥 Fire Bomb, ⚡ Speed, ☠️ Poison, 👻 Invisibility and 💢 Fury. Deeper finds hold rarer ones. Heroes pack the best on the way out and use them sensibly.',
+ 'Drinking an impure potion straight is a gamble. Big heal? Tiny hero? Sudden explosion? Only desperate heroes try it.']});}
 
 </script>
 </body></html>
