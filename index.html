@@ -4755,7 +4755,7 @@ function paint32(){const el=ST32.el.querySelector('.s32in'),cs=ST32.cs,m=ST32.mo
    <div class="small s32warn">No undo. When nothing fits, the round ends and leftovers return to the stash.</div><button class="btn s" data-s32="end">Stop here</button></div></div>`;}
  else if(m==='result'){const R=ST32.res;h=hd('🧱 Dump finished','')+`<div class="s32res ${R.gr==='MAX'?'max':''}"><div class="s32gr g${R.gr}">${R.gr}</div><b>${R.gone}/${R.n} items destroyed</b><div>${R.lines} lines · ${R.combos} combo${R.combos===1?'':'s'} · +💰${R.gold}${R.ore?' · +🪨'+R.ore:''}</div><div class="small">${R.n-R.gone?`${R.n-R.gone} item(s) went back to the stash.`:'Not a crumb left.'}</div>
   <div class="s32row"><button class="btn gold" data-s32="pick">🧱 Dump more</button><button class="btn" data-s32="menu">Done</button></div></div>`;}
- el.innerHTML=h;}
+ const st=el.scrollTop,same=ST32._pm===m;el.innerHTML=h;ST32._pm=m;if(same)el.scrollTop=st;}
 // ---- dragging (ghost follows the finger, lifted above it on touch; the board shows where it lands)
 function down32(ev){const d=ev.target.closest('.s32drag');if(!d)return;ev.preventDefault();const tray=d.dataset.tray,off=d.dataset.offer;
  const sh=tray!=null?rot32(shape32(tray),ST32.pk.tray.find(T=>T.id===tray).r):bShape32(S.blast32.offer[+off]);
