@@ -369,6 +369,7 @@ body,#app{font-variant-numeric:tabular-nums}#pw,#ak{display:inline-block;min-wid
 #readyp:not(.open){display:flex!important;align-items:center;justify-content:space-between;gap:6px;white-space:nowrap}
 #readyp:not(.open) .rph{margin:0}#readyp:not(.open) .rpb{margin:0}#readyp:not(.open) .rpb .btn{min-height:28px;padding:2px 8px}
 #readyp .rph{cursor:pointer}#readyp.open .rph::after{content:' ▾'}#readyp:not(.open) .rph::after{content:' ▸'}
+.hp2 .hn{position:relative}.bf28{position:absolute;left:46%;top:-1px;font-size:10px;line-height:14px;padding:0 4px;border-radius:7px;background:#000a;color:#ffe9a8;white-space:nowrap;pointer-events:none;font-variant-numeric:tabular-nums}
 </style><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(r=>r.update()));
@@ -484,10 +485,10 @@ const TIERS=[
  {n:'Primordial',ak:300,pw:800,cap:5,ic:'❂',d:'Rewrite fate: undo a hero\'s death.',unlock:['Rewrite Fate','Time no longer binds you']}];
 const MIRACLES=[
  {id:'heal',n:'Heal',ic:'❤️',cost:12,cd:10,tier:0,d:'Heal 40% (weakest or downed hero)'},
- {id:'bless',n:'Bless',ic:'🌟',cost:18,cd:30,tier:1,d:'Party +50% attack, 25 ticks'},
+ {id:'bless',n:'Bless',ic:'🌟',cost:22,cd:40,tier:1,d:'Party +50% attack, 36 ticks'},
  {id:'gift',n:'Gift',ic:'🎁',cost:15,cd:20,tier:1,d:'Drop the item a hero needs most'},
  {id:'reveal',n:'Reveal',ic:'👁️',cost:15,cd:25,tier:1,d:'Reveal floor, traps, omens & curses'},
- {id:'shield',n:'Shield',ic:'🛡️',cost:22,cd:30,tier:2,d:'Party -80% damage, 15 ticks'},
+ {id:'shield',n:'Shield',ic:'🛡️',cost:26,cd:34,tier:2,d:'Party -80% damage, 22 ticks'},
  {id:'smite',n:'Smite',ic:'⚡',cost:25,cd:15,tier:2,d:'Hit the marked (or nearest) enemy; splashes adjacent heroes'},
  {id:'cleanse',n:'Cleanse',ic:'💧',cost:20,cd:30,tier:2,d:'Lift curses, poison & roots'},
  {id:'soul',n:'Call Soul',ic:'🧝',cost:60,cd:120,tier:3,d:'A new hero joins mid-run (if room)'},
@@ -1269,10 +1270,10 @@ function cast(id,forH){
   if(x.hp/mhp(x)>.9)hope(x,-4,'I was fine. Why waste your gifts?');x.hp=Math.min(mhp(x),x.hp+Math.round(mhp(x)*p));
   if(x.req&&x.req.k==='heal'){x.req=null;affect(x,10,1);hope(x,10,pick(['My prayer was answered!','You heard me!']));faith(x,5);social(x,10);}};
  switch(id){
-  case 'heal':healOne(w,.4*pot);log(`❤️ Divine light heals ${w.name}.`,w);break;
+  case 'heal':healOne(w,.4*pot);if(w&&(w.mend||0)<2){w.mend=2;w.mendM=2;}log(`❤️ Divine light heals ${w.name}.`,w);break;
   case 'massheal':hs.forEach(x=>healOne(x,.5*pot));log('💖 Healing light washes over the party.');break;
-  case 'bless':hs.forEach(h=>{h.bless=25;faith(h,2);});log('🌟 The party glows with blessing.');break;
-  case 'shield':hs.forEach(h=>h.shield=15);log('🛡️ A divine shield surrounds the party.');break;
+  case 'bless':hs.forEach(h=>{h.bless=36;faith(h,2);});log('🌟 The party glows with blessing.');break;
+  case 'shield':hs.forEach(h=>h.shield=22);log('🛡️ A divine shield surrounds the party.');break;
   case 'smite':{const mobs=S.ents.filter(e=>e.t==='mob');if(!mobs.length){hs.forEach(h=>hope(h,-5,chance(.5)?'Lightning... at nothing? Is our god mad?':null));break;}
    const tgt=S.mark&&S.ents.includes(S.mark)?S.mark:mobs.sort((a,b)=>Math.min(...hs.map(h=>mdist(h,a)))-Math.min(...hs.map(h=>mdist(h,b))))[0];
    const dmg=Math.round((22+S.floor*7)*pot*(tgt.boss?1.5:1));log(`⚡ Smite strikes ${tgt.name} for ${dmg}!`);
@@ -1347,7 +1348,7 @@ function answerReq(hid,a){
  if(a==='no'){h.req=null;if(k==='company'){social(h,-8);hope(h,-5,'Oh. Okay.');}else if(k==='quest')hope(h,-2,'Then I\'ll fight for myself.');else if(k==='guide'||k==='bags')hope(h,-1);else{hope(h,-9,pick(['...ignored. I see.','So that\'s how it is.']));faith(h,-5);}affect(h,k==='quest'||k==='guide'||k==='bags'?-3:-8,1);render();return;}
  if(a==='heal')return cast('heal',h);
  if(a==='water'){if(S.power<6)return;S.power-=6;addItem(h,'water',2);god('Cool water fills their flask.');done('Water! Oh, thank you!',6,4,8);}
- if(a==='blessme'){if(S.power<10)return;S.power-=10;h.bless=20;god('I bless you.');done(pick(['I feel it! Your light in my arm!','Blessed. I won\'t waste it.']),8,6,8);}
+ if(a==='blessme'){if(S.power<10)return;S.power-=10;h.bless=28;god('I bless you.');done(pick(['I feel it! Your light in my arm!','Blessed. I won\'t waste it.']),8,6,8);}
  if(a==='gearme'){if(S.power<25)return;S.power-=25;const g=rollGear('w',S.floor+2,0);const old=h.gear.w;h.gear.w=g;if(old)carry(h,{gear:old},null);god('Take this blade.');done(`A ${g.n}! It hums with your power!`,8,6,6);}
  if(a==='gift'){if(S.power<15)return;S.power-=15;addItem(h,'potion',1);god('A potion appears at their feet.');done('A potion from the heavens! Thank you!',6,4,8);}
  if(a==='food'){if(S.power<8)return;S.power-=8;addItem(h,'ration',1);god('Warm bread appears.');done('Bread! Still warm! You do care.',6,4,10);}
@@ -1740,7 +1741,7 @@ function orderRisk(h,x,y){const m=mobAt(x,y);let r=S.ents.filter(e=>e.t==='mob'&
 function obeyChance(h,x,y){const r=x==null?0:orderRisk(h,x,y);return clamp(.45+trust(h)*.45-r*(1-Math.min(1,trust(h)*.8)),.03,.97);}
 function issueOrder(h,x,y){const m=mobAt(x,y);if(wall(x,y)&&!m)return toast('That is solid rock.');
  if(h.downed)return toast(`${h.name} is down and cannot move.`);
- const risky=orderRisk(h,x,y)>.3;if(chance(obeyChance(h,x,y))){if(risky)affect(h,1);h.order=m?{atk:m,t:20}:{x,y,t:20};h.engage=null;say(h,m?pick([`On it! The ${m.name} falls!`,'Target sighted.','By your will!']):pick(['Going.','As you wish.','Moving!','There? Fine.']));affect(h,.5);}
+ const risky=orderRisk(h,x,y)>.3;if(chance(obeyChance(h,x,y))){if(risky)affect(h,1);h.order=m?{atk:m,t:28}:{x,y,t:28};h.engage=null;say(h,m?pick([`On it! The ${m.name} falls!`,'Target sighted.','By your will!']):pick(['Going.','As you wish.','Moving!','There? Fine.']));affect(h,.5);}
  else{if(risky)say(h,pick(['That\'s suicide. No.','You want me to die there? Not today.']));else say(h,pick(['No. Not there. I know what I\'m doing.','Is that a god\'s voice or my own fear? ...I\'ll stay.',`${(h.aff||0)<20?'Why should I listen to you?':'Not now, I have a bad feeling.'}`]));hope(h,-1);}
  render();}
 let _tap=tapTile;
@@ -3215,8 +3216,9 @@ window.R9DG=function(dt){const st=th9(),T=FX.t;const key=S.floor+'|'+S.runs+'|'+
   if(p.f>.05){cx.globalAlpha=p.f*.85;cx.drawImage(heroImg(h,1),-12,-26+bob,24,27.4);}cx.restore();cx.globalAlpha=1;
   // status
   if(h.shield>0){cx.strokeStyle=`rgba(140,200,255,${.45+.25*Math.sin(T/150)})`;cx.lineWidth=1.2;cx.beginPath();for(let j=0;j<=6;j++){const an=j/6*6.283+T/900;cx.lineTo(cxp+Math.cos(an)*13,cyp+Math.sin(an)*12);}cx.stroke();}
-  const icons=[];if(h.poison>0)icons.push(['☠','#7f6']);if(h.root>0)icons.push(['⛓','#ca8']);if(h.bless>0)icons.push(['✦','#ffd76a']);
+  const icons=[];if(h.poison>0)icons.push(['☠','#7f6']);if(h.root>0)icons.push(['⛓','#ca8']);
   icons.forEach((ic,j)=>{cx.font='bold 7px system-ui';cx.fillStyle=ic[1];cx.fillText(ic[0],cxp-9+j*7,cyp-17);});
+  if(typeof buffs28==='function'){const bs=buffs28(h).slice(0,3);bs.forEach((b,j)=>{const x=cxp-(bs.length-1)*5+j*10,y=cyp-24;cx.fillStyle='#0009';cx.beginPath();cx.arc(x,y,4.6,0,6.283);cx.fill();cx.strokeStyle=b.f<.25?'#f86':'#ffd76a';cx.lineWidth=1.2;cx.beginPath();cx.arc(x,y,4.6,-1.571,-1.571+6.283*b.f);cx.stroke();cx.font='6px system-ui';cx.textAlign='center';cx.textBaseline='middle';cx.fillStyle='#fff';cx.fillText(b.ic,x,y+.3);cx.textAlign='start';cx.textBaseline='alphabetic';});}
   if(h.poison>0&&Q()&&Math.random()<.1)FX.parts.push({x:cxp+(Math.random()-.5)*8,y:cyp,vx:0,vy:-.4,c:'#7f6',l:25,m:25,r:1.1,g:-.01});
   if(cheer&&Math.random()<.08)FX.parts.push({x:cxp+(Math.random()-.5)*12,y:cyp-14,vx:(Math.random()-.5)*.6,vy:-.6,c:pick(['#ffd76a','#fff','#9cf']),l:30,m:30,r:1.1,g:-.01});
   // faith motes drift up from devout heroes
@@ -3654,13 +3656,13 @@ const _mr13b=makeReq;makeReq=function(h,k,t){if(!h)return;h._gr=h._gr||{};h._rcd
  h._gr[k]=0;h._rcd[k]=S.tick+(CD13[k]||60);ASK13.asked++;return _mr13b(h,k,t);};
 const _rq13b=reqTick;reqTick=function(h){if(h&&h.alive){if(h._ep&&h.hp/mhp(h)>.6)h._ep=0;if(h._gr)for(const k in h._gr)if(h._gr[k]&&canGive13(k))h._gr[k]=0;}return _rq13b(h);};
 // Ember Mend: cheap party heal-over-time from Ember rank. % per tick shrinks with depth, so it fades by floor 20+.
-MIRACLES.splice(1,0,{id:'mend',n:'Ember Mend',ic:'🕯️',cost:7,cd:22,tier:0,d:'Party regenerates over 6 ticks (strong early, fades deeper)'});
-const mendPct13=()=>Math.max(.015,.055-S.floor*.002);
+MIRACLES.splice(1,0,{id:'mend',n:'Ember Mend',ic:'🕯️',cost:8,cd:22,tier:0,d:'Party regenerates over 9 ticks (strong early, fades deeper)'});
+const mendPct13=()=>Math.max(.012,.044-S.floor*.0016);
 window.ST13={mendCasts:0,mendHealed:0};
 const _cast13=cast;cast=function(id,forH){if(id!=='mend')return _cast13(id,forH);const m=MIRACLES.find(x=>x.id==='mend');
  if(S.phase!=='dungeon'||(S.cd.mend||0)>0||S.power<m.cost)return;const hs=alive().filter(h=>!h.downed);if(!hs.length)return;
  S.power-=m.cost;S.cd.mend=m.cd;overuse();hs.forEach(attended);ST13.mendCasts++;
- for(const h of hs){h.mend=6;if(h.req&&h.req.k==='heal'){h.req=null;affect(h,6,1);hope(h,6,'Warmth... I can feel it mending.');faith(h,3);}}
+ for(const h of hs){h.mend=9;h.mendM=9;if(h.req&&h.req.k==='heal'){h.req=null;affect(h,6,1);hope(h,6,'Warmth... I can feel it mending.');faith(h,3);}}
  log('🕯️ Ember Mend: a slow warmth settles on the party.');if(typeof render==='function'&&!offline)render();};
 const _ht13=heroTick;heroTick=function(h){if(h&&h.alive&&h.mend>0){h.mend--;if(!h.downed){const M=mhp(h),a=Math.max(1,Math.round(M*mendPct13()));const g=Math.min(a,M-h.hp);if(g>0){h.hp+=g;ST13.mendHealed+=g;}}}return _ht13(h);};
 {const _cg=canGive13;canGive13=function(k){if(k==='heal'){const m=MIRACLES.find(x=>x.id==='mend');if(S.phase==='dungeon'&&!((S.cd.mend||0)>0)&&S.power>=m.cost)return true;}return _cg(k);};}
@@ -3735,14 +3737,14 @@ const TW17={Brave:{off:.85,t:'Offensive skills recharge 15% faster'},Cautious:{d
  Greedy:{off:1.1,dmg:1.12,t:'Damage skills +12%, but 10% slower'},Skeptic:{dmg:1.08,heal:.9,t:'Damage skills +8%, healing −10%'},Lonely:{solo:1.2,t:'+20% when no ally is adjacent'}};
 const tw17=(h,k)=>{const t=TW17[h.trait];return t&&t[k]||1;};
 const SK17={
- Warrior:[{id:'roar',n:'Taunting Roar',ic:'📣',cd:14,kind:'def',d:r=>`Enemies within 3 must fight me for ${3+r} ticks`,
+ Warrior:[{id:'roar',n:'Taunting Roar',ic:'📣',cd:14,kind:'def',d:r=>`Enemies within 3 must fight me for ${4+r} ticks`,
    when:h=>{const n=near17(h,3);return n.length>=2||n.some(e=>e.tg&&e.tg!==h&&['charger','flanker','brute'].includes(arch17(e)));},
-   go:(h,r)=>{const n=near17(h,3);n.forEach(e=>{e.tauntBy=h.id;e.tauntT=3+r;});h.swall=Math.max(h.swall||0,2);return {fx:'roar',n:n.length};}},
+   go:(h,r)=>{const n=near17(h,3);n.forEach(e=>{e.tauntBy=h.id;e.tauntT=4+r;});h.swall=Math.max(h.swall||0,2);return {fx:'roar',n:n.length};}},
   {id:'cleave',n:'Cleave',ic:'🪓',cd:8,kind:'off',lv:5,d:r=>`Strike every adjacent foe for ${Math.round((1+.1*r)*100)}%`,
    when:h=>near17(h,1).length>=2,go:(h,r)=>{near17(h,1).forEach(e=>hitM17(h,e,(1+.1*r)*tw17(h,'dmg')));return {fx:'cleave'};}}],
- Paladin:[{id:'wall',n:'Shield Wall',ic:'🛡️',cd:16,kind:'def',d:r=>`Me and adjacent allies take −${30+5*r}% damage for 4 ticks`,
+ Paladin:[{id:'wall',n:'Shield Wall',ic:'🛡️',cd:16,kind:'def',d:r=>`Me and adjacent allies take −${30+5*r}% damage for 5 ticks`,
    when:h=>near17(h,2).length>=2||alive().some(o=>o!==h&&mdist(o,h)<=1&&o.hp<mhp(o)*.6*tw17(h,'def')),
-   go:(h,r)=>{alive().filter(o=>mdist(o,h)<=1).forEach(o=>{o.swall=4;o.swallP=Math.min(.6,(.3+.05*r)*tw17(h,'ally'));});return {fx:'wall'};}},
+   go:(h,r)=>{alive().filter(o=>mdist(o,h)<=1).forEach(o=>{o.swall=5;o.swallP=Math.min(.6,(.3+.05*r)*tw17(h,'ally'));});return {fx:'wall'};}},
   {id:'lay',n:'Lay on Hands',ic:'🤲',cd:30,kind:'heal',lv:5,d:r=>`Heal the most wounded ally ${25+5*r}%`,
    when:h=>alive().some(o=>!o.downed&&o.hp<mhp(o)*.35*tw17(h,'def')&&mdist(o,h)<=4),
    go:(h,r)=>{const o=alive().filter(o=>!o.downed&&mdist(o,h)<=4).sort((a,b)=>a.hp/mhp(a)-b.hp/mhp(b))[0];if(!o)return null;healH17(o,(.25+.05*r)*tw17(h,'heal'));return {fx:'beam',on:[o]};}}],
@@ -3772,10 +3774,10 @@ const SK17={
    go:(h,r)=>{const f=nearFree(h.x,h.y);if(!f)return null;const hp=Math.round((20+S.floor*5)*(1+.15*r));S.ents.push({t:'ally',name:'Bone Knight',bk:h.id,x:f[0],y:f[1],hp,mhp:hp,atk:(3+S.floor*1.3)*(1+.1*r),ttl:16+4*r});return {fx:'raise',x:f[0],y:f[1]};}},
   {id:'drain',n:'Drain Life',ic:'🩸',cd:10,kind:'off',lv:5,d:r=>`${Math.round((1.2+.1*r)*100)}% to a foe, healing me for it`,
    when:h=>h.hp<mhp(h)*.8&&near17(h,4).some(e=>los(h,e)),go:(h,r)=>{const e=near17(h,4).find(e=>los(h,e));if(!e)return null;const d=hitM17(h,e,(1.2+.1*r)*tw17(h,'dmg'));h.hp=Math.min(mhp(h),h.hp+Math.round(d*.6));return {fx:'drain',at:e};}}],
- Bard:[{id:'rally',n:'Rallying Anthem',ic:'🎺',cd:18,kind:'ally',d:r=>`Party +${15+3*r}% damage for 6 ticks`,
-   when:h=>near17(h,4).length>=2,go:(h,r)=>{alive().forEach(o=>{o.rally=6;o.rallyP=(.15+.03*r)*tw17(h,'ally');});return {fx:'notes'};}},
-  {id:'discord',n:'Discordant Note',ic:'🎶',cd:20,kind:'def',lv:5,d:r=>`Foes within 3 deal −${25+5*r}% damage for 5 ticks`,
-   when:h=>near17(h,3).length>=3,go:(h,r)=>{near17(h,3).forEach(e=>{e.weak=5;e.weakP=.25+.05*r;});return {fx:'ring',c:'255,150,220'};}}]};
+ Bard:[{id:'rally',n:'Rallying Anthem',ic:'🎺',cd:18,kind:'ally',d:r=>`Party +${15+3*r}% damage for 8 ticks`,
+   when:h=>near17(h,4).length>=2,go:(h,r)=>{alive().forEach(o=>{o.rally=8;o.rallyP=(.15+.03*r)*tw17(h,'ally');});return {fx:'notes'};}},
+  {id:'discord',n:'Discordant Note',ic:'🎶',cd:20,kind:'def',lv:5,d:r=>`Foes within 3 deal −${25+5*r}% damage for 6 ticks`,
+   when:h=>near17(h,3).length>=3,go:(h,r)=>{near17(h,3).forEach(e=>{e.weak=6;e.weakP=.25+.05*r;});return {fx:'ring',c:'255,150,220'};}}]};
 const rank17=h=>Math.min(5,1+Math.floor((h.lvl-1)/3));
 const skills17=h=>(SK17[h.cls]||[]).filter(s=>(h.lvl||1)>=(s.lv||1));
 window.ST17={uses:{}};
@@ -4571,6 +4573,16 @@ ROSTER.push(...[
 if(typeof HTP!=='undefined'){const c=HTP.find(x=>x.t==='The War Council');if(c)c.p.push('🎒 <b>Porters</b> carry twice the gear, toss potions and food to allies mid-fight, and find more impure potions.');}
 window.V26={need26,pass26,kit26,pr26};
 {const _td=talentDesc;talentDesc=function(e){if(!e||!('pass' in e||'loot' in e))return _td.apply(this,arguments);const o=Object.assign({},e),x=[];if(o.pass){x.push(`+${o.pass} toss range`);delete o.pass;}if(o.loot){x.push(`+${Math.round(o.loot*100)}% extra finds`);delete o.loot;}const r=Object.keys(o).length?_td(o):'';return [x.join(', '),r].filter(Boolean).join(', ');};}
+
+</script><script>
+// v28: lasting powers show their time left (party rows + a ring on the map); Heal leaves a small 2-tick afterglow.
+const BUFF28=[['shield','🛡️',22],['bless','🌟',36],['mend','🕯️',9,'mendM'],['ward25','🧴',8],['rally','🎺',8],['swall','🧱',5],['haste25','💨',8],['fury25','🔥',8],['vanish','👻',5]];
+const buffs28=h=>BUFF28.filter(b=>h[b[0]]>0).map(b=>({k:b[0],ic:b[1],t:h[b[0]],f:Math.min(1,h[b[0]]/((b[3]&&h[b[3]])||b[2]))}));
+const secs28=t=>Math.max(1,Math.ceil(t*TICK/1000/(typeof speed==='number'&&speed>0?speed:1)));
+{const _r=renderPartyHUD;renderPartyHUD=function(){_r.apply(this,arguments);if(!S||!S.heroes)return;
+ for(const h of S.heroes){const r=document.getElementById('hr'+h.id);if(!r)continue;const hn=r.querySelector('.hn');if(!hn)continue;let el=hn.querySelector('.bf28');
+  if(!el){el=document.createElement('span');el.className='bf28';hn.appendChild(el);}
+  const t=h.alive?buffs28(h).map(b=>`${b.ic}${secs28(b.t)}s`).join(' '):'';if(el._t!==t){el._t=t;el.textContent=t;el.style.display=t?'':'none';}}};}
 
 </script>
 </body></html>
