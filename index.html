@@ -554,7 +554,7 @@ let S, speed=1, tab='chat', acc=0, last=performance.now(), offline=false;
 const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1)), pick=a=>a[Math.floor(Math.random()*a.length)], clamp=(v,a,b)=>Math.max(a,Math.min(b,v)), chance=p=>Math.random()<p;
 function fresh(){return{
  power:5,totalPower:0,ak:0,akTotal:0,tier:0,upg:{},perks:{},know:{},runs:0,best:0,
- base:{},stash:{ration:4,water:4,potion:2,wood:6},armory:[],gold:0,
+ base:{},stash:{ration:4,water:4,potion:1,imp1:3,wood:6},armory:[],gold:0,
  floor:1,deepest:1,heroes:[],nextId:0,phase:'dungeon',campT:0,map:null,seen:null,ents:[],tele:[],haz:[],choices:[],decision:null,
  floorBless:null,nextKind:'normal',kind:'normal',possess:null,mark:null,fateUsed:0,runStats:null,cd:{},scd:{},tool:null,leader:null,
  log:[],chat:[],tick:0,lastSave:Date.now(),dead:false,helpSeen:false,revealT:-1,lastReq:0,lastBanter:0,paused:false,cmdReturn:false};}
@@ -1140,7 +1140,7 @@ function resolveEvent(c,guided){
  if(!c.yes){log(`${h.name} walks past the ${EVT[e.k].n}.`,h);return;}
  const g=e.good,M=mhp(h),ps=alive();
  switch(e.k){
-  case 'merchant':{const p=10*S.floor;const payer=ps.sort((a,b)=>b.gold-a.gold)[0];if(payer.gold>=p){payer.gold-=p;const it=pick(['potion','ration','water','scroll','bomb']);if(addItem(h,it,2))log('No room to carry it all.');log(`${h.name} buys 2 ${ITEMS[it].n}.`,h);}break;}
+  case 'merchant':{const p=10*S.floor;const payer=ps.sort((a,b)=>b.gold-a.gold)[0];if(payer.gold>=p){payer.gold-=p;const it=pick([(typeof band25==='function'?'imp'+band25(S.floor):'potion'),'ration','water','scroll','bomb']);if(addItem(h,it,2))log('No room to carry it all.');log(`${h.name} buys 2 ${ITEMS[it].n}.`,h);}break;}
   case 'shrine':gainPower(8+h.faith*.3);ps.forEach(o=>{faith(o,4);hope(o,4);});say(h,'Here, I feel heard.');break;
   case 'altar':h.hp=Math.max(1,h.hp-Math.round(M*.25));if(g){h.base.atk+=1;gainPower(12);say(h,'Power flows into me!');}else hope(h,-12,'The altar mocks me. My blood, wasted.');break;
   case 'chest':if(g){const gg=R(10,25)*S.floor;h.gold+=gg;carry(h,{id:pick(THEME_MATS[Math.min(4,Math.floor((S.floor-1)/5))]),q:3});log(`${h.name} finds ${gg} gold!`,h);hope(h,4);if(chance(.4))carry(h,{gear:rollGear(pick(['w','a','r']),S.floor+1)});}
@@ -1150,7 +1150,7 @@ function resolveEvent(c,guided){
   case 'campfire':ps.forEach(o=>{o.energy=clamp(o.energy+50,0,100);o.hp=Math.min(mhp(o),o.hp+Math.round(mhp(o)*.25));social(o,15);});if(g){ps.forEach(o=>hope(o,5));say(h,'Warmth. We almost feel safe.');ps.forEach(a=>ps.forEach(b=>{if(a.id<b.id)addRel(a,b,3);}));}else{say(h,'We dozed off... and something found us!');for(let k=0;k<2;k++){const p=nearFree(h.x+2,h.y);if(p)addMob(pick(theme().mobs),p,mobScale(S.floor));}}break;
   case 'spirit':if(g){social(h,35);hope(h,8,'The spirit told me about its god. It sounded... like you.');faith(h,4);}else{social(h,-10);hope(h,-10,'It whispered that all who come here die. That our god will forget us.');}break;
   case 'tome':if(g){h.xp+=xpNeed(h);levelCheck(h);say(h,'Knowledge! I understand more now.');}else{h.energy=clamp(h.energy-40,0,100);hope(h,-6,'The words... crawl. My head aches.');}break;
-  case 'beggar':takeItem(h,'ration',1);faith(h,8);gainPower(10);if(g){say(h,'He blessed us in your name, then vanished. Was that you?');ps.forEach(o=>hope(o,5));addItem(h,'potion',1);}else say(h,'He ate and wandered off. At least someone ate tonight.');break;
+  case 'beggar':takeItem(h,'ration',1);faith(h,8);gainPower(10);if(g){say(h,'He blessed us in your name, then vanished. Was that you?');ps.forEach(o=>hope(o,5));addItem(h,(typeof band25==='function'?'imp'+band25(S.floor):'potion'),1);}else say(h,'He ate and wandered off. At least someone ate tonight.');break;
   case 'imp':{const bet=Math.min(h.gold,10*S.floor);if(g){h.gold+=bet;hope(h,3,'Ha! Double!');}else{h.gold-=bet;hope(h,-4,'Rigged. Obviously rigged.');}break;}
   case 'armory':carry(h,{gear:rollGear(pick(['w','a']),S.floor+2,g?0:.8)});if(!g)say(h,'The knight\'s ghost laughs as I take it...');break;
   case 'captive':if(g&&alive().length<5){const n=mkHero();n.x=h.x;n.y=h.y;S.heroes.push(n);say(n,'You freed me! I\'ll fight with you, all of you.');ps.forEach(o=>hope(o,5));}
@@ -1261,7 +1261,7 @@ function applyTool(id,x,y){
  const occupied=wall(x,y)||entAt(x,y)||heroAt(x,y)||(x===S.stairs[0]&&y===S.stairs[1]);
  switch(id){
   case 'mark':{const m=mobAt(x,y);if(!m)return false;S.mark=m;alive().forEach(attended);log(`🎯 The god marks ${m.name}. The party focuses it.`);if(chance(.5))say(leaderHero(),`There! Our god points at the ${m.name}!`);return true;}
-  case 'treasure':if(occupied)return false;S.ents.push({t:'loot',x,y,it:pick([{id:'potion',q:1},{id:'ration',q:2},{id:'water',q:2},{id:pick(THEME_MATS[Math.min(4,Math.floor((S.floor-1)/5))]),q:3},{gold:10*S.floor}])});S.seen[y][x]=1;log('💰 A cache of supplies appears.');return true;
+  case 'treasure':if(occupied)return false;S.ents.push({t:'loot',x,y,it:pick([{id:(typeof band25==='function'?'imp'+band25(S.floor):'potion'),q:1},{id:'ration',q:2},{id:'water',q:2},{id:pick(THEME_MATS[Math.min(4,Math.floor((S.floor-1)/5))]),q:3},{gold:10*S.floor}])});S.seen[y][x]=1;log('💰 A cache of supplies appears.');return true;
   case 'disarm':{const tr=S.ents.find(e=>e.t==='trap'&&!e.god&&e.x===x&&e.y===y&&e.known);if(!tr)return toast('Tap a revealed trap'),false;S.ents.splice(S.ents.indexOf(tr),1);log(`🔧 The ${TRAPS[tr.k].n} crumbles to dust.`);return true;}
   case 'shrinep':if(occupied)return false;S.ents.push({t:'shrine',x,y,uses:3});S.seen[y][x]=1;log('⛩️ A shrine rises from the stone.');alive().forEach(h=>{if(chance(.4))say(h,'A shrine just... grew out of the floor! For us!');faith(h,2);});return true;
   case 'snare':if(occupied)return false;S.ents.push({t:'trap',k:'net',god:true,x,y,known:true});log('🕸️ A holy snare is laid.');return true;
@@ -4445,9 +4445,19 @@ document.addEventListener('pointerdown',e=>{const t=e.target.closest('[data-act=
 window.APO25={gen25,solve25,canPour25,pourN25,solved25,recipe25,drinkImpure25,usePotion25,drinkHeal25,apoAuto25,openApo25,closeApo25,A25,POT25,GAMBLE25,band25};
 // How to Play: the Apothecary card (after "Home sweet camp")
 if(typeof HTP!=='undefined'){const i=HTP.findIndex(x=>x.t==='Home sweet camp');HTP.splice(i<0?HTP.length-1:i+1,0,{a:'<div class="hart">🫙<span>🧪</span></div>',t:'The Apothecary',
- p:['Heroes haul back <b>🫙 impure potions</b>. At camp, tap the <b>⚗️ Apothecary</b>: tap a vial, then where to pour. One colour per vial bottles that potion.',
+ p:['Every potion found below is <b>🫙 impure</b>. At camp, tap the <b>⚗️ Apothecary</b>: tap a vial, then where to pour. One colour per vial bottles a real potion.',
  'Pinks to crimson heal (I–V); also 🛡️ Shield, 🔥 Fire, ⚡ Speed, ☠️ Poison, 👻 Invisibility, 💢 Fury. Deeper finds are richer.',
  'Drinking one impure is a gamble: big heal, tiny hero… or an explosion.']});}
+// ---- everything found below is impure: drops, chests, events, the dungeon merchant (camp-made potions, the god's own gifts and the Porter's weak field brew are the exceptions)
+const PURE25=id=>!!POT25[id]||id==='elixir';
+const impFor25=id=>'imp'+Math.min(5,band25(S.floor)+(id==='elixir'||HEAL25.indexOf(id)>=2?1:0));
+{const _le2=lootEnt;lootEnt=function(){const e=_le2.apply(this,arguments);if(e&&e.it&&PURE25(e.it.id))e.it={id:impFor25(e.it.id),q:e.it.q||1};return e;};}
+{const _ca=carry;carry=function(h,s,e){if(S.phase==='dungeon'&&s&&PURE25(s.id))s={id:impFor25(s.id),q:s.q||1};return _ca.call(this,h,s,e);};}
+// the nudge: once the first soul has arrived, point at the bench
+function tip25(){if(!S||S.title||S.apoTip25||window.SIM_MODE||offline||S.phase!=='camp'||!alive().length||!impCount25()||A25.on)return;S.apoTip25=1;
+ ov(`<div class="s23first"><div class="hart">⚗️</div><h2>Purify before you go</h2><p>Everything found in the dungeon is <b>impure</b>. You have 🫙 ${impCount25()} on the shelf. Sort them at the <b>Apothecary</b> to bottle real potions: your heroes pack them on the way out.</p><p class="small">Drinking one impure is a gamble. Heroes only do it when desperate.</p><button class="btn gold" style="width:100%;min-height:44px" data-act="apo25">⚗️ Open the Apothecary</button><button class="btn" style="width:100%;min-height:44px;margin-top:6px" data-act="close">Later</button></div>`);}
+{const _cs=closeShrine23;closeShrine23=function(){const r=_cs.apply(this,arguments);setTimeout(tip25,500);return r;};}
+{const _oa=openApo25;openApo25=function(){if(S)S.apoTip25=1;return _oa.apply(this,arguments);};}
 
 </script>
 <script>
@@ -4478,8 +4488,8 @@ function kit26(o){const p=alive().find(x=>x.cls==='Porter'&&!x.downed&&(x.lvl||1
 SK17.Porter=[
  {id:'pass',n:'Pass the Pack',ic:'🎒',cd:6,kind:'ally',d:r=>`Tosses a potion or food to an ally up to ${3+Math.floor(r/2)} tiles away (hurt allies drink it at once)`,when:h=>!!need26(h),go:(h,r)=>{const n=need26(h);return n?pass26(h,n):null;}},
  {id:'pockets',n:'Deep Pockets',ic:'👝',cd:1,passive:1,kind:'ally',d:r=>`Always on: ${25+5*r}% chance of an extra find on pickup, +25% gold; foes drop impure potions ${6+r}% more often`,when:()=>false,go:()=>null},
- {id:'kit',n:'Field Kit',ic:'⚗️',cd:30,kind:'ally',lv:5,d:r=>`Brews a Healing Potion in the field. Passive: potions heal +${10+2*r}% near me`,
-  when:h=>alive().reduce((a,o)=>a+countItem(o,'potion'),0)<alive().length&&bagUsed(h)<cap(h),go:(h,r)=>{if(addItem(h,r>=4?'potion2':'potion',1))return null;ST26.brews++;if(!offline&&chance(.4))say(h,'A pinch of moss, a splash of… something. Good as new.');return{fx:'ring',c:'232,184,110'};}}];
+ {id:'kit',n:'Field Kit',ic:'⚗️',cd:30,kind:'ally',lv:5,d:r=>`Brews a weak Healing Potion (I) in the field. Passive: potions heal +${10+2*r}% near me`,
+  when:h=>alive().reduce((a,o)=>a+countItem(o,'potion'),0)<alive().length&&bagUsed(h)<cap(h),go:(h,r)=>{if(addItem(h,'potion',1))return null;ST26.brews++;if(!offline&&chance(.4))say(h,'A pinch of moss, a splash of… something. Good as new.');return{fx:'ring',c:'232,184,110'};}}];
 {const _dh=drinkHeal25;drinkHeal25=function(h,need){const r=_dh.apply(this,arguments);if(r)r.f*=kit26(h);return r;};}
 // Deep Pockets
 window.ST26={passes:0,extra:0,imp:0,brews:0};
