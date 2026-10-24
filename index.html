@@ -4659,13 +4659,18 @@ function cat32(id){if(typeof id==='object')return id.kind==='w'?'w':'a';if(/^imp
  if(['ration','water','meat'].includes(id))return 'food';const it=ITEMS[id];if(it&&it.kind==='mat')return 'mat';return 'junk';}
 // orientation variants: each distinct rotation of the base shape is equally likely (squares stay squares)
 function rots32(sh){const out=[],seen=new Set();let c=sh;for(let r=0;r<4;r++){const mx=Math.min(...c.map(q=>q[0])),my=Math.min(...c.map(q=>q[1]));const n=c.map(q=>[q[0]-mx,q[1]-my]).sort((a,b)=>a[1]-b[1]||a[0]-b[0]);const k=JSON.stringify(n);if(!seen.has(k)){seen.add(k);out.push(n);}c=c.map(q=>[-q[1],q[0]]);}return out;}
-function sh32(p){const v=rots32(shape32(p.it));if(!(p.o>=0&&p.o<v.length))p.o=Math.floor(Math.random()*v.length);return v[p.o];}
+// shape set (colour still shows category). weights favour small pieces so lines stay clearable
+const SHP32={'1':[3,[[0,0]]],I2:[3,[[0,0],[1,0]]],I3:[2.5,[[0,0],[1,0],[2,0]]],I4:[1.5,[[0,0],[1,0],[2,0],[3,0]]],O:[1.5,[[0,0],[1,0],[0,1],[1,1]]],
+ c3:[2.5,[[0,0],[1,0],[0,1]]],L:[1,[[0,0],[0,1],[0,2],[1,2]]],J:[1,[[1,0],[1,1],[1,2],[0,2]]],T:[1,[[0,0],[1,0],[2,0],[1,1]]],S:[.8,[[1,0],[2,0],[0,1],[1,1]]],Z:[.8,[[0,0],[1,0],[1,1],[2,1]]],U:[.6,[[0,0],[2,0],[0,1],[1,1],[2,1]]]};
+function pick32(){let t=0;for(const k in SHP32)t+=SHP32[k][0];let r=Math.random()*t;for(const k in SHP32)if((r-=SHP32[k][0])<0)return k;return '1';}
+// new pieces carry k (shape) and o (orientation); older saved pieces keep their category shape (and v34 's1' singles)
+function sh32(p){const base=p.k&&SHP32[p.k]?SHP32[p.k][1]:shape32(p.it);const v=rots32(base);if(!(p.o>=0&&p.o<v.length))p.o=Math.floor(Math.random()*v.length);return p.s1?[[0,0]]:v[p.o];}
 function shape32(it){if(typeof it==='object'&&it.kind==='r')return [[0,0],[1,0]];return CAT32[cat32(it)].sh;}
 const icon32=it=>typeof it==='object'?(it.kind==='w'?'🗡️':it.kind==='a'?'🛡️':'💍'):(ITEMS[it]&&ITEMS[it].ic)||(typeof POT25!=='undefined'&&POT25[it]&&POT25[it].ic)||'📦';
 const name32=it=>typeof it==='object'?it.n:(ITEMS[it]&&ITEMS[it].n)||(typeof POT25!=='undefined'&&POT25[it]&&POT25[it].n)||it;
 const rare32=it=>typeof it==='object'&&(it.leg||(it.rar||0)>=2);
 const QCAP32=24;
-const pc32=(it,o)=>Object.assign({it,tr:Math.random()<.12?1:0,junk:0},o||{});
+const pc32=(it,o)=>Object.assign({it,k:pick32(),tr:Math.random()<.12?1:0,junk:0},o||{});
 function bsz32(){const l=bl('storehouse');return 8+(l>=3?1:0)+(l>=5?1:0);}
 function sb32(){const n=bsz32();if(!S.sb32||S.sb32.n!==n){const old=S.sb32;S.sb32={n,cells:Array(n*n).fill(-1),pcs:{},seq:0,offer:[null,null,null],sess:null};
   if(old){for(const k in old.pcs)if(old.cells.includes(+k))S.sb32.offer.length&&(S.in32=S.in32||[]).unshift(old.pcs[k]);old.offer.forEach(p=>{if(p)(S.in32=S.in32||[]).unshift(p);});}}S.in32=S.in32||[];return S.sb32;}
