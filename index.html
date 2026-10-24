@@ -4657,6 +4657,9 @@ const CAT32={w:{n:'Weapons',c:'#c9574a',sh:[[0,0],[1,0],[2,0]]},a:{n:'Armor',c:'
  food:{n:'Food & water',c:'#d9a83a',sh:[[0,0],[0,1],[1,1]]},mat:{n:'Materials',c:'#8a6440',sh:[[0,0],[1,0]]},junk:{n:'Junk',c:'#7d7d86',sh:[[0,0],[1,0],[2,0],[1,1]]}};
 function cat32(id){if(typeof id==='object')return id.kind==='w'?'w':'a';if(/^imp\d$/.test(id)||(typeof POT25!=='undefined'&&POT25[id])||id==='antidote'||id==='potion'||id==='elixir')return 'pot';
  if(['ration','water','meat'].includes(id))return 'food';const it=ITEMS[id];if(it&&it.kind==='mat')return 'mat';return 'junk';}
+// orientation variants: each distinct rotation of the base shape is equally likely (squares stay squares)
+function rots32(sh){const out=[],seen=new Set();let c=sh;for(let r=0;r<4;r++){const mx=Math.min(...c.map(q=>q[0])),my=Math.min(...c.map(q=>q[1]));const n=c.map(q=>[q[0]-mx,q[1]-my]).sort((a,b)=>a[1]-b[1]||a[0]-b[0]);const k=JSON.stringify(n);if(!seen.has(k)){seen.add(k);out.push(n);}c=c.map(q=>[-q[1],q[0]]);}return out;}
+function sh32(p){const v=rots32(shape32(p.it));if(!(p.o>=0&&p.o<v.length))p.o=Math.floor(Math.random()*v.length);return v[p.o];}
 function shape32(it){if(typeof it==='object'&&it.kind==='r')return [[0,0],[1,0]];return CAT32[cat32(it)].sh;}
 const icon32=it=>typeof it==='object'?(it.kind==='w'?'🗡️':it.kind==='a'?'🛡️':'💍'):(ITEMS[it]&&ITEMS[it].ic)||(typeof POT25!=='undefined'&&POT25[it]&&POT25[it].ic)||'📦';
 const name32=it=>typeof it==='object'?it.n:(ITEMS[it]&&ITEMS[it].n)||(typeof POT25!=='undefined'&&POT25[it]&&POT25[it].n)||it;
@@ -4691,8 +4694,8 @@ function combo32(cat,mult,out){let t='';
 function sess32(){const B=sb32();if(!B.sess)B.sess={placed:0,lines:0,combos:0,multi:0,spill:0,stored:0,scrap:0,tre:0,pts:0};return B.sess;}
 function refill32(){const B=sb32();if(B.offer.some(p=>p))return;for(let i=0;i<3;i++)B.offer[i]=S.in32.length?S.in32.shift():null;}
 function fits32(cells,n,sh,x,y){return sh.every(([dx,dy])=>{const X=x+dx,Y=y+dy;return X>=0&&Y>=0&&X<n&&Y<n&&cells[Y*n+X]===-1;});}
-function canFit32(p){const B=sb32(),sh=shape32(p.it);for(let y=0;y<B.n;y++)for(let x=0;x<B.n;x++)if(fits32(B.cells,B.n,sh,x,y))return true;return false;}
-function place32(oi,x,y){const B=sb32(),p=B.offer[oi];if(!p)return null;const sh=shape32(p.it);if(!fits32(B.cells,B.n,sh,x,y))return null;const k=++B.seq;B.pcs[k]=p;B.offer[oi]=null;
+function canFit32(p){const B=sb32(),sh=sh32(p);for(let y=0;y<B.n;y++)for(let x=0;x<B.n;x++)if(fits32(B.cells,B.n,sh,x,y))return true;return false;}
+function place32(oi,x,y){const B=sb32(),p=B.offer[oi];if(!p)return null;const sh=sh32(p);if(!fits32(B.cells,B.n,sh,x,y))return null;const k=++B.seq;B.pcs[k]=p;B.offer[oi]=null;
  sh.forEach(([dx,dy])=>B.cells[(y+dy)*B.n+x+dx]=k);const S0=sess32();S0.placed++;S0.pts+=sh.length;
  const n=B.n,rows=[],cols=[];for(let i=0;i<n;i++){let r=1,c=1;for(let j=0;j<n;j++){if(B.cells[i*n+j]<0)r=0;if(B.cells[j*n+i]<0)c=0;}if(r)rows.push(i);if(c)cols.push(i);}
  const out={stored:0,scrap:0,gold:0,ore:0,lost:[],tre:[],combo:[],lines:rows.length+cols.length,cells:[],placedCells:sh.map(([dx,dy])=>(y+dy)*n+x+dx)};
@@ -4748,7 +4751,7 @@ function paint32(){if(!ST32.el||!ST32.on)return;const el=ST32.el.querySelector('
   `<div class="s32body"><div class="s32bw"><div class="s32brd" style="width:${n*cs}px;height:${n*cs}px">${B.cells.map((c,i)=>{const p=c>=0?B.pcs[c]:null;const X=(i%n)*cs,Y=Math.floor(i/n)*cs,st=`left:${X}px;top:${Y}px;width:${cs-2}px;height:${cs-2}px`;
    const first=p&&B.cells.indexOf(c)===i;return `<b class="s32c" style="${st}"></b>${p?`<i class="s32f${pc.has(i)?' snap':''}" style="${st};background:${col32(p)}">${first?(p.tr?'❔':icon32(p.it)):''}</i>`:''}${fc.has(i)?`<em class="s32fx" style="${st}"></em>`:''}`;}).join('')}
    ${fx&&(fx.combo.length||fx.tre.length||fx.lines)?`<div class="s32pop">${fx.lines>=2?`<b>×${fx.lines} LINES!</b>`:fx.lines?'<b>Stored!</b>':''}${fx.combo.map(t=>`<div class="cb">${t}</div>`).join('')}${fx.tre.map(t=>`<div class="tr">❔ ${t}</div>`).join('')}</div>`:''}</div></div>
-   <div class="s32side"><div class="s32offer">${B.offer.map((p,k)=>!p?'<div class="s32slot"></div>':`<div class="s32slot ${p.junk?'jk':''}"><div class="s32drag" data-offer="${k}">${pieceHTML32(shape32(p.it),col32(p),Math.round(cs*.6),icon32(p.it),p.tr)}</div><span class="small">${name32(p.it)}</span><button class="btn s" data-s32="junk" data-v="${k}">${p.junk?'🗑️ junk':'keep'}</button></div>`).join('')}</div>
+   <div class="s32side"><div class="s32offer">${B.offer.map((p,k)=>!p?'<div class="s32slot"></div>':`<div class="s32slot ${p.junk?'jk':''}"><div class="s32drag" data-offer="${k}">${pieceHTML32(sh32(p),col32(p),Math.round(cs*.6),icon32(p.it),p.tr)}</div><span class="small">${name32(p.it)}</span><button class="btn s" data-s32="junk" data-v="${k}">${p.junk?'🗑️ junk':'keep'}</button></div>`).join('')}</div>
    ${ST32.spill?`<div class="s32lost">💨 Nothing fit, so it spilled: <b>${ST32.spill.lost.join(', ')}</b> lost. The crew sorted the jam (${ST32.spill.stored} stored).</div>`:''}
    ${ST32.note?`<div class="small s32note">${ST32.note}</div>`:''}
    ${!B.offer.some(p=>p)?`<div class="s32empty">All loot is sorted. Bring more home, or feed junk in.</div>`:''}
@@ -4762,7 +4765,7 @@ function paint32(){if(!ST32.el||!ST32.on)return;const el=ST32.el.querySelector('
   <div class="s32row"><button class="btn gold" data-s32="board">Keep sorting</button><button class="btn" data-s32="close">Close</button></div></div>`;}
  const st=el.scrollTop,same=ST32._pm===m;el.innerHTML=h;ST32._pm=m;if(same)el.scrollTop=st;}
 // ---- dragging: ghost follows the finger (lifted on touch); the board previews the landing squares
-function down32(ev){const d=ev.target.closest('.s32drag');if(!d)return;ev.preventDefault();const oi=+d.dataset.offer,p=sb32().offer[oi];if(!p)return;const sh=shape32(p.it),cs=ST32.cs;
+function down32(ev){const d=ev.target.closest('.s32drag');if(!d)return;ev.preventDefault();const oi=+d.dataset.offer,p=sb32().offer[oi];if(!p)return;const sh=sh32(p),cs=ST32.cs;
  const g=document.createElement('div');g.className='s32ghost';g.innerHTML=pieceHTML32(sh,col32(p),cs,'',0);document.body.appendChild(g);
  ST32.drag={oi,sh,g,lift:ev.pointerType==='mouse'?0:cs*1.4,x:-9,y:-9,id:ev.pointerId};d.classList.add('lift');move32(ev);
  const mv=e=>{if(ST32.drag&&e.pointerId===ST32.drag.id)move32(e);},up=e=>{if(!ST32.drag||e.pointerId!==ST32.drag.id)return;removeEventListener('pointermove',mv);removeEventListener('pointerup',up);removeEventListener('pointercancel',up);drop32();};
