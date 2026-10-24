@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="First Flame">
-<meta name="theme-color" content="#0d0d14"><title>First Flame</title>
+<meta name="theme-color" content="#07050b"><title>First Flame</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 html,body{margin:0;background:#0d0d14;color:#ddd;font:12px/1.3 system-ui,-apple-system,sans-serif;touch-action:manipulation;overscroll-behavior:none}
@@ -423,6 +423,28 @@ h2.h39{display:flex;align-items:center;gap:8px}h2.h39 .q39{margin-left:auto}.s32
 .hp39{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#0009;padding:14px;animation:ovin .18s ease-out}
 .hb39{width:min(440px,94vw);max-height:84vh;overflow:auto;background:linear-gradient(#241a2e,#17111d);border:1px solid #ffd76a66;border-radius:14px;padding:12px 14px;box-shadow:0 10px 30px #000c;font-size:13.5px;line-height:1.45;color:#efe2c4}
 .hh39{display:flex;align-items:center;justify-content:space-between;font:bold 16px Georgia,serif;color:#ffd76a;margin-bottom:6px}.hb39 p{margin:6px 0}
+#tr40{position:fixed;inset:0;z-index:9000;display:none;align-items:center;justify-content:center;background:radial-gradient(#2a1d14,#120c08);padding:env(safe-area-inset-top) 10px env(safe-area-inset-bottom)}
+.t40in{display:flex;flex-direction:column;gap:8px;width:100%;max-width:580px;align-items:center}.t40hd{display:flex;align-items:center;gap:10px;width:100%}.t40hd .btn{min-height:44px}.t40t b{font:bold 16px Georgia,serif;color:#ffd76a}
+.t40tap{position:relative;touch-action:manipulation;user-select:none;-webkit-user-select:none}.t40tap canvas{display:block;border-radius:14px;border:2px solid #6a4a2a;box-shadow:0 6px 20px #000a}
+.t40fx{position:absolute;left:0;right:0;top:12%;text-align:center;pointer-events:none}.t40fx b{font:bold 24px Georgia,serif;text-shadow:0 2px 6px #000;animation:s32pop 1s ease-out forwards;display:inline-block}
+.t40fx .perfect{color:#ffe9a8}.t40fx .good{color:#bff0a0}.t40fx .ok{color:#9ec9ff}.t40fx .miss{color:#ff8a7a}
+.t40bar{display:flex;align-items:center;gap:10px;width:100%;max-width:560px}.t40go{flex:1;min-height:60px;font-size:20px!important;letter-spacing:2px}
+.t40dots{display:flex;gap:6px}.t40dots i{width:14px;height:14px;border-radius:50%;background:#3a2e22;border:1px solid #6a5a48}.t40dots i.perfect{background:#ffd76a}.t40dots i.good{background:#9fe07a}.t40dots i.ok{background:#7aa8e0}.t40dots i.miss{background:#a04a3a}.t40dots.big i{width:20px;height:20px}
+.t40res{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;padding:14px;border:1px solid #6a4a2a;border-radius:16px;background:linear-gradient(#2a1f16,#1a130d)}
+.rk40{font:bold 64px Georgia,serif;color:#ffd76a;text-shadow:0 0 18px #ffd76a66;line-height:1}.rk40.rMAX{font-size:54px;color:#fff0b8}.rk40.rC{color:#c9b89a;text-shadow:none}
+.gn40{display:flex;flex-direction:column;gap:6px;width:100%}.gl40{display:grid;grid-template-columns:1fr auto;gap:2px 8px;align-items:center}.gl40 b{color:#bff0a0}.gl40 u{grid-column:1/3;height:6px;border-radius:3px;background:#3a2e22;overflow:hidden}.gl40 u i{display:block;height:100%;background:#ffd76a}.gl40 em{grid-column:1/3;font-style:normal;font-size:11px;opacity:.6}
+.t40say{font-style:italic;text-align:center}.t40ft{display:flex;gap:8px;width:100%}.t40ft .btn{flex:1;min-height:46px}
+.p40{width:100%;max-width:620px}.p40 h2{margin:0 0 8px}.g40{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.hc40{display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 6px;min-height:120px;border:1px solid #6a4a2a;border-radius:12px;background:linear-gradient(#2a1f16,#1a130d);color:inherit;font:inherit;cursor:pointer}.hc40.off{opacity:.45;cursor:default}.hc40 span{font-size:12px}.hc40 i{font-style:normal;font-size:10.5px;opacity:.75}.hc40 em{font-style:normal;font-size:11px;color:#ffd76a}
+@media (orientation:landscape) and (max-height:500px){.t40in{max-width:none;flex-direction:column}.t40res{flex-direction:row;flex-wrap:wrap;justify-content:center;padding:8px}.rk40{font-size:48px}.gn40{width:auto;min-width:240px}}
+/* v41: iOS PWA edges. Solid dark html, safe-area padding on every overlay, opaque bars under the status bar and home indicator, sticky modal headers */
+html{background:#0a0810!important;min-height:100%}body{background:radial-gradient(ellipse at 30% 0%,#1b1426 0%,#0a0810 70%) #0a0810!important;background-attachment:scroll!important;min-height:100%}
+.ov,#pm{padding:calc(env(safe-area-inset-top) + 8px) calc(env(safe-area-inset-right) + 8px) calc(env(safe-area-inset-bottom) + 8px) calc(env(safe-area-inset-left) + 8px)!important;box-sizing:border-box;background:#07050bf0!important}
+.ov .box{max-height:100%!important;box-sizing:border-box}
+.hp39{padding:calc(env(safe-area-inset-top) + 14px) 14px calc(env(safe-area-inset-bottom) + 14px)!important}
+#shr23{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);box-sizing:border-box}
+.edge41{position:fixed;left:0;right:0;z-index:2147483000;background:#07050b;pointer-events:none}.edge41.t{top:0;height:env(safe-area-inset-top)}.edge41.b{bottom:0;height:env(safe-area-inset-bottom)}
+#ovb>.council>.ch,#ovb>.wc38>.hd38,#ovb>.a38>.hd38,#ovb>.base>.ch,#ovb>.c36>h2,#ovb>.p40>h2,#ovb>div>h2:first-child{position:sticky;top:-12px;z-index:5;background:#17111f;margin:-12px 0 6px;padding:10px 0 8px;box-shadow:0 0 0 12px #17111f;clip-path:inset(0 -12px);border-bottom:1px solid #3a3048}
 </style><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(r=>r.update()));
@@ -5059,6 +5081,109 @@ function help39(k){const c=H39.find(x=>x.k===k);if(!c)return;const r=document.qu
  HP39=document.createElement('div');HP39.className='hp39';HP39.innerHTML=`<div class="hb39"><div class="hh39"><b>❔ ${c.t}</b><button class="btn s" data-q39x="1">✕</button></div>${parts.map(p=>`<p>${p}</p>`).join('')||'<p>Nothing tricky here.</p>'}<button class="btn gold" data-q39x="1" style="width:100%">Got it</button></div>`;document.body.appendChild(HP39);}
 function closeHelp39(){if(HP39){HP39.remove();HP39=null;}}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-q39]');if(b){e.stopPropagation();help39(b.dataset.q39);return;}if(e.target.closest('[data-q39x]')||e.target===HP39)closeHelp39();},true);
+// v41: opaque dark strips under the iOS status bar and home indicator (no light scroll-edge fade over modals)
+for(const c of ['t','b']){const e=document.createElement('div');e.className='edge41 '+c;document.body.appendChild(e);}
+
+</script><script>
+// v40: Training Grounds. The player runs a short timing drill for one hero; the result permanently raises raw base stats
+// (max HP / attack / defence), never level or XP. Each session costs COST40 from camp storage (no per-visit cap); each stat
+// has a lifetime cap (25% of the class's base value) and every session closes a share of the remaining gap (diminishing returns).
+const COST40={ration:1,ore:2};// tune here: stash item id → count per session
+const DR40={
+ Warrior:{n:'Parry the Dummy',ic:'⚔️',st:{atk:.6,mhp:.4},v:'parry'},
+ Paladin:{n:'Shield Block',ic:'🛡️',st:{def:.6,mhp:.4},v:'block'},
+ Rogue:{n:'Pick the Lock',ic:'🗝️',st:{atk:.7,def:.3},v:'lock'},
+ Ranger:{n:'Moving Targets',ic:'🏹',st:{atk:1},v:'archery'},
+ Mage:{n:'Sweet-Spot Focus',ic:'🔮',st:{atk:.8,mhp:.2},v:'meter'},
+ Necromancer:{n:'Rune Channel',ic:'💀',st:{atk:.6,mhp:.4},v:'rune'},
+ Cleric:{n:'Heartbeat Prayer',ic:'✝️',st:{mhp:.6,def:.4},v:'pulse'},
+ Bard:{n:'Lute Rhythm',ic:'🎻',st:{atk:.5,def:.5},v:'notes'},
+ Porter:{n:'Crate Drop',ic:'🎒',st:{mhp:.6,def:.4},v:'crate'}};
+const RANK40={C:.4,B:.6,A:.8,S:1,MAX:1.25},SN40={mhp:'❤️ Max HP',atk:'⚔️ Attack',def:'🛡️ Defence'};
+const BEATS40=6,P40={perfect:70,good:150,ok:250};
+const cap40=(h,s)=>{const C=CLASSES[h.cls]||{};const b=s==='mhp'?C.hp:s==='atk'?C.atk:C.def;return Math.max(s==='def'?.8:1,(b||0)*.25);};
+const done40=(h,s)=>(h.tb40&&h.tb40[s])||0;
+function gain40(h,rank){const out={};const d=DR40[h.cls];if(!d)return out;for(const s in d.st){const gap=Math.max(0,cap40(h,s)-done40(h,s));out[s]=gap*.2*RANK40[rank]*d.st[s];}return out;}
+function apply40(h,rank){const g=gain40(h,rank);h.tb40=h.tb40||{};for(const s in g){h.base[s]+=g[s];h.tb40[s]=(h.tb40[s]||0)+g[s];if(s==='mhp')h.hp=Math.min(mhp(h),h.hp+g[s]);}h.tr40=S.cv40||0;h.trN40=(h.trN40||0)+1;return g;}
+const afford40=()=>Object.keys(COST40).every(k=>(S.stash[k]||0)>=COST40[k]);
+const costTxt40=()=>Object.keys(COST40).map(k=>`${(ITEMS[k]&&ITEMS[k].ic)||k}${COST40[k]}`).join(' ');
+function pay40(){if(!afford40())return false;for(const k in COST40){S.stash[k]-=COST40[k];if(S.stash[k]<=0)delete S.stash[k];}return true;}
+const canTrain40=h=>!!(h&&h.alive&&!h.downed&&DR40[h.cls]&&S.phase==='camp'&&alive().includes(h));
+{const _ec=enterCamp;enterCamp=function(){S.cv40=(S.cv40||0)+1;const r=_ec.apply(this,arguments);
+ if(window.SIM_MODE&&window.TRAIN40SIM&&bl('training')>0)for(const h of alive())if(canTrain40(h)&&pay40())apply40(h,'A');return r;};}
+// ---- chooser + hero picker
+if(typeof ST36!=='undefined')ST36.training={ic:'🎯',n:'Training Yard',game:'Training',play:()=>pick40(),noinv:1};
+{const _ch=choose36;choose36=function(id){_ch.apply(this,arguments);if(ST36[id]&&ST36[id].noinv){const b=document.querySelector('#ovb [data-c36=inv]');if(b)b.remove();const p=document.querySelector('#ovb [data-c36=play]');if(p)p.textContent='🎯 Training: pick a hero';const s=document.querySelector('#ovb .c36>.small');if(s)s.textContent=`Each session costs ${costTxt40()}`;}};}
+function pick40(){const hs=rosterAll().filter(h=>h.alive);
+ ov(`<div class="p40"><h2>🎯 Training Yard</h2><div class="small">Cost per session: ${costTxt40()} · you have ${Object.keys(COST40).map(k=>`${(ITEMS[k]&&ITEMS[k].ic)||k}${S.stash[k]||0}`).join(' ')}</div><div class="g40">${hs.map(h=>{const d=DR40[h.cls]||{n:'—',ic:'?',st:{}};const ok=canTrain40(h)&&afford40();
+  return `<button class="hc40 ${ok?'':'off'}" ${ok?`data-t40="${h.id}"`:'disabled'}>${avatar(h.cls,h.color,h)}<b style="color:${h.color}">${h.name}</b><span>${d.ic} ${d.n}</span><i>${Object.keys(d.st).map(s=>`${SN40[s].split(' ')[0]} ${Math.round(done40(h,s)/cap40(h,s)*100)}%`).join(' · ')}</i><em>${!alive().includes(h)?'On the bench':afford40()?`Train · ${costTxt40()}`:`Need ${costTxt40()}`}</em></button>`;}).join('')}</div>
+  <button class="btn" style="width:100%;margin-top:8px" data-act="close">Close</button></div>`);}
+// ---- the drill
+const T40={el:null,h:null,i:0,res:[],t0:0,D:0,uh:.7,raf:0,fx:null,done:false};
+function build40(){if(T40.el)return;const e=document.createElement('div');e.id='tr40';e.innerHTML='<div class="t40in"></div>';document.body.appendChild(e);T40.el=e;
+ e.addEventListener('pointerdown',ev=>{if(ev.target.closest('.t40tap'))tap40(ev);});
+ e.addEventListener('click',ev=>{const b=ev.target.closest('[data-x40]');if(!b)return;const a=b.dataset.x40;if(a==='close')close40();else if(a==='again')pick40w();});}
+function pick40w(){close40();pick40();}
+function open40(hid){const h=heroById(hid);if(!canTrain40(h))return;if(!pay40())return toast(`Training needs ${costTxt40()}.`);closeOv();build40();Object.assign(T40,{h,i:0,res:[],done:false,fx:null});S.paused=true;
+ const d=DR40[h.cls];T40.el.querySelector('.t40in').innerHTML=`<div class="t40hd"><button class="btn" data-x40="close">✕ Close</button><div class="t40t"><b>${d.ic} ${d.n}</b><div class="small">${h.name} · ${h.cls}</div></div></div>
+  <div class="t40tap"><canvas></canvas><div class="t40fx"></div></div><div class="t40bar"><div class="t40dots">${Array.from({length:BEATS40},(_,i)=>`<i data-b="${i}"></i>`).join('')}</div><button class="btn gold t40go t40tap">TAP</button></div>`;
+ T40.el.style.display='flex';lay40();beat40(performance.now()+500);cancelAnimationFrame(T40.raf);T40.raf=requestAnimationFrame(loop40);}
+function lay40(){const c=T40.el.querySelector('canvas');if(!c)return;const W=Math.min(innerWidth-24,560),H=Math.max(180,Math.min(innerHeight-170,innerWidth>innerHeight?innerHeight-150:360));const dp=Math.min(2,devicePixelRatio||1);c.width=W*dp;c.height=H*dp;c.style.width=W+'px';c.style.height=H+'px';T40.W=W;T40.H=H;T40.dp=dp;}
+addEventListener('resize',()=>{if(T40.el&&T40.el.style.display==='flex')lay40();});
+function beat40(t){T40.t0=t;T40.D=1500-T40.i*90;T40.uh=.55+Math.random()*.25;T40.tapped=false;}
+function grade40(errMs){return errMs<=P40.perfect?'perfect':errMs<=P40.good?'good':errMs<=P40.ok?'ok':'miss';}
+function tap40(ev){if(T40.done||T40.tapped)return;ev.preventDefault();const t=performance.now();if(t<T40.t0)return;const u=(t-T40.t0)/T40.D;T40.tapped=true;settle40(grade40(Math.abs(u-T40.uh)*T40.D),t);}
+function settle40(g,t){T40.res.push(g);T40.fx={g,t};const dot=T40.el.querySelector(`.t40dots [data-b="${T40.i}"]`);if(dot)dot.className=g;
+ if(navigator.vibrate&&g!=='miss')try{navigator.vibrate(g==='perfect'?18:8);}catch(e){}
+ const f=T40.el.querySelector('.t40fx');f.innerHTML=`<b class="${g}">${{perfect:'Perfect!',good:'Good',ok:'Okay',miss:'Miss'}[g]}</b>`;
+ T40.i++;if(T40.i>=BEATS40){T40.done=true;setTimeout(result40,650);}else beat40(t+650);}
+function rank40(res){const pts=res.reduce((a,g)=>a+({perfect:3,good:2,ok:1,miss:0}[g]),0);return res.every(g=>g==='perfect')?'MAX':pts>=15?'S':pts>=11?'A':pts>=7?'B':'C';}
+function result40(){const h=T40.h,r=rank40(T40.res),d=DR40[h.cls];const g=apply40(h,r);cancelAnimationFrame(T40.raf);if(typeof save==='function')try{save();}catch(e){}
+ T40.el.querySelector('.t40in').innerHTML=`<div class="t40hd"><button class="btn" data-x40="close">✕ Close</button><div class="t40t"><b>${d.ic} ${d.n}</b><div class="small">${h.name}</div></div></div>
+  <div class="t40res"><div class="rk40 r${r}">${r}</div><div class="t40dots big">${T40.res.map(x=>`<i class="${x}"></i>`).join('')}</div>
+  <div class="gn40">${Object.keys(g).map(s=>`<div class="gl40"><span>${SN40[s]}</span><b>+${g[s]>=1?g[s].toFixed(1):g[s].toFixed(2)}</b><u><i style="width:${Math.round(done40(h,s)/cap40(h,s)*100)}%"></i></u><em>${Math.round(done40(h,s)/cap40(h,s)*100)}% of limit</em></div>`).join('')}</div>
+  <div class="small t40say">“${pick(r==='MAX'||r==='S'?['That felt right. Again tomorrow?','My arms remember that.','Did you see that? Perfect.']:r==='A'||r==='B'?['Getting there.','Sore, but stronger.','One more visit and I\'ll have it.']:['Clumsy today. Thanks for staying with me.','Tomorrow I\'ll do better.'])}”</div>
+  <div class="t40ft"><button class="btn" data-x40="again">Train someone else</button><button class="btn gold" data-x40="close">Done</button></div></div>`;
+ if(typeof say==='function')try{say(h,r==='MAX'?'Flawless. I can feel it in my bones.':'Good work at the yard.');}catch(e){}}
+function close40(){if(!T40.el)return;cancelAnimationFrame(T40.raf);T40.el.style.display='none';S.paused=false;if(typeof render==='function')render();}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-t40]');if(b)open40(+b.dataset.t40);});
+// ---- cozy hand-drawn drills (one shared timing core, nine looks)
+function loop40(t){if(!T40.el||T40.el.style.display!=='flex')return;const c=T40.el.querySelector('canvas');if(!c)return;const g=c.getContext('2d');const {W,H,dp}=T40;g.setTransform(dp,0,0,dp,0,0);
+ if(!T40.done&&!T40.tapped&&t>T40.t0&&(t-T40.t0)/T40.D>T40.uh+P40.ok/T40.D)settle40('miss',t);
+ const u=Math.max(0,Math.min(1.2,(t-T40.t0)/T40.D)),uh=T40.uh,k=u/uh;// k: 0→1 arrives at the hit moment
+ const bg=g.createLinearGradient(0,0,0,H);bg.addColorStop(0,'#3b2a1e');bg.addColorStop(1,'#20160f');g.fillStyle=bg;g.fillRect(0,0,W,H);
+ g.fillStyle='#5a4128';g.fillRect(0,H*.8,W,H*.2);for(let x=0;x<W;x+=26){g.fillStyle='#4a3420';g.fillRect(x,H*.8,2,H*.2);}
+ g.fillStyle='rgba(255,214,140,.08)';g.beginPath();g.arc(W*.85,H*.15,60,0,6.283);g.fill();
+ DRAW40[DR40[T40.h.cls].v](g,W,H,k,u,t);
+ if(T40.fx&&t-T40.fx.t<500){g.globalAlpha=1-(t-T40.fx.t)/500;g.strokeStyle={perfect:'#ffe9a8',good:'#bff0a0',ok:'#9ec9ff',miss:'#ff8a7a'}[T40.fx.g];g.lineWidth=3;g.beginPath();g.arc(W/2,H/2,30+(t-T40.fx.t)/6,0,6.283);g.stroke();g.globalAlpha=1;}
+ T40.raf=requestAnimationFrame(loop40);}
+const C40={wood:'#8a5a32',dark:'#5a3a1e',straw:'#d9b86a',cloth:'#b85a4a',gold:'#ffd76a',ink:'#2a1d12',glow:'#ffe9a8'};
+function dummy40(g,x,y,s){g.fillStyle=C40.dark;g.fillRect(x-3*s,y,6*s,40*s);g.fillStyle=C40.straw;g.beginPath();g.ellipse(x,y-6*s,16*s,20*s,0,0,6.283);g.fill();g.fillStyle=C40.cloth;g.fillRect(x-16*s,y-4*s,32*s,6*s);g.fillStyle=C40.straw;g.beginPath();g.arc(x,y-34*s,11*s,0,6.283);g.fill();g.fillStyle=C40.ink;g.fillRect(x-5*s,y-36*s,3*s,3*s);g.fillRect(x+2*s,y-36*s,3*s,3*s);}
+const DRAW40={
+ parry(g,W,H,k){const x=W*.55,y=H*.55;dummy40(g,x,y,1.3);const a=-2.4+Math.min(1.2,k)*1.9;g.save();g.translate(x-14,y-20);g.rotate(a);g.fillStyle=C40.wood;g.fillRect(0,-4,70,8);g.restore();
+  g.strokeStyle=C40.glow;g.lineWidth=2;g.setLineDash([4,5]);g.beginPath();g.arc(x-14,y-20,74,-2.4+1.9-.05,-2.4+1.9+.05);g.stroke();g.setLineDash([]);
+  g.fillStyle='#c0c8d0';g.save();g.translate(W*.28,y-10);g.rotate(-.5);g.fillRect(-4,-40,8,60);g.fillStyle=C40.gold;g.fillRect(-12,18,24,5);g.restore();},
+ block(g,W,H,k){const y=H*.6,x0=W*.1,x1=W*.62,x=x0+(x1-x0)*Math.min(1.15,k);g.fillStyle=C40.straw;g.beginPath();g.ellipse(x,y-10,22,26,0,0,6.283);g.fill();g.fillStyle=C40.dark;g.beginPath();g.moveTo(x+20,y-14);g.lineTo(x+38,y-10);g.lineTo(x+20,y-6);g.fill();
+  g.fillStyle='#d9d2b8';g.beginPath();g.moveTo(W*.68,y-50);g.lineTo(W*.76,y-50);g.lineTo(W*.76,y+10);g.quadraticCurveTo(W*.72,y+30,W*.68,y+10);g.fill();g.fillStyle=C40.gold;g.fillRect(W*.715,y-40,10,40);g.strokeStyle=C40.glow;g.setLineDash([4,5]);g.beginPath();g.moveTo(x1+38,y-60);g.lineTo(x1+38,y+30);g.stroke();g.setLineDash([]);},
+ lock(g,W,H,k){const cx=W/2,cy=H*.5;g.fillStyle='#6a5a48';g.fillRect(cx-90,cy-60,180,120);g.fillStyle='#3a2e22';g.fillRect(cx-80,cy-50,160,100);
+  const sy=cy-6;g.fillStyle='rgba(255,233,168,.25)';g.fillRect(cx-80,sy-6,160,12);const py=cy+40-Math.min(1.2,k)*46;g.fillStyle=C40.gold;g.fillRect(cx-8,py,16,40);g.fillStyle='#c0c8d0';g.fillRect(cx-60,cy+44,120,5);g.fillRect(cx+58,cy+38,6,16);},
+ archery(g,W,H,k){const y=H*.42,x=W*.12+(W*.5-W*.12)*k*1;g.fillStyle=C40.dark;g.fillRect(x-2,y+20,4,H*.8-y-20);for(const [r,c] of [[24,'#f3e3c0'],[17,C40.cloth],[10,'#f3e3c0'],[4,C40.cloth]]){g.fillStyle=c;g.beginPath();g.arc(x,y,r,0,6.283);g.fill();}
+  g.strokeStyle=C40.glow;g.lineWidth=2;g.beginPath();g.arc(W*.5,y,30,0,6.283);g.moveTo(W*.5-38,y);g.lineTo(W*.5+38,y);g.moveTo(W*.5,y-38);g.lineTo(W*.5,y+38);g.stroke();
+  g.strokeStyle=C40.wood;g.lineWidth=4;g.beginPath();g.arc(W*.5,H*.95,40,-2.6,-.54);g.stroke();},
+ meter(g,W,H,k){const x0=W*.12,x1=W*.88,y=H*.5;g.fillStyle='#2a1f2e';g.fillRect(x0,y-14,x1-x0,28);const sx=x0+(x1-x0)*.7;g.fillStyle='rgba(190,150,255,.45)';g.fillRect(sx-14,y-14,28,28);
+  const nx=x0+(x1-x0)*.7*Math.min(1.25,k);g.fillStyle=C40.glow;g.fillRect(nx-2,y-24,4,48);g.fillStyle='#b48cff';g.beginPath();g.arc(W/2,H*.2,10+6*Math.sin(k*6),0,6.283);g.fill();},
+ rune(g,W,H,k){const cx=W/2,cy=H*.48,R=Math.min(W,H)*.3;for(let i=0;i<8;i++){const a=i/8*6.283-1.571;g.fillStyle=i===5?'#9fe07a':'#5a6a4a';g.font='bold 18px Georgia';g.textAlign='center';g.fillText(['✦','☽','✧','☼','◈','✶','❖','✷'][i],cx+Math.cos(a)*R,cy+Math.sin(a)*R+6);}
+  const a=-1.571+k*(5/8*6.283);g.fillStyle=C40.glow;g.beginPath();g.arc(cx+Math.cos(a)*R,cy+Math.sin(a)*R,7,0,6.283);g.fill();g.strokeStyle='rgba(159,224,122,.3)';g.beginPath();g.arc(cx,cy,R,0,6.283);g.stroke();},
+ pulse(g,W,H,k){const cx=W/2,cy=H*.48;g.fillStyle=C40.cloth;g.beginPath();g.moveTo(cx,cy+26);g.bezierCurveTo(cx-50,cy-6,cx-24,cy-44,cx,cy-18);g.bezierCurveTo(cx+24,cy-44,cx+50,cy-6,cx,cy+26);g.fill();
+  const r=40+(1-Math.min(1.2,k))*110;g.strokeStyle=C40.glow;g.lineWidth=3;g.beginPath();g.arc(cx,cy-6,Math.max(8,r),0,6.283);g.stroke();g.strokeStyle='rgba(255,233,168,.35)';g.setLineDash([4,5]);g.beginPath();g.arc(cx,cy-6,40,0,6.283);g.stroke();g.setLineDash([]);},
+ notes(g,W,H,k){const ly=H*.7;for(let i=0;i<3;i++){g.strokeStyle='#5a4128';g.beginPath();g.moveTo(W*(.3+i*.2),H*.05);g.lineTo(W*(.3+i*.2),ly+20);g.stroke();}
+  g.strokeStyle=C40.glow;g.lineWidth=3;g.beginPath();g.moveTo(W*.2,ly);g.lineTo(W*.8,ly);g.stroke();const y=H*.05+(ly-H*.05)*Math.min(1.2,k);g.fillStyle='#ff9ad0';g.beginPath();g.ellipse(W*.5,y,12,9,-.4,0,6.283);g.fill();g.fillRect(W*.5+9,y-30,3,30);},
+ crate(g,W,H,k){const cx=W/2;g.strokeStyle=C40.straw;g.lineWidth=2;g.beginPath();g.moveTo(cx,0);g.lineTo(cx,H*.32);g.stroke();g.fillStyle=C40.wood;g.fillRect(cx-20,H*.32,40,34);g.strokeStyle=C40.dark;g.strokeRect(cx-20,H*.32,40,34);g.beginPath();g.moveTo(cx-20,H*.32);g.lineTo(cx+20,H*.32+34);g.stroke();
+  const x=W*.08+(cx-W*.08)*Math.min(1.25,k);g.fillStyle='#6a4a2a';g.fillRect(x-36,H*.66,72,26);g.fillStyle=C40.ink;g.beginPath();g.arc(x-22,H*.78+6,8,0,6.283);g.arc(x+22,H*.78+6,8,0,6.283);g.fill();g.strokeStyle=C40.glow;g.setLineDash([4,5]);g.beginPath();g.moveTo(cx,H*.42);g.lineTo(cx,H*.66);g.stroke();g.setLineDash([]);}};
+// help entries (shared '?' popup)
+if(typeof H39!=='undefined')H39.push(
+ {k:'train',t:'Training Yard',on:'#tr40',hd:'.t40hd',mv:[],tx:'Tap <b>TAP</b> (or the picture) at the exact moment the action lands: the swing hits, the target crosses the sight, the needle meets the glow. Six beats, each a little faster. Your rank (C to MAX) sets how much the hero grows.<br>Training raises <b>base stats</b> (max HP, attack, defence), never level. Each session costs supplies from camp storage (shown on the Train button). Each stat has a lifetime limit, and every session closes part of the remaining gap, so gains shrink as a hero nears the limit.'},
+ {k:'tpick',t:'Training Yard',on:'#ovb .p40',hd:'h2',mv:[],tx:'Pick a hero to train. Each class has its own drill. The percentages show how close each stat is to that hero\'s training limit. Each session costs supplies from camp storage. Benched heroes can\'t train.'});
 
 </script>
 </body></html>
