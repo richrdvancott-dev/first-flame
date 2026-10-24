@@ -391,6 +391,10 @@ body,#app{font-variant-numeric:tabular-nums}#pw,#ak{display:inline-block;min-wid
 .s32pop{position:absolute;line-height:1.35;display:flex;flex-direction:column;align-items:center;gap:2px;left:50%;top:38%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;animation:s32pop 1.6s ease-out forwards;z-index:3;white-space:nowrap;text-shadow:0 2px 6px #000}.s32pop b{position:static;display:block;font:bold 22px Georgia,serif;color:#ffe9a8}.s32pop .cb{font-weight:700;color:#bff0a0;font-size:14px}.s32pop .tr{font-weight:700;color:#ffd76a;font-size:14px}
 @keyframes s32pop{0%{opacity:0;transform:translate(-50%,-30%) scale(.8)}12%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}75%{opacity:1}100%{opacity:0;transform:translate(-50%,-90%)}}
 .s32slot.jk{border-color:#a0a0a8;background:#1a1a1e}.s32lost{background:#3a1616;border:1px solid #a04040;border-radius:8px;padding:5px 8px;font-size:12px}.s32empty{font-size:12px;opacity:.8;text-align:center}.s32note{color:#c8e0a0}.s32ht{min-width:0}
+.c36{display:flex;flex-direction:column;gap:8px;box-sizing:border-box;width:100%;max-width:520px;min-width:0}.c36 *{box-sizing:border-box}.c36 h2{margin:0}.c36>.btn{min-height:44px;font-size:15px}.r36{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.r36 .btn{flex:1}
+.box36{max-height:min(52vh,420px);overflow:auto;overscroll-behavior:contain;border:1px solid #5a4a30;border-radius:8px;background:#0003;padding:4px 6px}
+.g36{font-weight:700;color:#ffd76a;font-size:12px;margin:8px 0 2px;position:sticky;top:-4px;background:#1d1610;padding:2px 0}.i36{display:flex;align-items:center;gap:8px;padding:4px 2px;border-bottom:1px solid #ffffff10;font-size:13px}.i36 b{flex:1;font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis}.i36 i{font-style:normal;color:#e8d8b0}
+@media (orientation:landscape) and (max-height:500px){.box36{max-height:52vh}}
 </style><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(r=>r.update()));
@@ -1501,7 +1505,7 @@ function renderPanel(){
   hs.map(h=>`<div class="row"><div><b style="color:${h.color}">${h.name}</b> ${h.cls} <span class="small">(${CLASSES[h.cls].role}) · ${h.trait}</span><br><span class="small">${hs.filter(o=>o!==h).map(o=>`${o.name} ${rel(h,o)>40?'❤️':rel(h,o)<-30?'💢':'·'}${Math.round(rel(h,o))}`).join('  ')}</span></div>${S.tier>=2?`<button class="btn ${leaderHero()===h?'on':''}" data-act="leader" data-h="${h.id}">👑</button>`:''}<button class="btn" data-act="sheet" data-h="${h.id}">Sheet</button></div>`).join('')+
   (typeof memorialHTML==='function'?memorialHTML():'');}
  else if(tab==='base'){
-  s=`<div>💰${S.gold} · Stash ${stashUsed()}/${stashCap()}</div><div class="small">${Object.keys(S.stash).filter(k=>S.stash[k]>0).map(k=>ITEMS[k].ic+S.stash[k]).join(' ')||'empty'}</div><div class="small">Armory: ${S.armory.map(gearName).join(', ')||'empty'}</div>`+
+  s=`<div>💰${S.gold} · Stash ${stashUsed()}/${stashCap()}</div><div class="small">Armory ${S.armory.length} · <button class="btn s" data-c36="inv" data-v="storehouse">📦 Open Inventory</button></div>`+
   '<h3>Buildings</h3>'+BUILD.map(b=>{const c=bcost(b.id),ok=canPay(c)&&bl(b.id)<5;return `<div class="row"><div>${b.ic} <b>${b.n}</b> ${bl(b.id)?'lvl '+bl(b.id):'<span class="small">not built</span>'}<br><span class="small">${b.d}</span></div><button class="btn ${ok?'gold':'off'}" data-act="build" data-id="${b.id}">${bl(b.id)>=5?'max':Object.keys(c).map(k=>(k==='gold'?'💰':ITEMS[k].ic)+c[k]).join(' ')}</button></div>`;}).join('')+
   '<h3>Crafting</h3>'+RECIPES.map(r=>{let need,lbl,ok,lock='';
    if(r.gear&&r.bld==='forge'){const g=gearRecipe(r.gear);need=g.need;lbl=`${g.n} +${g.v}`;ok=bl('forge')>0&&hasMats(need);if(!bl('forge'))lock='needs Forge';}
@@ -2954,16 +2958,18 @@ const _ct8=campTick;campTick=function(){if(isLive()){const t=S.campT;_ct8();if(S
 function campReadyTick(){if(S.phase!=='camp'||!isLive()){S.readyHold=0;return;}const hs=alive();const st=hs.map(h=>heroReady(h));const allR=st.every(x=>x[0]);
  hs.forEach((h,i)=>{const r=st[i][0];if(r&&!h._rdy&&chance(.5))say(h,pick(['Ready when you are!','Let\'s go!','I\'m packed. Lead on.','Rested and ready.']));if(!r&&chance(.01))say(h,pick(['I need more rest.','Not yet. My feet are still blistered.','Give me a moment.']));h._rdy=r;});
  if(allR){S.readyHold=(S.readyHold||0)+1;if(S.readyHold>40&&S.readyHold%30===0){const g=hs.filter(h=>(h.aff||0)<25||h.faith<25||h.hope<35);if(g.length){const h=pick(g);say(h,pick(['Are we waiting for an invitation?','The dungeon won\'t clear itself.','We\'re burning daylight here.']));hope(h,-1);}}}else S.readyHold=0;}
-function depart(rush){const hs=alive();const nr=hs.filter(h=>!heroReady(h)[0]);if(nr.length&&!rush)return toast('Not everyone is ready yet.');
+// the chosen waystone is a fixed start: the player's pick sticks (saved), else last trip's start, else floor 1. never auto-jump to the deepest
+function wpPick8(wps){wps=wps||waypoints();if(window.SIM_MODE)return wps[wps.length-1];for(const f of [S.readyWp,S.tripStart])if(f&&wps.includes(+f))return +f;return wps[0];}
+function depart(rush){const hs=alive();if(!hs.length)return toast('Need a hero to set out.');const nr=hs.filter(h=>!heroReady(h)[0]);if(nr.length&&!rush)return toast('Not everyone is ready yet.');
  if(rush)nr.forEach(h=>{hope(h,-6);affect(h,-3);say(h,pick(['Already? I barely sat down.','Fine... but I\'m not happy about it.']));});
- const wps=waypoints();const wp=S.readyWp&&wps.includes(S.readyWp)?S.readyWp:wps[wps.length-1];S.readyWp=null;S.decision={k:'leave',t:1,choice:wp,opts:wps,byPlayer:1};resolveDecision();if(typeof closeOv==='function'&&(baseOpen||stashOpen))closeOv();render();}
+ const wps=waypoints();const wp=wpPick8(wps);S.readyWp=wp;S.decision={k:'leave',t:1,choice:wp,opts:wps,byPlayer:1};resolveDecision();if(typeof closeOv==='function'&&(baseOpen||stashOpen))closeOv();render();}
 const rp=document.createElement('div');rp.id='readyp';(document.getElementById('left')||document.body).appendChild(rp);
 function readyUI(){if(!S||S.title||S.phase!=='camp'||!isLive()||S.dead){if(rp.style.display!=='none')rp.style.display='none';return;}rp.style.display='block';
- const hs=alive();const st=hs.map(h=>heroReady(h));const allR=st.every(x=>x[0]);const wps=waypoints();const wp=S.readyWp&&wps.includes(S.readyWp)?S.readyWp:wps[wps.length-1];
+ const hs=alive();const st=hs.map(h=>heroReady(h));const allR=hs.length>0&&st.every(x=>x[0]);const wps=waypoints();const wp=wpPick8(wps);
  const key=hs.map(h=>h.id).join()+'|'+wps.join()+'|'+wp+'|'+allR;
  if(rp._k!==key){rp._k=key;rp.innerHTML=`<div class="rph">🏕️ Ready to depart <span class="rpc"></span></div>${hs.map(h=>`<div class="rpr" data-h="${h.id}"><span class="rpm"></span><b style="color:${h.color}">${h.name}</b> <span class="rps small"></span></div>`).join('')}
   ${wps.length>1?`<div class="rpw small">Set out from: ${wps.map(f=>`<button class="btn s ${f===wp?'on':''}" data-act="rdywp" data-v="${f}">F${f}</button>`).join('')}</div>`:''}
-  <div class="rpb"><button class="btn ${allR?'gold glow':'off'}" data-act="depart">⚔️ Set out${wps.length>1?' (F'+wp+')':''}</button>${allR?'':'<button class="btn s red" data-act="rush">Rush</button>'}</div>`;}
+  <div class="rpb">${!hs.length?'<button class="btn off" disabled data-act="depart">⚔️ Set out</button><span class="small rpneed">Need a hero</span>':`<button class="btn ${allR?'gold glow':'off'}" data-act="depart">⚔️ Set out${wps.length>1?' (F'+wp+')':''}</button>${allR?'':'<button class="btn s red" data-act="rush">Rush</button>'}`}</div>`;}
  hs.forEach((h,i)=>{const row=rp.querySelector(`.rpr[data-h="${h.id}"]`);if(!row)return;const [r,why]=st[i];setTxt(row.querySelector('.rpm'),r?'✅':'⏳');setTxt(row.querySelector('.rps'),r?'Ready':why);row.classList.toggle('ok',r);});
  setTxt(rp.querySelector('.rpc'),`${st.filter(x=>x[0]).length}/${hs.length}`);}
 setInterval(readyUI,250);
@@ -2979,6 +2985,12 @@ const _dc8=drawCampF;drawCampF=function(){_dc8();if(!isLive())return;for(const h
 const _r8=render;render=function(){_r8();ascUI();};
 // headless AI sims: skip DOM rendering entirely (huge speedup, no gameplay effect)
 const _r8s=render;render=function(){if(window.SIM_MODE)return;return _r8s.apply(this,arguments);};
+
+// never start a run with zero heroes; a save stuck in a hero-less run returns to camp
+{const _rd=resolveDecision;resolveDecision=function(){const d=S&&S.decision;if(d&&d.k==='leave'&&!alive().length){S.decision=null;return;}return _rd.apply(this,arguments);};}
+function rescue8(){if(S&&!S.title&&!S.dead&&S.phase==='dungeon'&&!alive().length){S.decision=null;enterCamp();log('🏕️ No heroes were in the dungeon, so the run was called back to camp.');}}
+{const _ld8=load;load=function(){const r=_ld8.apply(this,arguments);try{rescue8();}catch(e){}return r;};}
+{const _tk8=tick;tick=function(){const r=_tk8.apply(this,arguments);if(!window.SIM_MODE)rescue8();return r;};}
 
 </script>
 <script>
@@ -3740,7 +3752,7 @@ const _tk16=tick;tick=function(){const r=_tk16.apply(this,arguments);if(!full13(
  if(S.decision&&S.decision.k==='stairs'&&S.phase==='dungeon'){const camp=S.decision.choice==='camp';const h=leaderHero();AUTO16.stairs++;
   log(camp?'🏕️ The party decides to rest at camp.':'⬇️ The party decides to press on.');autoSay16(h,camp?pick(['We\'re worn thin. Camp.','Back to the fire for a bit.']):pick(['We\'re good. Deeper!','Onward. No sense waiting.']));resolveDecision();}
  // camp: leave once everyone is ready (mutual ready check completes on its own)
- if(S.phase==='camp'&&!S.decision&&typeof heroReady==='function'){const hs=alive();if(hs.length&&hs.every(h=>heroReady(h)[0])){S.auto16R=(S.auto16R||0)+1;if(S.auto16R>=6){S.auto16R=0;AUTO16.departs++;const h=pick(hs);autoSay16(h,pick(['Everyone\'s ready. Let\'s go!','Packed and rested. Down we go.']));log('🧭 Everyone is ready; the party sets out on its own.');depart(false);}}else{S.auto16R=0;if((S.campT||0)<=0){S.auto16W=(S.auto16W||0)+1;if(S.auto16W>=45){S.auto16W=0;AUTO16.departs++;const nr=hs.filter(h=>!heroReady(h)[0]);const why=nr.length?heroReady(nr[0])[1]:'';log(`🧭 The party stops waiting${why?' ('+why+')':''} and sets out with what it has.`);autoSay16(pick(hs),'We can sort that later. Let\'s move.');const wps=waypoints();S.decision={k:'leave',t:1,choice:wps[wps.length-1],opts:wps,byPlayer:1};resolveDecision();}}}}else S.auto16W=0;
+ if(S.phase==='camp'&&!S.decision&&typeof heroReady==='function'){const hs=alive();if(hs.length&&hs.every(h=>heroReady(h)[0])){S.auto16R=(S.auto16R||0)+1;if(S.auto16R>=6){S.auto16R=0;AUTO16.departs++;const h=pick(hs);autoSay16(h,pick(['Everyone\'s ready. Let\'s go!','Packed and rested. Down we go.']));log('🧭 Everyone is ready; the party sets out on its own.');depart(false);}}else{S.auto16R=0;if((S.campT||0)<=0){S.auto16W=(S.auto16W||0)+1;if(S.auto16W>=45){S.auto16W=0;AUTO16.departs++;const nr=hs.filter(h=>!heroReady(h)[0]);const why=nr.length?heroReady(nr[0])[1]:'';log(`🧭 The party stops waiting${why?' ('+why+')':''} and sets out with what it has.`);autoSay16(pick(hs),'We can sort that later. Let\'s move.');const wps=waypoints();S.decision={k:'leave',t:1,choice:wpPick8(wps),opts:wps,byPlayer:1};resolveDecision();}}}}else S.auto16W=0;
  if(S.decision&&S.decision.k==='leave'&&S.phase==='camp'){AUTO16.departs++;resolveDecision();}
  return r;};
 {const _st=setThink13;setThink13=function(v){_st(v);if(full13()&&typeof PM!=='undefined'&&PM.open){closePM();if(S)S.paused=false;}};}
@@ -4528,7 +4540,7 @@ document.addEventListener('pointerdown',e=>{const t=e.target.closest('[data-act=
 // the camp bench: little coloured vials and a count badge
 {const _dc=drawCampF;drawCampF=function(){_dc.apply(this,arguments);if(S.phase!=='camp'||typeof cx==='undefined')return;const [x,y]=CAMP_POS.apothecary,n=impCount25(),T=FX.t||0;
  const cs=['#ff7f98','#3fa9ff','#ffe14a','#7ed321'];cs.forEach((c,i)=>{const vx=x-11+i*7,vy=y-12;cx.fillStyle='#dfe8f055';cx.fillRect(vx-1,vy-1,5,11);cx.fillStyle=c;cx.fillRect(vx,vy+3+(i%2),3,6-(i%2));});
- if(n){const bx=x+15,by=y-16,pu=1+Math.sin(T/12)*.06;cx.save();cx.translate(bx,by);cx.scale(pu,pu);cx.fillStyle='#2a1d12';cx.beginPath();cx.arc(0,0,7,0,6.283);cx.fill();cx.strokeStyle='#ffd76a';cx.lineWidth=1;cx.stroke();
+ if(n){const bx=x+15,by=y-16,br=(1-Math.cos(T*6.283/2600))/2,pu=1+br*.03;cx.save();cx.translate(bx,by);cx.fillStyle=`rgba(255,215,106,${(.06+br*.14).toFixed(3)})`;cx.beginPath();cx.arc(0,0,9.5,0,6.283);cx.fill();cx.scale(pu,pu);cx.fillStyle='#2a1d12';cx.beginPath();cx.arc(0,0,7,0,6.283);cx.fill();cx.strokeStyle='#ffd76a';cx.lineWidth=1;cx.stroke();
   cx.fillStyle='#ffd76a';cx.font='bold 7px system-ui';cx.textAlign='center';cx.textBaseline='middle';cx.fillText(n>99?'99':n,0,.5);cx.restore();cx.textBaseline='alphabetic';}};}
 // impure potions don't feed the camp's "carry potions" logic, and older saves gain the bench state
 {const _ld=load;load=function(){const r=_ld.apply(this,arguments);try{if(S&&S.apo25&&!S.apo25.v)S.apo25=null;if(S&&S.apo25&&S.apo25.par==null)S.apo25.par=par25(S.apo25.v,goal25(S.apo25.ids))||S.apo25.moves+20;}catch(e){}return r;};}
@@ -4788,8 +4800,7 @@ function drop32(){const D=ST32.drag;ST32.drag=null;D.g.remove();const out=place3
   if(d<36&&d<=best+.01&&bl('storehouse')>0){openStore32();return;}}return _tp.apply(this,arguments);};}
 {const _rb=renderBase;renderBase=function(){_rb.apply(this,arguments);if(!baseOpen||baseSel!=='storehouse'||!bl('storehouse'))return;const d=$('ovb').querySelector('.bdet');if(d&&!d.querySelector('.st32b'))d.insertAdjacentHTML('afterbegin',`<button class="btn gold st32b" data-act="st32" style="width:100%;margin-bottom:6px">🏚️ Sort the storehouse · ${(S.in32||[]).length} waiting</button>`);};}
 document.addEventListener('pointerdown',e=>{const b=e.target.closest('[data-act="st32"]');if(b){e.preventDefault();closeOv();openStore32();}},true);
-{const _dc=drawCampF;drawCampF=function(){_dc.apply(this,arguments);const n=(S.in32||[]).length+((S.sb32&&S.sb32.offer.filter(p=>p).length)||0);if(S.phase!=='camp'||!n||typeof cx==='undefined')return;const [x,y]=CAMP_POS.storehouse,T=FX.t||0,bx=x+16,by=y-16,pu=1+Math.sin(T/12)*.06;
- cx.save();cx.translate(bx,by);cx.scale(pu,pu);cx.fillStyle='#2a1d12';cx.beginPath();cx.arc(0,0,7,0,6.283);cx.fill();cx.strokeStyle='#ffd76a';cx.lineWidth=1;cx.stroke();cx.fillStyle='#ffd76a';cx.font='bold 7px system-ui';cx.textAlign='center';cx.textBaseline='middle';cx.fillText(n>99?'99':n,0,.5);cx.restore();cx.textBaseline='alphabetic';};}
+{const _dc=drawCampF;drawCampF=function(){_dc.apply(this,arguments);const n=(S.in32||[]).length+((S.sb32&&S.sb32.offer.filter(p=>p).length)||0);if(S.phase!=='camp'||!n||typeof cx==='undefined')return;const [x,y]=CAMP_POS.storehouse,T=FX.t||0,bx=x+16,by=y-16,br=(1-Math.cos(T*6.283/2600))/2,pu=1+br*.03;cx.save();cx.translate(bx,by);cx.fillStyle=`rgba(255,215,106,${(.06+br*.14).toFixed(3)})`;cx.beginPath();cx.arc(0,0,9.5,0,6.283);cx.fill();cx.scale(pu,pu);cx.fillStyle='#2a1d12';cx.beginPath();cx.arc(0,0,7,0,6.283);cx.fill();cx.strokeStyle='#ffd76a';cx.lineWidth=1;cx.stroke();cx.fillStyle='#ffd76a';cx.font='bold 7px system-ui';cx.textAlign='center';cx.textBaseline='middle';cx.fillText(n>99?'99':n,0,.5);cx.restore();cx.textBaseline='alphabetic';};}
 if(typeof HTP!=='undefined'){const i=HTP.findIndex(x=>x.t==='The Apothecary');HTP.splice(i<0?HTP.length-1:i+1,0,{a:'<div class="hart">🏚️<span>🧱</span></div>',t:'The Storehouse',
  p:['Loot comes home as pieces shaped and coloured by kind. Drag them onto the 🏚️ Storehouse board; a full row or column stores its items (🗑️ junk is scrapped).','One-colour lines pay bonuses (gear upgrade, purified potion, feast, ore); ❔ pieces hide treasure.','<b>No undo.</b> If nothing fits, the offered pieces spill and are lost.']});}
 
@@ -4860,6 +4871,30 @@ function pv31(h,src){const k=h.id+'|'+src.length+src.slice(-24);if(PV31.has(k))r
 {const _av=avatar;avatar=function(cls,col,h){const html=_av.apply(this,arguments);if(!h||!h.id||!/^<img/.test(html))return html;const m=html.match(/src="([^"]+)"/);if(!m)return html;const u=pv31(h,m[1]);
  return html.replace(m[0],`src="${u}" data-pv="${h.id}" style="border-color:${h.color||'#fff3'}"`);};}
 {const _p=portrait;portrait=function(cls,big,h){const html=_p.apply(this,arguments);if(!h||!h.id)return html;const m=String(html).match(/<img[^>]*src="([^"]+)"/);if(!m)return html;const u=pv31(h,m[1]);return html.replace(`src="${m[1]}"`,`src="${u}" data-pv="${h.id}"`);};}
+
+</script><script>
+// v36: item stations open a small chooser (Inventory / mini-game / building) and a tidy, scrollable inventory box
+const ST36={
+ storehouse:{ic:'🏚️',n:'Storehouse',game:'Sort',play:()=>openStore32(),f:()=>true,gear:1},
+ apothecary:{ic:'⚗️',n:'Apothecary',game:'Brew',play:()=>openApo25(),f:id=>cat32(id)==='pot'},
+ forge:{ic:'⚒️',n:'Forge',game:'Smith',f:id=>cat32(id)==='mat',gear:1},
+ kitchen:{ic:'🍲',n:'Kitchen',game:'Cook',f:id=>cat32(id)==='food'}};
+const GRP36={w:'🗡️ Weapons',a:'🛡️ Armor',pot:'🧪 Potions',food:'🍞 Food & water',mat:'🪵 Materials',junk:'🗑️ Other'};
+function invHTML36(id){const c=ST36[id],g={};
+ for(const k of Object.keys(S.stash).filter(k=>S.stash[k]>0&&c.f(k)).sort((a,b)=>name32(a).localeCompare(name32(b)))){const q=cat32(k);(g[q]=g[q]||[]).push(`<div class="i36"><span>${icon32(k)}</span><b>${name32(k)}</b><i>×${S.stash[k]}</i></div>`);}
+ let h=Object.keys(GRP36).filter(q=>g[q]).map(q=>`<div class="g36">${GRP36[q]}</div>${g[q].join('')}`).join('');
+ if(c.gear&&S.armory.length)h+=`<div class="g36">🗃️ Armory (${S.armory.length})</div>`+S.armory.map(x=>`<div class="i36"><span>${icon32(x)}</span><b>${gearLine(x)}</b></div>`).join('');
+ return h||'<div class="small" style="padding:10px">Nothing stored here yet.</div>';}
+function choose36(id){const c=ST36[id];ov(`<div class="c36"><h2>${c.ic} ${c.n}</h2><div class="small">Stash ${stashUsed()}/${stashCap()}${c.gear?' · Armory '+S.armory.length:''}</div>
+ <button class="btn gold" data-c36="inv" data-v="${id}">📦 Open Inventory</button>
+ ${c.play?`<button class="btn gold" data-c36="play" data-v="${id}">🎲 Play ${c.game}</button>`:`<button class="btn off" disabled>🎲 ${c.game}: coming soon</button>`}
+ <div class="r36"><button class="btn s" data-c36="base" data-v="${id}">🏗️ Building</button><button class="btn s" data-c36="close">✕ Close</button></div></div>`);}
+function inv36(id){const c=ST36[id];ov(`<div class="c36 w"><div class="r36"><h2>${c.ic} ${c.n} · Inventory</h2></div><div class="small">Stash ${stashUsed()}/${stashCap()}</div><div class="box36">${invHTML36(id)}</div>
+ <div class="r36"><button class="btn s" data-c36="back" data-v="${id}">‹ Back</button>${c.play?`<button class="btn s gold" data-c36="play" data-v="${id}">🎲 Play ${c.game}</button>`:''}<button class="btn s" data-c36="close">✕ Close</button></div></div>`);}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-c36]');if(!b)return;const a=b.dataset.c36,v=b.dataset.v;
+ if(a==='inv')inv36(v);else if(a==='back')choose36(v);else if(a==='close')closeOv();else if(a==='base'){closeOv();openBase(v);}else if(a==='play'){closeOv();ST36[v].play();}});
+{const _tp=tapTile;tapTile=function(x,y){if(S.phase==='camp'&&!window.SIM_MODE){const px=x*TS+12,py=y*TS+12;let best=null,bd=1e9;for(const id in CAMP_POS){const d=Math.hypot(CAMP_POS[id][0]-px,CAMP_POS[id][1]-py);if(d<bd){bd=d;best=id;}}
+ if(best&&bd<36&&ST36[best]&&bl(best)>0){choose36(best);return;}}return _tp.apply(this,arguments);};}
 
 </script>
 </body></html>
