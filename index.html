@@ -418,6 +418,11 @@ body,#app{font-variant-numeric:tabular-nums}#pw,#ak{display:inline-block;min-wid
 .rk38{display:flex;align-items:stretch;gap:8px;justify-content:center}.rc38{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 6px;border:1px solid #4a4058;border-radius:12px;background:#0003}.rc38 span{font-size:28px;color:#ffd76a}.rc38 b{font:bold 15px Georgia,serif}.rc38 i{font-style:normal;font-size:11px;opacity:.7}.rc38.nx{border-color:#ffd76a88;box-shadow:0 0 12px #ffd76a22 inset}.ar38{align-self:center;font-size:20px;opacity:.6}
 .a38 .anext .st38{font:bold 12px Georgia,serif;color:#ffd76a;margin:8px 0 4px}.a38 .aun{display:flex;flex-wrap:wrap;gap:4px}.mx38{text-align:center;padding:10px;border:1px solid #ffd76a55;border-radius:12px;background:#ffd76a0d;display:flex;flex-direction:column;gap:4px}
 .ah38{position:fixed;left:50%;top:6%;transform:translateX(-50%);width:min(500px,92vw);max-height:84vh;overflow:auto;z-index:30;border:1px solid #ffd76a66;border-radius:12px;background:#140f1c;padding:10px;box-shadow:0 8px 24px #000c}
+.q39,.q38{width:30px;height:30px;min-width:30px!important;min-height:30px!important;padding:0!important;border-radius:50%!important;font:bold 15px Georgia,serif!important;color:#ffd76a!important;border:1px solid #ffd76a88!important;background:#2a1f14!important;flex:none}
+h2.h39{display:flex;align-items:center;gap:8px}h2.h39 .q39{margin-left:auto}.s32hd .q39,.a25hd .q39,.s23hd .q39{margin-left:auto;width:44px;height:44px;min-width:44px!important;min-height:44px!important;font-size:18px!important}.hd38 .q39{margin-left:6px}
+.hp39{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#0009;padding:14px;animation:ovin .18s ease-out}
+.hb39{width:min(440px,94vw);max-height:84vh;overflow:auto;background:linear-gradient(#241a2e,#17111d);border:1px solid #ffd76a66;border-radius:14px;padding:12px 14px;box-shadow:0 10px 30px #000c;font-size:13.5px;line-height:1.45;color:#efe2c4}
+.hh39{display:flex;align-items:center;justify-content:space-between;font:bold 16px Georgia,serif;color:#ffd76a;margin-bottom:6px}.hb39 p{margin:6px 0}
 </style><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script>
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(r=>r.update()));
@@ -5027,6 +5032,33 @@ openAscend=function(){if(typeof ascHint!=='undefined')ascHint.style.display='non
  :`<div class="mx38"><div class="small">Max rank. There is nothing above you.</div><div class="small">📜 ${Math.floor(S.ak)} AK to spend on Divine Upgrades.</div></div>`}
  ${AH38?help:''}<button class="btn" style="width:100%;margin-top:6px" data-act="close">Close</button></div>`);$('ov').classList.add('wide');};
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a38]');if(!b)return;AH38=b.dataset.a38==='1';openAscend();});
+
+</script><script>
+// v39: one '?' per screen. Instruction/rules text is lifted out of the open view into a cozy help popup; flavour stays.
+const H39=[
+ {k:'council',t:'War Council',on:'#ovb .wc38',hd:'.hd38',hide:1,mv:[/^drag or tap to move$/,/^Propose the plan for/],tx:'Drag a hero chip between Front, Middle and Back (or tap it). Pick a preset, tactics and one order per hero from the dropdowns. <b>Propose plan</b> asks the party to agree: more agreement means a coordination bonus. <b>Insist</b> forces it (they may resent it); <b>Adopt idea</b> takes a hero\'s own suggestion. <b>Matchups</b> lists the next floor\'s foes and what counters them.'},
+ {k:'sheet',t:'Hero sheet',on:'#ovb',test:o=>!!o.querySelector(':scope>.sh37t'),hd:'.sh37t h2',mv:[/^Affection for you:/],tx:'Tap an <b>Equipped</b> slot to swap in gear from the bag or camp storage, or to put it in the bag. Talents are picked at even levels; you can suggest a path. Faith gives you power; affection makes faith and devotion stronger. Talk with them and answer their requests to raise both.'},
+ {k:'stash',t:'Camp Storage',on:'#ovb',test:o=>/^📦 Camp Storage/.test((o.querySelector('h2')||{}).textContent||''),mv:[/^Items in storage are always safe/,/^Tap an item to compare/],tx:'Gear a hero carries is lost if they die. Storage is not.'},
+ {k:'base',t:'Base',on:'#ovb .base',mv:[],tx:'Tap a building to see it, then build or upgrade it with gold and materials. Benched heroes can work a station while the party explores. Swap heroes in and out of the party at camp.'},
+ {k:'codex',t:'Codex',on:'#ovb',test:o=>/^📖 Codex/.test((o.querySelector('h2')||{}).textContent||''),mv:[],tx:'Everything your god has learned: foes met, bosses, items, the fallen and feats. Entries fill in as your heroes discover them.'},
+ {k:'shrine',t:'Shrine of Calling',on:'#shr23',hd:'.s23hd',mv:[/^Earn 💠/,/guaranteed within/],tx:'Call heroes waiting in the dark with 💠 shards. The first call is free. The living never answer twice.'},
+ {k:'summon',t:'Call a Soul',on:'#ovb',test:o=>/^🌀 Call a Soul/.test((o.querySelector('h2')||{}).textContent||''),mv:[/^Earn 💠/,/guaranteed within/],tx:''},
+ {k:'tend',t:'Tend your heroes',on:'#ovb',test:o=>/^💞 Tend/.test((o.querySelector('h2')||{}).textContent||''),mv:[/^At camp you can feed/],tx:''},
+ {k:'apo',t:'Apothecary',on:'#apo25',hd:'.a25hd',mv:[/^Pour the top layer/,/^☠️ Drinking an impure potion/],tx:''},
+ {k:'store',t:'Storehouse',on:'#st32',hd:'.s32hd',mv:[/^Fill a row or column/,/^Only what you pick goes in/],tx:'Drag a piece from the tray onto the board.'},
+ {k:'chooser',t:'Camp station',on:'#ovb .c36',hd:'h2',mv:[],tx:'<b>Open Inventory</b> shows what this station holds. <b>Play</b> opens its mini-game, if it has one. <b>Building</b> opens upgrades and the station worker.'},
+ {k:'death',t:'The party has fallen',on:'#ovb',test:o=>/The Party Has Fallen/.test((o.querySelector('h2')||{}).textContent||''),mv:[/^Their levels, gear, bags/,/^Ascend, buy upgrades and build/],tx:'Storage, buildings, AK and your rank survive. A new party can be called at the Shrine.'},
+ {k:'settings',t:'Settings',on:'#ovb',test:o=>/^⚙ Settings/.test((o.querySelector('h2')||{}).textContent||''),mv:[/^Low: no colored glow/,/^Think: they handle/],tx:''}];
+let HP39=null;
+function scan39(){for(const c of H39){const r=document.querySelector(c.on);if(!r||!r.isConnected||(r.offsetParent===null&&getComputedStyle(r).position!=='fixed'))continue;if(c.test&&!c.test(r))continue;
+ const head=r.querySelector(c.hd||'h2');if(!head)continue;
+ if(!head.querySelector('.q39')){r._h39=[];const b=document.createElement('button');b.className='btn s q39';b.textContent='?';b.dataset.q39=c.k;b.setAttribute('aria-label','How this works');if(head.tagName==='H2')head.classList.add('h39');head.appendChild(b);}
+ r.querySelectorAll('.small,p,span.small').forEach(e=>{if(e.dataset.h39||e.closest('.hp39'))return;const t=e.textContent.trim();if(c.mv.some(re=>re.test(t))){e.dataset.h39=1;if(!c.hide&&!r._h39.includes(e.innerHTML))r._h39.push(e.innerHTML);e.style.display='none';}});}}
+let raf39=0;new MutationObserver(()=>{if(!raf39)raf39=requestAnimationFrame(()=>{raf39=0;try{scan39();}catch(e){}});}).observe(document.body,{childList:true,subtree:true});
+function help39(k){const c=H39.find(x=>x.k===k);if(!c)return;const r=document.querySelector(c.on);closeHelp39();const parts=[...(r&&r._h39||[]),c.tx].filter(x=>x);
+ HP39=document.createElement('div');HP39.className='hp39';HP39.innerHTML=`<div class="hb39"><div class="hh39"><b>❔ ${c.t}</b><button class="btn s" data-q39x="1">✕</button></div>${parts.map(p=>`<p>${p}</p>`).join('')||'<p>Nothing tricky here.</p>'}<button class="btn gold" data-q39x="1" style="width:100%">Got it</button></div>`;document.body.appendChild(HP39);}
+function closeHelp39(){if(HP39){HP39.remove();HP39=null;}}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-q39]');if(b){e.stopPropagation();help39(b.dataset.q39);return;}if(e.target.closest('[data-q39x]')||e.target===HP39)closeHelp39();},true);
 
 </script>
 </body></html>
