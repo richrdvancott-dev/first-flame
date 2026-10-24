@@ -2770,7 +2770,7 @@ function updInd(){const now=performance.now();const seen=new Set();
   const z=parseFloat(getComputedStyle(el).zoom)||1;const top=r.top*1,h=r.height;const thH=Math.max(24,h*el.clientHeight/el.scrollHeight);const y=top+(h-thH)*(el.scrollTop/over);
   const zi=el.closest('#ov')?11:el.id==='hudfull'?8:5;
   Object.assign(d.th.style,{display:'block',left:(r.right-5)+'px',top:y+'px',height:thH+'px',opacity:now-d.t<1200?'1':'.55',zIndex:zi});
-  const dn=el.scrollTop<over-4,up=el.scrollTop>4;Object.assign(d.dn.style,{display:dn?'block':'none',left:(r.left+r.width/2-14)+'px',top:(r.bottom-20)+'px',zIndex:zi});Object.assign(d.up.style,{display:up?'block':'none',left:(r.left+r.width/2-14)+'px',top:(r.top+2)+'px',zIndex:zi});});
+  const dn=el.scrollTop<over-4,up=el.scrollTop>4;Object.assign(d.dn.style,{display:dn?'block':'none',left:(r.left+r.width/2-14)+'px',top:(r.bottom-20)+'px',zIndex:zi});Object.assign(d.up.style,{display:up?'block':'none',left:(r.left+r.width/2-14)+'px',top:(r.top+2+(()=>{const s=[...el.querySelectorAll(':scope>*>.hd38,:scope>*>.ch,:scope>*>h2')].find(x=>getComputedStyle(x).position==='sticky');return s?Math.max(0,s.getBoundingClientRect().bottom-r.top):0})())+'px',zIndex:zi});});
  for(const [el,d] of IND)if(!seen.has(el)||!el.isConnected){d.th.remove();d.dn.remove();d.up.remove();IND.delete(el);}}
 document.addEventListener('scroll',e=>{LASTSC=performance.now();if(e.target&&e.target.nodeType===1)showInd(e.target);},true);
 setInterval(updInd,120);
